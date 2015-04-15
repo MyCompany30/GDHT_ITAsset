@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gdht.itasset.widget.CheckLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/plan_listitem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_selector"
+    android:gravity="center"
+    android:minHeight="80dp"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/color"
+            android:layout_width="15dp"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:id="@+id/color_in"
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/listitem_tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="RFID标签号："
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/listitem_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="12345678910"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+
+</com.gdht.itasset.widget.CheckLinearLayout>

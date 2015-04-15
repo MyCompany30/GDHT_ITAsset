@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">IT资产监察管理系统</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="login_name">　用户名：</string>
+    <string name="login_pwd">　密　码：</string>
+    <string name="login_auto">记住密码：</string>
+    <string name="app_id">5490e64a</string>
+    <string name="copyright">Copyright © 国电海通版权所有</string>
+    <string name="title_activity_waiting">WaitingActivity</string>
+    <string name="MakeSurePDAexitRfid">没有找到Rfid超高频通信模块，请确定当前PDA内存在该模块</string>
+    <string name="url_login">/moveCheck/applogin.s</string>
+    <string name="url_getPlans">/moveCheck/getCheckPlansByLoginUser.s</string>
+    <string name="url_checkAssetByRfid">/moveCheck/checkAssetByRfid.s</string>
+    <string name="url_checkAssetBybarCode">/moveCheck/checkAssetBybarCode.s</string>
+    <string name="url_checkAssetByqrCode">/moveCheck/checkAssetByqrCode.s</string>
+    <string name="url_updateassetstatus">/moveCheck/updateassetstatus.s</string>
+    <string name="url_getAssetTypesByUserAndDept">/moveCheck/getAssetTypesByUserAndDept.s</string>
+    <string name="url_getAssetTypesByPTypeAndUser">/moveCheck/getAssetTypesByPTypeAndUser.s</string>
+    <string name="url_getAssetList">/moveCheck/getAssetList.s</string>
+    <string name="url_updateAssetInfo">/moveCheck/updateAssetinfo.s</string>
+	<string name="url_getWarehouse">/moveCheck/getWarehouse.s</string>
+	<string name="url_getDept">/moveCheck/getDept.s</string>
+	<string name="url_getCode">/moveCheck/getCode.s</string>
+	<string name="url_addRepairInfo">/moveCheck/addRepairInfo.s</string>
+    <string name="url_getStoresByUser">/moveCheck/getStoresByUser.s</string>
+	<string name="url_pyxz">/moveCheck/pyxz.s</string>
+	<string name="url_isHasRfid">/assetmanager/isHasRfid.s</string>
+	
+    <string name="submit"> 确 定 </string>
+    <string name="title_activity_plan">盘点计划</string>
+    <string name="title_activity_scan">扫描</string>
+    <string name="title_activity_scan_complate">扫描结果</string>
+
+    <string-array name="color_array">
+        <item>@drawable/colorbg1</item>
+        <item>@drawable/colorbg2</item>
+        <item>@drawable/colorbg3</item>
+        <item>@drawable/colorbg4</item>
+        <item>@drawable/colorbg5</item>
+        <item>@drawable/colorbg6</item>
+        <item>@drawable/colorbg7</item>
+        <item>@drawable/colorbg8</item>
+        <item>@drawable/colorbg9</item>
+        <item>@drawable/colorbg10</item>
+    </string-array>
+    <string-array name="colorIn_array">
+        <item>#2fd2c8</item>
+        <item>#5fb9e8</item>
+        <item>#5750e6</item>
+        <item>#9a50e6</item>
+        <item>#dd50e6</item>
+        <item>#e65090</item>
+        <item>#ef4e4e</item>
+        <item>#efde4e</item>
+        <item>#efa14e</item>
+        <item>#f8f4d2</item>
+    </string-array>
+
+    <string name="title_activity_yi_pan">YiPanActivity</string>
+    <string name="title_activity_pan_ying">PanYingActivity</string>
+    <string name="title_activity_xin_zeng">XinZengActivity</string>
+    <string name="title_activity_pan_kui">PanKuiActivity</string>
+    <string name="title_activity_wei_pan">WeiPanActivity</string>
+    <string name="title_activity_gu_zhang_deng_ji">GuZhangDengJiActivity</string>
+    <string name="title_activity_xiu_gai_zai_yun">XiuGaiZaiYunActivity</string>
+    <string name="title_activity_xiu_gai_cang_ku">XiuGaiCangKuActivity</string>
+
+</resources>

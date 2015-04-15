@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e2e9ef"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#5aa1d7"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/fanhui_03"
+            android:clickable="true"
+            android:onClick="btnClick"
+            android:scaleX="0.7"
+            android:scaleY="0.7" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <EditText
+                android:id="@+id/search_edt"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_bg"
+                android:drawableLeft="@drawable/search_icon"
+                android:drawablePadding="20dp"
+                android:gravity="center_vertical"
+                android:hint="查询盘亏资产"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/pankui_listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:divider="#00000000"
+        android:dividerHeight="20dp"
+        android:listSelector="@android:color/transparent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/chexiao_btn_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/chexiao_btn_large" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

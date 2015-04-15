@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg_blue"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#5aa1d7" >
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/fanhui_03"
+            android:clickable="true"
+            android:onClick="btnClick" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="修改信息(在运)"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white" >
+
+        <TextView
+            android:id="@+id/rfid_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:text="RFID标签号：" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/rfid_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/rfid_title"
+            android:layout_toRightOf="@id/rfid_title"
+            android:text="jlsadjfldsjflksdjdfjadslfj"
+            android:textColor="@color/color_orange" >
+        </TextView>
+
+        <LinearLayout
+            android:id="@+id/line1"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/rfid_title"
+            android:layout_marginTop="20dp"
+            android:background="@color/line_color" >
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/dept"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/line1"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/dept_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="20dp"
+                android:text="部门：" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/dept_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/dept_title"
+                android:layout_toRightOf="@+id/dept_title" >
+            </TextView>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="10dp"
+                android:src="@drawable/arrow" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/line2"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/dept"
+            android:background="@color/line_color" >
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/office"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/line2"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/office_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="20dp"
+                android:text="办公室：" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/office_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/office_title"
+                android:layout_toRightOf="@+id/office_title" >
+            </TextView>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="10dp"
+                android:src="@drawable/arrow" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/line3"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/office"
+            android:background="@color/line_color" >
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/person"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/line3"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/person_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="20dp"
+                android:text="责任人：" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/person_code"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/person_title"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/person_title" >
+            </EditText>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/line4"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/person"
+            android:background="@color/line_color" >
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/breakdownDetail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line4"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="20dp"
+            android:text="备注：" >
+        </TextView>
+
+        <LinearLayout
+            android:id="@+id/kuang"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/breakdownDetail_title"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/line_color" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="0.5dp"
+                android:background="@android:color/white"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <ImageView
+                        android:id="@+id/duihao_"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentLeft="true"
+                        android:paddingBottom="20dp"
+                        android:paddingLeft="20dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/duihao" />
+
+                    <TextView
+                        android:id="@+id/duihao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_toRightOf="@+id/duihao_"
+                        android:paddingBottom="20dp"
+                        android:paddingLeft="10dp"
+                        android:text="确定"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/shanchu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:paddingBottom="20dp"
+                        android:paddingRight="20dp"
+                        android:text="取消"
+                        android:textColor="@android:color/black" />
+
+                    <ImageView
+                        android:id="@+id/shanchu_"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_toLeftOf="@+id/shanchu"
+                        android:paddingBottom="20dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/shanchu" />
+
+                    <EditText
+                        android:id="@+id/add_content"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_above="@+id/duihao"
+                        android:layout_margin="5dp"
+                        android:background="@null"
+                        android:enabled="true"
+                        android:gravity="top"
+                        android:inputType="textMultiLine"
+                        android:maxLines="10"
+                        android:minLines="8"
+                        android:scrollbars="vertical"
+                        android:selectAllOnFocus="@null" >
+                    </EditText>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
