@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gdht.itasset.dateslider.SliderContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.gdht.itasset"
+    android:id="@+id/dateSliderContainer"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+
+
+    <com.gdht.itasset.dateslider.ScrollLayout
+        style="@style/Scroller"
+        app:childWidth="180dp"
+        app:labelerClass="com.gdht.itasset.dateslider.labeler.HourLabeler"
+        app:labelerFormat="%tk" />
+
+    <com.gdht.itasset.dateslider.ScrollLayout
+        style="@style/Scroller"
+        app:childWidth="160dp"
+        app:labelerClass="com.gdht.itasset.dateslider.labeler.MinuteLabeler"
+        app:labelerFormat="%tM" />
+
+    <include layout="@layout/dialogbuttons" />
+
+</com.gdht.itasset.dateslider.SliderContainer>

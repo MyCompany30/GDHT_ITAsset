@@ -72,6 +72,7 @@
             android:divider="#00000000"
             android:dividerHeight="10dp"
             android:listSelector="@android:color/transparent"
+            android:descendantFocusability="beforeDescendants"
              >
         </ListView>
     </LinearLayout>

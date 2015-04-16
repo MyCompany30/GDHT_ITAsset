@@ -79,6 +79,7 @@ public class XinZengErWeiScanActivity extends Activity {
 				item.setDept(GlobalParams.cangKuValue);
 				item.setOffice("");
 				item.setIsck(GlobalParams.isck);
+				item.setBuyDate("");
 				items.add(item);
 				adapter.notifyDataSetChanged();
 			}

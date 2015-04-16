@@ -85,10 +85,7 @@
                 android:background="@drawable/arrow" />
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#cccccc" />
+
 
         <!-- <RelativeLayout
             android:layout_width="match_parent"
@@ -154,6 +151,126 @@
                 android:focusable="true"
                 android:textColor="#000"
                 android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/addBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/arrow" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#cccccc" />
+        <RelativeLayout
+            android:id="@+id/goumaiLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/lable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="购买日期:"
+                android:textColor="#000"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/goumairiqi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/addBtn"
+                android:layout_toRightOf="@+id/lable"
+                android:background="@null"
+                android:focusable="true"
+                android:textColor="#000"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/addBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/arrow" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#cccccc" />
+        <RelativeLayout
+            android:id="@+id/fuzerenLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/lable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="预计寿命(月):"
+                android:textColor="#000"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/yujishouming"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/addBtn"
+                android:layout_toRightOf="@+id/lable"
+                android:background="@null"
+                android:focusable="true"
+                android:textColor="#000"
+                android:textSize="18dp" 
+                android:inputType="number"
+                />
+
+            <ImageView
+                android:id="@+id/addBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/arrow" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#cccccc" />
+        <RelativeLayout
+            android:id="@+id/shfwdqLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/lable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="售后服务到期:"
+                android:textColor="#000"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/shouhoufuwudaoqi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/addBtn"
+                android:layout_toRightOf="@+id/lable"
+                android:background="@null"
+                android:focusable="true"
+                android:textColor="#000"
+                android:textSize="18dp" 
+                />
 
             <ImageView
                 android:id="@+id/addBtn"

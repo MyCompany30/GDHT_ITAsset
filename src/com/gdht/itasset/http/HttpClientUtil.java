@@ -667,6 +667,9 @@ public class HttpClientUtil {
 		formparams.add(new BasicNameValuePair("assetUse.keeper", item
 				.getKeeper()));
 		formparams.add(new BasicNameValuePair("isck", item.getIsck()));
+		formparams.add(new BasicNameValuePair("buyDate", item.getBuyDate()));
+		formparams.add(new BasicNameValuePair("lifetime", item.getLifetime()));
+		formparams.add(new BasicNameValuePair("shfwdqsj", item.getShfwdqsj()));
 		HttpEntity entity = null;
 		try {
 			entity = new UrlEncodedFormEntity(formparams, "UTF-8");

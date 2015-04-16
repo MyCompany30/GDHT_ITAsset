@@ -1,11 +1,14 @@
 package com.gdht.itasset.adapter;
 
+import java.util.Calendar;
 import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +24,8 @@ import android.widget.Toast;
 import com.gdht.itasset.CangKuSelectActivity;
 import com.gdht.itasset.PanYingActivity;
 import com.gdht.itasset.R;
+import com.gdht.itasset.dateslider.DateSlider;
+import com.gdht.itasset.dateslider.YMDDateSlider;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.YingPanXinZengItem;
 import com.gdht.itasset.widget.WaitingDialog;
@@ -32,6 +37,8 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 	private YingPanXinZengItem item;
 	private AlertDialog nameAd;
 	private WaitingDialog dialog;
+	TextView goumairiqiTv;
+	private int goumaiLocation = 0;
 
 	public YingPanXinZenItemAdapter(Context context,
 			List<YingPanXinZengItem> items) {
@@ -76,11 +83,41 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 		TextView nameEt = (TextView) convertView.findViewById(R.id.name);
 		TextView fuzerenTv = (TextView) convertView
 				.findViewById(R.id.fuzerenname);
+		goumairiqiTv = (TextView) convertView.findViewById(R.id.goumairiqi);
+		goumairiqiTv.setText(item.getBuyDate());
+		EditText yujishoumingEt = (EditText) convertView.findViewById(R.id.yujishouming);
+		yujishoumingEt.setText(item.getLifetime());
+		yujishoumingEt.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				items.get(position).setLifetime(arg0.toString());
+//				YingPanXinZenItemAdapter.this.notifyDataSetChanged();
+			}
+		});
+		TextView shouhoufuwudaoqTv = (TextView) convertView.findViewById(R.id.shouhoufuwudaoqi);
+		shouhoufuwudaoqTv.setText(item.getShfwdqsj());
 		// TextView quyuTv = (TextView) convertView.findViewById(R.id.quyu);
 		RelativeLayout nameLayout = (RelativeLayout) convertView
 				.findViewById(R.id.nameLayout);
 		RelativeLayout fuzerenLayout = (RelativeLayout) convertView
 				.findViewById(R.id.fuzerenLayout);
+		RelativeLayout goumaiLayout = (RelativeLayout) convertView
+				.findViewById(R.id.goumaiLayout);
+		RelativeLayout shfwdqLayout = (RelativeLayout) convertView.findViewById(R.id.shfwdqLayout);
 		ImageView addBtn = (ImageView) convertView.findViewById(R.id.addBtn);
 		nameLayout.setOnClickListener(new OnClickListener() {
 
@@ -96,6 +133,24 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 				showFuZeRenNameAd(position);
 			}
 		});
+		goumaiLayout.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				goumaiLocation = position;
+				new YMDDateSlider(context, yearDateSetListener, Calendar
+						.getInstance(), "购买日期").show();
+			}
+		});
+		shfwdqLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				goumaiLocation = position;
+				new YMDDateSlider(context, shfwYearDateSetListener, Calendar
+						.getInstance(), "售后服务到期").show();
+			}
+		});
 		addBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -105,7 +160,13 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 					Toast.makeText(context, "请填写名称!", 0).show();
 				} else if (TextUtils.isEmpty(item.getKeeper())) {
 					Toast.makeText(context, "请填写责任人!", 0).show();
-				} else {
+				}else if(TextUtils.isEmpty(item.getBuyDate())) {
+					Toast.makeText(context, "请选择购买时间!", 0).show();
+				}else if(TextUtils.isEmpty(item.getLifetime())) {
+					Toast.makeText(context, "请填写预计寿命!", 0).show();
+				}else if(TextUtils.isEmpty(item.getShfwdqsj())) {
+					Toast.makeText(context, "请填写售后服务到期时间!", 0).show();
+				}else {
 					// Toast.makeText(context, "item = " + item.toString(),
 					// 1).show();
 					Log.i("a", "item = " + item.toString());
@@ -119,6 +180,34 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 		// quyuTv.setText(item.getQuyu());
 		return convertView;
 	}
+
+	private DateSlider.OnDateSetListener yearDateSetListener = new DateSlider.OnDateSetListener() {
+		public void onDateSet(DateSlider view, Calendar selectedDate) {
+			// goumairiqiTv.setText(String.valueOf(selectedDate.get(Calendar.YEAR)
+			// + "-" + (selectedDate.get(Calendar.MONTH) + 1) + "-"
+			// + selectedDate.get(Calendar.DAY_OF_MONTH)));
+			String ymd = String.valueOf(selectedDate.get(Calendar.YEAR) + "-"
+					+ (selectedDate.get(Calendar.MONTH) + 1) + "-"
+					+ selectedDate.get(Calendar.DAY_OF_MONTH));
+			items.get(goumaiLocation).setBuyDate(ymd);
+			Log.i("a", "goumaiLocation = " + goumaiLocation + " : " + items.get(goumaiLocation).getBuyDate());
+			YingPanXinZenItemAdapter.this.notifyDataSetChanged();
+		}
+	};
+	
+	private DateSlider.OnDateSetListener shfwYearDateSetListener = new DateSlider.OnDateSetListener() {
+		public void onDateSet(DateSlider view, Calendar selectedDate) {
+			// goumairiqiTv.setText(String.valueOf(selectedDate.get(Calendar.YEAR)
+			// + "-" + (selectedDate.get(Calendar.MONTH) + 1) + "-"
+			// + selectedDate.get(Calendar.DAY_OF_MONTH)));
+			String ymd = String.valueOf(selectedDate.get(Calendar.YEAR) + "-"
+					+ (selectedDate.get(Calendar.MONTH) + 1) + "-"
+					+ selectedDate.get(Calendar.DAY_OF_MONTH));
+			items.get(goumaiLocation).setShfwdqsj(ymd);
+			Log.i("a", "goumaiLocation = " + goumaiLocation + " : " + items.get(goumaiLocation).getBuyDate());
+			YingPanXinZenItemAdapter.this.notifyDataSetChanged();
+		}
+	};
 
 	private class isHasRfidAs extends AsyncTask<String, Integer, String> {
 		private YingPanXinZengItem asItem;

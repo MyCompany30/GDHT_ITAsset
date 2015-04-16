@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gdht.itasset.dateslider.SliderContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.gdht.itasset"
+    android:id="@+id/dateSliderContainer"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" 
+        android:padding="5dp"
+        >
+        <TextView
+            android:id="@+id/title"
+            android:text="选择购买日期"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="#fff" 
+            />
+    </LinearLayout>
+    
+    <com.gdht.itasset.dateslider.ScrollLayout
+        style="@style/Scroller"
+        android:layout_width="match_parent"
+        app:childWidth="180dp"
+        app:labelerClass="com.gdht.itasset.dateslider.labeler.YearLabeler"
+        app:labelerFormat="%tY" />
+
+    <com.gdht.itasset.dateslider.ScrollLayout
+        style="@style/Scroller"
+        app:childWidth="160dp"
+        app:labelerClass="com.gdht.itasset.dateslider.labeler.MonthLabeler"
+        app:labelerFormat="%tB" />
+
+    <com.gdht.itasset.dateslider.ScrollLayout
+        style="@style/Scroller"
+        app:childWidth="45dp"
+        app:labelerClass="com.gdht.itasset.dateslider.labeler.DayDateLabeler"
+        app:labelerFormat="%td %ta" />
+
+    <include layout="@layout/dialogbuttons" />
+
+</com.gdht.itasset.dateslider.SliderContainer>

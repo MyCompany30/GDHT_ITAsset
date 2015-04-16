@@ -78,7 +78,9 @@
         <activity android:name="com.gdht.itasset.LocalDBActivity" />
         <activity android:name="com.gdht.itasset.XinZengSubActivity" />
         <activity android:name="com.gdht.itasset.XinZengMainScanActivity" />
-        <activity android:name="com.gdht.itasset.XinZengErWeiScanActivity" />
+        <activity android:name="com.gdht.itasset.XinZengErWeiScanActivity"
+            android:windowSoftInputMode="adjustPan" 
+            />
         <activity android:name="com.gdht.itasset.CangKuSelectActivity" />
         <activity android:name="com.gdht.itasset.XinZengScanActivity" />
         <activity android:name="com.gdht.itasset.XinZengHaveRfidActivity" />
