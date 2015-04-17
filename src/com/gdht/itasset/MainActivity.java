@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
 				if(TextUtils.isEmpty(ip.getText().toString())) {
 					ipStr = new AppSharedPreferences(MainActivity.this, "gdht").getIP();
 				}else {
-					ipStr = "http://" + ip.getText().toString().trim() + "/itasset2.0";
+					ipStr = "http://" + ip.getText().toString().trim();
 				}
 				new LoginAsyncTask(MainActivity.this, ipStr).execute(name,pwd, ipStr);
 				loginSettings = MainActivity.this.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE);
