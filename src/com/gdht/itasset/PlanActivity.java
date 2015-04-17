@@ -12,6 +12,7 @@ import android.widget.ImageView;
 public class PlanActivity extends Activity {
 	public static String PLAN_ID;
 	public static String operator;
+	public static boolean isZYPlan;
 	private ImageView saomiao_btn;
 	private ImageView weipan_btn;
 	private ImageView yipan_btn;
