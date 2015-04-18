@@ -28,9 +28,9 @@ public class PlanListAdapter extends BaseAdapter {
 		this.activity = activity;
 		colorsIn = activity.getResources().getStringArray(R.array.colorIn_array);
 		TypedArray ar = activity.getResources().obtainTypedArray(R.array.color_array);
-		int len = ar.length();     
-		colors = new int[len];     
-		for (int i = 0; i < len; i++)     
+		int len = ar.length();
+		colors = new int[len];
+		for (int i = 0; i < len; i++)
 			colors[i] = ar.getResourceId(i, 0);
 		ar.recycle();
 	}

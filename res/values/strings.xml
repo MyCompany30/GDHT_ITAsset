@@ -13,6 +13,7 @@
     <string name="MakeSurePDAexitRfid">没有找到Rfid超高频通信模块，请确定当前PDA内存在该模块</string>
     <string name="url_login">/moveCheck/applogin.s</string>
     <string name="url_getPlans">/moveCheck/getCheckPlansByLoginUser.s</string>
+    <string name="url_getPlanInfoById">/moveCheck/getInfoByPlanid.s</string>
     <string name="url_checkAssetByRfid">/moveCheck/checkAssetByRfid.s</string>
     <string name="url_checkAssetBybarCode">/moveCheck/checkAssetBybarCode.s</string>
     <string name="url_checkAssetByqrCode">/moveCheck/checkAssetByqrCode.s</string>
@@ -21,14 +22,13 @@
     <string name="url_getAssetTypesByPTypeAndUser">/moveCheck/getAssetTypesByPTypeAndUser.s</string>
     <string name="url_getAssetList">/moveCheck/getAssetList.s</string>
     <string name="url_updateAssetInfo">/moveCheck/updateAssetinfo.s</string>
-	<string name="url_getWarehouse">/moveCheck/getWarehouse.s</string>
-	<string name="url_getDept">/moveCheck/getDept.s</string>
-	<string name="url_getCode">/moveCheck/getCode.s</string>
-	<string name="url_addRepairInfo">/moveCheck/addRepairInfo.s</string>
+    <string name="url_getWarehouse">/moveCheck/getWarehouse.s</string>
+    <string name="url_getDept">/moveCheck/getDept.s</string>
+    <string name="url_getCode">/moveCheck/getCode.s</string>
+    <string name="url_addRepairInfo">/moveCheck/addRepairInfo.s</string>
     <string name="url_getStoresByUser">/moveCheck/getStoresByUser.s</string>
-	<string name="url_pyxz">/moveCheck/pyxz.s</string>
-	<string name="url_isHasRfid">/assetmanager/isHasRfid.s</string>
-	
+    <string name="url_pyxz">/moveCheck/pyxz.s</string>
+    <string name="url_isHasRfid">/assetmanager/isHasRfid.s</string>
     <string name="submit"> 确 定 </string>
     <string name="title_activity_plan">盘点计划</string>
     <string name="title_activity_scan">扫描</string>
@@ -67,5 +67,10 @@
     <string name="title_activity_gu_zhang_deng_ji">GuZhangDengJiActivity</string>
     <string name="title_activity_xiu_gai_zai_yun">XiuGaiZaiYunActivity</string>
     <string name="title_activity_xiu_gai_cang_ku">XiuGaiCangKuActivity</string>
+    <string name="title_activity_select_dept">SelectDeptActivity</string>
+    <string name="title_activity_select_use_type">SelectUseTypeActivity</string>
+    <string name="title_activity_select_warehouse_area">SelectWarehouseAreaActivity</string>
+    <string name="title_activity_select_office">SelectOfficeActivity</string>
+    <string name="title_activity_select_goods_shelves">SelectGoodsShelvesActivity</string>
 
 </resources>

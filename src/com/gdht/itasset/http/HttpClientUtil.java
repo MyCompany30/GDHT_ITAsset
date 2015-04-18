@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.gdht.itasset.R;
 import com.gdht.itasset.pojo.CangKuInfo;
+import com.gdht.itasset.pojo.PlanAssetInfo;
 import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.StockItem;
 import com.gdht.itasset.pojo.YingPanXinZengItem;
@@ -258,6 +259,46 @@ public class HttpClientUtil {
 		}
 		return arrayList;
 	}
+	
+	//获取盘点计划详细信息
+	public synchronized ArrayList<PlanAssetInfo> getPlanInfoById(Activity activity, String planid){
+		ArrayList<PlanAssetInfo> arrayList = new ArrayList<PlanAssetInfo>();
+		JSONObject jsonObject = null;
+		JSONArray jsonArray = null;
+		String result = null;
+		String uri = null;
+		uri = activity.getResources().getString(R.string.url_getPlanInfoById)+"?planid="+planid;
+		HttpPost get = new HttpPost(ip + uri);
+		try {
+			HttpResponse httpResponse = getHttpClient().execute(get);
+			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				result = new String(EntityUtils.toString(httpResponse.getEntity()).getBytes(),"UTF-8");
+				jsonArray = new JSONArray(result);
+				for(int i = 0; i<jsonArray.length(); i++){
+					PlanAssetInfo planAssetInfo = new PlanAssetInfo();
+					jsonObject = jsonArray.getJSONObject(i);
+					planAssetInfo.setAssetName(jsonObject.getString("assetName"));// 资产名称
+					planAssetInfo.setRfidnumber(jsonObject.getString("rfidnumber"));// rfid标签号
+					planAssetInfo.setBarnumber(jsonObject.getString("barnumber"));// 条形码标签号
+					planAssetInfo.setQrnumber(jsonObject.getString("qrnumber"));// 二维码标签号
+					planAssetInfo.setUsetype(jsonObject.getString("usetype"));// 资产状态(1库存备用 2.在运)
+					planAssetInfo.setDept(jsonObject.getString("dept"));// 部门
+					planAssetInfo.setOffice(jsonObject.getString("office"));// 办公室
+					planAssetInfo.setWarehouseArea(jsonObject.getString("warehouseArea"));//仓库区域
+					planAssetInfo.setGoodsShelves(jsonObject.getString("goodsShelves"));//区域货架
+					planAssetInfo.setId(jsonObject.getString("id"));// 资产id主键
+
+					arrayList.add(planAssetInfo);
+				}
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return arrayList;
+		}
+		return arrayList;
+	}
+	
 	/**
 	 * 
 	 * 设置盘点状态

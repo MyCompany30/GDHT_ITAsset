@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.gdht.itasset.db.service.RFIDSDBService;
+import com.gdht.itasset.pojo.PlanAssetInfo;
 import com.gdht.itasset.xintong.Accompaniment;
 import com.gdht.itasset.xintong.App;
 import com.gdht.itasset.xintong.DataTransfer;
@@ -21,6 +22,7 @@ import android.os.HandlerThread;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +42,7 @@ public class ScanActivity extends Activity {
 	private LinearLayout complateBtn;
 	private LinearLayout clearBtn;
 	private ArrayList<String> rfidArray = new ArrayList<String>();
-	
+	private ArrayList<PlanAssetInfo> planAssetArrayList = null;
 	private Timer mTimer;
 	private TimerTask mTask;
 	private UII uii_change;
@@ -66,10 +68,12 @@ public class ScanActivity extends Activity {
 		}
 	};
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scan);
+		planAssetArrayList = (ArrayList<PlanAssetInfo>) getIntent().getSerializableExtra("assetInfoList");
 		rfidsdbService = new RFIDSDBService(this);
 		pd = new ProgressDialog(this);
 		pd.setMessage("数据保存中...");
@@ -136,6 +140,7 @@ public class ScanActivity extends Activity {
 					Intent intent = new Intent();
 					intent.setClass(ScanActivity.this, ScanComplateActivity.class);
 					intent.putStringArrayListExtra("rfidArray", rfidArray);
+					intent.putExtra("assetInfoList", planAssetArrayList);
 					ScanActivity.this.startActivity(intent);
 				}
 				
@@ -257,8 +262,20 @@ public class ScanActivity extends Activity {
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			convertView = getLayoutInflater().inflate(R.layout.rfid_listitem, null);
 			TextView numberTV = (TextView)convertView.findViewById(R.id.number);
+			TextView rfidTitleTv = (TextView)convertView.findViewById(R.id.rfidTitle);
 			TextView rfidTV = (TextView)convertView.findViewById(R.id.rfidCode);
 			numberTV.setText(position+1+"");
+			for(int i = 0; i < planAssetArrayList.size(); i++){
+				if(planAssetArrayList.get(i).getRfidnumber().equals(rfidArray.get(position))){
+					rfidTitleTv.setText((planAssetArrayList.get(i).getAssetName()));
+					convertView.setBackgroundColor(Color.parseColor("#d3fac7"));
+					break;
+				}
+				if(i==planAssetArrayList.size()-1){
+					convertView.setBackgroundColor(Color.parseColor("#fbc9cc"));
+				}
+				
+			}
 			rfidTV.setText(rfidArray.get(position));
 			return convertView;
 		}

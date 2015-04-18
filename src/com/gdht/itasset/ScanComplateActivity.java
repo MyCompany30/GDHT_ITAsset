@@ -3,6 +3,7 @@ package com.gdht.itasset;
 import java.util.ArrayList;
 
 import com.gdht.itasset.http.HttpClientUtil;
+import com.gdht.itasset.pojo.PlanAssetInfo;
 import com.gdht.itasset.pojo.StockItem;
 import com.gdht.itasset.widget.WaitingDialog;
 
@@ -10,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,12 +36,15 @@ public class ScanComplateActivity extends Activity {
 	private ArrayList<String> list = null;
 	private ArrayList<StockItem> dataArray = new ArrayList<StockItem>();
 	private static StockItem currentSelectItem = null; 
+	private ArrayList<PlanAssetInfo> planAssetArrayList = null;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scan_complate);
 		list = getIntent().getStringArrayListExtra("rfidArray");
+		planAssetArrayList = (ArrayList<PlanAssetInfo>) getIntent().getSerializableExtra("assetInfoList");
 	}
 	@Override
 	protected void onResume() {
@@ -103,6 +108,16 @@ public class ScanComplateActivity extends Activity {
 			final TextView tv66 = (TextView)convertView.findViewById(R.id.person_);
 			final TextView tv77 = (TextView)convertView.findViewById(R.id.status_);
 			//setText...
+			for(int i = 0; i < planAssetArrayList.size(); i++){
+				if(planAssetArrayList.get(i).getRfidnumber().equals(dataArray.get(position).getRfidLabelnum())){
+					convertView.setBackgroundColor(Color.parseColor("#d3fac7"));
+					break;
+				}
+				if(i==planAssetArrayList.size()-1){
+					convertView.setBackgroundColor(Color.parseColor("#fbc9cc"));
+				}
+				
+			}
 			tv1.setText(dataArray.get(position).getRfidLabelnum());
 			tv2.setText(dataArray.get(position).getAssetType());
 			tv3.setText(dataArray.get(position).getAssetName());

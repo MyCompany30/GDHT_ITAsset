@@ -78,9 +78,9 @@
         <activity android:name="com.gdht.itasset.LocalDBActivity" />
         <activity android:name="com.gdht.itasset.XinZengSubActivity" />
         <activity android:name="com.gdht.itasset.XinZengMainScanActivity" />
-        <activity android:name="com.gdht.itasset.XinZengErWeiScanActivity"
-            android:windowSoftInputMode="adjustPan" 
-            />
+        <activity
+            android:name="com.gdht.itasset.XinZengErWeiScanActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name="com.gdht.itasset.CangKuSelectActivity" />
         <activity android:name="com.gdht.itasset.XinZengScanActivity" />
         <activity android:name="com.gdht.itasset.XinZengHaveRfidActivity" />
@@ -95,6 +95,26 @@
         <activity
             android:name="com.gdht.itasset.XiuGaiCangKuActivity"
             android:label="@string/title_activity_xiu_gai_cang_ku" >
+        </activity>
+        <activity
+            android:name="com.gdht.itasset.SelectDeptActivity"
+            android:label="@string/title_activity_select_dept" >
+        </activity>
+        <activity
+            android:name="com.gdht.itasset.SelectUseTypeActivity"
+            android:label="@string/title_activity_select_use_type" >
+        </activity>
+        <activity
+            android:name="com.gdht.itasset.SelectWarehouseAreaActivity"
+            android:label="@string/title_activity_select_warehouse_area" >
+        </activity>
+        <activity
+            android:name="com.gdht.itasset.SelectOfficeActivity"
+            android:label="@string/title_activity_select_office" >
+        </activity>
+        <activity
+            android:name="com.gdht.itasset.SelectGoodsShelvesActivity"
+            android:label="@string/title_activity_select_goods_shelves" >
         </activity>
     </application>
 

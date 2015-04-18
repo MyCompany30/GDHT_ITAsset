@@ -3,10 +3,12 @@ package com.gdht.itasset;
 import java.util.ArrayList;
 
 import com.gdht.itasset.db.service.RFIDSDBService;
+import com.gdht.itasset.pojo.PlanAssetInfo;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,13 +24,16 @@ public class ErWeiScanActivity extends Activity {
 	private ListView listView;
 	private MyListAdapter rfidListAdapter;
 	private ArrayList<String> rfidArray = new ArrayList<String>();
+	private ArrayList<PlanAssetInfo> planAssetArrayList = null;
 	private RFIDSDBService rfidsdbService;
 	private ProgressDialog pd;
 	private SaveRFIDAsyncTask asyncTask;
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_scan_erwei);
+		planAssetArrayList = (ArrayList<PlanAssetInfo>) getIntent().getSerializableExtra("assetInfoList");
 		rfidsdbService = new RFIDSDBService(this);
 		pd = new ProgressDialog(this);
 		pd.setMessage("数据保存中...");
@@ -98,6 +103,7 @@ public class ErWeiScanActivity extends Activity {
 			Intent intent = new Intent();
 			intent.setClass(ErWeiScanActivity.this, ScanComplateActivity.class);
 			intent.putStringArrayListExtra("rfidArray", rfidArray);
+			intent.putExtra("assetInfoList", planAssetArrayList);
 			ErWeiScanActivity.this.startActivity(intent);
 		}
 	}
@@ -125,9 +131,21 @@ public class ErWeiScanActivity extends Activity {
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			convertView = getLayoutInflater().inflate(R.layout.rfid_listitem, null);
 			TextView numberTV = (TextView)convertView.findViewById(R.id.number);
+			TextView rfidTitleTv = (TextView)convertView.findViewById(R.id.rfidTitle);
 			TextView rfidTV = (TextView)convertView.findViewById(R.id.rfidCode);
 			numberTV.setText(position+1+"");
 			rfidTV.setText(rfidArray.get(position));
+			for(int i = 0; i < planAssetArrayList.size(); i++){
+				if(planAssetArrayList.get(i).getRfidnumber().equals(rfidArray.get(position))){
+					rfidTitleTv.setText((planAssetArrayList.get(i).getAssetName()));
+					convertView.setBackgroundColor(Color.parseColor("#d3fac7"));
+					break;
+				}
+				if(i==planAssetArrayList.size()-1){
+					convertView.setBackgroundColor(Color.parseColor("#fbc9cc"));
+				}
+				
+			}
 			return convertView;
 		}
 	}

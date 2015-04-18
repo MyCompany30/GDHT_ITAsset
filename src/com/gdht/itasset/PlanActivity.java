@@ -1,9 +1,15 @@
 package com.gdht.itasset;
 
+import java.util.ArrayList;
+
+import com.gdht.itasset.http.HttpClientUtil;
+import com.gdht.itasset.pojo.PlanAssetInfo;
 import com.gdht.itasset.utils.GlobalParams;
+import com.senter.go;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +25,7 @@ public class PlanActivity extends Activity {
 	private ImageView pankui_btn;
 	private ImageView panying_btn;
 	private ImageView xinzeng_btn;
+	private ArrayList<PlanAssetInfo> planAssetInfoList = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,6 +35,16 @@ public class PlanActivity extends Activity {
 		operator = getIntent().getStringExtra("operator");
 		findViews();
 		setOnClicks();
+		
+		new AsyncTask<Void, Void, Void>() {
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				GlobalParams.planAssetInfoList = new HttpClientUtil(PlanActivity.this).getPlanInfoById(PlanActivity.this, GlobalParams.planId);
+				
+				return null;
+			}
+		}.execute();
 	}
 
 	private void setOnClicks() {
@@ -35,8 +52,13 @@ public class PlanActivity extends Activity {
 		saomiao_btn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				/*
 				Intent intent = new Intent();
 				intent.setClass(PlanActivity.this, MainScanActivity.class);
+				PlanActivity.this.startActivity(intent);
+				*/
+				Intent intent = new Intent();
+				intent.setClass(PlanActivity.this, SelectDeptActivity.class);
 				PlanActivity.this.startActivity(intent);
 			}
 		});
