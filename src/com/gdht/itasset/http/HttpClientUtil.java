@@ -286,7 +286,7 @@ public class HttpClientUtil {
 					planAssetInfo.setOffice(jsonObject.getString("office"));// 办公室
 					planAssetInfo.setWarehouseArea(jsonObject.getString("warehouseArea"));//仓库区域
 					planAssetInfo.setGoodsShelves(jsonObject.getString("goodsShelves"));//区域货架
-					planAssetInfo.setId(jsonObject.getString("id"));// 资产id主键
+					//planAssetInfo.setId(jsonObject.getString("id"));// 资产id主键
 
 					arrayList.add(planAssetInfo);
 				}
