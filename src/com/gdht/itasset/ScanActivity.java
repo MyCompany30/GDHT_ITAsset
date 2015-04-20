@@ -9,6 +9,7 @@ import com.gdht.itasset.pojo.PlanAssetInfo;
 import com.gdht.itasset.xintong.Accompaniment;
 import com.gdht.itasset.xintong.App;
 import com.gdht.itasset.xintong.DataTransfer;
+import com.senter.support.openapi.StPonTest;
 import com.senter.support.openapi.StUhf.UII;
 import com.senter.support.openapi.StUhf.InterrogatorModelDs.InterrogatorModelD2;
 import com.senter.support.openapi.StUhf.InterrogatorModelDs.UmdErrorCode;
@@ -76,6 +77,13 @@ public class ScanActivity extends Activity {
 		planAssetArrayList = (ArrayList<PlanAssetInfo>) getIntent().getSerializableExtra("assetInfoList");
 		rfidsdbService = new RFIDSDBService(this);
 		pd = new ProgressDialog(this);
+//		try {
+//			StPonTest.getInstance().start(StPonTest.WaveLength.WL1300nm);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
 		pd.setMessage("数据保存中...");
 		if (App.getRfid() == null)
 		{

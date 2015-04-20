@@ -45,6 +45,7 @@ public class ScanComplateActivity extends Activity {
 		setContentView(R.layout.activity_scan_complate);
 		list = getIntent().getStringArrayListExtra("rfidArray");
 		planAssetArrayList = (ArrayList<PlanAssetInfo>) getIntent().getSerializableExtra("assetInfoList");
+
 	}
 	@Override
 	protected void onResume() {
@@ -68,8 +69,8 @@ public class ScanComplateActivity extends Activity {
 	}
     
 	private class RfidListAdapter extends BaseAdapter {
-
-		
+		private ArrayList<Integer> openS = new ArrayList<Integer>();
+		private ArrayList<Integer> closeS = new ArrayList<Integer>();
 		@Override
 		public int getCount() {
 			return dataArray.size();
@@ -84,6 +85,17 @@ public class ScanComplateActivity extends Activity {
 		public long getItemId(int position) {
 			return position;
 		}
+		
+		public void showMoreInfos(int selectId) {
+			this.openS.add(selectId);
+			this.notifyDataSetChanged();
+		}
+		
+		public void closeMoreInfos(int selectId){
+			this.closeS.add(selectId);
+			this.notifyDataSetChanged();
+		}
+		
 
 		@Override
 		public View getView(final int position, View convertView, ViewGroup parent) {
@@ -91,8 +103,11 @@ public class ScanComplateActivity extends Activity {
 			View v  = inflater.inflate(R.layout.scan_complate_listitem, null);
 			convertView = v;
 			//findViews...
+			final RelativeLayout l1 = (RelativeLayout) convertView.findViewById(R.id.l1);
+			final RelativeLayout l2 = (RelativeLayout) convertView.findViewById(R.id.l2);
 			final CheckBox checkBox  = (CheckBox)convertView.findViewById(R.id.chkBox);
 			final ImageView pointBtn = (ImageView)convertView.findViewById(R.id.pointBtn);
+			final ImageView pointBtn2 = (ImageView)convertView.findViewById(R.id.pointBtn2);
 			final ImageView panBtn = (ImageView)convertView.findViewById(R.id.panBtn);
 			final TextView tv1 = (TextView)convertView.findViewById(R.id.tv1);
 			final TextView tv2 = (TextView)convertView.findViewById(R.id.tv2);
@@ -130,7 +145,7 @@ public class ScanComplateActivity extends Activity {
 			tv6.setText(dataArray.get(position).getKeeper());
 			tv7.setText(dataArray.get(position).getCheckstate());
 			//pointBtn
-			pointBtn.setVisibility(View.INVISIBLE);
+//			pointBtn.setVisibility(View.INVISIBLE);
 			//隐藏
 //			if(pointBtn.getTag().equals("point_down")){
 //				tv2.setVisibility(View.INVISIBLE);
@@ -148,48 +163,75 @@ public class ScanComplateActivity extends Activity {
 //				panBtn.setVisibility(View.INVISIBLE);
 //			}
 				
+//			pointBtn.setOnClickListener(new OnClickListener() {
+//				
+//				@Override
+//				public void onClick(View v) {
+//					// TODO Auto-generated method stub
+//					if(pointBtn.getTag().equals("point_up")){
+//						//隐藏
+//						tv2.setVisibility(View.INVISIBLE);
+//						tv22.setVisibility(View.INVISIBLE);
+//						tv3.setVisibility(View.INVISIBLE);
+//						tv33.setVisibility(View.INVISIBLE);
+//						tv4.setVisibility(View.INVISIBLE);
+//						tv44.setVisibility(View.INVISIBLE);
+//						tv5.setVisibility(View.INVISIBLE);
+//						tv55.setVisibility(View.INVISIBLE);
+//						tv6.setVisibility(View.INVISIBLE);
+//						tv66.setVisibility(View.INVISIBLE);
+//						tv7.setVisibility(View.INVISIBLE);
+//						tv77.setVisibility(View.INVISIBLE);
+//						panBtn.setVisibility(View.INVISIBLE);
+//						pointBtn.setImageResource(R.drawable.point_down);
+//						pointBtn.setTag("point_down");
+//					}else{
+//						//显示
+//						tv2.setVisibility(View.VISIBLE);
+//						tv22.setVisibility(View.VISIBLE);
+//						tv3.setVisibility(View.VISIBLE);
+//						tv33.setVisibility(View.VISIBLE);
+//						tv4.setVisibility(View.VISIBLE);
+//						tv44.setVisibility(View.VISIBLE);
+//						tv5.setVisibility(View.VISIBLE);
+//						tv55.setVisibility(View.VISIBLE);
+//						tv6.setVisibility(View.VISIBLE);
+//						tv66.setVisibility(View.VISIBLE);
+//						tv7.setVisibility(View.VISIBLE);
+//						tv77.setVisibility(View.VISIBLE);
+//						panBtn.setVisibility(View.VISIBLE);
+//						pointBtn.setImageResource(R.drawable.point_up);
+//					}
+//				}
+//			});
+			if(openS.contains(new Integer(position))) {
+				l1.setVisibility(View.VISIBLE);
+				l2.setVisibility(View.GONE);
+			}
+			if(closeS.contains(new Integer(position))) {
+				l1.setVisibility(View.GONE);
+				l2.setVisibility(View.VISIBLE);
+			}
+			final int location = position;
 			pointBtn.setOnClickListener(new OnClickListener() {
 				
 				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					if(pointBtn.getTag().equals("point_up")){
-						//隐藏
-						tv2.setVisibility(View.INVISIBLE);
-						tv22.setVisibility(View.INVISIBLE);
-						tv3.setVisibility(View.INVISIBLE);
-						tv33.setVisibility(View.INVISIBLE);
-						tv4.setVisibility(View.INVISIBLE);
-						tv44.setVisibility(View.INVISIBLE);
-						tv5.setVisibility(View.INVISIBLE);
-						tv55.setVisibility(View.INVISIBLE);
-						tv6.setVisibility(View.INVISIBLE);
-						tv66.setVisibility(View.INVISIBLE);
-						tv7.setVisibility(View.INVISIBLE);
-						tv77.setVisibility(View.INVISIBLE);
-						panBtn.setVisibility(View.INVISIBLE);
-						pointBtn.setImageResource(R.drawable.point_down);
-						pointBtn.setTag("point_down");
-					}else{
-						//显示
-						tv2.setVisibility(View.VISIBLE);
-						tv22.setVisibility(View.VISIBLE);
-						tv3.setVisibility(View.VISIBLE);
-						tv33.setVisibility(View.VISIBLE);
-						tv4.setVisibility(View.VISIBLE);
-						tv44.setVisibility(View.VISIBLE);
-						tv5.setVisibility(View.VISIBLE);
-						tv55.setVisibility(View.VISIBLE);
-						tv6.setVisibility(View.VISIBLE);
-						tv66.setVisibility(View.VISIBLE);
-						tv7.setVisibility(View.VISIBLE);
-						tv77.setVisibility(View.VISIBLE);
-						panBtn.setVisibility(View.VISIBLE);
-						pointBtn.setImageResource(R.drawable.point_up);
-					}
+				public void onClick(View arg0) {
+//					showMoreInfos(location);
+					closeS.add(location);
+					openS.remove(new Integer(location));
+					closeMoreInfos(location);
 				}
 			});
-			
+			pointBtn2.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					openS.add(location);
+					closeS.remove(new Integer(location));
+					showMoreInfos(location);
+				}
+			});
 			//checkBox...
 			if(dataArray.get(position).isChecked()){
 				checkBox.setChecked(true);
@@ -337,7 +379,16 @@ public class ScanComplateActivity extends Activity {
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
+			StockItem si = new StockItem();
+			si.setRfidLabelnum("11111");
+			si.setAssetName("aaa");
+			dataArray.add(si);
+			si = new StockItem();
+			si.setRfidLabelnum("22222");
+			si.setAssetName("bbbb");
+			dataArray.add(si);
 			adapter.notifyDataSetChanged();
+			adapter.showMoreInfos(0);
 			dialog.cancel();
 			findViews();
 			setOnClicks();

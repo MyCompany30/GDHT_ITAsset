@@ -176,11 +176,11 @@ containing a value of this type.
         public static final int about_version_code=0x7f06000e;
         public static final int addBtn=0x7f060061;
         public static final int add_content=0x7f060029;
-        public static final int assetName_=0x7f06007c;
+        public static final int assetName_=0x7f06007d;
         public static final int assetName_code=0x7f060019;
         public static final int assetName_title=0x7f06001a;
         public static final int assetTypeSub_listitem=0x7f060054;
-        public static final int assetType_=0x7f06007a;
+        public static final int assetType_=0x7f06007b;
         public static final int assetType_code=0x7f060018;
         public static final int assetType_listView=0x7f06003e;
         public static final int assetType_listitem=0x7f060051;
@@ -191,12 +191,12 @@ containing a value of this type.
          */
         public static final int auto_focus=0x7f060000;
         public static final int back=0x7f060011;
-        public static final int brand_=0x7f06007e;
+        public static final int brand_=0x7f06007f;
         public static final int breakdownDetail_title=0x7f060023;
         public static final int breakdown_title=0x7f060020;
         public static final int chexiao_btn=0x7f060050;
         public static final int chexiao_btn_=0x7f06002d;
-        public static final int chkBox=0x7f060077;
+        public static final int chkBox=0x7f060078;
         public static final int ck=0x7f060041;
         public static final int ck_code=0x7f060043;
         public static final int ck_title=0x7f060042;
@@ -214,7 +214,7 @@ containing a value of this type.
         public static final int dept=0x7f060048;
         public static final int deptName_code=0x7f06001d;
         public static final int deptName_title=0x7f06001e;
-        public static final int dept_=0x7f060080;
+        public static final int dept_=0x7f060081;
         public static final int dept_code=0x7f06004a;
         public static final int dept_title=0x7f060049;
         public static final int duihao=0x7f060026;
@@ -232,6 +232,8 @@ containing a value of this type.
         public static final int img=0x7f060052;
         public static final int ip=0x7f06006f;
         public static final int kuang=0x7f060024;
+        public static final int l1=0x7f060077;
+        public static final int l2=0x7f060089;
         public static final int lable=0x7f06005f;
         public static final int launch_product_query=0x7f060006;
         public static final int line1=0x7f06001f;
@@ -245,25 +247,26 @@ containing a value of this type.
         public static final int loginBtn=0x7f060071;
         public static final int logo=0x7f06006c;
         public static final int main_layout=0x7f060076;
-        public static final int menu_settings=0x7f060088;
+        public static final int menu_settings=0x7f06008b;
         public static final int name=0x7f06005a;
         public static final int nameLayout=0x7f060062;
         public static final int number=0x7f060074;
         public static final int office=0x7f06004b;
         public static final int office_code=0x7f06004d;
         public static final int office_title=0x7f06004c;
-        public static final int panBtn=0x7f060087;
+        public static final int panBtn=0x7f060088;
         public static final int pankui_btn=0x7f060033;
         public static final int pankui_listView=0x7f06002c;
         public static final int panying_btn=0x7f060034;
         public static final int panying_listView=0x7f06002e;
         public static final int person=0x7f060044;
-        public static final int person_=0x7f060082;
+        public static final int person_=0x7f060083;
         public static final int person_code=0x7f060046;
         public static final int person_title=0x7f060045;
         public static final int plan_listView=0x7f060072;
         public static final int plan_listitem=0x7f06006a;
-        public static final int pointBtn=0x7f060086;
+        public static final int pointBtn=0x7f060087;
+        public static final int pointBtn2=0x7f06008a;
         public static final int preview_view=0x7f060013;
         public static final int quit=0x7f060007;
         public static final int restart_preview=0x7f060008;
@@ -271,7 +274,7 @@ containing a value of this type.
         public static final int rfidCode=0x7f060060;
         public static final int rfidScan=0x7f06003a;
         public static final int rfidTitle=0x7f060075;
-        public static final int rfid_=0x7f060078;
+        public static final int rfid_=0x7f060079;
         public static final int rfid_code=0x7f060016;
         public static final int rfid_item_layout=0x7f060073;
         public static final int rfid_title=0x7f060015;
@@ -290,18 +293,18 @@ containing a value of this type.
         public static final int shfwdqLayout=0x7f060068;
         public static final int shouhoufuwudaoqi=0x7f060069;
         public static final int split=0x7f06000f;
-        public static final int status_=0x7f060084;
+        public static final int status_=0x7f060085;
         public static final int sure=0x7f060059;
         public static final int switch_btn=0x7f060021;
         public static final int title=0x7f060058;
         public static final int title_tv=0x7f06003f;
-        public static final int tv1=0x7f060079;
-        public static final int tv2=0x7f06007b;
-        public static final int tv3=0x7f06007d;
-        public static final int tv4=0x7f06007f;
-        public static final int tv5=0x7f060081;
-        public static final int tv6=0x7f060083;
-        public static final int tv7=0x7f060085;
+        public static final int tv1=0x7f06007a;
+        public static final int tv2=0x7f06007c;
+        public static final int tv3=0x7f06007e;
+        public static final int tv4=0x7f060080;
+        public static final int tv5=0x7f060082;
+        public static final int tv6=0x7f060084;
+        public static final int tv7=0x7f060086;
         public static final int userName=0x7f06006d;
         public static final int userPwd=0x7f06006e;
         public static final int viewfinder_view=0x7f060014;
@@ -354,9 +357,10 @@ containing a value of this type.
         public static final int plan_select_view=0x7f030025;
         public static final int rfid_listitem=0x7f030026;
         public static final int scan_complate_listitem=0x7f030027;
-        public static final int select_cangku=0x7f030028;
-        public static final int waiting_view=0x7f030029;
-        public static final int ymddateslider=0x7f03002a;
+        public static final int scan_complate_listitem2=0x7f030028;
+        public static final int select_cangku=0x7f030029;
+        public static final int waiting_view=0x7f03002a;
+        public static final int ymddateslider=0x7f03002b;
     }
     public static final class menu {
         public static final int activity_gu_zhang_deng_ji=0x7f0a0000;
@@ -497,7 +501,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:childHeight
+          @attr name com.gdht.itasset:childHeight
         */
         public static final int ScrollLayout_childHeight = 3;
         /**
@@ -513,7 +517,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:childWidth
+          @attr name com.gdht.itasset:childWidth
         */
         public static final int ScrollLayout_childWidth = 2;
         /**
@@ -527,7 +531,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:labelerClass
+          @attr name com.gdht.itasset:labelerClass
         */
         public static final int ScrollLayout_labelerClass = 0;
         /**
@@ -541,7 +545,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:labelerFormat
+          @attr name com.gdht.itasset:labelerFormat
         */
         public static final int ScrollLayout_labelerFormat = 1;
     };

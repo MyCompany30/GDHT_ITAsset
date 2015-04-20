@@ -73,6 +73,7 @@ public class ErWeiScanActivity extends Activity {
 				Intent intent = new Intent();
 				intent.setClass(ErWeiScanActivity.this, ScanComplateActivity.class);
 				intent.putStringArrayListExtra("rfidArray", rfidArray);
+				intent.putExtra("assetInfoList", planAssetArrayList);
 				ErWeiScanActivity.this.startActivity(intent);
 			}
 			break;
