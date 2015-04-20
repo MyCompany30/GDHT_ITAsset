@@ -9,6 +9,7 @@ public class YingPanXinZengItem {
 	private String name;// 资产名称
 	private String registrant;// 登记人(id)
 	private String dept;// 部门
+	private String deptName; //部门仓库名称
 	private String office;// 办公室
 	private String keeper;// 责任人
 	private String buyDate;  //购买日期  时间戳精确到日
@@ -93,16 +94,23 @@ public class YingPanXinZengItem {
 	public void setIsck(String isck) {
 		this.isck = isck;
 	}
+	public String getDeptName() {
+		return deptName;
+	}
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
 	@Override
 	public String toString() {
 		return "YingPanXinZengItem [assetCheckplanId=" + assetCheckplanId
 				+ ", rfid_labelnum=" + rfid_labelnum + ", classify=" + classify
 				+ ", type=" + type + ", name=" + name + ", registrant="
-				+ registrant + ", dept=" + dept + ", office=" + office
-				+ ", keeper=" + keeper + ", buyDate=" + buyDate + ", lifetime="
-				+ lifetime + ", shfwdqsj=" + shfwdqsj + ", isck=" + isck + "]";
+				+ registrant + ", dept=" + dept + ", deptName=" + deptName
+				+ ", office=" + office + ", keeper=" + keeper + ", buyDate="
+				+ buyDate + ", lifetime=" + lifetime + ", shfwdqsj=" + shfwdqsj
+				+ ", isck=" + isck + "]";
 	}
-
+	
 	
 	
 

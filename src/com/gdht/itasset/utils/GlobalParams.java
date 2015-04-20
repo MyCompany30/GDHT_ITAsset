@@ -8,6 +8,7 @@ public class GlobalParams {
 	public static String rfid;
 	public static String username;
 	public static String cangKuValue;
+	public static String cangKuName;
 	public static String zichanfenlei;
 	public static String zichanzifenlei;
 	public static String planId;

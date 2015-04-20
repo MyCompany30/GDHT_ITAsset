@@ -14,8 +14,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.gdht.itasset.adapter.YingPanXinZenItemAdapter;
+import com.gdht.itasset.eventbus.SelectCangKuListener;
 import com.gdht.itasset.pojo.YingPanXinZengItem;
 import com.gdht.itasset.utils.GlobalParams;
+
+import de.greenrobot.event.EventBus;
 
 public class XinZengErWeiScanActivity extends Activity {
 	private Intent intent;
@@ -31,6 +34,7 @@ public class XinZengErWeiScanActivity extends Activity {
 		this.setContentView(R.layout.activity_scan_erwei_xinzeng);
 		// pd = new ProgressDialog(this);
 		// pd.setMessage("数据保存中...");
+		EventBus.getDefault().register(this);
 		findViews();
 	}
 
@@ -38,6 +42,13 @@ public class XinZengErWeiScanActivity extends Activity {
 		listView = (ListView) this.findViewById(R.id.listView);
 		adapter = new YingPanXinZenItemAdapter(this, items);
 		listView.setAdapter(adapter);
+	}
+	
+	public void onEvent(SelectCangKuListener event) {
+		YingPanXinZengItem item = items.get(event.getLocation());
+		item.setDept(event.getDept());
+		item.setDeptName(event.getDeptName());
+		adapter.notifyDataSetChanged();
 	}
 
 	public void btnClick(View view) {
@@ -77,6 +88,7 @@ public class XinZengErWeiScanActivity extends Activity {
 				item.setType(GlobalParams.zichanzifenlei);
 				item.setRegistrant(GlobalParams.username);
 				item.setDept(GlobalParams.cangKuValue);
+				item.setDeptName(GlobalParams.cangKuName);
 				item.setOffice("");
 				item.setIsck(GlobalParams.isck);
 				item.setBuyDate("");
@@ -99,5 +111,6 @@ public class XinZengErWeiScanActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		EventBus.getDefault().unregister(this);
 	}
 }

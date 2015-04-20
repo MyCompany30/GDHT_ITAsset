@@ -379,14 +379,14 @@ public class ScanComplateActivity extends Activity {
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-			StockItem si = new StockItem();
-			si.setRfidLabelnum("11111");
-			si.setAssetName("aaa");
-			dataArray.add(si);
-			si = new StockItem();
-			si.setRfidLabelnum("22222");
-			si.setAssetName("bbbb");
-			dataArray.add(si);
+//			StockItem si = new StockItem();
+//			si.setRfidLabelnum("11111");
+//			si.setAssetName("aaa");
+//			dataArray.add(si);
+//			si = new StockItem();
+//			si.setRfidLabelnum("22222");
+//			si.setAssetName("bbbb");
+//			dataArray.add(si);
 			adapter.notifyDataSetChanged();
 			adapter.showMoreInfos(0);
 			dialog.cancel();

@@ -7,6 +7,7 @@ import java.util.TimerTask;
 
 import com.gdht.itasset.adapter.YingPanXinZenItemAdapter;
 import com.gdht.itasset.db.service.RFIDSDBService;
+import com.gdht.itasset.eventbus.SelectCangKuListener;
 import com.gdht.itasset.pojo.YingPanXinZengItem;
 import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.xintong.Accompaniment;
@@ -19,6 +20,7 @@ import com.senter.support.openapi.StUhf.InterrogatorModelDs.UmdFrequencyPoint;
 import com.senter.support.openapi.StUhf.InterrogatorModelDs.UmdOnIso18k6cRealTimeInventory;
 import com.senter.support.openapi.StUhf.InterrogatorModelDs.UmdRssi;
 
+import de.greenrobot.event.EventBus;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -76,6 +78,7 @@ public class XinZengScanActivity extends Activity {
 				item.setRegistrant(GlobalParams.username);
 				item.setDept(GlobalParams.cangKuValue);
 				item.setOffice("");
+				item.setDeptName(GlobalParams.cangKuName);
 				item.setIsck(GlobalParams.isck);
 				items.add(item);
 				adapter.notifyDataSetChanged();
@@ -98,6 +101,7 @@ public class XinZengScanActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scan_xinzeng);
 		rfidsdbService = new RFIDSDBService(this);
+		EventBus.getDefault().register(this);
 		pd = new ProgressDialog(this);
 		pd.setMessage("数据保存中...");
 		if (App.getRfid() == null) {
@@ -123,6 +127,14 @@ public class XinZengScanActivity extends Activity {
 		accompaniment.init();
 
 	}
+	
+	public void onEvent(SelectCangKuListener event) {
+		YingPanXinZengItem item = items.get(event.getLocation());
+		item.setDept(event.getDept());
+		item.setDeptName(event.getDeptName());
+		adapter.notifyDataSetChanged();
+	}
+	
 
 	private void setOnClicks() {
 		// 开始扫描
@@ -248,6 +260,15 @@ public class XinZengScanActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		stop();
+		EventBus.getDefault().unregister(this);
+	}
+	
+	public void btnClick(View view) {
+		switch (view.getId()) {
+		case R.id.back:
+			this.finish();
+			break;
+		}
 	}
 
 }

@@ -14,8 +14,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.gdht.itasset.adapter.YingPanXinZenItemAdapter;
+import com.gdht.itasset.eventbus.SelectCangKuListener;
 import com.gdht.itasset.pojo.YingPanXinZengItem;
 import com.gdht.itasset.utils.GlobalParams;
+
+import de.greenrobot.event.EventBus;
 
 public class XinZengHaveRfidActivity extends Activity {
 	private Intent intent;
@@ -31,6 +34,7 @@ public class XinZengHaveRfidActivity extends Activity {
 		this.setContentView(R.layout.activity_haverfid_xinzeng);
 		// pd = new ProgressDialog(this);
 		// pd.setMessage("数据保存中...");
+		EventBus.getDefault().register(this);
 		findViews();
 	}
 
@@ -46,8 +50,16 @@ public class XinZengHaveRfidActivity extends Activity {
 		item.setRegistrant(GlobalParams.username);
 		item.setDept(GlobalParams.cangKuValue);
 		item.setOffice("");
+		item.setDeptName(GlobalParams.cangKuName);
 		item.setIsck(GlobalParams.isck);
 		items.add(item);
+		adapter.notifyDataSetChanged();
+	}
+	
+	public void onEvent(SelectCangKuListener event) {
+		YingPanXinZengItem item = items.get(event.getLocation());
+		item.setDept(event.getDept());
+		item.setDeptName(event.getDeptName());
 		adapter.notifyDataSetChanged();
 	}
 
@@ -76,5 +88,6 @@ public class XinZengHaveRfidActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		EventBus.getDefault().unregister(this);
 	}
 }

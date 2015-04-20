@@ -82,6 +82,7 @@ public class CangKuSelectActivity extends Activity {
 				String key = cangKuInfos.get(arg2).getKey();
 				intent.putExtra("cangKuValue", key);
 				GlobalParams.cangKuValue = key;
+				GlobalParams.cangKuName = cangKuInfos.get(arg2).getValue();
 				if (key.startsWith("asset_ck")) {
 					GlobalParams.isck = "1";
 				} else {

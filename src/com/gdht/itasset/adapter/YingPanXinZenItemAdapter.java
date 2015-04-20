@@ -5,7 +5,9 @@ import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.sax.StartElementListener;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -21,14 +23,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gdht.itasset.CangKuSelectActivity;
-import com.gdht.itasset.PanYingActivity;
+import com.gdht.itasset.CangKuSelectSingleActivity;
 import com.gdht.itasset.R;
 import com.gdht.itasset.dateslider.DateSlider;
 import com.gdht.itasset.dateslider.YMDDateSlider;
+import com.gdht.itasset.eventbus.SelectCangKuListener;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.YingPanXinZengItem;
 import com.gdht.itasset.widget.WaitingDialog;
+
+import de.greenrobot.event.EventBus;
 
 public class YingPanXinZenItemAdapter extends BaseAdapter {
 	private Context context;
@@ -46,6 +50,8 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 		this.context = context;
 		this.items = items;
 	}
+	
+
 
 	@Override
 	public int getCount() {
@@ -74,6 +80,7 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 		// convertView.setTag(vh);
 		// }
 		// vh = (ViewHolder) convertView.getTag();
+		final int location = position;
 		item = items.get(position);
 		// vh.rfidTv.setText(item.getRfid());
 		// vh.nameEt.setText(item.getName());
@@ -83,6 +90,7 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 		TextView nameEt = (TextView) convertView.findViewById(R.id.name);
 		TextView fuzerenTv = (TextView) convertView
 				.findViewById(R.id.fuzerenname);
+		TextView cangKuTv = (TextView) convertView.findViewById(R.id.cangKu);
 		goumairiqiTv = (TextView) convertView.findViewById(R.id.goumairiqi);
 		goumairiqiTv.setText(item.getBuyDate());
 		EditText yujishoumingEt = (EditText) convertView.findViewById(R.id.yujishouming);
@@ -118,6 +126,7 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 		RelativeLayout goumaiLayout = (RelativeLayout) convertView
 				.findViewById(R.id.goumaiLayout);
 		RelativeLayout shfwdqLayout = (RelativeLayout) convertView.findViewById(R.id.shfwdqLayout);
+		RelativeLayout cangkuLayout = (RelativeLayout) convertView.findViewById(R.id.cangKuLayout);
 		ImageView addBtn = (ImageView) convertView.findViewById(R.id.addBtn);
 		nameLayout.setOnClickListener(new OnClickListener() {
 
@@ -174,9 +183,20 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 				}
 			}
 		});
+		cangkuLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(context, CangKuSelectSingleActivity.class);
+				intent.putExtra("key", item.getDept());
+				intent.putExtra("postion", location);
+				context.startActivity(intent);
+			}
+		});
 		rfidTv.setText(item.getRfid_labelnum());
 		nameEt.setText(item.getName());
 		fuzerenTv.setText(item.getKeeper());
+		cangKuTv.setText(item.getDeptName());
 		// quyuTv.setText(item.getQuyu());
 		return convertView;
 	}
