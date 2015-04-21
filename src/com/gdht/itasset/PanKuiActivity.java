@@ -33,7 +33,14 @@ public class PanKuiActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		itemArray = new ArrayList<StockItem>();
+		itemArrayTemp = new ArrayList<StockItem>();
 		setContentView(R.layout.activity_pan_kui);
 		cheXiaoBtn = (ImageView)findViewById(R.id.chexiao_btn_);
 		cheXiaoBtn.setOnClickListener(new OnClickListener() {
@@ -52,7 +59,7 @@ public class PanKuiActivity extends Activity {
 							};
 							@Override
 							protected String doInBackground(Void... params) {
-								return new HttpClientUtil(PanKuiActivity.this).updateAssetStatus(PanKuiActivity.this, PlanActivity.PLAN_ID, itemArray.get(position).getAssetInfoId(), "", "0", PlanActivity.operator);
+								return new HttpClientUtil(PanKuiActivity.this).updateAssetStatus(PanKuiActivity.this, PlanActivity.PLAN_ID, itemArray.get(itemArray.indexOf(item)).getAssetInfoId(), "", "0", PlanActivity.operator);
 								
 							}
 							protected void onPostExecute(String result) {

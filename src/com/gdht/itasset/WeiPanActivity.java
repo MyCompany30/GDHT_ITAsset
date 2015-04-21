@@ -57,7 +57,7 @@ public class WeiPanActivity extends Activity {
 							};
 							@Override
 							protected String doInBackground(Void... params) {
-								return new HttpClientUtil(WeiPanActivity.this).updateAssetStatus(WeiPanActivity.this, PlanActivity.PLAN_ID, itemArray.get(position).getAssetInfoId(), "", "3", PlanActivity.operator);
+								return new HttpClientUtil(WeiPanActivity.this).updateAssetStatus(WeiPanActivity.this, PlanActivity.PLAN_ID, itemArray.get(itemArray.indexOf(item)).getAssetInfoId(), "", "3", PlanActivity.operator);
 								
 							}
 							protected void onPostExecute(String result) {
