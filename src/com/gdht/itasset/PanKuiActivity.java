@@ -66,6 +66,7 @@ public class PanKuiActivity extends Activity {
 								dialog.dismiss();
 								if(result.equals("1")){
 									itemArray.remove(item);
+									adapter.notifyDataSetChanged();
 								}
 							}
 						}.execute();
