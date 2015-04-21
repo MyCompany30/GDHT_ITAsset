@@ -120,13 +120,7 @@ public class YiPanActivity extends Activity {
 
 							@Override
 							protected String doInBackground(Void... params) {
-								return new HttpClientUtil(YiPanActivity.this)
-										.updateAssetStatus(YiPanActivity.this,
-												PlanActivity.PLAN_ID, itemArray
-														.get(position)
-														.getAssetInfoId(), "",
-												"0", PlanActivity.operator);
-
+								return new HttpClientUtil(YiPanActivity.this).updateAssetStatus(YiPanActivity.this, PlanActivity.PLAN_ID, itemArray.get(itemArray.indexOf(item)).getAssetInfoId(), "","0", PlanActivity.operator);
 							}
 
 							protected void onPostExecute(String result) {
