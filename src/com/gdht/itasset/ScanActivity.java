@@ -3,7 +3,6 @@ package com.gdht.itasset;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import com.gdht.itasset.db.service.RFIDSDBService;
 import com.gdht.itasset.pojo.PlanAssetInfo;
 import com.gdht.itasset.xintong.Accompaniment;
@@ -16,7 +15,6 @@ import com.senter.support.openapi.StUhf.InterrogatorModelDs.UmdErrorCode;
 import com.senter.support.openapi.StUhf.InterrogatorModelDs.UmdFrequencyPoint;
 import com.senter.support.openapi.StUhf.InterrogatorModelDs.UmdOnIso18k6cRealTimeInventory;
 import com.senter.support.openapi.StUhf.InterrogatorModelDs.UmdRssi;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -74,6 +72,21 @@ public class ScanActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scan);
+		if(SelectDeptActivity.instance!=null){
+			SelectDeptActivity.instance.finish();
+		}
+		if(SelectOfficeActivity.instance!=null){
+			SelectOfficeActivity.instance.finish();
+		}
+		if(SelectUseTypeActivity.instance!=null){
+			SelectUseTypeActivity.instance.finish();
+		}
+		if(SelectWarehouseAreaActivity.instance!=null){
+			SelectWarehouseAreaActivity.instance.finish();
+		}
+		if(SelectGoodsShelvesActivity.instance!=null){
+			SelectGoodsShelvesActivity.instance.finish();
+		}
 		planAssetArrayList = (ArrayList<PlanAssetInfo>) getIntent().getSerializableExtra("assetInfoList");
 		rfidsdbService = new RFIDSDBService(this);
 		pd = new ProgressDialog(this);

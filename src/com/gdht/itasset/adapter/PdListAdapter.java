@@ -70,11 +70,17 @@ public class PdListAdapter extends BaseAdapter implements ListAdapter {
 		views.add(position, (CheckLinearLayout) convertView);
 		TextView rfidTv = (TextView)convertView.findViewById(R.id.listitem_tv2);
 		rfidTv.setText(itemArray.get(position).getRfidLabelnum());
+		TextView assetNameTv = (TextView)convertView.findViewById(R.id.listitem_tv4);
+		assetNameTv.setText(itemArray.get(position).getAssetName());
+		TextView assetTypeTv = (TextView)convertView.findViewById(R.id.listitem_tv6);
+		assetTypeTv.setText(itemArray.get(position).getAssetType());
+		TextView keeperTv = (TextView)convertView.findViewById(R.id.listitem_tv8);
+		keeperTv.setText(itemArray.get(position).getKeeper());
 		color = convertView.findViewById(R.id.color);
 		colorIn = convertView.findViewById(R.id.color_in);
 		color.setBackgroundResource(colors[position%colors.length]);
 		colorIn.setBackgroundColor(Color.parseColor(colorsIn[position%colorsIn.length]));
 		return convertView;
-	}
+}
 
 }

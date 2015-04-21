@@ -19,11 +19,12 @@ public class SelectWarehouseAreaActivity extends Activity {
 	private ListView listView = null;
 	private String dept = null;
 	private String usetype = null;
+	public static SelectWarehouseAreaActivity instance;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_warehouse_area);
-		
+		instance = this;
 		dept = getIntent().getStringExtra("dept");
 		usetype = getIntent().getStringExtra("usetype");
 		ArrayList<String> warehouseArea = new ArrayList<String>();

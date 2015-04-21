@@ -18,11 +18,12 @@ import android.widget.AdapterView.OnItemClickListener;
 public class SelectUseTypeActivity extends Activity {
 	private ListView listView = null;
 	private String dept = null;
+	public static SelectUseTypeActivity instance;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.activity_select_use_type);
+		instance = this;
 		dept = getIntent().getStringExtra("dept");
 		ArrayList<String> useType = new ArrayList<String>();
 		ArrayList<PlanAssetInfo> deptArrayList = new ArrayList<PlanAssetInfo>();
@@ -40,11 +41,21 @@ public class SelectUseTypeActivity extends Activity {
 		}
 		//设置listView显示数据
 		final String [] values = new String[useType.size()];
-		 for(int i=0;i<useType.size();i++){  
-			 values[i]=(String)useType.get(i);  
-	     }
+		for(int i=0;i<useType.size();i++){  
+			values[i]=(String)useType.get(i);  
+	    }
+		String [] keys = new String[values.length];
+		for(int i=0;i<values.length;i++){  
+			if(values[i].equals("1")){ //库存
+				keys[i] = "库存";
+			}else if(values[i].equals("2")){  //在运
+				keys[i] = "在运";
+			}else if(values[i].equals("3")){   //废弃
+				keys[i] = "废弃";
+			}
+	    }
 		listView = (ListView)findViewById(R.id.listView);
-		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(SelectUseTypeActivity.this, android.R.layout.simple_list_item_1, values);
+		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(SelectUseTypeActivity.this, android.R.layout.simple_list_item_1, keys);
 	    listView.setAdapter(arrayAdapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
