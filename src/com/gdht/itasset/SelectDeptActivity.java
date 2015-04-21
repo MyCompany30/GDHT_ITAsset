@@ -18,11 +18,12 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class SelectDeptActivity extends Activity {
 	private ListView listView = null;
-	
+	public static SelectDeptActivity instance;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_dept);
+		instance = this;
 		ArrayList<String> deptValueArray = new ArrayList<String>();
 		//ArrayList<PlanAssetInfo> deptArrayList = new ArrayList<PlanAssetInfo>();
 		//筛选dept

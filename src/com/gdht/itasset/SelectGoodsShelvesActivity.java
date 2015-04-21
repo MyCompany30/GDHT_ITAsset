@@ -20,12 +20,12 @@ public class SelectGoodsShelvesActivity extends Activity {
 	private String dept = null;
 	private String usetype = null;
 	private String warehouseArea = null;
-	
+	public static SelectGoodsShelvesActivity instance;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_goods_shelves);
-		
+		instance = this;
 		dept = getIntent().getStringExtra("dept");
 		usetype = getIntent().getStringExtra("usetype");
 		warehouseArea = getIntent().getStringExtra("warehouseArea");

@@ -4,16 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#f6fafd"
-    android:paddingBottom="10dp" 
     android:orientation="vertical"
-    >
+    android:paddingBottom="10dp" >
 
     <RelativeLayout
         android:id="@+id/l1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-         >
+        android:visibility="gone" >
 
         <CheckBox
             android:id="@+id/chkBox"
@@ -23,7 +21,6 @@
             android:layout_margin="15dp" />
 
         <TextView
-            android:id="@+id/rfid_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/chkBox"
@@ -170,16 +167,15 @@
 
         <ImageView
             android:id="@+id/pointBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/point_down"
-            android:tag="point_down" 
-            />
+            android:scaleType="fitXY"
+            android:src="@drawable/point_up"
+            android:tag="point_up" />
 
         <ImageView
             android:id="@+id/panBtn"
@@ -191,23 +187,24 @@
             android:layout_marginTop="10dp"
             android:scaleType="centerInside"
             android:src="@drawable/yipan_" />
-
     </RelativeLayout>
-    	<RelativeLayout 
-    	    android:id="@+id/l2"
-	    android:layout_width="match_parent"
-	    android:layout_height="0dp"
-	    android:layout_weight="1"
-	    android:gravity="center_vertical"
-	    >
-	    <CheckBox
-            android:id="@+id/chkBox"
+
+    <LinearLayout
+        android:id="@+id/l2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical" >
+
+        <CheckBox
+            android:id="@+id/chkBox_"
             style="@drawable/pandian_checkbox_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp" />
-	            <TextView
-            android:id="@+id/rfid_"
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/chkBox"
@@ -219,23 +216,25 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv1"
+            android:id="@+id/tv1_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/chkBox"
             android:layout_toRightOf="@+id/rfid_"
             android:text="adfasdfe123e12e32fd1"
+            android:layout_weight="1"
             android:textColor="#ef8200"
             android:textSize="12sp" />
+
         <ImageView
             android:id="@+id/pointBtn2"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:scaleType="centerInside"
-            android:background="@drawable/point_up"
-            />
-	</RelativeLayout>
+            android:background="@drawable/point_down"
+            android:scaleType="centerInside" />
+    </LinearLayout>
+
 </LinearLayout>

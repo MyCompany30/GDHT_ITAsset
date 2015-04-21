@@ -19,12 +19,12 @@ public class SelectOfficeActivity extends Activity {
 	private ListView listView = null;
 	private String dept = null;
 	private String usetype = null;
-	
+	public static SelectOfficeActivity instance;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_goods_shelves);
-		
+		instance = this;
 		dept = getIntent().getStringExtra("dept");
 		usetype = getIntent().getStringExtra("usetype");
 		ArrayList<String> offices = new ArrayList<String>();

@@ -103,13 +103,15 @@ public class ScanComplateActivity extends Activity {
 			View v  = inflater.inflate(R.layout.scan_complate_listitem, null);
 			convertView = v;
 			//findViews...
-			final RelativeLayout l1 = (RelativeLayout) convertView.findViewById(R.id.l1);
-			final RelativeLayout l2 = (RelativeLayout) convertView.findViewById(R.id.l2);
+			final View l1 = (View) convertView.findViewById(R.id.l1);
+			final View l2 = (View) convertView.findViewById(R.id.l2);
 			final CheckBox checkBox  = (CheckBox)convertView.findViewById(R.id.chkBox);
+			final CheckBox checkBox_  = (CheckBox)convertView.findViewById(R.id.chkBox_);
 			final ImageView pointBtn = (ImageView)convertView.findViewById(R.id.pointBtn);
 			final ImageView pointBtn2 = (ImageView)convertView.findViewById(R.id.pointBtn2);
 			final ImageView panBtn = (ImageView)convertView.findViewById(R.id.panBtn);
 			final TextView tv1 = (TextView)convertView.findViewById(R.id.tv1);
+			final TextView tv1_ = (TextView)convertView.findViewById(R.id.tv1_);
 			final TextView tv2 = (TextView)convertView.findViewById(R.id.tv2);
 			final TextView tv3 = (TextView)convertView.findViewById(R.id.tv3);
 			final TextView tv4 = (TextView)convertView.findViewById(R.id.tv4);
@@ -134,6 +136,7 @@ public class ScanComplateActivity extends Activity {
 				
 			}
 			tv1.setText(dataArray.get(position).getRfidLabelnum());
+			tv1_.setText(dataArray.get(position).getRfidLabelnum());
 			tv2.setText(dataArray.get(position).getAssetType());
 			tv3.setText(dataArray.get(position).getAssetName());
 			tv4.setText(dataArray.get(position).getBrandModel());
@@ -235,10 +238,23 @@ public class ScanComplateActivity extends Activity {
 			//checkBox...
 			if(dataArray.get(position).isChecked()){
 				checkBox.setChecked(true);
+				checkBox_.setChecked(true);
 			}else{
 				checkBox.setChecked(false);
+				checkBox_.setChecked(false);
 			}
 			checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					for(StockItem item : dataArray){
+						item.setChecked(false);
+					}
+					currentSelectItem = dataArray.get(position);
+					currentSelectItem.setChecked(true);
+					adapter.notifyDataSetChanged();
+				}
+			});
+			checkBox_.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 					for(StockItem item : dataArray){
