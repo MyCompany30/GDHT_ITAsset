@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="选择"
+            android:text="选择资产状态"
             android:textColor="@android:color/white" />
     </RelativeLayout>
 
