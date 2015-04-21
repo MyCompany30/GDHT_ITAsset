@@ -11,6 +11,10 @@ import com.gdht.itasset.widget.WaitingDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -25,6 +29,7 @@ public class PanKuiActivity extends Activity {
 	private PdListAdapter adapter = null;
 	private EditText searchEdt = null;
 	private ArrayList<StockItem> itemArray = new ArrayList<StockItem>();
+	private ArrayList<StockItem> itemArrayTemp = new ArrayList<StockItem>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,6 +69,7 @@ public class PanKuiActivity extends Activity {
 		});
 		
 		listView = (ListView)findViewById(R.id.pankui_listView);
+		searchEdt = (EditText) findViewById(R.id.search_edt);
 		adapter = new PdListAdapter(PanKuiActivity.this, itemArray); 
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -76,6 +82,39 @@ public class PanKuiActivity extends Activity {
 					itemLayout.setChecked(false);
 				}else{
 					itemLayout.setChecked(true);
+				}
+			}
+		});
+searchEdt.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+				
+			}
+			
+			
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				Log.i("a", "值: " + arg0.toString());
+				if(TextUtils.isEmpty(arg0.toString())) {
+					itemArray.clear();
+					itemArray.addAll(itemArrayTemp);
+					adapter.notifyDataSetChanged();
+				}else {
+					for(int i=0; i<itemArray.size(); i++) {
+						StockItem si = itemArray.get(i);
+						if(si.getRfidLabelnum().equals(arg0.toString())){
+							itemArray.clear();
+							itemArray.add(si);
+							adapter.notifyDataSetChanged();
+						}
+					}
 				}
 			}
 		});
@@ -94,6 +133,8 @@ public class PanKuiActivity extends Activity {
 			return null;
 		}
 		protected void onPostExecute(String result) {
+			itemArrayTemp.clear();
+			itemArrayTemp.addAll(itemArray);
 			dialog.dismiss();
 			adapter.notifyDataSetChanged();
 		}

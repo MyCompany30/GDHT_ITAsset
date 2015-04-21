@@ -12,6 +12,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -29,7 +33,7 @@ public class PanYingActivity extends Activity {
 	private ArrayList<StockItem> itemArray = null;
 	private CheckLinearLayout currSectItem = null;
 	private ArrayList<StockItem> dataArray = null;
-	
+	private ArrayList<StockItem> itemArrayTemp = new ArrayList<StockItem>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -83,6 +87,7 @@ public class PanYingActivity extends Activity {
 		});
 		
 		listView = (ListView)findViewById(R.id.panying_listView);
+		searchEdt = (EditText) findViewById(R.id.search_edt);
 		adapter = new PdListAdapter(PanYingActivity.this, itemArray); 
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -104,6 +109,40 @@ public class PanYingActivity extends Activity {
 				}
 			}
 		});
+searchEdt.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+				
+			}
+			
+			
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				Log.i("a", "值: " + arg0.toString());
+				if(TextUtils.isEmpty(arg0.toString())) {
+					itemArray.clear();
+					itemArray.addAll(itemArrayTemp);
+					adapter.notifyDataSetChanged();
+				}else {
+					for(int i=0; i<itemArray.size(); i++) {
+						StockItem si = itemArray.get(i);
+						if(si.getRfidLabelnum().equals(arg0.toString())){
+							itemArray.clear();
+							itemArray.add(si);
+							adapter.notifyDataSetChanged();
+						}
+					}
+				}
+			}
+		});
+		
 		new PanYingTask().execute();
 	}
 	class PanYingTask extends AsyncTask<Void, Void, String>{
@@ -118,7 +157,10 @@ public class PanYingActivity extends Activity {
 			return null;
 		}
 		protected void onPostExecute(String result) {
+			itemArrayTemp.clear();
+			itemArrayTemp.addAll(itemArray);
 			dialog.dismiss();
+			adapter.notifyDataSetChanged();
 		}
 	}
 	

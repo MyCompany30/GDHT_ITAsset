@@ -14,6 +14,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,7 +33,7 @@ public class WeiPanActivity extends Activity {
 	private PdListAdapter adapter = null;
 	private EditText searchEdt = null;
 	private ArrayList<StockItem> itemArray = new ArrayList<StockItem>();
-	
+	private ArrayList<StockItem> itemArrayTemp = new ArrayList<StockItem>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,7 @@ public class WeiPanActivity extends Activity {
 		});
 		
 		listView = (ListView)findViewById(R.id.weipan_listView);
+		searchEdt = (EditText) findViewById(R.id.search_edt);
 		adapter = new PdListAdapter(WeiPanActivity.this, itemArray); 
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -87,7 +92,40 @@ public class WeiPanActivity extends Activity {
 				}
 			}
 		});
-
+		searchEdt.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+				
+			}
+			
+			
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				Log.i("a", "值: " + arg0.toString());
+				if(TextUtils.isEmpty(arg0.toString())) {
+					itemArray.clear();
+					itemArray.addAll(itemArrayTemp);
+					adapter.notifyDataSetChanged();
+				}else {
+					for(int i=0; i<itemArray.size(); i++) {
+						StockItem si = itemArray.get(i);
+						if(si.getRfidLabelnum().equals(arg0.toString())){
+							itemArray.clear();
+							itemArray.add(si);
+							adapter.notifyDataSetChanged();
+						}
+					}
+				}
+			}
+		});
+		
 		new WeiPanTask().execute();
 		
 	}
@@ -105,6 +143,8 @@ public class WeiPanActivity extends Activity {
 			return null;
 		}
 		protected void onPostExecute(String result) {
+			itemArrayTemp.clear();
+			itemArrayTemp.addAll(itemArray);
 			dialog.dismiss();
 			adapter.notifyDataSetChanged();
 		}
