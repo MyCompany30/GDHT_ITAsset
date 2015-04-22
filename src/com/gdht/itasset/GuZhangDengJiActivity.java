@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class GuZhangDengJiActivity extends Activity {
 	private TextView rfidTv = null;
@@ -84,6 +85,11 @@ public class GuZhangDengJiActivity extends Activity {
 					return new HttpClientUtil(GuZhangDengJiActivity.this).addRepairInfo(GuZhangDengJiActivity.this, assetInfoId, repairtype, detil.getText().toString(), PlanActivity.operator);
 				}
 				protected void onPostExecute(String result) {
+					if(result.equals("1")){
+						Toast.makeText(GuZhangDengJiActivity.this, "处理成功", Toast.LENGTH_SHORT).show();
+					}else{
+						Toast.makeText(GuZhangDengJiActivity.this, "处理失败", Toast.LENGTH_SHORT).show();
+					}
 					dialog.dismiss();
 				};
 			}.execute();
