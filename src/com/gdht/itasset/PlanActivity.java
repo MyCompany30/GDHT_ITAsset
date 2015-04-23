@@ -52,14 +52,16 @@ public class PlanActivity extends Activity {
 		saomiao_btn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				/*
-				Intent intent = new Intent();
-				intent.setClass(PlanActivity.this, MainScanActivity.class);
-				PlanActivity.this.startActivity(intent);
-				*/
-				Intent intent = new Intent();
-				intent.setClass(PlanActivity.this, SelectDeptActivity.class);
-				PlanActivity.this.startActivity(intent);
+				if(GlobalParams.isLogin){
+					Intent intent = new Intent();
+					intent.setClass(PlanActivity.this, SelectDeptActivity.class);
+					PlanActivity.this.startActivity(intent);
+				}else{
+					Intent intent = new Intent();
+					intent.setClass(PlanActivity.this, MainScanActivity.class);
+					PlanActivity.this.startActivity(intent);
+				}
+				
 			}
 		});
 		//未盘

@@ -73,6 +73,7 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 		if(result!=null){
 			if(result.equals("登录成功")){
 				//登录成功
+				GlobalParams.isLogin = true;
 				activity.setContentView(R.layout.plan_select_view);
 				initPlanView();
 				new AppSharedPreferences(activity, "gdht").saveIP(ipStr);;
