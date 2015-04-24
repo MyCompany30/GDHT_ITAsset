@@ -27,6 +27,7 @@
     <string name="url_getCode">/moveCheck/getCode.s</string>
     <string name="url_addRepairInfo">/moveCheck/addRepairInfo.s</string>
     <string name="url_getStoresByUser">/moveCheck/getStoresByUser.s</string>
+    <string name="url_getAllDeptByUser">/moveCheck/getAllDeptByUser.s</string>
     <string name="url_pyxz">/moveCheck/pyxz.s</string>
     <string name="url_isHasRfid">/assetmanager/isHasRfid.s</string>
     <string name="submit"> 确 定 </string>

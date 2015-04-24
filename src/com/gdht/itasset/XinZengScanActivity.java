@@ -132,6 +132,7 @@ public class XinZengScanActivity extends Activity {
 		YingPanXinZengItem item = items.get(event.getLocation());
 		item.setDept(event.getDept());
 		item.setDeptName(event.getDeptName());
+		item.setIsck(event.getIsCk());
 		adapter.notifyDataSetChanged();
 	}
 	

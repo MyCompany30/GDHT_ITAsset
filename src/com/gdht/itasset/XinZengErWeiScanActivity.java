@@ -47,6 +47,7 @@ public class XinZengErWeiScanActivity extends Activity {
 	public void onEvent(SelectCangKuListener event) {
 		YingPanXinZengItem item = items.get(event.getLocation());
 		item.setDept(event.getDept());
+		item.setIsck(event.getIsCk());
 		item.setDeptName(event.getDeptName());
 		adapter.notifyDataSetChanged();
 	}

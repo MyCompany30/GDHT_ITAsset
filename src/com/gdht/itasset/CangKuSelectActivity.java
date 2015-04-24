@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.CangKuInfo;
+import com.gdht.itasset.pojo.DeptInfo;
 import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.widget.WaitingDialog;
 
@@ -25,7 +26,7 @@ public class CangKuSelectActivity extends Activity {
 	// private String[] cangkus = new String[]{"仓库1","仓库2","仓库3","仓库4","仓库5"};
 	private ListView listView;
 	private MyAdapter adapter;
-	private List<CangKuInfo> cangKuInfos = new ArrayList<CangKuInfo>();
+	private List<DeptInfo> cangKuInfos = new ArrayList<DeptInfo>();
 	private WaitingDialog dialog;
 	private String rfid = "";
 
@@ -40,7 +41,7 @@ public class CangKuSelectActivity extends Activity {
 	}
 
 	private class GetStoresByUserAsyncTask extends
-			AsyncTask<String, Integer, List<CangKuInfo>> {
+			AsyncTask<String, Integer, List<DeptInfo>> {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -50,13 +51,13 @@ public class CangKuSelectActivity extends Activity {
 		}
 
 		@Override
-		protected List<CangKuInfo> doInBackground(String... arg0) {
-			return new HttpClientUtil(CangKuSelectActivity.this).getStoresByUser(
+		protected List<DeptInfo> doInBackground(String... arg0) {
+			return new HttpClientUtil(CangKuSelectActivity.this).getAllDepts(
 					CangKuSelectActivity.this, GlobalParams.username);
 		}
 
 		@Override
-		protected void onPostExecute(List<CangKuInfo> result) {
+		protected void onPostExecute(List<DeptInfo> result) {
 			dialog.dismiss();
 			if (result.size() > 0) {
 				// for(CangKuInfo in : result) {

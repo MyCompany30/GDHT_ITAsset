@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.gdht.itasset.eventbus.SelectCangKuListener;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.CangKuInfo;
+import com.gdht.itasset.pojo.DeptInfo;
 import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.widget.WaitingDialog;
 
@@ -28,7 +29,7 @@ public class CangKuSelectSingleActivity extends Activity {
 	// private String[] cangkus = new String[]{"仓库1","仓库2","仓库3","仓库4","仓库5"};
 	private ListView listView;
 	private MyAdapter adapter;
-	private List<CangKuInfo> cangKuInfos = new ArrayList<CangKuInfo>();
+	private List<DeptInfo> cangKuInfos = new ArrayList<DeptInfo>();
 	private WaitingDialog dialog;
 	private String rfid = "";
 	private int location;
@@ -44,23 +45,22 @@ public class CangKuSelectSingleActivity extends Activity {
 	}
 
 	private class GetStoresByUserAsyncTask extends
-			AsyncTask<String, Integer, List<CangKuInfo>> {
+			AsyncTask<String, Integer, List<DeptInfo>> {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			dialog = new WaitingDialog(CangKuSelectSingleActivity.this,
-					R.style.TRANSDIALOG);
+			dialog = new WaitingDialog(CangKuSelectSingleActivity.this,	R.style.TRANSDIALOG);
 			dialog.show();
 		}
 
 		@Override
-		protected List<CangKuInfo> doInBackground(String... arg0) {
-			return new HttpClientUtil(CangKuSelectSingleActivity.this).getStoresByUser(
+		protected List<DeptInfo> doInBackground(String... arg0) {
+			return new HttpClientUtil(CangKuSelectSingleActivity.this).getAllDepts(
 					CangKuSelectSingleActivity.this, GlobalParams.username);
 		}
 
 		@Override
-		protected void onPostExecute(List<CangKuInfo> result) {
+		protected void onPostExecute(List<DeptInfo> result) {
 			dialog.dismiss();
 			if (result.size() > 0) {
 				// for(CangKuInfo in : result) {
@@ -85,7 +85,13 @@ public class CangKuSelectSingleActivity extends Activity {
 				String value = cangKuInfos.get(arg2).getValue();
 //				GlobalParams.cangKuValue = key;
 //				GlobalParams.cangKuName = cangKuInfos.get(arg2).getValue();
-				EventBus.getDefault().post(new SelectCangKuListener(location, key, value));
+				String isCk = "1";
+				if (key.startsWith("asset_ck")) {
+					isCk = "1";
+				} else {
+					isCk = "2";
+				}
+				EventBus.getDefault().post(new SelectCangKuListener(location, key, value, isCk));
 				CangKuSelectSingleActivity.this.finish();
 			}
 		});
@@ -110,8 +116,7 @@ public class CangKuSelectSingleActivity extends Activity {
 
 		@Override
 		public View getView(int arg0, View convertView, ViewGroup arg2) {
-			convertView = getLayoutInflater().inflate(
-					R.layout.item_cangku_listview, null);
+			convertView = getLayoutInflater().inflate(R.layout.item_cangku_listview, null);
 			TextView name = (TextView) convertView.findViewById(R.id.name);
 			name.setText(cangKuInfos.get(arg0).getValue());
 			return convertView;

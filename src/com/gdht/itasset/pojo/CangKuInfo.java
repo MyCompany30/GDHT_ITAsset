@@ -1,6 +1,6 @@
 package com.gdht.itasset.pojo;
 
-public class CangKuInfo {
+public class CangKuInfo implements DeptInfo{
 	private String key;
 	private String value;
 	public String getKey() {

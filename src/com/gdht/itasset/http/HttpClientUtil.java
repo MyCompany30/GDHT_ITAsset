@@ -25,7 +25,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.gdht.itasset.R;
+import com.gdht.itasset.pojo.BuMenInfo;
 import com.gdht.itasset.pojo.CangKuInfo;
+import com.gdht.itasset.pojo.DeptInfo;
 import com.gdht.itasset.pojo.PlanAssetInfo;
 import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.StockItem;
@@ -565,11 +567,45 @@ public class HttpClientUtil {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return result;
+			return result; 
 		}
 		return result;
 	}
 	
+	public List<BuMenInfo> getAllDeptByUser(Activity activity, String username) {
+		Log.i("a", "username = " + username);
+		List<BuMenInfo> infos = new ArrayList<BuMenInfo>();
+		String uri = null;
+		String result = null;
+		JSONObject jsonObject = null;
+		JSONArray jsonArray = null;
+		uri = activity.getResources().getString(R.string.url_getAllDeptByUser);
+		HttpPost post = new HttpPost(ip + uri);
+		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		pairs.add(new BasicNameValuePair("ID_", username));
+		HttpEntity entity = null;
+		try {
+			entity = new UrlEncodedFormEntity(pairs, "UTF-8");
+			post.setEntity(entity);
+			HttpResponse httpResponse = getHttpClient().execute(post);
+			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+				result = EntityUtils.toString(httpResponse.getEntity());
+				Log.i("a", "资产分类 = " + result);
+				jsonArray = new JSONArray(result);
+				for (int i = 0; i < jsonArray.length(); i++) {
+					jsonObject = jsonArray.getJSONObject(i);
+					BuMenInfo info = new BuMenInfo();
+					info.setKey(jsonObject.getString("key"));
+					info.setValue(jsonObject.getString("value"));
+					infos.add(info);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return infos;
+	}
 	public List<CangKuInfo> getStoresByUser(Activity activity, String username) {
 		Log.i("a", "username = " + username);
 		List<CangKuInfo> infos = new ArrayList<CangKuInfo>();
@@ -755,6 +791,68 @@ public class HttpClientUtil {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	public List<DeptInfo> getAllDepts(Activity activity, String username) {
+		Log.i("a", "username = " + username);
+		List<DeptInfo> infos = new ArrayList<DeptInfo>();
+		String uri = null;
+		String result = null;
+		JSONObject jsonObject = null;
+		JSONArray jsonArray = null;
+		uri = activity.getResources().getString(R.string.url_getStoresByUser);
+		HttpPost post = new HttpPost(ip + uri);
+		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		pairs.add(new BasicNameValuePair("ID_", username));
+		HttpEntity entity = null;
+		try {
+			entity = new UrlEncodedFormEntity(pairs, "UTF-8");
+			post.setEntity(entity);
+			HttpResponse httpResponse = getHttpClient().execute(post);
+			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+				result = EntityUtils.toString(httpResponse.getEntity());
+				Log.i("a", "资产分类 = " + result);
+				jsonArray = new JSONArray(result);
+				for (int i = 0; i < jsonArray.length(); i++) {
+					jsonObject = jsonArray.getJSONObject(i);
+					CangKuInfo info = new CangKuInfo();
+					info.setKey(jsonObject.getString("key"));
+					info.setValue(jsonObject.getString("value"));
+					infos.add(info);
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		String uri2 = null;
+		String result2 = null;
+		JSONObject jsonObject2 = null;
+		JSONArray jsonArray2 = null;
+		uri2 = activity.getResources().getString(R.string.url_getAllDeptByUser);
+		HttpPost post2 = new HttpPost(ip + uri2);
+		List<NameValuePair> pairs2 = new ArrayList<NameValuePair>();
+		pairs2.add(new BasicNameValuePair("ID_", username));
+		HttpEntity entity2 = null;
+		try {
+			entity2 = new UrlEncodedFormEntity(pairs2, "UTF-8");
+			post2.setEntity(entity2);
+			HttpResponse httpResponse2 = getHttpClient().execute(post2);
+			if (httpResponse2.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+				result2 = EntityUtils.toString(httpResponse2.getEntity());
+				Log.i("a", "资产分类 = " + result);
+				jsonArray2 = new JSONArray(result2);
+				for (int i = 0; i < jsonArray2.length(); i++) {
+					if(i==0) continue;
+					jsonObject2 = jsonArray2.getJSONObject(i);
+					BuMenInfo info2 = new BuMenInfo();
+					info2.setKey(jsonObject2.getString("key"));
+					info2.setValue(jsonObject2.getString("value"));
+					infos.add(info2);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return infos;
 	}
 	
 	
