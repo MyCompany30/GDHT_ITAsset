@@ -866,7 +866,7 @@ public class HttpClientUtil {
 				Log.i("a", "资产分类 = " + result);
 				jsonArray2 = new JSONArray(result2);
 				for (int i = 0; i < jsonArray2.length(); i++) {
-					if(i==0) continue;
+					//if(i==0) continue;
 					jsonObject2 = jsonArray2.getJSONObject(i);
 					BuMenInfo info2 = new BuMenInfo();
 					info2.setKey(jsonObject2.getString("key"));

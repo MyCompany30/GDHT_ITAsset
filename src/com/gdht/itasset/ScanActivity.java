@@ -58,7 +58,7 @@ public class ScanActivity extends Activity {
 			accompaniment.start();
 			accompainimentsHandler.removeCallbacks(this);
 			//截取rfid编号
-			uii = DataTransfer.xGetString(mUii.getBytes()).substring(6, 31).replace(" ", "");
+			uii = DataTransfer.xGetString(mUii.getBytes()).substring(6, 41).replace(" ", "");
 			if(!rfidArray.contains(uii)){
 				rfidArray.add(uii);
 				rfidListAdapter.notifyDataSetChanged();
