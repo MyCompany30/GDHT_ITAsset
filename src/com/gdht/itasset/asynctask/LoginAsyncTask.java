@@ -13,7 +13,9 @@ import com.gdht.itasset.utils.AppSharedPreferences;
 import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.widget.WaitingDialog;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -107,7 +109,27 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 		back.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				activity.finish();
+				//显示退出对话框
+				new AlertDialog.Builder(activity)
+						.setTitle("确定要退出程序？")
+						.setIcon(android.R.drawable.ic_dialog_info)
+						.setPositiveButton("确定",
+								new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,	int which) {
+										dialog.dismiss();
+										activity.finish();
+									}
+								})
+						.setNegativeButton("取消",
+								new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,	int which) {
+										// 点击“返回”后的操作,这里不设置没有任何操作
+										dialog.dismiss();
+									}
+								}).show();
+			
 			}
 		});
 		planListView.setAdapter(listAdapter);
