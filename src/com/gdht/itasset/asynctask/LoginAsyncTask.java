@@ -103,7 +103,7 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 	
 	private void initPlanView() {
 		planListView = (ListView)activity.findViewById(R.id.plan_listView);
-		ImageView back = (ImageView) activity.findViewById(R.id.back);
+		View back = (View) activity.findViewById(R.id.back);
 		back.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
