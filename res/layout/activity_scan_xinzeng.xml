@@ -10,17 +10,7 @@
         android:layout_height="50dp"
         android:background="#5aa1d7"
         android:gravity="center" >
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/fanhui_03"
-            android:clickable="true"
-            android:onClick="btnClick"
-            android:scaleX="0.7"
-            android:scaleY="0.7" />
+        <include layout="@layout/btnclick_layout" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -40,13 +30,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#c0ddea"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:gravity="center"
+         >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center" >
+            android:gravity="center" 
+            >
 
             <ImageView
                 android:id="@+id/scan_start_btn"
@@ -60,14 +52,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center" >
+            android:gravity="center" 
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/scan_pause_btn"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:scaleType="centerInside"
-                android:src="@drawable/scan_pause_btn" />
+                android:src="@drawable/scan_pause_btn"
+                />
         </LinearLayout>
     </LinearLayout>
 
@@ -106,7 +100,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/scan_complate_btn"
-            android:gravity="center" >
+            android:gravity="center" 
+            android:clickable="true"
+            >
 
             <ImageView
                 android:layout_width="30dp"

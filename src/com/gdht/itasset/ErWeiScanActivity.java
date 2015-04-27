@@ -161,7 +161,8 @@ public class ErWeiScanActivity extends Activity {
 			if(rfidArray.contains(code)){
 				Toast.makeText(ErWeiScanActivity.this, "已经存在!", 0).show();
 			}else {
-				rfidArray.add(code + "0000000");
+//				rfidArray.add(code + "0000000");
+				rfidArray.add(code);
 				rfidListAdapter.notifyDataSetChanged();
 			}
 			break;

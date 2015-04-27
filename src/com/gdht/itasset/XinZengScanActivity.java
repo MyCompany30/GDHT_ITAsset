@@ -149,18 +149,18 @@ public class XinZengScanActivity extends Activity {
 			}
 		});
 		// 暂停扫描
-		pauseBtn.setOnClickListener(new OnClickListener() {
+		complateBtn.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				stop();
 				rfidSb = new StringBuffer();
 				for(YingPanXinZengItem item : items){
-					rfidSb.append(item.getRfid_labelnum()).append(",");
+					rfidSb.append("'").append(item.getRfid_labelnum()).append("'").append(",");
 				}
 				rfidSb.deleteCharAt(rfidSb.length() - 1);
-//				Log.i("a", "rfidSb.String = " + rfidSb.toString());
-//				Toast.makeText(XinZengScanActivity.this, "rfidSb = " + rfidSb.toString(), 0).show();
+				Log.i("a", "rfidSb.String = " + rfidSb.toString());
+			//	Toast.makeText(XinZengScanActivity.this, "rfidSb = " + rfidSb.toString(), 0).show();
 				new rfidfilterAsyncTask().execute(rfidSb.toString());
 			}
 		});
@@ -176,19 +176,20 @@ public class XinZengScanActivity extends Activity {
 
 	}
 	
-	private class rfidfilterAsyncTask extends AsyncTask<String, Integer, String> {
+	private class rfidfilterAsyncTask extends AsyncTask<String, Integer, List<String>> {
 		
 		
 		
 		@Override
-		protected String doInBackground(String... params) {
+		protected List<String> doInBackground(String... params) {
 			return new HttpClientUtil(XinZengScanActivity.this).rfidfilter(XinZengScanActivity.this, params[0]);
 		}
 		
 		@Override
-		protected void onPostExecute(String result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
+		protected void onPostExecute(List<String> result) {
+			for(String s : result){
+				Log.i("a", s);
+			}
 		}
 	}
 

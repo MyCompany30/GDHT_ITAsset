@@ -793,10 +793,11 @@ public class HttpClientUtil {
 		return result;
 	}
 	
-	public String rfidfilter(Context context, String rfids) {
+	public List<String> rfidfilter(Context context, String rfids) {
 		String uri = null;
-		String result = "false";
+		String resultStr = "";
 		JSONObject jsonObject = null;
+		List<String> result = new ArrayList<String>();
 		JSONArray jsonArray = null;
 		uri = context.getResources().getString(R.string.url_rfidfilter);
 		HttpPost post = new HttpPost(ip + uri);
@@ -808,8 +809,16 @@ public class HttpClientUtil {
 			post.setEntity(entity);
 			HttpResponse httpResponse = getHttpClient().execute(post);
 			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-				result = EntityUtils.toString(httpResponse.getEntity());
-				 Log.i("a", "rfidfilter = " + result);
+				resultStr = EntityUtils.toString(httpResponse.getEntity());
+				Log.i("a", "resultStr = " + resultStr);
+				jsonArray = new JSONArray(resultStr);
+				for (int i = 0; i < jsonArray.length(); i++) {
+					jsonObject = jsonArray.getJSONObject(i);
+					String s = jsonObject.toString();
+					Log.i("a", "http s = " + s);
+					s = s.replace("'","");
+					result.add(s);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

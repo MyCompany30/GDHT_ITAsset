@@ -5,45 +5,34 @@
     android:background="#e2e9ef"
     android:orientation="vertical" >
 
-               <RelativeLayout
-            android:id="@+id/rl_title"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:background="#5aa1d7" >
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="#5aa1d7" >
 
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:onClick="btnClick"
-                android:background="@drawable/fanhui_03"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:scaleX="0.7"
-            	android:scaleY="0.7"  />
+		<include layout="@layout/btnclick_layout"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="选择仓库"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
-        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="选择仓库"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:listSelector="@android:color/transparent"
-        android:dividerHeight="10dp"
+        android:layout_marginTop="5dp"
         android:divider="#00000000"
-        />
+        android:dividerHeight="10dp"
+        android:listSelector="@android:color/transparent" />
 
 </LinearLayout>
