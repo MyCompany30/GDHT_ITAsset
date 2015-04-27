@@ -406,24 +406,24 @@ containing a value of this type.
         public static final int login_name=0x7f070003;
         public static final int login_pwd=0x7f070004;
         public static final int menu_settings=0x7f070002;
-        public static final int submit=0x7f07001d;
-        public static final int title_activity_gu_zhang_deng_ji=0x7f070026;
-        public static final int title_activity_pan_kui=0x7f070024;
-        public static final int title_activity_pan_ying=0x7f070022;
-        public static final int title_activity_plan=0x7f07001e;
-        public static final int title_activity_scan=0x7f07001f;
-        public static final int title_activity_scan_complate=0x7f070020;
-        public static final int title_activity_select_dept=0x7f070029;
-        public static final int title_activity_select_goods_shelves=0x7f07002d;
-        public static final int title_activity_select_office=0x7f07002c;
-        public static final int title_activity_select_use_type=0x7f07002a;
-        public static final int title_activity_select_warehouse_area=0x7f07002b;
+        public static final int submit=0x7f07001e;
+        public static final int title_activity_gu_zhang_deng_ji=0x7f070027;
+        public static final int title_activity_pan_kui=0x7f070025;
+        public static final int title_activity_pan_ying=0x7f070023;
+        public static final int title_activity_plan=0x7f07001f;
+        public static final int title_activity_scan=0x7f070020;
+        public static final int title_activity_scan_complate=0x7f070021;
+        public static final int title_activity_select_dept=0x7f07002a;
+        public static final int title_activity_select_goods_shelves=0x7f07002e;
+        public static final int title_activity_select_office=0x7f07002d;
+        public static final int title_activity_select_use_type=0x7f07002b;
+        public static final int title_activity_select_warehouse_area=0x7f07002c;
         public static final int title_activity_waiting=0x7f070008;
-        public static final int title_activity_wei_pan=0x7f070025;
-        public static final int title_activity_xin_zeng=0x7f070023;
-        public static final int title_activity_xiu_gai_cang_ku=0x7f070028;
-        public static final int title_activity_xiu_gai_zai_yun=0x7f070027;
-        public static final int title_activity_yi_pan=0x7f070021;
+        public static final int title_activity_wei_pan=0x7f070026;
+        public static final int title_activity_xin_zeng=0x7f070024;
+        public static final int title_activity_xiu_gai_cang_ku=0x7f070029;
+        public static final int title_activity_xiu_gai_zai_yun=0x7f070028;
+        public static final int title_activity_yi_pan=0x7f070022;
         public static final int url_addRepairInfo=0x7f070018;
         public static final int url_checkAssetByRfid=0x7f07000d;
         public static final int url_checkAssetBybarCode=0x7f07000e;
@@ -441,6 +441,7 @@ containing a value of this type.
         public static final int url_isHasRfid=0x7f07001c;
         public static final int url_login=0x7f07000a;
         public static final int url_pyxz=0x7f07001b;
+        public static final int url_rfidfilter=0x7f07001d;
         public static final int url_updateAssetInfo=0x7f070014;
         public static final int url_updateassetstatus=0x7f070010;
     }
@@ -513,7 +514,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:childHeight
+          @attr name com.gdht.itasset:childHeight
         */
         public static final int ScrollLayout_childHeight = 3;
         /**
@@ -529,7 +530,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:childWidth
+          @attr name com.gdht.itasset:childWidth
         */
         public static final int ScrollLayout_childWidth = 2;
         /**
@@ -543,7 +544,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:labelerClass
+          @attr name com.gdht.itasset:labelerClass
         */
         public static final int ScrollLayout_labelerClass = 0;
         /**
@@ -557,7 +558,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:labelerFormat
+          @attr name com.gdht.itasset:labelerFormat
         */
         public static final int ScrollLayout_labelerFormat = 1;
     };

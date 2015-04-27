@@ -792,6 +792,31 @@ public class HttpClientUtil {
 		}
 		return result;
 	}
+	
+	public String rfidfilter(Context context, String rfids) {
+		String uri = null;
+		String result = "false";
+		JSONObject jsonObject = null;
+		JSONArray jsonArray = null;
+		uri = context.getResources().getString(R.string.url_rfidfilter);
+		HttpPost post = new HttpPost(ip + uri);
+		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		pairs.add(new BasicNameValuePair("rfid", rfids));
+		HttpEntity entity = null;
+		try {
+			entity = new UrlEncodedFormEntity(pairs, "UTF-8");
+			post.setEntity(entity);
+			HttpResponse httpResponse = getHttpClient().execute(post);
+			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+				result = EntityUtils.toString(httpResponse.getEntity());
+				 Log.i("a", "rfidfilter = " + result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public List<DeptInfo> getAllDepts(Activity activity, String username) {
 		Log.i("a", "username = " + username);
 		List<DeptInfo> infos = new ArrayList<DeptInfo>();

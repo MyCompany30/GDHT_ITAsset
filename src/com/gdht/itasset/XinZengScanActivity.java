@@ -8,6 +8,7 @@ import java.util.TimerTask;
 import com.gdht.itasset.adapter.YingPanXinZenItemAdapter;
 import com.gdht.itasset.db.service.RFIDSDBService;
 import com.gdht.itasset.eventbus.SelectCangKuListener;
+import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.YingPanXinZengItem;
 import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.xintong.Accompaniment;
@@ -21,6 +22,7 @@ import com.senter.support.openapi.StUhf.InterrogatorModelDs.UmdOnIso18k6cRealTim
 import com.senter.support.openapi.StUhf.InterrogatorModelDs.UmdRssi;
 
 import de.greenrobot.event.EventBus;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -55,7 +57,7 @@ public class XinZengScanActivity extends Activity {
 	private String uii;
 	private RFIDSDBService rfidsdbService;
 	private ProgressDialog pd;
-
+	private StringBuffer rfidSb = new StringBuffer();
 	// 放入timertask内执行
 	private final Runnable accompainimentRunnable = new Runnable() {
 		@Override
@@ -152,6 +154,14 @@ public class XinZengScanActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				stop();
+				rfidSb = new StringBuffer();
+				for(YingPanXinZengItem item : items){
+					rfidSb.append(item.getRfid_labelnum()).append(",");
+				}
+				rfidSb.deleteCharAt(rfidSb.length() - 1);
+//				Log.i("a", "rfidSb.String = " + rfidSb.toString());
+//				Toast.makeText(XinZengScanActivity.this, "rfidSb = " + rfidSb.toString(), 0).show();
+				new rfidfilterAsyncTask().execute(rfidSb.toString());
 			}
 		});
 		// 清除扫描
@@ -164,6 +174,22 @@ public class XinZengScanActivity extends Activity {
 			}
 		});
 
+	}
+	
+	private class rfidfilterAsyncTask extends AsyncTask<String, Integer, String> {
+		
+		
+		
+		@Override
+		protected String doInBackground(String... params) {
+			return new HttpClientUtil(XinZengScanActivity.this).rfidfilter(XinZengScanActivity.this, params[0]);
+		}
+		
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+		}
 	}
 
 	private void findViews() {
