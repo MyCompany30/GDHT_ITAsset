@@ -5,41 +5,29 @@
     android:background="#e2e9ef"
     android:orientation="vertical" >
 
-            <RelativeLayout
-            android:id="@+id/rl_title"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:background="#5aa1d7" >
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="#5aa1d7" >
 
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:onClick="btnClick"
-                android:background="@drawable/fanhui_03"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:scaleX="0.7"
-                android:scaleY="0.7"
-                />
+        <include layout="@layout/btnclick_layout" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="扫一扫"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
-        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="扫一扫"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#c0ddea"
-        android:gravity="center" 
-        >
+        android:gravity="center" >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -50,11 +38,9 @@
                 android:id="@+id/scan_start_btn"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/scan_start_btn"
                 android:onClick="btnClick"
-                />
+                android:src="@drawable/scan_start_btn" />
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
@@ -69,11 +55,10 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="#e2e9ef"
+            android:descendantFocusability="beforeDescendants"
             android:divider="#00000000"
             android:dividerHeight="10dp"
-            android:listSelector="@android:color/transparent"
-            android:descendantFocusability="beforeDescendants"
-             >
+            android:listSelector="@android:color/transparent" >
         </ListView>
     </LinearLayout>
 
@@ -88,17 +73,15 @@
         android:layout_height="60dp"
         android:orientation="horizontal" >
 
-        
-
         <LinearLayout
             android:id="@+id/scan_clear"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:clickable="true"
-            android:onClick="btnClick"
             android:background="@drawable/scan_clear_btn"
-            android:gravity="center" >
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="btnClick" >
 
             <ImageView
                 android:layout_width="30dp"

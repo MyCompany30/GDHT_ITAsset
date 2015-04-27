@@ -5,6 +5,16 @@
     android:background="@drawable/menubg"
     tools:context=".PlanActivity" >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent" >
+
+        <include layout="@layout/btnclick_layout"/>
+
+
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

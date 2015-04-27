@@ -121,5 +121,11 @@ public class PlanActivity extends Activity {
 		panying_btn = (ImageView)findViewById(R.id.panying_btn);
 		xinzeng_btn = (ImageView)findViewById(R.id.xinzeng_btn);
 	}
-
+	public void btnClick(View view) {
+		switch (view.getId()) {
+		case R.id.back:
+			this.finish();
+			break;
+		}
+	}
 }

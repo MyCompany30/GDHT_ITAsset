@@ -19,9 +19,19 @@ public class MainScanActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_scan_main);
 		Intent intent = getIntent();
-		String dept = intent.getStringExtra("dept");
+		planAssetArrayList = GlobalParams.planAssetInfoList;
 		//获取需要盘点的资产列表
-		if(intent.hasExtra("office")){
+		if(intent.hasExtra("dept")){
+			String dept = intent.getStringExtra("dept");
+			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
+				if(GlobalParams.planAssetInfoList.get(i).getDept().equals(dept)){
+					planAssetArrayList.add(GlobalParams.planAssetInfoList.get(i));
+				}
+			}
+			
+		}
+		if(intent.hasExtra("dept")&&intent.hasExtra("office")){
+			String dept = intent.getStringExtra("dept");
 			String office = intent.getStringExtra("office");
 			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
 				if(GlobalParams.planAssetInfoList.get(i).getDept().equals(dept)&&GlobalParams.planAssetInfoList.get(i).getOffice().equals(office)){
@@ -29,7 +39,19 @@ public class MainScanActivity extends Activity {
 				}
 			}
 			
-		}else{
+		}
+		if(intent.hasExtra("dept")&&intent.hasExtra("warehouseArea")){
+			String dept = intent.getStringExtra("dept");
+			String area = intent.getStringExtra("warehouseArea");
+			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
+				if(GlobalParams.planAssetInfoList.get(i).getDept().equals(dept)&&GlobalParams.planAssetInfoList.get(i).getWarehouseArea().equals(area)){
+					planAssetArrayList.add(GlobalParams.planAssetInfoList.get(i));
+				}
+			}
+			
+		}
+		if(intent.hasExtra("dept")&&intent.hasExtra("warehouseArea")&&intent.hasExtra("goodsShelves")){
+			String dept = intent.getStringExtra("dept");
 			String area = intent.getStringExtra("warehouseArea");
 			String shelve = intent.getStringExtra("goodsShelves");
 			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
