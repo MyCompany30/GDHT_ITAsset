@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import com.gdht.itasset.db.service.RFIDSDBService;
 import com.gdht.itasset.pojo.PlanAssetInfo;
+import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.xintong.Accompaniment;
 import com.gdht.itasset.xintong.App;
 import com.gdht.itasset.xintong.DataTransfer;
@@ -87,7 +88,50 @@ public class ScanActivity extends Activity {
 		if(SelectGoodsShelvesActivity.instance!=null){
 			SelectGoodsShelvesActivity.instance.finish();
 		}
-		planAssetArrayList = (ArrayList<PlanAssetInfo>) getIntent().getSerializableExtra("assetInfoList");
+		//planAssetArrayList = (ArrayList<PlanAssetInfo>) getIntent().getSerializableExtra("assetInfoList");
+		Intent intent = getIntent();
+		planAssetArrayList = GlobalParams.planAssetInfoList;
+		//获取需要盘点的资产列表
+		if(intent.hasExtra("dept")&&(!intent.getStringExtra("dept").equals(""))){
+			String dept = intent.getStringExtra("dept");
+			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
+				if(GlobalParams.planAssetInfoList.get(i).getDept().equals(dept)){
+					planAssetArrayList.add(GlobalParams.planAssetInfoList.get(i));
+				}
+			}
+			
+		}
+		if(intent.hasExtra("dept")&&intent.hasExtra("office")&&(!intent.getStringExtra("dept").equals(""))&&(!intent.getStringExtra("office").equals(""))){
+			String dept = intent.getStringExtra("dept");
+			String office = intent.getStringExtra("office");
+			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
+				if(GlobalParams.planAssetInfoList.get(i).getDept().equals(dept)&&GlobalParams.planAssetInfoList.get(i).getOffice().equals(office)){
+					planAssetArrayList.add(GlobalParams.planAssetInfoList.get(i));
+				}
+			}
+			
+		}
+		if(intent.hasExtra("dept")&&intent.hasExtra("warehouseArea")&&(!intent.getStringExtra("dept").equals(""))&&(!intent.getStringExtra("warehouseArea").equals(""))){
+			String dept = intent.getStringExtra("dept");
+			String area = intent.getStringExtra("warehouseArea");
+			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
+				if(GlobalParams.planAssetInfoList.get(i).getDept().equals(dept)&&GlobalParams.planAssetInfoList.get(i).getWarehouseArea().equals(area)){
+					planAssetArrayList.add(GlobalParams.planAssetInfoList.get(i));
+				}
+			}
+			
+		}
+		if(intent.hasExtra("dept")&&intent.hasExtra("warehouseArea")&&intent.hasExtra("goodsShelves")&&(!intent.getStringExtra("dept").equals(""))&&(!intent.getStringExtra("warehouseArea").equals(""))&&(!intent.getStringExtra("goodsShelves").equals(""))){
+			String dept = intent.getStringExtra("dept");
+			String area = intent.getStringExtra("warehouseArea");
+			String shelve = intent.getStringExtra("goodsShelves");
+			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
+				if(GlobalParams.planAssetInfoList.get(i).getDept().equals(dept)&&GlobalParams.planAssetInfoList.get(i).getWarehouseArea().equals(area)&&GlobalParams.planAssetInfoList.get(i).getGoodsShelves().equals(shelve)){
+					planAssetArrayList.add(GlobalParams.planAssetInfoList.get(i));
+				}
+			}
+			
+		}
 		rfidsdbService = new RFIDSDBService(this);
 		pd = new ProgressDialog(this);
 //		try {
