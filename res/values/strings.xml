@@ -74,5 +74,6 @@
     <string name="title_activity_select_warehouse_area">SelectWarehouseAreaActivity</string>
     <string name="title_activity_select_office">SelectOfficeActivity</string>
     <string name="title_activity_select_goods_shelves">SelectGoodsShelvesActivity</string>
+    <string name="title_activity_option">OptionActivity</string>
 
 </resources>

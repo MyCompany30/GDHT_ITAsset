@@ -21,7 +21,7 @@ public class MainScanActivity extends Activity {
 		Intent intent = getIntent();
 		planAssetArrayList = GlobalParams.planAssetInfoList;
 		//获取需要盘点的资产列表
-		if(intent.hasExtra("dept")){
+		if(intent.hasExtra("dept")&&(!intent.getStringExtra("dept").equals(""))){
 			String dept = intent.getStringExtra("dept");
 			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
 				if(GlobalParams.planAssetInfoList.get(i).getDept().equals(dept)){
@@ -30,7 +30,7 @@ public class MainScanActivity extends Activity {
 			}
 			
 		}
-		if(intent.hasExtra("dept")&&intent.hasExtra("office")){
+		if(intent.hasExtra("dept")&&intent.hasExtra("office")&&(!intent.getStringExtra("dept").equals(""))&&(!intent.getStringExtra("office").equals(""))){
 			String dept = intent.getStringExtra("dept");
 			String office = intent.getStringExtra("office");
 			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
@@ -40,7 +40,7 @@ public class MainScanActivity extends Activity {
 			}
 			
 		}
-		if(intent.hasExtra("dept")&&intent.hasExtra("warehouseArea")){
+		if(intent.hasExtra("dept")&&intent.hasExtra("warehouseArea")&&(!intent.getStringExtra("dept").equals(""))&&(!intent.getStringExtra("warehouseArea").equals(""))){
 			String dept = intent.getStringExtra("dept");
 			String area = intent.getStringExtra("warehouseArea");
 			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
@@ -50,7 +50,7 @@ public class MainScanActivity extends Activity {
 			}
 			
 		}
-		if(intent.hasExtra("dept")&&intent.hasExtra("warehouseArea")&&intent.hasExtra("goodsShelves")){
+		if(intent.hasExtra("dept")&&intent.hasExtra("warehouseArea")&&intent.hasExtra("goodsShelves")&&(!intent.getStringExtra("dept").equals(""))&&(!intent.getStringExtra("warehouseArea").equals(""))&&(!intent.getStringExtra("goodsShelves").equals(""))){
 			String dept = intent.getStringExtra("dept");
 			String area = intent.getStringExtra("warehouseArea");
 			String shelve = intent.getStringExtra("goodsShelves");

@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
 	private CheckBox chkBox = null;
 	private ImageView logo = null;
 	private SharedPreferences loginSettings = null;
+	public static String ipStr = "";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,11 +56,15 @@ public class MainActivity extends Activity {
 					Toast.makeText(getApplicationContext(), "用户名或密码为空！", Toast.LENGTH_LONG).show();
 					return;
 				}
-				String ipStr = "";
+				/*
 				if(TextUtils.isEmpty(ip.getText().toString())) {
 					ipStr = new AppSharedPreferences(MainActivity.this, "gdht").getIP();
 				}else {
 					ipStr = "http://" + ip.getText().toString().trim();
+				}
+				*/
+				if(ipStr.equals("")) {
+					ipStr = new AppSharedPreferences(MainActivity.this, "gdht").getIP();
 				}
 				new LoginAsyncTask(MainActivity.this, ipStr).execute(name,pwd, ipStr);
 				loginSettings = MainActivity.this.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE);

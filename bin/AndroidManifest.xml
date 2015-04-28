@@ -116,11 +116,14 @@
             android:name="com.gdht.itasset.SelectGoodsShelvesActivity"
             android:label="@string/title_activity_select_goods_shelves" >
         </activity>
-                <activity
+        <activity
             android:name="com.gdht.itasset.CangKuSelectSingleActivity"
             android:label="@string/title_activity_select_goods_shelves" >
         </activity>
-        
+        <activity
+            android:name="com.gdht.itasset.OptionActivity"
+            android:label="@string/title_activity_option" >
+        </activity>
     </application>
 
 </manifest>
