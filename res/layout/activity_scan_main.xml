@@ -30,6 +30,7 @@
             android:layout_centerVertical="true" 
             android:onClick="btnClick"
             android:clickable="true"
+            android:layout_marginRight="10dp"
             />
     </RelativeLayout>
 

@@ -48,6 +48,7 @@ public class XinZengScanActivity extends Activity {
 	private LinearLayout clearBtn;
 	private YingPanXinZenItemAdapter adapter;
 	private List<YingPanXinZengItem> items = new ArrayList<YingPanXinZengItem>();
+	private List<YingPanXinZengItem> itemsAll = new ArrayList<YingPanXinZengItem>();
 	private Timer mTimer;
 	private TimerTask mTask;
 	private UII uii_change;
@@ -83,6 +84,7 @@ public class XinZengScanActivity extends Activity {
 				item.setDeptName(GlobalParams.cangKuName);
 				item.setIsck(GlobalParams.isck);
 				items.add(item);
+				itemsAll.add(item);
 				adapter.notifyDataSetChanged();
 			}
 
@@ -154,14 +156,16 @@ public class XinZengScanActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				stop();
-				rfidSb = new StringBuffer();
-				for(YingPanXinZengItem item : items){
-					rfidSb.append("'").append(item.getRfid_labelnum()).append("'").append(",");
+				if(items != null && items.size() > 0) {
+					rfidSb = new StringBuffer();
+					for(YingPanXinZengItem item : items){
+						rfidSb.append("'").append(item.getRfid_labelnum()).append("'").append(",");
+					}
+					rfidSb.deleteCharAt(rfidSb.length() - 1);
+					Log.i("a", "rfidSb.String = " + rfidSb.toString());
+				//	Toast.makeText(XinZengScanActivity.this, "rfidSb = " + rfidSb.toString(), 0).show();
+					new rfidfilterAsyncTask().execute(rfidSb.toString());
 				}
-				rfidSb.deleteCharAt(rfidSb.length() - 1);
-				Log.i("a", "rfidSb.String = " + rfidSb.toString());
-			//	Toast.makeText(XinZengScanActivity.this, "rfidSb = " + rfidSb.toString(), 0).show();
-				new rfidfilterAsyncTask().execute(rfidSb.toString());
 			}
 		});
 		// 清除扫描
@@ -187,8 +191,26 @@ public class XinZengScanActivity extends Activity {
 		
 		@Override
 		protected void onPostExecute(List<String> result) {
-			for(String s : result){
-				Log.i("a", s);
+			if(result == null) {
+				items.clear();
+				adapter.notifyDataSetChanged();
+				Toast.makeText(XinZengScanActivity.this, "没有可新增的资产!", 0).show();
+			}else {
+				items.clear();
+				for(String s : result){
+					for(YingPanXinZengItem item : itemsAll) {
+						if(item.getRfid_labelnum().equals(s)) {
+							items.add(item);
+						}
+					}
+				}
+//				for(String s : result) {
+//					Log.i("a", s);
+//				}
+//				for(YingPanXinZengItem item : itemsAll) {
+//					Log.i("a", "rfid = " + item.getRfid_labelnum());
+//				}
+				adapter.notifyDataSetChanged();
 			}
 		}
 	}
