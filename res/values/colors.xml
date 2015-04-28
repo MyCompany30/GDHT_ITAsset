@@ -10,4 +10,5 @@
     <color name="color_bg_blue">#e2e9ef</color>
     <color name="line_color">#a9a9a9</color>
     <color name="color_orange">#f28d01</color>
+        <color name="orange_txt">#ff6600</color>
 </resources>

@@ -2,52 +2,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical" 
     android:background="#fff"
-    android:orientation="vertical" >
+    >
+                <RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:background="#5aa1d7" >
 
-    <RelativeLayout
-        android:id="@+id/rl_title"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:background="#5aa1d7" >
+            <include layout="@layout/btnclick_layout" />
 
-        <include layout="@layout/btnclick_layout" />
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="名称设置"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
-
-        <ImageView
-            android:id="@+id/sure"
-            android:layout_width="37dp"
-            android:layout_height="37dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/dianji_after"
-            android:clickable="true"
-            android:onClick="btnClick"
-            android:scaleType="centerInside" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" >
-
-        <EditText
-            android:id="@+id/name"
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="名称设置"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+            
+                        <ImageView
+                android:id="@+id/sure"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:clickable="true"
+                android:onClick="btnClick"
+                android:background="@drawable/dianji_after"
+                android:scaleType="centerInside"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                />
+        </RelativeLayout>
+        
+        <LinearLayout 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="请填写名称"
-            android:textColor="#000"
-            android:textSize="16dp" />
-    </LinearLayout>
+            android:padding="10dp"
+            >
+            <EditText 
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请填写名称"
+                android:textSize="16dp"
+                android:textColor="#000"
+                />
+        </LinearLayout>
 
 </LinearLayout>

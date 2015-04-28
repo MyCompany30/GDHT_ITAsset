@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.sax.StartElementListener;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -93,29 +95,29 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 		TextView cangKuTv = (TextView) convertView.findViewById(R.id.cangKu);
 		goumairiqiTv = (TextView) convertView.findViewById(R.id.goumairiqi);
 		goumairiqiTv.setText(item.getBuyDate());
-		EditText yujishoumingEt = (EditText) convertView.findViewById(R.id.yujishouming);
+		TextView yujishoumingEt = (TextView) convertView.findViewById(R.id.yujishouming);
 		yujishoumingEt.setText(item.getLifetime());
-		yujishoumingEt.addTextChangedListener(new TextWatcher() {
-			
-			@Override
-			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-					int arg3) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void afterTextChanged(Editable arg0) {
-				items.get(position).setLifetime(arg0.toString());
-//				YingPanXinZenItemAdapter.this.notifyDataSetChanged();
-			}
-		});
+//		yujishoumingEt.addTextChangedListener(new TextWatcher() {
+//			
+//			@Override
+//			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+//					int arg3) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void afterTextChanged(Editable arg0) {
+//				items.get(position).setLifetime(arg0.toString());
+////				YingPanXinZenItemAdapter.this.notifyDataSetChanged();
+//			}
+//		});
 		TextView shouhoufuwudaoqTv = (TextView) convertView.findViewById(R.id.shouhoufuwudaoqi);
 		shouhoufuwudaoqTv.setText(item.getShfwdqsj());
 		// TextView quyuTv = (TextView) convertView.findViewById(R.id.quyu);
@@ -127,6 +129,7 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 				.findViewById(R.id.goumaiLayout);
 		RelativeLayout shfwdqLayout = (RelativeLayout) convertView.findViewById(R.id.shfwdqLayout);
 		RelativeLayout cangkuLayout = (RelativeLayout) convertView.findViewById(R.id.cangKuLayout);
+		RelativeLayout yujishoumingLayout = (RelativeLayout) convertView.findViewById(R.id.yujishoumingLayout);
 		ImageView addBtn = (ImageView) convertView.findViewById(R.id.addBtn);
 		nameLayout.setOnClickListener(new OnClickListener() {
 
@@ -140,6 +143,14 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View arg0) {
 				showFuZeRenNameAd(position);
+			}
+		});
+		
+		yujishoumingLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				showYuJiShouMingAd(position);
 			}
 		});
 		goumaiLayout.setOnClickListener(new OnClickListener() {
@@ -300,7 +311,7 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 		final EditText nameEt = (EditText) nameAdView.findViewById(R.id.name);
 		TextView title = (TextView) nameAdView.findViewById(R.id.title);
 		title.setText("名称");
-		ImageView back = (ImageView) nameAdView.findViewById(R.id.back);
+		LinearLayout back = (LinearLayout) nameAdView.findViewById(R.id.back);
 		ImageView sure = (ImageView) nameAdView.findViewById(R.id.sure);
 		back.setOnClickListener(new OnClickListener() {
 
@@ -331,7 +342,7 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 		final EditText nameEt = (EditText) nameAdView.findViewById(R.id.name);
 		TextView title = (TextView) nameAdView.findViewById(R.id.title);
 		title.setText("责任人");
-		ImageView back = (ImageView) nameAdView.findViewById(R.id.back);
+		LinearLayout back = (LinearLayout) nameAdView.findViewById(R.id.back);
 		ImageView sure = (ImageView) nameAdView.findViewById(R.id.sure);
 		back.setOnClickListener(new OnClickListener() {
 
@@ -349,6 +360,38 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 				} else {
 					nameAd.dismiss();
 					items.get(position).setKeeper(nameEt.getText().toString());
+					YingPanXinZenItemAdapter.this.notifyDataSetChanged();
+				}
+			}
+		});
+		nameAd = new AlertDialog.Builder(context).setView(nameAdView).create();
+		nameAd.show();
+	}
+	
+	private void showYuJiShouMingAd(final int position) {
+		View nameAdView = inflater.inflate(R.layout.dialog_yingpan_name, null);
+		final EditText nameEt = (EditText) nameAdView.findViewById(R.id.name);
+		nameEt.setInputType(InputType.TYPE_CLASS_NUMBER);
+		TextView title = (TextView) nameAdView.findViewById(R.id.title);
+		title.setText("预计寿命");
+		LinearLayout back = (LinearLayout) nameAdView.findViewById(R.id.back);
+		ImageView sure = (ImageView) nameAdView.findViewById(R.id.sure);
+		back.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				nameAd.dismiss();
+			}
+		});
+		sure.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				if (TextUtils.isEmpty(nameEt.getText())) {
+					Toast.makeText(context, "请填写预计寿命.", 0).show();
+				} else {
+					nameAd.dismiss();
+					items.get(position).setLifetime(nameEt.getText().toString());
 					YingPanXinZenItemAdapter.this.notifyDataSetChanged();
 				}
 			}

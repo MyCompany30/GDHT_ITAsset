@@ -4,17 +4,17 @@
     android:layout_width="150dp"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
-    android:onClick="btnClick" >
+    android:onClick="btnClick"
+    android:clickable="true" 
+    >
 
     <ImageView
-        android:id="@+id/back"
+        android:id="@+id/back2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:background="@drawable/fanhui_03"
-        android:clickable="true"
-        android:onClick="btnClick"
         android:scaleX="0.7"
         android:scaleY="0.7" />
 

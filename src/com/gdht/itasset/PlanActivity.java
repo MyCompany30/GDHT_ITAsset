@@ -54,7 +54,7 @@ public class PlanActivity extends Activity {
 			public void onClick(View v) {
 				if(GlobalParams.isLogin){
 					Intent intent = new Intent();
-					intent.setClass(PlanActivity.this, SelectDeptActivity.class);
+					intent.setClass(PlanActivity.this, MainScanActivity.class);
 					PlanActivity.this.startActivity(intent);
 				}else{
 					Intent intent = new Intent();

@@ -242,7 +242,7 @@
             android:layout_height="1dp"
             android:background="#cccccc" />
         <RelativeLayout
-            android:id="@+id/fuzerenLayout"
+            android:id="@+id/yujishoumingLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -257,7 +257,7 @@
                 android:textColor="#000"
                 android:textSize="18dp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/yujishouming"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -265,10 +265,8 @@
                 android:layout_toLeftOf="@+id/addBtn"
                 android:layout_toRightOf="@+id/lable"
                 android:background="@null"
-                android:focusable="true"
                 android:textColor="#000"
                 android:textSize="18dp" 
-                android:inputType="number"
                 />
 
             <ImageView

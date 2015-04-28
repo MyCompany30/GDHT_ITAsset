@@ -6,6 +6,7 @@
     android:orientation="vertical" >
 
     <RelativeLayout
+                android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#5aa1d7" >
@@ -19,6 +20,17 @@
             android:text="扫描选择"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
+        
+                <ImageView
+            android:id="@+id/more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gengduo"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" 
+            android:onClick="btnClick"
+            android:clickable="true"
+            />
     </RelativeLayout>
 
     <LinearLayout
