@@ -218,4 +218,11 @@ public class XiuGaiZaiYunActivity extends Activity {
 		}
 		
 	}
+	public void btnClick(View view) {
+		switch (view.getId()) {
+		case R.id.back:
+			this.finish();
+			break;
+		}
+	}
 }

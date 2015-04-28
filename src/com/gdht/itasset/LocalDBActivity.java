@@ -38,37 +38,8 @@ public class LocalDBActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_scan_localdb);
 		Intent intent = getIntent();
-		planAssetArrayList = GlobalParams.planAssetInfoList;
 		//获取需要盘点的资产列表
-		if(intent.hasExtra("dept")&&(!intent.getStringExtra("dept").equals(""))){
-			String dept = intent.getStringExtra("dept");
-			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
-				if(GlobalParams.planAssetInfoList.get(i).getDept().equals(dept)){
-					planAssetArrayList.add(GlobalParams.planAssetInfoList.get(i));
-				}
-			}
-			
-		}
-		if(intent.hasExtra("dept")&&intent.hasExtra("office")&&(!intent.getStringExtra("dept").equals(""))&&(!intent.getStringExtra("office").equals(""))){
-			String dept = intent.getStringExtra("dept");
-			String office = intent.getStringExtra("office");
-			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
-				if(GlobalParams.planAssetInfoList.get(i).getDept().equals(dept)&&GlobalParams.planAssetInfoList.get(i).getOffice().equals(office)){
-					planAssetArrayList.add(GlobalParams.planAssetInfoList.get(i));
-				}
-			}
-			
-		}
-		if(intent.hasExtra("dept")&&intent.hasExtra("warehouseArea")&&(!intent.getStringExtra("dept").equals(""))&&(!intent.getStringExtra("warehouseArea").equals(""))){
-			String dept = intent.getStringExtra("dept");
-			String area = intent.getStringExtra("warehouseArea");
-			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
-				if(GlobalParams.planAssetInfoList.get(i).getDept().equals(dept)&&GlobalParams.planAssetInfoList.get(i).getWarehouseArea().equals(area)){
-					planAssetArrayList.add(GlobalParams.planAssetInfoList.get(i));
-				}
-			}
-			
-		}
+
 		if(intent.hasExtra("dept")&&intent.hasExtra("warehouseArea")&&intent.hasExtra("goodsShelves")&&(!intent.getStringExtra("dept").equals(""))&&(!intent.getStringExtra("warehouseArea").equals(""))&&(!intent.getStringExtra("goodsShelves").equals(""))){
 			String dept = intent.getStringExtra("dept");
 			String area = intent.getStringExtra("warehouseArea");
@@ -79,6 +50,34 @@ public class LocalDBActivity extends Activity {
 				}
 			}
 			
+		}else if(intent.hasExtra("dept")&&intent.hasExtra("warehouseArea")&&(!intent.getStringExtra("dept").equals(""))&&(!intent.getStringExtra("warehouseArea").equals(""))){
+			String dept = intent.getStringExtra("dept");
+			String area = intent.getStringExtra("warehouseArea");
+			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
+				if(GlobalParams.planAssetInfoList.get(i).getDept().equals(dept)&&GlobalParams.planAssetInfoList.get(i).getWarehouseArea().equals(area)){
+					planAssetArrayList.add(GlobalParams.planAssetInfoList.get(i));
+				}
+			}
+			
+		}else if(intent.hasExtra("dept")&&intent.hasExtra("office")&&(!intent.getStringExtra("dept").equals(""))&&(!intent.getStringExtra("office").equals(""))){
+			String dept = intent.getStringExtra("dept");
+			String office = intent.getStringExtra("office");
+			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
+				if(GlobalParams.planAssetInfoList.get(i).getDept().equals(dept)&&GlobalParams.planAssetInfoList.get(i).getOffice().equals(office)){
+					planAssetArrayList.add(GlobalParams.planAssetInfoList.get(i));
+				}
+			}
+			
+		}else if(intent.hasExtra("dept")&&(!intent.getStringExtra("dept").equals(""))){
+			String dept = intent.getStringExtra("dept");
+			for(int i = 0; i< GlobalParams.planAssetInfoList.size(); i++){
+				if(GlobalParams.planAssetInfoList.get(i).getDept().equals(dept)){
+					planAssetArrayList.add(GlobalParams.planAssetInfoList.get(i));
+				}
+			}
+			
+		}else{
+			planAssetArrayList = GlobalParams.planAssetInfoList;
 		}
 		findViews();
 		rfidsdbService = new RFIDSDBService(this);
