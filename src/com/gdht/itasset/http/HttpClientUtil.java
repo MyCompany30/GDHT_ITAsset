@@ -812,9 +812,9 @@ public class HttpClientUtil {
 				resultStr = EntityUtils.toString(httpResponse.getEntity());
 				Log.i("a", "resultStr = " + resultStr);
 				jsonArray = new JSONArray(resultStr);
+				Log.i("a", "size = " +jsonArray.length());
 				for (int i = 0; i < jsonArray.length(); i++) {
-					jsonObject = jsonArray.getJSONObject(i);
-					String s = jsonObject.toString();
+					String s = jsonArray.getString(i);
 					Log.i("a", "http s = " + s);
 					s = s.replace("'","");
 					result.add(s);
