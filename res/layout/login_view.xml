@@ -69,42 +69,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#cfeaff" >
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="60dp" >
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ip_03" />
-
-        <EditText
-            android:id="@+id/ip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@null"
-            android:hint="IP地址设定"
-            android:inputType="text"
-            android:textSize="15sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#cfeaff"
         android:orientation="vertical" >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -123,11 +92,36 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/savePwd"
+                android:layout_toRightOf="@+id/savePwd"
                 android:paddingLeft="10dp"
                 android:text="记住密码"
                 android:textColor="#1d4f92"
                 android:textSize="15sp" />
-        </LinearLayout>
+
+            <TextView
+                android:id="@+id/optionTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/savePwd"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="10dp"
+                android:paddingRight="60dp"
+                android:text="IP设置"
+                android:textColor="#1d4f92"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/optionImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/optionTv"
+                android:scaleType="centerInside"
+                android:src="@drawable/option_btn"
+                android:scaleX="0.8"
+                android:scaleY="0.8" >
+            </ImageView>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -147,7 +141,6 @@
                 android:text="登　录"
                 android:textColor="@android:color/white" />
         </LinearLayout>
-
     </LinearLayout>
 
 </LinearLayout>

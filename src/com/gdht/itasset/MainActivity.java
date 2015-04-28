@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.text.TextUtils;
@@ -30,9 +31,10 @@ public class MainActivity extends Activity {
 	private TextView loginBtn = null;
 	private EditText userName = null;
 	private EditText userPwd = null;
-	private EditText ip = null;
 	private CheckBox chkBox = null;
 	private ImageView logo = null;
+	private ImageView optionImg = null;
+	private TextView optionTv = null;
 	private SharedPreferences loginSettings = null;
 	public static String ipStr = "";
 	@Override
@@ -87,9 +89,28 @@ public class MainActivity extends Activity {
 		loginBtn = (TextView)this.findViewById(R.id.loginBtn);
 		userName = (EditText)this.findViewById(R.id.userName);
 		userPwd = (EditText)this.findViewById(R.id.userPwd);
-		ip = (EditText) this.findViewById(R.id.ip);
 		chkBox = (CheckBox)this.findViewById(R.id.savePwd);
 		logo = (ImageView)this.findViewById(R.id.logo);
+		optionImg = (ImageView)this.findViewById(R.id.optionImg);
+		optionTv = (TextView)this.findViewById(R.id.optionTv);
+		optionImg.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, OptionActivity.class);
+				startActivity(intent);
+			}
+		});
+		optionTv.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, OptionActivity.class);
+				startActivity(intent);
+			}
+		});
 		DisplayMetrics dm = new DisplayMetrics(); 
 		this.getWindowManager().getDefaultDisplay().getMetrics(dm);
 		logo.setLayoutParams(new LinearLayout.LayoutParams(dm.widthPixels, dm.widthPixels/2));

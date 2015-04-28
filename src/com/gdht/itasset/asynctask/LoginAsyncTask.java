@@ -78,7 +78,7 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 				GlobalParams.isLogin = true;
 				activity.setContentView(R.layout.plan_select_view);
 				initPlanView();
-				new AppSharedPreferences(activity, "gdht").saveIP(ipStr);;
+				//new AppSharedPreferences(activity, "gdht").saveIP(ipStr);
 			}else if(result.equals("用户名或密码错误")){
 				Toast.makeText(activity, "用户名或密码错误", Toast.LENGTH_SHORT).show();
 			}else if(result.equals("没有权限")){

@@ -92,7 +92,6 @@
                     android:layout_marginLeft="10dp"
                     android:background="@null"
                     android:hint="请输入端口号"
-                    android:password="true"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -132,6 +131,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="50dp"
             android:orientation="horizontal" >
 
             <LinearLayout
