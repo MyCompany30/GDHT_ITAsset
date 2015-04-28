@@ -29,6 +29,7 @@ import android.os.HandlerThread;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,33 +60,36 @@ public class XinZengScanActivity extends Activity {
 	private RFIDSDBService rfidsdbService;
 	private ProgressDialog pd;
 	private StringBuffer rfidSb = new StringBuffer();
+	private boolean isStop = true;
 	// 放入timertask内执行
 	private final Runnable accompainimentRunnable = new Runnable() {
 		@Override
 		public void run() {
-			accompaniment.start();
-			accompainimentsHandler.removeCallbacks(this);
-			// 截取rfid编号
-			uii = DataTransfer.xGetString(mUii.getBytes()).substring(6, 41)
-					.replace(" ", "");
-			if (!isExitsAlready(uii)) {
-				// YingPanXinZengItem item = new YingPanXinZengItem();
-				// item.setRfid_labelnum(uii);
-				// items.add(item);
-				// adapter.notifyDataSetChanged();
-				YingPanXinZengItem item = new YingPanXinZengItem();
-				item.setRfid_labelnum(uii);
-				item.setAssetCheckplanId(GlobalParams.planId);
-				item.setClassify(GlobalParams.zichanfenlei);
-				item.setType(GlobalParams.zichanzifenlei);
-				item.setRegistrant(GlobalParams.username);
-				item.setDept(GlobalParams.cangKuValue);
-				item.setOffice("");
-				item.setDeptName(GlobalParams.cangKuName);
-				item.setIsck(GlobalParams.isck);
-				items.add(item);
-				itemsAll.add(item);
-				adapter.notifyDataSetChanged();
+			if(!isStop) {
+				accompaniment.start();
+				accompainimentsHandler.removeCallbacks(this);
+				// 截取rfid编号
+				uii = DataTransfer.xGetString(mUii.getBytes()).substring(6, 41)
+						.replace(" ", "");
+				if (!isExitsAlready(uii)) {
+					// YingPanXinZengItem item = new YingPanXinZengItem();
+					// item.setRfid_labelnum(uii);
+					// items.add(item);
+					// adapter.notifyDataSetChanged();
+					YingPanXinZengItem item = new YingPanXinZengItem();
+					item.setRfid_labelnum(uii);
+					item.setAssetCheckplanId(GlobalParams.planId);
+					item.setClassify(GlobalParams.zichanfenlei);
+					item.setType(GlobalParams.zichanzifenlei);
+					item.setRegistrant(GlobalParams.username);
+					item.setDept(GlobalParams.cangKuValue);
+					item.setOffice("");
+					item.setDeptName(GlobalParams.cangKuName);
+					item.setIsck(GlobalParams.isck);
+					items.add(item);
+					itemsAll.add(item);
+					adapter.notifyDataSetChanged();
+				}
 			}
 
 		}
@@ -147,6 +151,7 @@ public class XinZengScanActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				isStop = false;
 				start();
 			}
 		});
@@ -155,10 +160,11 @@ public class XinZengScanActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				isStop = true;
 				stop();
-				if(items != null && items.size() > 0) {
+				if(itemsAll != null && itemsAll.size() > 0) {
 					rfidSb = new StringBuffer();
-					for(YingPanXinZengItem item : items){
+					for(YingPanXinZengItem item : itemsAll){
 						rfidSb.append("'").append(item.getRfid_labelnum()).append("'").append(",");
 					}
 					rfidSb.deleteCharAt(rfidSb.length() - 1);
@@ -174,6 +180,7 @@ public class XinZengScanActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				items.clear();
+				itemsAll.clear();
 				adapter.notifyDataSetChanged();
 			}
 		});
@@ -321,4 +328,10 @@ public class XinZengScanActivity extends Activity {
 		}
 	}
 
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		// TODO Auto-generated method stub
+		super.onConfigurationChanged(newConfig);
+	}
 }
