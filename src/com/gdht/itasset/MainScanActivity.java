@@ -114,7 +114,6 @@ public class MainScanActivity extends Activity {
 		intent.putExtra("office", bangongsi);
 		intent.putExtra("warehouseArea", quyu);
 		intent.putExtra("goodsShelves", huojia);
-		this.startActivity(intent);
 		switch (view.getId()) {
 		case R.id.rfidScan:
 			intent.setClass(MainScanActivity.this, ScanActivity.class);
