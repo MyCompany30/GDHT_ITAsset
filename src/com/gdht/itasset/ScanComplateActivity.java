@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.PlanAssetInfo;
 import com.gdht.itasset.pojo.StockItem;
+import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.widget.WaitingDialog;
 
 import android.os.AsyncTask;
@@ -304,6 +305,9 @@ public class ScanComplateActivity extends Activity {
 				public void onClick(View v) {
 					if(currentSelectItem==null){
 						Toast.makeText(ScanComplateActivity.this, "没有被选中的项目", Toast.LENGTH_SHORT).show();
+						return;
+					}
+					if((!currentSelectItem.getCheckstate().equals("未盘"))&&(!currentSelectItem.getDept().equals(""))){
 						return;
 					}
 					Intent intent = new Intent();

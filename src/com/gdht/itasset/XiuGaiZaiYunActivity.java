@@ -3,6 +3,8 @@ package com.gdht.itasset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import com.gdht.itasset.http.HttpClientUtil;
+import com.gdht.itasset.utils.GlobalParams;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -201,6 +203,7 @@ public class XiuGaiZaiYunActivity extends Activity {
 				protected void onPostExecute(String result) {
 					if(result.equals("1")){
 						Toast.makeText(XiuGaiZaiYunActivity.this, "处理成功", Toast.LENGTH_SHORT).show();
+						GlobalParams.planAssetInfoList = new HttpClientUtil(XiuGaiZaiYunActivity.this).getPlanInfoById(XiuGaiZaiYunActivity.this, GlobalParams.planId);
 						XiuGaiZaiYunActivity.this.finish();
 					}else{
 						Toast.makeText(XiuGaiZaiYunActivity.this, "处理失败", Toast.LENGTH_SHORT).show();

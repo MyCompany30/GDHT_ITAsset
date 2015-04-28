@@ -28,7 +28,7 @@ public class LocalDBActivity extends Activity {
 	private ListView listView;
 	private MyListAdapter rfidListAdapter;
 	private ArrayList<String> rfidArray = new ArrayList<String>();
-	private ArrayList<PlanAssetInfo> planAssetArrayList = null;
+	private ArrayList<PlanAssetInfo> planAssetArrayList = new ArrayList<PlanAssetInfo>();
 	private RFIDSDBService rfidsdbService;
 	private ProgressDialog pd, deletePd;
 	private AlertDialog deleteAd;

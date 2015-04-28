@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.gdht.itasset.http.HttpClientUtil;
+import com.gdht.itasset.utils.GlobalParams;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -141,6 +142,7 @@ public class XiuGaiCangKuActivity extends Activity {
 				protected void onPostExecute(String result) {
 					if(result.equals("1")){
 						Toast.makeText(XiuGaiCangKuActivity.this, "处理成功", Toast.LENGTH_SHORT).show();
+						GlobalParams.planAssetInfoList = new HttpClientUtil(XiuGaiCangKuActivity.this).getPlanInfoById(XiuGaiCangKuActivity.this, GlobalParams.planId);
 						XiuGaiCangKuActivity.this.finish();
 					}else{
 						Toast.makeText(XiuGaiCangKuActivity.this, "处理失败", Toast.LENGTH_SHORT).show();
