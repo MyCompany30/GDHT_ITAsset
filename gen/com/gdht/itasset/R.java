@@ -554,7 +554,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.gdht.itasset:childHeight
+          @attr name android:childHeight
         */
         public static final int ScrollLayout_childHeight = 3;
         /**
@@ -570,7 +570,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.gdht.itasset:childWidth
+          @attr name android:childWidth
         */
         public static final int ScrollLayout_childWidth = 2;
         /**
@@ -584,7 +584,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.gdht.itasset:labelerClass
+          @attr name android:labelerClass
         */
         public static final int ScrollLayout_labelerClass = 0;
         /**
@@ -598,7 +598,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.gdht.itasset:labelerFormat
+          @attr name android:labelerFormat
         */
         public static final int ScrollLayout_labelerFormat = 1;
     };
