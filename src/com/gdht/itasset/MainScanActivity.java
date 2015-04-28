@@ -109,14 +109,15 @@ public class MainScanActivity extends Activity {
 	public void btnClick(View view) {
 		intent = new Intent();
 		intent.putExtra("assetInfoList", planAssetArrayList);
+		intent.putExtra("dept", bumen);
+		intent.putExtra("useType", zhuangtai);
+		intent.putExtra("office", bangongsi);
+		intent.putExtra("warehouseArea", quyu);
+		intent.putExtra("goodsShelves", huojia);
+		this.startActivity(intent);
 		switch (view.getId()) {
 		case R.id.rfidScan:
 			intent.setClass(MainScanActivity.this, ScanActivity.class);
-			intent.putExtra("dept", bumen);
-			intent.putExtra("useType", zhuangtai);
-			intent.putExtra("office", bangongsi);
-			intent.putExtra("warehouseArea", quyu);
-			intent.putExtra("goodsShelves", huojia);
 			this.startActivity(intent);
 			break;
 		case R.id.erweiScan:
