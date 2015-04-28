@@ -1,0 +1,1 @@
+itasset_mcheck移动巡检的发布包apk名称统一使用itasset_mcheck
