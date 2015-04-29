@@ -12,11 +12,6 @@
          >
 <include layout="@layout/btnclick_layout" />
 
-        <LinearLayout
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center" >
         <EditText
             android:id="@+id/search_edt"
             android:layout_width="300dp"
@@ -29,8 +24,19 @@
             android:textColor="@android:color/black"
             android:textSize="18sp" 
             android:singleLine="true"
+            android:layout_centerInParent="true"
             />
-        </LinearLayout>
+                    <ImageView
+                android:id="@+id/clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/quxiao_03" 
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/search_edt"
+                android:layout_marginLeft="10dp"
+                android:onClick="btnClick"
+                android:visibility="gone"
+                />
     </RelativeLayout>
 
     <ListView

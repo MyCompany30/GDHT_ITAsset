@@ -2,6 +2,7 @@ package com.gdht.itasset;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import com.gdht.itasset.adapter.YingPanXinZenItemAdapter;
 import com.gdht.itasset.eventbus.SelectCangKuListener;
 import com.gdht.itasset.http.HttpClientUtil;
@@ -66,6 +68,11 @@ public class XinZengErWeiScanActivity extends Activity {
 		case R.id.scan_clear:
 			items.clear();
 			adapter.notifyDataSetChanged();
+			break;
+		case R.id.goHome:
+			Intent intent = new Intent(XinZengErWeiScanActivity.this, PlanActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			break;
 		}
 	}

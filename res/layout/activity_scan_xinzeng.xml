@@ -21,6 +21,20 @@
             android:text="扫描"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
+        
+        <ImageView
+            android:id="@+id/goHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="btnClick"
+            android:clickable="true"
+            android:background="@drawable/back" 
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            />
+        
     </RelativeLayout>
 
     <LinearLayout

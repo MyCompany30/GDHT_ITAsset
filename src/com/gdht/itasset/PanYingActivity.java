@@ -34,6 +34,7 @@ public class PanYingActivity extends Activity {
 	private CheckLinearLayout currSectItem = null;
 	private ArrayList<StockItem> dataArray = null;
 	private ArrayList<StockItem> itemArrayTemp = new ArrayList<StockItem>();
+	private ImageView clearBtn;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,6 +49,7 @@ public class PanYingActivity extends Activity {
 		setContentView(R.layout.activity_pan_ying);
 		//故障登记
 		guzhangBtn = (ImageView)findViewById(R.id.guzhangdengji_btn);
+		clearBtn = (ImageView) findViewById(R.id.clear);
 		guzhangBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -127,10 +129,12 @@ searchEdt.addTextChangedListener(new TextWatcher() {
 			public void afterTextChanged(Editable arg0) {
 				Log.i("a", "值: " + arg0.toString());
 				if(TextUtils.isEmpty(arg0.toString())) {
+					clearBtn.setVisibility(View.GONE);
 					itemArray.clear();
 					itemArray.addAll(itemArrayTemp);
 					adapter.notifyDataSetChanged();
 				}else {
+					clearBtn.setVisibility(View.VISIBLE);
 					for(int i=0; i<itemArray.size(); i++) {
 						StockItem si = itemArray.get(i);
 						if(si.getRfidLabelnum().equals(arg0.toString())){
@@ -169,7 +173,9 @@ searchEdt.addTextChangedListener(new TextWatcher() {
 		case R.id.back:
 			this.finish();
 			break;
-
+		case R.id.clear:
+			searchEdt.setText("");
+			break;
 		default:
 			break;
 		}

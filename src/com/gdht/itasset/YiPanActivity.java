@@ -35,7 +35,7 @@ public class YiPanActivity extends Activity {
 	private ArrayList<StockItem> itemArray = new ArrayList<StockItem>();
 	private ArrayList<StockItem> dataArray = null;
 	private ArrayList<StockItem> itemArrayTemp = new ArrayList<StockItem>();
-
+	private ImageView clearBtn;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,6 +49,7 @@ public class YiPanActivity extends Activity {
 		dataArray = new ArrayList<StockItem>();
 		setContentView(R.layout.activity_yi_pan);
 		guZhangBtn = (ImageView) findViewById(R.id.guzhangdengji_btn);
+		clearBtn = (ImageView) findViewById(R.id.clear);
 		guZhangBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -178,10 +179,12 @@ public class YiPanActivity extends Activity {
 			@Override
 			public void afterTextChanged(Editable arg0) {
 				if (TextUtils.isEmpty(arg0.toString())) {
+					clearBtn.setVisibility(View.GONE);
 					itemArray.clear();
 					itemArray.addAll(itemArrayTemp);
 					adapter.notifyDataSetChanged();
 				} else {
+					clearBtn.setVisibility(View.VISIBLE);
 					for (int i = 0; i < itemArray.size(); i++) {
 						StockItem si = itemArray.get(i);
 						if (si.getRfidLabelnum().equals(arg0.toString())) {
@@ -222,7 +225,9 @@ public class YiPanActivity extends Activity {
 		case R.id.back:
 			this.finish();
 			break;
-
+		case R.id.clear:
+			searchEdt.setText("");
+			break;
 		default:
 			break;
 		}

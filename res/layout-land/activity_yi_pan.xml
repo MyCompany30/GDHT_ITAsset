@@ -5,13 +5,12 @@
     android:background="#e2e9ef"
     android:orientation="vertical" >
 
-   <RelativeLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#5aa1d7"
          >
 <include layout="@layout/btnclick_layout" />
-
 
         <EditText
             android:id="@+id/search_edt"
@@ -20,13 +19,13 @@
             android:drawableLeft="@drawable/search_icon"
             android:background="@drawable/search_bg"
             android:drawablePadding="20dp"
-            android:hint="查询盘亏资产"
+            android:hint="查询已盘资产"
             android:gravity="center_vertical"
             android:textColor="@android:color/black"
-            android:textSize="18sp" 
+            android:textSize="18sp"
             android:layout_centerInParent="true"
             android:singleLine="true"
-            />
+             />
         
                     <ImageView
                 android:id="@+id/clear"
@@ -42,7 +41,7 @@
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/pankui_listView"
+        android:id="@+id/yipan_listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="5dp"
@@ -66,13 +65,23 @@
             android:gravity="center" >
 
             <ImageView
-                android:id="@+id/chexiao_btn_"
-                android:layout_width="wrap_content"
+                android:id="@+id/chexiao_btn"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/chexiao_btn_large" />
+                android:src="@drawable/chexiao_btn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/guzhangdengji_btn"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/guzhangdengji_btn" />
         </LinearLayout>
     </LinearLayout>
 

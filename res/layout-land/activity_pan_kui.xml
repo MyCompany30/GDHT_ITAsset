@@ -28,7 +28,7 @@
             android:singleLine="true"
             />
         
-                    <ImageView
+                            <ImageView
                 android:id="@+id/clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,6 +72,8 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:scaleType="centerInside"
+                                android:scaleX="0.8"
+                android:scaleY="0.8"
                 android:src="@drawable/chexiao_btn_large" />
         </LinearLayout>
     </LinearLayout>

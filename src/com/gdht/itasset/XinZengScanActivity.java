@@ -315,7 +315,6 @@ public class XinZengScanActivity extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		stop();
 		EventBus.getDefault().unregister(this);
@@ -325,6 +324,11 @@ public class XinZengScanActivity extends Activity {
 		switch (view.getId()) {
 		case R.id.back:
 			this.finish();
+			break;
+		case R.id.goHome:
+			Intent intent = new Intent(XinZengScanActivity.this, PlanActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			break;
 		}
 	}

@@ -34,13 +34,14 @@ public class WeiPanActivity extends Activity {
 	private EditText searchEdt = null;
 	private ArrayList<StockItem> itemArray = new ArrayList<StockItem>();
 	private ArrayList<StockItem> itemArrayTemp = new ArrayList<StockItem>();
-	
+	private ImageView clearBtn;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_wei_pan);
 		panKuiBtn = (ImageView)findViewById(R.id.pankui_btn);
+		clearBtn = (ImageView) findViewById(R.id.clear);
 		panKuiBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -113,7 +114,9 @@ public class WeiPanActivity extends Activity {
 					itemArray.clear();
 					itemArray.addAll(itemArrayTemp);
 					adapter.notifyDataSetChanged();
+					clearBtn.setVisibility(View.GONE);
 				}else {
+					clearBtn.setVisibility(View.VISIBLE);
 					for(int i=0; i<itemArray.size(); i++) {
 						StockItem si = itemArray.get(i);
 						if(si.getRfidLabelnum().equals(arg0.toString())){
@@ -155,7 +158,9 @@ public class WeiPanActivity extends Activity {
 		case R.id.back:
 			this.finish();
 			break;
-
+		case R.id.clear:
+			searchEdt.setText("");
+			break;
 		default:
 			break;
 		}
