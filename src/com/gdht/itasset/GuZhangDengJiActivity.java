@@ -87,6 +87,7 @@ public class GuZhangDengJiActivity extends Activity {
 				protected void onPostExecute(String result) {
 					if(result.equals("1")){
 						Toast.makeText(GuZhangDengJiActivity.this, "处理成功", Toast.LENGTH_SHORT).show();
+						GuZhangDengJiActivity.this.finish();
 					}else{
 						Toast.makeText(GuZhangDengJiActivity.this, "处理失败", Toast.LENGTH_SHORT).show();
 					}

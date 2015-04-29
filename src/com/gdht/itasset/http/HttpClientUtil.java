@@ -550,7 +550,7 @@ public class HttpClientUtil {
 	 * @return 1登记成功 其他登记失败
 	 */
 	public synchronized String addRepairInfo(Activity activity, String assetInfoInId, String repairtype, String description,String userid){
-		String result = null;
+		String result = "";
 		String uri = null;
 		uri = activity.getResources().getString(R.string.url_addRepairInfo);
 		HttpPost post = new HttpPost(ip + uri);
@@ -575,6 +575,9 @@ public class HttpClientUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return result; 
+		}
+		if(result.equals("-1")){
+			return "该资产已有故障上报";
 		}
 		return result;
 	}

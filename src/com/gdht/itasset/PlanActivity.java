@@ -42,11 +42,15 @@ public class PlanActivity extends Activity {
 			@Override
 			protected String doInBackground(Void... params) {
 				GlobalParams.planAssetInfoList = new HttpClientUtil(PlanActivity.this).getPlanInfoById(PlanActivity.this, GlobalParams.planId);
-				return "盘点资产清单获取成功";
+				if(GlobalParams.planAssetInfoList.size()>0){
+					return "盘点资产清单获取成功";
+				}
+				return "";
 			}
 			protected void onPostExecute(String result) {
-				System.out.println(result);
-				Toast.makeText(PlanActivity.this,result, Toast.LENGTH_LONG).show();
+				if(!result.equals("")){
+					Toast.makeText(PlanActivity.this,result, Toast.LENGTH_LONG).show();
+				}
 			};
 		}.execute();
 	}

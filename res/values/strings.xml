@@ -75,5 +75,6 @@
     <string name="title_activity_select_office">SelectOfficeActivity</string>
     <string name="title_activity_select_goods_shelves">SelectGoodsShelvesActivity</string>
     <string name="title_activity_option">OptionActivity</string>
+    <string name="title_activity_plan_list">PlanListActivity</string>
 
 </resources>

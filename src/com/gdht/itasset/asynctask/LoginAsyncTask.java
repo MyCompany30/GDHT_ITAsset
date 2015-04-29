@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.gdht.itasset.MainActivity;
 import com.gdht.itasset.PlanActivity;
+import com.gdht.itasset.PlanListActivity;
 import com.gdht.itasset.R;
 import com.gdht.itasset.adapter.PlanListAdapter;
 import com.gdht.itasset.http.HttpClientUtil;
@@ -33,8 +34,6 @@ import android.widget.Toast;
 public class LoginAsyncTask extends AsyncTask<String, String, String> {
 	private MainActivity activity;
 	private WaitingDialog dialog;
-	private ListAdapter listAdapter = null;
-	private ListView planListView = null;
 	private String name = null;
 	private String pwd = null;
 	private ArrayList<PlanInfo> dataList = new ArrayList<PlanInfo>();
@@ -59,10 +58,7 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 		loginFlag = new HttpClientUtil(activity).login(activity,name,pwd,tm.getDeviceId(),"IT资产移动巡检", params[2]);
 		//登录成功获取查询盘点计划中指定的盘点人是自己的盘点计划
 		if(loginFlag!=null && loginFlag.equals("登录成功")){
-			
 			dataList = new HttpClientUtil(activity).getPlans(activity, name);
-			
-			listAdapter = new PlanListAdapter(dataList, activity);
 		}
 		return loginFlag;
 	}
@@ -76,9 +72,11 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 			if(result.equals("登录成功")){
 				//登录成功
 				GlobalParams.isLogin = true;
-				activity.setContentView(R.layout.plan_select_view);
-				initPlanView();
 				//new AppSharedPreferences(activity, "gdht").saveIP(ipStr);
+				Intent intent = new Intent();
+				intent.setClass(activity, PlanListActivity.class);
+				intent.putExtra("planList", dataList);
+				activity.startActivity(intent);
 			}else if(result.equals("用户名或密码错误")){
 				Toast.makeText(activity, "用户名或密码错误", Toast.LENGTH_SHORT).show();
 			}else if(result.equals("没有权限")){
@@ -103,47 +101,4 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 		super.onProgressUpdate(values);
 	}
 	
-	private void initPlanView() {
-		planListView = (ListView)activity.findViewById(R.id.plan_listView);
-		View back = (View) activity.findViewById(R.id.back);
-		back.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				//显示退出对话框
-				new AlertDialog.Builder(activity)
-						.setTitle("确定要退出程序？")
-						.setIcon(android.R.drawable.ic_dialog_info)
-						.setPositiveButton("确定",
-								new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog,	int which) {
-										dialog.dismiss();
-										activity.finish();
-									}
-								})
-						.setNegativeButton("取消",
-								new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog,	int which) {
-										// 点击“返回”后的操作,这里不设置没有任何操作
-										dialog.dismiss();
-									}
-								}).show();
-			
-			}
-		});
-		planListView.setAdapter(listAdapter);
-		planListView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				Intent intent = new Intent();
-				intent.setClass(activity, PlanActivity.class);
-				intent.putExtra("planId", dataList.get(arg2).getId());
-				intent.putExtra("operator", name);
-				activity.startActivity(intent);
-			}
-			
-		});
-	}
 }

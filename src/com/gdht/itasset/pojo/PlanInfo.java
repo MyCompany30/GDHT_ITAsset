@@ -1,6 +1,12 @@
 package com.gdht.itasset.pojo;
 
-public class PlanInfo {
+import java.io.Serializable;
+
+public class PlanInfo implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3178209081701721579L;
 	private String id;
 	private String title;
 	private String depts;

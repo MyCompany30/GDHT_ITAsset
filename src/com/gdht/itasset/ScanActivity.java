@@ -244,7 +244,7 @@ public class ScanActivity extends Activity {
 					startInventory();
 				}
 			};
-		mTimer.schedule(mTask, 1000, 100);
+		mTimer.schedule(mTask, 1000, 10);
 
 	}
 	// 停止
@@ -263,31 +263,23 @@ public class ScanActivity extends Activity {
 	private UII mUii;
 	//开启RFID扫描器
 	protected void startInventory() {
-		App.getRfid()
-				.getInterrogatorAs(InterrogatorModelD2.class)
-				.iso18k6cRealTimeInventory(1,
+		App.getRfid().getInterrogatorAs(InterrogatorModelD2.class).iso18k6cRealTimeInventory(1,
 						new UmdOnIso18k6cRealTimeInventory() {
 
 							@Override
 							public void onTagInventory(UII uii,	UmdFrequencyPoint frequencyPoint, Integer antennaId, UmdRssi rssi) {
-								System.out.println("----begin onTagInventory------");
 								mUii = uii;
 
 							}
-
 							@Override
 							public void onFinishedSuccessfully(Integer arg0, int arg1, int arg2) {
-								System.out.println("-----onFinishedSuccessfully-----");
 								if (mUii != null) {
 									addToplay(mUii);
 								}
 
 							}
-
 							@Override
 							public void onFinishedWithError(UmdErrorCode arg0) {
-
-								System.out.println("------onFinishedWithError-------");
 
 							}
 						});
