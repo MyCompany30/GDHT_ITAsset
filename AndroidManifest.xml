@@ -33,8 +33,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="sensor"
-            android:windowSoftInputMode="stateAlwaysHidden"
-             >
+            android:windowSoftInputMode="stateAlwaysHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -61,15 +60,17 @@
         </activity>
         <activity
             android:name="com.gdht.itasset.YiPanActivity"
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="screenSize|orientation|keyboardHidden"
             android:label="@string/title_activity_yi_pan"
-            android:screenOrientation="sensor" >
+            android:screenOrientation="sensor"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" >
         </activity>
         <activity
             android:name="com.gdht.itasset.PanYingActivity"
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="screenSize|orientation|keyboardHidden"
             android:label="@string/title_activity_pan_ying"
-            android:screenOrientation="sensor" >
+            android:screenOrientation="sensor"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" >
         </activity>
         <activity
             android:name="com.gdht.itasset.XinZengActivity"
@@ -79,15 +80,17 @@
         </activity>
         <activity
             android:name="com.gdht.itasset.PanKuiActivity"
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="screenSize|orientation|keyboardHidden"
             android:label="@string/title_activity_pan_kui"
-            android:screenOrientation="sensor" >
+            android:screenOrientation="sensor"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" >
         </activity>
         <activity
             android:name="com.gdht.itasset.WeiPanActivity"
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="screenSize|orientation|keyboardHidden"
             android:label="@string/title_activity_wei_pan"
-            android:screenOrientation="sensor" >
+            android:screenOrientation="sensor"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" >
         </activity>
         <activity
             android:name="com.gdht.itasset.MainScanActivity"
@@ -134,7 +137,9 @@
             android:name="com.gdht.itasset.GuZhangDengJiActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_gu_zhang_deng_ji"
-            android:screenOrientation="sensor" >
+            android:screenOrientation="sensor"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+             >
         </activity>
         <activity
             android:name="com.gdht.itasset.XiuGaiZaiYunActivity"
