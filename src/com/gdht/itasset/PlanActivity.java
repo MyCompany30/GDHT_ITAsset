@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class PlanActivity extends Activity {
 	public static String PLAN_ID;
@@ -36,14 +37,16 @@ public class PlanActivity extends Activity {
 		findViews();
 		setOnClicks();
 		
-		new AsyncTask<Void, Void, Void>() {
+		new AsyncTask<Void, Void, String>() {
 
 			@Override
-			protected Void doInBackground(Void... params) {
+			protected String doInBackground(Void... params) {
 				GlobalParams.planAssetInfoList = new HttpClientUtil(PlanActivity.this).getPlanInfoById(PlanActivity.this, GlobalParams.planId);
-				
-				return null;
+				return "盘点资产清单获取成功";
 			}
+			protected void onPostExecute(String result) {
+				Toast.makeText(PlanActivity.this,result, Toast.LENGTH_SHORT).show();
+			};
 		}.execute();
 	}
 
