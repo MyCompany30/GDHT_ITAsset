@@ -9,9 +9,11 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+
 import com.gdht.itasset.asynctask.LoginAsyncTask;
 import com.gdht.itasset.utils.AppSharedPreferences;
 import com.gdht.itasset.version.VersionServiceIndex;
+
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -156,8 +159,8 @@ public class MainActivity extends Activity {
 		});
 		DisplayMetrics dm = new DisplayMetrics();
 		this.getWindowManager().getDefaultDisplay().getMetrics(dm);
-		logo.setLayoutParams(new LinearLayout.LayoutParams(dm.widthPixels,
-				dm.widthPixels / 2));
+//		logo.setLayoutParams(new LinearLayout.LayoutParams(dm.widthPixels,
+//				dm.widthPixels / 2));
 		// 检测是否记住密码
 		loginSettings = this.getSharedPreferences(SETTINGS,
 				Context.MODE_PRIVATE);
@@ -344,4 +347,10 @@ public class MainActivity extends Activity {
 			super.handleMessage(msg);
 		}
 	};
+	
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+	};
+	
+
 }
