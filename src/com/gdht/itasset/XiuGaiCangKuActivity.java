@@ -142,7 +142,7 @@ public class XiuGaiCangKuActivity extends Activity {
 				protected void onPostExecute(String result) {
 					if(result.equals("1")){
 						Toast.makeText(XiuGaiCangKuActivity.this, "处理成功", Toast.LENGTH_SHORT).show();
-						GlobalParams.planAssetInfoList = new HttpClientUtil(XiuGaiCangKuActivity.this).getPlanInfoById(XiuGaiCangKuActivity.this, GlobalParams.planId);
+						//GlobalParams.planAssetInfoList = new HttpClientUtil(XiuGaiCangKuActivity.this).getPlanInfoById(XiuGaiCangKuActivity.this, GlobalParams.planId);
 						XiuGaiCangKuActivity.this.finish();
 					}else{
 						Toast.makeText(XiuGaiCangKuActivity.this, "处理失败", Toast.LENGTH_SHORT).show();

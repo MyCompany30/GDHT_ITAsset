@@ -84,8 +84,11 @@ public class HttpClientUtil {
 				String result = EntityUtils.toString(httpResponse.getEntity());
 				//处理返回结果
 				strToJsonList(result, dataArray);
+			}else{
+				Toast.makeText(activity, "消息异常，状态码："+httpResponse.getStatusLine().getStatusCode(), Toast.LENGTH_SHORT).show();
 			}
 		} catch (Exception e) {
+			Toast.makeText(activity, "网络异常", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 			return null;
 		}

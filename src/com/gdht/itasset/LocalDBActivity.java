@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -171,6 +172,7 @@ public class LocalDBActivity extends Activity {
 				Intent intent = new Intent();
 				intent.setClass(LocalDBActivity.this, ScanComplateActivity.class);
 				intent.putStringArrayListExtra("rfidArray", rfidArray);
+				intent.putExtra("assetInfoList", planAssetArrayList);
 				LocalDBActivity.this.startActivity(intent);
 			}
 			break;
@@ -229,6 +231,16 @@ public class LocalDBActivity extends Activity {
 			convertView = getLayoutInflater().inflate(R.layout.rfid_listitem, null);
 			TextView numberTV = (TextView)convertView.findViewById(R.id.number);
 			TextView rfidTV = (TextView)convertView.findViewById(R.id.rfidCode);
+			for(int i = 0; i < planAssetArrayList.size(); i++){
+				if(planAssetArrayList.get(i).getRfidnumber().equals(rfidArray.get(position))){
+					convertView.setBackgroundColor(Color.parseColor("#d3fac7"));
+					break;
+				}
+				if(i==planAssetArrayList.size()-1){
+					convertView.setBackgroundColor(Color.parseColor("#fbc9cc"));
+				}
+				
+			}
 			numberTV.setText(position+1+"");
 			rfidTV.setText(rfidArray.get(position));
 			return convertView;
