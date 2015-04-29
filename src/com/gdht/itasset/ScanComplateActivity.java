@@ -138,15 +138,31 @@ public class ScanComplateActivity extends Activity {
 			}
 			tv1.setText(dataArray.get(position).getRfidLabelnum());
 			tv1_.setText(dataArray.get(position).getRfidLabelnum());
-			tv2.setText(dataArray.get(position).getAssetType());
-			tv3.setText(dataArray.get(position).getAssetName());
-			tv4.setText(dataArray.get(position).getBrandModel());
+			String assetType = dataArray.get(position).getAssetType();
+			if(assetType == null || "null".equals(assetType)) {
+				assetType = "";
+			}
+			tv2.setText(assetType);
+			String assetName = dataArray.get(position).getAssetName();
+			if(assetName == null || "null".equals(assetName)) {
+				assetName = "";
+			}
+			tv3.setText(assetName);
+			String brandModel = dataArray.get(position).getBrandModel();
+			if(brandModel == null || "null".equals(brandModel) || "null-null".endsWith(brandModel) || "null-".equals(brandModel)) {
+				brandModel = "";
+			}
+			tv4.setText(brandModel);
 			if(dataArray.get(position).getDeptOffice()!=null&&dataArray.get(position).getDeptOffice().length()>0){
 				tv5.setText(dataArray.get(position).getDeptOffice());
 			}else{
 				tv5.setText(dataArray.get(position).getDeptQyHj());
 			}
-			tv6.setText(dataArray.get(position).getKeeper());
+			String keeper = dataArray.get(position).getKeeper();
+			if(keeper == null || "null".equals(keeper) ) {
+				keeper = "";
+			}
+			tv6.setText(keeper);
 			tv7.setText(dataArray.get(position).getCheckstate());
 			//pointBtn
 //			pointBtn.setVisibility(View.INVISIBLE);

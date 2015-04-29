@@ -151,6 +151,7 @@ public class HttpClientUtil {
 					stockItem.setAssetCheckplanId(jsonObject.has("assetCheckplanId")?jsonObject.getString("assetCheckplanId"):"");
 					arrayList.add(stockItem);
 				}
+
 			}
 		} catch (Exception e) {
 			//网络异常
@@ -197,6 +198,9 @@ public class HttpClientUtil {
 			stockItem.setAssetChecklistId(jsonObject.has("assetChecklistId")?jsonObject.getString("assetChecklistId"):"");
 			stockItem.setAssetCheckplanId(jsonObject.has("assetCheckplanId")?jsonObject.getString("assetCheckplanId"):"");
 			dataArray.add(stockItem);
+		}
+		for(StockItem si : dataArray) {
+			Log.i("a", "si = " + si.toString());
 		}
 		return dataArray;
 	}

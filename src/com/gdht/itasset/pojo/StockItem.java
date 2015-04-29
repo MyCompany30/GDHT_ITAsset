@@ -172,5 +172,19 @@ public class StockItem {
 		}
 		return false;
 	}
+	@Override
+	public String toString() {
+		return "StockItem [isChecked=" + isChecked + ", useType=" + useType
+				+ ", rfidLabelnum=" + rfidLabelnum + ", barNumber=" + barNumber
+				+ ", qrNumber=" + qrNumber + ", assetType=" + assetType
+				+ ", assetName=" + assetName + ", name=" + name
+				+ ", brandModel=" + brandModel + ", deptOffice=" + deptOffice
+				+ ", deptQyHj=" + deptQyHj + ", dept=" + dept + ", detil="
+				+ detil + ", office=" + office + ", qy=" + qy + ", hj=" + hj
+				+ ", keeper=" + keeper + ", checkstate=" + checkstate
+				+ ", operation=" + operation + ", assetInfoId=" + assetInfoId
+				+ ", assetChecklistId=" + assetChecklistId
+				+ ", assetCheckplanId=" + assetCheckplanId + "]";
+	}
 	
 }
