@@ -10,23 +10,13 @@
         android:layout_height="50dp"
         android:background="#5aa1d7" >
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/fanhui_03"
-            android:clickable="true"
-            android:scaleType="centerInside"
-            android:scaleX="0.7"
-            android:scaleY="0.7" />
+        <include layout="@layout/btnclick_layout" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="修改信息(在运)"
+            android:text="修改信息(仓库)"
             android:textColor="@android:color/white" />
     </RelativeLayout>
 

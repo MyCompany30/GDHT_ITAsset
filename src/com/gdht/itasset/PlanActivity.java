@@ -46,7 +46,7 @@ public class PlanActivity extends Activity {
 			}
 			protected void onPostExecute(String result) {
 				System.out.println(result);
-				Toast.makeText(PlanActivity.this,result, Toast.LENGTH_SHORT).show();
+				Toast.makeText(PlanActivity.this,result, Toast.LENGTH_LONG).show();
 			};
 		}.execute();
 	}
