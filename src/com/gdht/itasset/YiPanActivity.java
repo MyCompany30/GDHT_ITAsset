@@ -124,10 +124,10 @@ public class YiPanActivity extends Activity {
 							}
 
 							protected void onPostExecute(String result) {
-								dialog.dismiss();
 								if (result.equals("1")) {
 									itemArray.remove(item);
 								}
+								dialog.dismiss();
 							}
 						}.execute();
 					}
@@ -205,8 +205,7 @@ public class YiPanActivity extends Activity {
 
 		@Override
 		protected String doInBackground(Void... params) {
-			new HttpClientUtil(YiPanActivity.this).getDataByStatus(
-					YiPanActivity.this, itemArray, PlanActivity.PLAN_ID, "1");
+			new HttpClientUtil(YiPanActivity.this).getDataByStatus(YiPanActivity.this, itemArray, PlanActivity.PLAN_ID, "1");
 			return null;
 		}
 
