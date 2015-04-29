@@ -15,6 +15,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" >
+    </uses-permission>
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -82,7 +84,10 @@
             android:name="com.gdht.itasset.XinZengErWeiScanActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name="com.gdht.itasset.CangKuSelectActivity" />
-        <activity android:name="com.gdht.itasset.XinZengScanActivity" />
+        <activity
+            android:name="com.gdht.itasset.XinZengScanActivity"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:screenOrientation="sensor" />
         <activity android:name="com.gdht.itasset.XinZengHaveRfidActivity" />
         <activity
             android:name="com.gdht.itasset.GuZhangDengJiActivity"
@@ -124,6 +129,8 @@
             android:name="com.gdht.itasset.OptionActivity"
             android:label="@string/title_activity_option" >
         </activity>
+                <service android:name="com.gdht.itasset.version.VersionServiceIndex" >
+        </service>
     </application>
 
 </manifest>

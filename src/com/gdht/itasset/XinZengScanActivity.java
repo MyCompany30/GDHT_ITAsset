@@ -65,7 +65,7 @@ public class XinZengScanActivity extends Activity {
 	private final Runnable accompainimentRunnable = new Runnable() {
 		@Override
 		public void run() {
-			if(!isStop) {
+			if (!isStop) {
 				accompaniment.start();
 				accompainimentsHandler.removeCallbacks(this);
 				// 截取rfid编号
@@ -135,7 +135,7 @@ public class XinZengScanActivity extends Activity {
 		accompaniment.init();
 
 	}
-	
+
 	public void onEvent(SelectCangKuListener event) {
 		YingPanXinZengItem item = items.get(event.getLocation());
 		item.setDept(event.getDept());
@@ -143,7 +143,6 @@ public class XinZengScanActivity extends Activity {
 		item.setIsck(event.getIsCk());
 		adapter.notifyDataSetChanged();
 	}
-	
 
 	private void setOnClicks() {
 		// 开始扫描
@@ -162,14 +161,16 @@ public class XinZengScanActivity extends Activity {
 			public void onClick(View v) {
 				isStop = true;
 				stop();
-				if(itemsAll != null && itemsAll.size() > 0) {
+				if (itemsAll != null && itemsAll.size() > 0) {
 					rfidSb = new StringBuffer();
-					for(YingPanXinZengItem item : itemsAll){
-						rfidSb.append("'").append(item.getRfid_labelnum()).append("'").append(",");
+					for (YingPanXinZengItem item : itemsAll) {
+						rfidSb.append("'").append(item.getRfid_labelnum())
+								.append("'").append(",");
 					}
 					rfidSb.deleteCharAt(rfidSb.length() - 1);
 					Log.i("a", "rfidSb.String = " + rfidSb.toString());
-				//	Toast.makeText(XinZengScanActivity.this, "rfidSb = " + rfidSb.toString(), 0).show();
+					// Toast.makeText(XinZengScanActivity.this, "rfidSb = " +
+					// rfidSb.toString(), 0).show();
 					new rfidfilterAsyncTask().execute(rfidSb.toString());
 				}
 			}
@@ -186,37 +187,37 @@ public class XinZengScanActivity extends Activity {
 		});
 
 	}
-	
-	private class rfidfilterAsyncTask extends AsyncTask<String, Integer, List<String>> {
-		
-		
-		
+
+	private class rfidfilterAsyncTask extends
+			AsyncTask<String, Integer, List<String>> {
+
 		@Override
 		protected List<String> doInBackground(String... params) {
-			return new HttpClientUtil(XinZengScanActivity.this).rfidfilter(XinZengScanActivity.this, params[0]);
+			return new HttpClientUtil(XinZengScanActivity.this).rfidfilter(
+					XinZengScanActivity.this, params[0]);
 		}
-		
+
 		@Override
 		protected void onPostExecute(List<String> result) {
-			if(result == null) {
+			if (result == null) {
 				items.clear();
 				adapter.notifyDataSetChanged();
 				Toast.makeText(XinZengScanActivity.this, "没有可新增的资产!", 0).show();
-			}else {
+			} else {
 				items.clear();
-				for(String s : result){
-					for(YingPanXinZengItem item : itemsAll) {
-						if(item.getRfid_labelnum().equals(s)) {
+				for (String s : result) {
+					for (YingPanXinZengItem item : itemsAll) {
+						if (item.getRfid_labelnum().equals(s)) {
 							items.add(item);
 						}
 					}
 				}
-//				for(String s : result) {
-//					Log.i("a", s);
-//				}
-//				for(YingPanXinZengItem item : itemsAll) {
-//					Log.i("a", "rfid = " + item.getRfid_labelnum());
-//				}
+				// for(String s : result) {
+				// Log.i("a", s);
+				// }
+				// for(YingPanXinZengItem item : itemsAll) {
+				// Log.i("a", "rfid = " + item.getRfid_labelnum());
+				// }
 				adapter.notifyDataSetChanged();
 			}
 		}
@@ -319,7 +320,7 @@ public class XinZengScanActivity extends Activity {
 		stop();
 		EventBus.getDefault().unregister(this);
 	}
-	
+
 	public void btnClick(View view) {
 		switch (view.getId()) {
 		case R.id.back:
@@ -328,7 +329,6 @@ public class XinZengScanActivity extends Activity {
 		}
 	}
 
-	
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		// TODO Auto-generated method stub

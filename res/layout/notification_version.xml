@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+     <ImageView
+         android:id="@+id/imageView"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_gravity="center"
+        /> 
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/n_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dip"
+            android:text="IT资产管理更新"
+            android:textColor="#fff" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+             >
+
+            <TextView
+                android:id="@+id/n_text"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:text="进度显示"
+                android:textColor="#fff"
+                android:layout_marginLeft="6dp"
+                 />
+
+            <ProgressBar
+                android:id="@+id/n_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:max="100" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
