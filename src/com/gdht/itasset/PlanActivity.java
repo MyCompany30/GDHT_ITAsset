@@ -45,6 +45,7 @@ public class PlanActivity extends Activity {
 				return "盘点资产清单获取成功";
 			}
 			protected void onPostExecute(String result) {
+				System.out.println(result);
 				Toast.makeText(PlanActivity.this,result, Toast.LENGTH_SHORT).show();
 			};
 		}.execute();
