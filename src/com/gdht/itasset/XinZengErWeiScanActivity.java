@@ -76,7 +76,7 @@ public class XinZengErWeiScanActivity extends Activity {
 		switch (resultCode) {
 		case 100:
 			Bundle bundle = data.getExtras();
-			String code = bundle.getString("result");
+			String code = bundle.getString("result")+ "0000000";
 			new isHasRfidAs(code).execute(code);
 			
 			
@@ -121,7 +121,7 @@ public class XinZengErWeiScanActivity extends Activity {
 							.show();
 				} else {
 					YingPanXinZengItem item = new YingPanXinZengItem();
-					item.setRfid_labelnum(code + "0000000");
+					item.setRfid_labelnum(code);
 					item.setAssetCheckplanId(GlobalParams.planId);
 					item.setClassify(GlobalParams.zichanfenlei);
 					item.setType(GlobalParams.zichanzifenlei);
