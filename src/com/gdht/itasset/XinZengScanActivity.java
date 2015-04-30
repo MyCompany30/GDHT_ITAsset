@@ -7,6 +7,7 @@ import java.util.TimerTask;
 
 import com.gdht.itasset.adapter.YingPanXinZenItemAdapter;
 import com.gdht.itasset.db.service.RFIDSDBService;
+import com.gdht.itasset.eventbus.RefreshNumberListener;
 import com.gdht.itasset.eventbus.SelectCangKuListener;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.YingPanXinZengItem;
@@ -147,6 +148,11 @@ public class XinZengScanActivity extends Activity {
 		item.setDeptName(event.getDeptName());
 		item.setIsck(event.getIsCk());
 		adapter.notifyDataSetChanged();
+	}
+	
+	public void onEvent(RefreshNumberListener event) {
+//		Toast.makeText(this, "items size = " + items.size(), 0).show();
+		number.setText("(" + items.size() + ")");
 	}
 
 	private void setOnClicks() {

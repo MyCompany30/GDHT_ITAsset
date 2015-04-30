@@ -29,6 +29,7 @@ import com.gdht.itasset.CangKuSelectSingleActivity;
 import com.gdht.itasset.R;
 import com.gdht.itasset.dateslider.DateSlider;
 import com.gdht.itasset.dateslider.YMDDateSlider;
+import com.gdht.itasset.eventbus.RefreshNumberListener;
 import com.gdht.itasset.eventbus.SelectCangKuListener;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.YingPanXinZengItem;
@@ -296,6 +297,7 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 				Toast.makeText(context, "新增成功!", 0).show();
 				items.remove(asItem);
 				notifyDataSetChanged();
+				EventBus.getDefault().post(new RefreshNumberListener());
 			} else if ("2".equals(result)) {
 				Toast.makeText(context, "新增失败!", 0).show();
 			}
