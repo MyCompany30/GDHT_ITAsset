@@ -28,11 +28,12 @@
             android:layout_height="wrap_content"
             android:onClick="btnClick"
             android:clickable="true"
-            android:background="@drawable/back" 
+            android:background="@drawable/gohome" 
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:scaleX="0.7"
             android:scaleY="0.7"
+            android:layout_marginRight="10dp"
             />
         
     </RelativeLayout>
@@ -115,10 +116,7 @@
             android:clickable="true"
             >
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ok" />
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -128,6 +126,17 @@
                 android:text="完成扫描"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
+                        <TextView 
+                android:id="@+id/number"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="(0)"
+                android:textSize="18sp"
+                android:textColor="#ff0000"
+                android:visibility="gone"
+                />
         </LinearLayout>
 
         <LinearLayout

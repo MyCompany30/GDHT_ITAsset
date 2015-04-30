@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
     android:fillViewport="true"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -135,7 +135,9 @@
                 android:layout_height="0.5dp"
                 android:layout_below="@+id/depotName_title"
                 android:layout_marginTop="20dp"
-                android:background="@color/line_color" >
+                android:background="@color/line_color"
+                tools:ignore="Orientation" >
+
             </LinearLayout>
 
             <TextView
@@ -164,7 +166,9 @@
                 android:layout_height="0.5dp"
                 android:layout_below="@+id/breakdown_title"
                 android:layout_marginTop="20dp"
-                android:background="@color/line_color" >
+                android:background="@color/line_color"
+                tools:ignore="Orientation" >
+
             </LinearLayout>
 
             <TextView
@@ -241,7 +245,7 @@
                             android:layout_toLeftOf="@+id/shanchu"
                             android:paddingBottom="20dp"
                             android:scaleType="centerInside"
-                            android:src="@drawable/shanchu" />
+                            android:src="@drawable/lajitong2" />
 
                         <EditText
                             android:id="@+id/add_content"

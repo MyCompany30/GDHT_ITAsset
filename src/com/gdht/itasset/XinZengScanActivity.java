@@ -61,6 +61,7 @@ public class XinZengScanActivity extends Activity {
 	private ProgressDialog pd;
 	private StringBuffer rfidSb = new StringBuffer();
 	private boolean isStop = true;
+	private TextView number;
 	// 放入timertask内执行
 	private final Runnable accompainimentRunnable = new Runnable() {
 		@Override
@@ -89,6 +90,9 @@ public class XinZengScanActivity extends Activity {
 					items.add(item);
 					itemsAll.add(item);
 					adapter.notifyDataSetChanged();
+					if(items.size() > 0) {
+						number.setText("(" +items.size() + ")");
+					}
 				}
 			}
 
@@ -109,6 +113,7 @@ public class XinZengScanActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scan_xinzeng);
 		rfidsdbService = new RFIDSDBService(this);
+		number = (TextView) this.findViewById(R.id.number);
 		EventBus.getDefault().register(this);
 		pd = new ProgressDialog(this);
 		pd.setMessage("数据保存中...");
@@ -151,6 +156,8 @@ public class XinZengScanActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				isStop = false;
+				number.setText("(" + items.size() + ")");
+				number.setVisibility(View.VISIBLE);
 				start();
 			}
 		});
@@ -182,6 +189,7 @@ public class XinZengScanActivity extends Activity {
 			public void onClick(View v) {
 				items.clear();
 				itemsAll.clear();
+				number.setText("(" +items.size() + ")");
 				adapter.notifyDataSetChanged();
 			}
 		});
@@ -218,6 +226,8 @@ public class XinZengScanActivity extends Activity {
 				// for(YingPanXinZengItem item : itemsAll) {
 				// Log.i("a", "rfid = " + item.getRfid_labelnum());
 				// }
+				number.setText("(" + items.size() + ")");
+				number.setVisibility(View.VISIBLE);
 				adapter.notifyDataSetChanged();
 			}
 		}
