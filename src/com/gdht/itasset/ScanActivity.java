@@ -51,7 +51,7 @@ public class ScanActivity extends Activity {
 	private String uii;
 	private RFIDSDBService rfidsdbService;
 	private ProgressDialog pd;
-	
+	private TextView number;
 	//放入timertask内执行
 	private final Runnable accompainimentRunnable = new Runnable() {
 		@Override
@@ -64,7 +64,9 @@ public class ScanActivity extends Activity {
 				rfidArray.add(uii);
 				rfidListAdapter.notifyDataSetChanged();
 			}
-
+			if(rfidArray.size() > 0) {
+				number.setText("(" +rfidArray.size() + ")");
+			}
 		}
 	};
 	
@@ -73,6 +75,7 @@ public class ScanActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scan);
+		number = (TextView) this.findViewById(R.id.number);
 		if(SelectDeptActivity.instance!=null){
 			SelectDeptActivity.instance.finish();
 		}
@@ -175,6 +178,8 @@ public class ScanActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				number.setText("(" + rfidArray.size() + ")");
+				number.setVisibility(View.VISIBLE);
 				start();
 			}
 		});
@@ -217,6 +222,7 @@ public class ScanActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				rfidArray.removeAll(rfidArray);
+				number.setText("(" + rfidArray.size() + ")");
 				rfidListAdapter.notifyDataSetChanged();
 			}
 		});

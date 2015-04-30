@@ -100,10 +100,6 @@
             android:background="@drawable/scan_complate_btn"
             android:gravity="center" >
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ok" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -113,6 +109,17 @@
                 android:text="完成扫描"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
+            <TextView 
+                android:id="@+id/number"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="(0)"
+                android:textSize="18sp"
+                android:textColor="#ff0000"
+                android:visibility="gone"
+                />
         </LinearLayout>
 
         <LinearLayout

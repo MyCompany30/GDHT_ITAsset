@@ -293,6 +293,7 @@ public class YingPanXinZenItemAdapter extends BaseAdapter {
 		protected void onPostExecute(String result) {
 			dialog.dismiss();
 			if ("1".equals(result)) {
+				Toast.makeText(context, "新增成功!", 0).show();
 				items.remove(asItem);
 				notifyDataSetChanged();
 			} else if ("2".equals(result)) {
