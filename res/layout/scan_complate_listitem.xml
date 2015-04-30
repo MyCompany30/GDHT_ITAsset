@@ -109,6 +109,7 @@
             android:id="@+id/dept_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv4"
             android:layout_alignBottom="@+id/brand_"
             android:layout_alignLeft="@+id/assetName_"
             android:text="部门办公室："
@@ -187,6 +188,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:scaleType="centerInside"
+            android:visibility="visible"
             android:src="@drawable/yipan_" />
     </RelativeLayout>
 

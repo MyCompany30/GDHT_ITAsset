@@ -127,9 +127,6 @@ public class ScanComplateActivity extends Activity {
 			final TextView tv55 = (TextView)convertView.findViewById(R.id.dept_);
 			final TextView tv66 = (TextView)convertView.findViewById(R.id.person_);
 			final TextView tv77 = (TextView)convertView.findViewById(R.id.status_);
-			if(tv7.getText().toString().equals("已盘")){
-				panBtn.setImageResource(R.drawable.yipan_);
-			}
 			//setText...
 			for(int i = 0; i < planAssetArrayList.size(); i++){
 				if(planAssetArrayList.get(i).getRfidnumber().equals(dataArray.get(position).getRfidLabelnum())){
@@ -298,7 +295,7 @@ public class ScanComplateActivity extends Activity {
 							protected void onPostExecute(String result) {
 								if(result.equals("1")){
 									Toast.makeText(ScanComplateActivity.this, "盘点成功", Toast.LENGTH_SHORT).show();
-									panBtn.setImageResource(R.drawable.yipan_p);
+									panBtn.setImageResource(R.drawable.yipan_pp);
 									tv7.setText("已盘");
 									panBtn.setClickable(false);
 								}
@@ -310,11 +307,12 @@ public class ScanComplateActivity extends Activity {
 				});
 			}else if(dataArray.get(position).getCheckstate().equals("已盘")){
 				//已盘
-				panBtn.setImageResource(R.drawable.yipan_p);
+				panBtn.setImageResource(R.drawable.yipan_pp);
 				panBtn.setClickable(false);
 			}else if(dataArray.get(position).getCheckstate().equals("盘盈")){
 				//盘盈
 				tv7.setText("盘盈");
+				panBtn.setVisibility(View.INVISIBLE);
 			}else if(dataArray.get(position).getCheckstate().equals("盘亏")){
 				//盘亏
 				tv7.setText("盘亏");
