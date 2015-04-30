@@ -129,6 +129,7 @@ public class YiPanActivity extends Activity {
 									itemArray.remove(item);
 								}
 								dialog.dismiss();
+								adapter.notifyDataSetChanged();
 							}
 						}.execute();
 					}
