@@ -125,6 +125,9 @@ public class ScanComplateActivity extends Activity {
 			final TextView tv55 = (TextView)convertView.findViewById(R.id.dept_);
 			final TextView tv66 = (TextView)convertView.findViewById(R.id.person_);
 			final TextView tv77 = (TextView)convertView.findViewById(R.id.status_);
+			if(tv7.getText().toString().equals("已盘")){
+				panBtn.setImageResource(R.drawable.yipan_p);
+			}
 			//setText...
 			for(int i = 0; i < planAssetArrayList.size(); i++){
 				if(planAssetArrayList.get(i).getRfidnumber().equals(dataArray.get(position).getRfidLabelnum())){

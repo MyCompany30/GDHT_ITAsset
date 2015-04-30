@@ -31,8 +31,8 @@ public class PlanActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_plan);
-//		PLAN_ID = getIntent().getStringExtra("planId");
-//		GlobalParams.planId = PLAN_ID;
+		PLAN_ID = getIntent().getStringExtra("planId");
+		GlobalParams.planId = PLAN_ID;
 		operator = getIntent().getStringExtra("operator");
 		findViews();
 		setOnClicks();
