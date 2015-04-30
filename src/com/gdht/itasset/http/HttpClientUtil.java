@@ -899,6 +899,29 @@ public class HttpClientUtil {
 		return infos;
 	}
 	
-	
+	public String lastAppVersion(Context context, String appName) {
+		String uri = null;
+		String result = "0";
+		JSONObject jsonObject = null;
+		JSONArray jsonArray = null;
+		uri = context.getResources().getString(R.string.url_lastAppVersion);
+		 Log.i("a", "uri = " + ip + uri);
+		HttpPost post = new HttpPost(ip + uri);
+		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		pairs.add(new BasicNameValuePair("appName", appName));
+		HttpEntity entity = null;
+		try {
+			entity = new UrlEncodedFormEntity(pairs, "UTF-8");
+			post.setEntity(entity);
+			HttpResponse httpResponse = getHttpClient().execute(post);
+			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+				result = EntityUtils.toString(httpResponse.getEntity());
+				 Log.i("a", "版本号 = " + result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 }

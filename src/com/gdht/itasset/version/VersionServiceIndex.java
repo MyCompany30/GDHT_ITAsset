@@ -1,6 +1,7 @@
 package com.gdht.itasset.version;
 
-import com.gdht.itasset.MainActivity;
+import com.gdht.itasset.PlanListActivity;
+import com.gdht.itasset.PlanListActivity;
 import com.gdht.itasset.R;
 
 import android.app.Notification;
@@ -21,7 +22,7 @@ public class VersionServiceIndex extends Service {
 	public void onCreate() {
 		super.onCreate();isFirstStart=true;
 		notificationMrg = (NotificationManager) this.getSystemService(android.content.Context.NOTIFICATION_SERVICE);
-//		System.out.println(MainActivity.loading_process+"==");
+//		System.out.println(PlanListActivity.loading_process+"==");
 		mHandler.handleMessage(new Message());
 	}
 
@@ -29,13 +30,13 @@ public class VersionServiceIndex extends Service {
 		@Override
 		public void handleMessage(Message msg) {
 			// 1为出现，2为隐藏
-			if(MainActivity.loading_process>99){
+			if(PlanListActivity.loading_process>99){
 				notificationMrg.cancel(0);
 				stopSelf();
 				return;
 			}
-			if(MainActivity.loading_process>old_process){
-				displayNotificationMessage(MainActivity.loading_process);
+			if(PlanListActivity.loading_process>old_process){
+				displayNotificationMessage(PlanListActivity.loading_process);
 			}
 			
 			new Thread() {
@@ -45,7 +46,7 @@ public class VersionServiceIndex extends Service {
 					mHandler.sendMessage(msg);
 				}
 			}.start();
-			old_process =MainActivity.loading_process;
+			old_process =PlanListActivity.loading_process;
 		}
 	};
 
@@ -65,7 +66,7 @@ public class VersionServiceIndex extends Service {
 		// 创建Notifcation
 		Notification notification = new Notification(R.drawable.tubiao,
 				"IT资产管理更新", System.currentTimeMillis());// 设定Notification出现时的声音，一般不建议自定义
-		if(isFirstStart || MainActivity.loading_process>97){
+		if(isFirstStart || PlanListActivity.loading_process>97){
 			notification.defaults |= Notification.DEFAULT_SOUND;// 设定是否振动
 			notification.defaults |= Notification.DEFAULT_VIBRATE;
 		}notification.flags |= Notification.FLAG_ONGOING_EVENT;
