@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.gdht.itasset.adapter.PdListAdapter;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.StockItem;
+import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.widget.CheckLinearLayout;
 import com.gdht.itasset.widget.WaitingDialog;
 
@@ -68,7 +69,7 @@ public class YiPanActivity extends Activity {
 								.toString();
 						new HttpClientUtil(YiPanActivity.this)
 								.checkAssetByCodes(YiPanActivity.this,
-										PlanActivity.PLAN_ID,
+										GlobalParams.planId,
 										R.string.url_checkAssetByRfid, "Rfid",
 										rfid, dataArray);
 						return null;
@@ -121,7 +122,7 @@ public class YiPanActivity extends Activity {
 
 							@Override
 							protected String doInBackground(Void... params) {
-								return new HttpClientUtil(YiPanActivity.this).updateAssetStatus(YiPanActivity.this, PlanActivity.PLAN_ID, itemArray.get(itemArray.indexOf(item)).getAssetInfoId(), "","0", PlanActivity.operator);
+								return new HttpClientUtil(YiPanActivity.this).updateAssetStatus(YiPanActivity.this, GlobalParams.planId, itemArray.get(itemArray.indexOf(item)).getAssetInfoId(), "","0", GlobalParams.username);
 							}
 
 							protected void onPostExecute(String result) {
@@ -209,7 +210,7 @@ public class YiPanActivity extends Activity {
 
 		@Override
 		protected String doInBackground(Void... params) {
-			new HttpClientUtil(YiPanActivity.this).getDataByStatus(YiPanActivity.this, itemArray, PlanActivity.PLAN_ID, "1");
+			new HttpClientUtil(YiPanActivity.this).getDataByStatus(YiPanActivity.this, itemArray, GlobalParams.planId, "1");
 			return null;
 		}
 

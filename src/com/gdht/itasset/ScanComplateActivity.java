@@ -293,7 +293,7 @@ public class ScanComplateActivity extends Activity {
 							@Override
 							protected String doInBackground(Void... params) {
 								
-								return new HttpClientUtil(ScanComplateActivity.this).updateAssetStatus(ScanComplateActivity.this, PlanActivity.PLAN_ID, dataArray.get(position).getAssetInfoId(), "", "1", PlanActivity.operator);
+								return new HttpClientUtil(ScanComplateActivity.this).updateAssetStatus(ScanComplateActivity.this, GlobalParams.planId, dataArray.get(position).getAssetInfoId(), "", "1", GlobalParams.username);
 							}
 							protected void onPostExecute(String result) {
 								if(result.equals("1")){
@@ -353,7 +353,7 @@ public class ScanComplateActivity extends Activity {
 					break;
 				data+=",";
 			}
-			new HttpClientUtil(ScanComplateActivity.this).checkAssetByCodes(activity,PlanActivity.PLAN_ID ,R.string.url_checkAssetByRfid,"Rfid", data, dataArray);
+			new HttpClientUtil(ScanComplateActivity.this).checkAssetByCodes(activity,GlobalParams.planId ,R.string.url_checkAssetByRfid,"Rfid", data, dataArray);
 			sort(dataArray);
 			return null;
 		}

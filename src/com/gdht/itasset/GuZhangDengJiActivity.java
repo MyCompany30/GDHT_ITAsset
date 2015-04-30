@@ -1,6 +1,7 @@
 package com.gdht.itasset;
 
 import com.gdht.itasset.http.HttpClientUtil;
+import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.widget.WaitingDialog;
 
 import android.os.AsyncTask;
@@ -82,7 +83,7 @@ public class GuZhangDengJiActivity extends Activity {
 					}else{
 						repairtype = "1";    //故障
 					}
-					return new HttpClientUtil(GuZhangDengJiActivity.this).addRepairInfo(GuZhangDengJiActivity.this, assetInfoId, repairtype, detil.getText().toString(), PlanActivity.operator);
+					return new HttpClientUtil(GuZhangDengJiActivity.this).addRepairInfo(GuZhangDengJiActivity.this, assetInfoId, repairtype, detil.getText().toString(), GlobalParams.username);
 				}
 				protected void onPostExecute(String result) {
 					if(result.equals("1")){

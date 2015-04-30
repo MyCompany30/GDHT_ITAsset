@@ -58,7 +58,7 @@ public class XiuGaiCangKuActivity extends Activity {
 		shanchu_.setOnClickListener(shanChuClickListener);
 		//显示rfid编号 和 当前登录人作为负责人
 		rfidTV.setText(getIntent().getStringExtra("rfid"));
-		keeperEdt.setText(PlanActivity.operator);
+		keeperEdt.setText(GlobalParams.username);
 		selectedCk = getIntent().getStringExtra("dept");
 		getArrayValues();
 		ck_code.setText(selectedCk);

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.gdht.itasset.adapter.PdListAdapter;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.StockItem;
+import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.widget.CheckLinearLayout;
 import com.gdht.itasset.widget.WaitingDialog;
 
@@ -61,7 +62,7 @@ public class PanKuiActivity extends Activity {
 							};
 							@Override
 							protected String doInBackground(Void... params) {
-								return new HttpClientUtil(PanKuiActivity.this).updateAssetStatus(PanKuiActivity.this, PlanActivity.PLAN_ID, itemArray.get(itemArray.indexOf(item)).getAssetInfoId(), "", "0", PlanActivity.operator);
+								return new HttpClientUtil(PanKuiActivity.this).updateAssetStatus(PanKuiActivity.this, GlobalParams.planId, itemArray.get(itemArray.indexOf(item)).getAssetInfoId(), "", "0", GlobalParams.username);
 								
 							}
 							protected void onPostExecute(String result) {
@@ -141,7 +142,7 @@ searchEdt.addTextChangedListener(new TextWatcher() {
 		};
 		@Override
 		protected String doInBackground(Void... params) {
-			new HttpClientUtil(PanKuiActivity.this).getDataByStatus(PanKuiActivity.this, itemArray, PlanActivity.PLAN_ID, "3");
+			new HttpClientUtil(PanKuiActivity.this).getDataByStatus(PanKuiActivity.this, itemArray, GlobalParams.planId, "3");
 			return null;
 		}
 		protected void onPostExecute(String result) {

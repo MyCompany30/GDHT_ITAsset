@@ -15,6 +15,7 @@ import com.gdht.itasset.adapter.PlanListAdapter;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.utils.AppSharedPreferences;
+import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.version.VersionServiceIndex;
 
 import android.net.Uri;
@@ -103,6 +104,7 @@ public class PlanListActivity extends Activity {
 				Intent intent = new Intent();
 				intent.setClass(activity, PlanActivity.class);
 				intent.putExtra("planId", dataList.get(arg2).getId());
+				GlobalParams.planId = dataList.get(arg2).getId();
 				intent.putExtra("operator", name);
 				activity.startActivity(intent);
 			}

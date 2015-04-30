@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.gdht.itasset.adapter.PdListAdapter;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.StockItem;
+import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.widget.CheckLinearLayout;
 import com.gdht.itasset.widget.WaitingDialog;
 
@@ -63,7 +64,7 @@ public class PanYingActivity extends Activity {
 						if(currSectItem==null)
 							return null;
 						String rfid = ((TextView)currSectItem.findViewById(R.id.listitem_tv2)).getText().toString();
-						new HttpClientUtil(PanYingActivity.this).checkAssetByCodes(PanYingActivity.this, PlanActivity.PLAN_ID, R.string.url_checkAssetByRfid, "Rfid", rfid, dataArray);
+						new HttpClientUtil(PanYingActivity.this).checkAssetByCodes(PanYingActivity.this, GlobalParams.planId, R.string.url_checkAssetByRfid, "Rfid", rfid, dataArray);
 						return null;
 					}
 					protected void onPostExecute(Void result) {
@@ -157,7 +158,7 @@ searchEdt.addTextChangedListener(new TextWatcher() {
 		};
 		@Override
 		protected String doInBackground(Void... params) {
-			new HttpClientUtil(PanYingActivity.this).getDataByStatus(PanYingActivity.this, itemArray, PlanActivity.PLAN_ID, "2");
+			new HttpClientUtil(PanYingActivity.this).getDataByStatus(PanYingActivity.this, itemArray, GlobalParams.planId, "2");
 			return null;
 		}
 		protected void onPostExecute(String result) {
