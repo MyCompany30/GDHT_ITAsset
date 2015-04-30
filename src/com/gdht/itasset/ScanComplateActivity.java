@@ -46,8 +46,10 @@ public class ScanComplateActivity extends Activity {
 		setContentView(R.layout.activity_scan_complate);
 		list = getIntent().getStringArrayListExtra("rfidArray");
 		planAssetArrayList = (ArrayList<PlanAssetInfo>) getIntent().getSerializableExtra("assetInfoList");
+		
 
 	}
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -352,6 +354,7 @@ public class ScanComplateActivity extends Activity {
 				data+=",";
 			}
 			new HttpClientUtil(ScanComplateActivity.this).checkAssetByCodes(activity,PlanActivity.PLAN_ID ,R.string.url_checkAssetByRfid,"Rfid", data, dataArray);
+			sort(dataArray);
 			return null;
 		}
 		@Override
@@ -366,7 +369,23 @@ public class ScanComplateActivity extends Activity {
 		}
 
 	}
-	
+	private void sort(ArrayList<StockItem> dataArray) {
+		StockItem s1;
+		StockItem s2;
+		int index = 0;
+		for(int i = 0; i<dataArray.size(); i++){
+			for(int j = 0; j< planAssetArrayList.size(); j++){
+				if(dataArray.get(i).getRfidLabelnum().equals(planAssetArrayList.get(j).getRfidnumber())){
+					s1 = dataArray.get(i);
+					s2 = dataArray.get(index);
+					dataArray.set(index, s1);
+					dataArray.set(i, s2);
+					index++;
+					continue;
+				}
+			}
+		}
+	}
 	public void btnClick(View view) {
 		switch (view.getId()) {
 		case R.id.back:
