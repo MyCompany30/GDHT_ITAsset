@@ -155,11 +155,18 @@ public class ScanComplateActivity extends Activity {
 				brandModel = "";
 			}
 			tv4.setText(brandModel);
+			String bumenOrBangongshi = "";
 			if(dataArray.get(position).getDeptOffice()!=null&&dataArray.get(position).getDeptOffice().length()>0){
-				tv5.setText(dataArray.get(position).getDeptOffice());
+				bumenOrBangongshi = dataArray.get(position).getDeptOffice();
 			}else{
-				tv5.setText(dataArray.get(position).getDeptQyHj());
+				bumenOrBangongshi = dataArray.get(position).getDeptQyHj();
 			}
+			if(bumenOrBangongshi != null) {
+				bumenOrBangongshi = bumenOrBangongshi.replaceAll("null", "");
+			}else {
+				bumenOrBangongshi = "";
+			}
+			tv5.setText(bumenOrBangongshi);
 			String keeper = dataArray.get(position).getKeeper();
 			if(keeper == null || "null".equals(keeper) ) {
 				keeper = "";

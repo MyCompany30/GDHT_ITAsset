@@ -21,6 +21,20 @@
             android:text="盘盈新增"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
+        
+        <ImageView
+            android:id="@+id/goHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="btnClick"
+            android:clickable="true"
+            android:background="@drawable/gohome" 
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:layout_marginRight="10dp"
+            />
     </RelativeLayout>
 
     <LinearLayout

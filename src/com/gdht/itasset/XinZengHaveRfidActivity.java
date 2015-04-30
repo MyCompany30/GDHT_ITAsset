@@ -73,6 +73,11 @@ public class XinZengHaveRfidActivity extends Activity {
 			items.clear();
 			adapter.notifyDataSetChanged();
 			break;
+		case R.id.goHome:
+			Intent intent = new Intent(XinZengHaveRfidActivity.this, PlanActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			break;
 		}
 	}
 
