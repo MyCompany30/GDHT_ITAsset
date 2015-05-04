@@ -13,6 +13,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -39,12 +40,18 @@ public class MainScanActivity extends Activity {
 			selectDLayout;
 	private TextView selectAText,selectBText,selectCText,selectDText;
 	private ImageView ivA, ivB, ivC, ivD;
+	private String checkStr;
+	private LinearLayout dbLayout;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_scan_main);
-		
+		dbLayout = (LinearLayout) this.findViewById(R.id.localDB);
+		checkStr = this.getIntent().getStringExtra("check");
+		if(checkStr != null && "check".equals(checkStr)){
+			dbLayout.setVisibility(View.GONE);
+		}
 		
 	}
 	
@@ -117,10 +124,12 @@ public class MainScanActivity extends Activity {
 		switch (view.getId()) {
 		case R.id.rfidScan:
 			intent.setClass(MainScanActivity.this, ScanActivity.class);
+			intent.putExtra("check", checkStr);
 			this.startActivity(intent);
 			break;
 		case R.id.erweiScan:
 			intent.setClass(MainScanActivity.this, ErWeiScanActivity.class);
+			intent.putExtra("check", checkStr);
 			startActivity(intent);
 			break;
 		case R.id.localDB:

@@ -65,5 +65,11 @@
                 android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
-
+	<ImageView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/arrow" 
+	    android:layout_marginLeft="5dp"
+	    android:layout_marginRight="10dp"
+	    />
 </LinearLayout>

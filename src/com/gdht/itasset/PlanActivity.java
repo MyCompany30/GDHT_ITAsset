@@ -26,6 +26,7 @@ public class PlanActivity extends Activity {
 	private ImageView pankui_btn;
 	private ImageView panying_btn;
 	private ImageView xinzeng_btn;
+	private ImageView ziChan_btn;
 	private ArrayList<PlanAssetInfo> planAssetInfoList = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +121,16 @@ public class PlanActivity extends Activity {
 				PlanActivity.this.startActivity(intent);
 			}
 		});
+		ziChan_btn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+					Intent intent = new Intent();
+					intent.setClass(PlanActivity.this, MainScanActivity.class);
+					intent.putExtra("check", "check");
+					PlanActivity.this.startActivity(intent);
+			}
+		});
 	}
 	private void findViews() {
 		saomiao_btn = (ImageView)findViewById(R.id.saomiao_btn);
@@ -128,6 +139,7 @@ public class PlanActivity extends Activity {
 		pankui_btn = (ImageView)findViewById(R.id.pankui_btn);
 		panying_btn = (ImageView)findViewById(R.id.panying_btn);
 		xinzeng_btn = (ImageView)findViewById(R.id.xinzeng_btn);
+		ziChan_btn = (ImageView) findViewById(R.id.zichan_btn);
 	}
 	public void btnClick(View view) {
 		switch (view.getId()) {

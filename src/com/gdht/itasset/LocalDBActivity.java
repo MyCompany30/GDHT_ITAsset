@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -121,6 +122,17 @@ public class LocalDBActivity extends Activity {
 				deleteTag = rfidArray.get(arg2);
 				deleteAd.show();
 				return true;
+			}
+		});
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent intent = new Intent(LocalDBActivity.this, RfidCheckActivity.class);
+				intent.putExtra("code", rfidArray.get(arg2));
+				intent.putExtra("assetInfoList", planAssetArrayList);
+				startActivity(intent);
 			}
 		});
 	}
