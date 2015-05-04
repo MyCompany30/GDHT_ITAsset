@@ -35,6 +35,7 @@ public class MainScanActivity extends Activity {
 	private ListView pwListView;
 	private RelativeLayout parentView;
 	private View pwContentView;
+	private TextView tv1,tv2,tv3;
 	private RelativeLayout selectALayout, selectBLayout, selectCLayout,
 			selectDLayout;
 	private TextView selectAText,selectBText,selectCText,selectDText;
@@ -44,10 +45,11 @@ public class MainScanActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_scan_main);
-		
+		tv1 = (TextView) this.findViewById(R.id.tv1);
+		tv2 = (TextView) this.findViewById(R.id.tv2);
+		tv3 = (TextView) this.findViewById(R.id.tv3);
 		
 	}
-	
 	
 	private void initPopupWindow() {
 		int height = this.getResources().getDisplayMetrics().heightPixels / 2;
@@ -168,6 +170,13 @@ public class MainScanActivity extends Activity {
 				// Toast.makeText(MainScanActivity.this, values[arg2],
 				// 0).show();
 				bumen = values[arg2];
+				if(bumen.equals(null)){
+					tv1.setText("部门：");
+				}else{
+					tv1.setText("部门："+bumen);
+				}
+				tv2.setText("资产状态：");
+				tv3.setText("位置：");
 				zhuangtai = "";
 				bangongsi = "";
 				quyu = "";
@@ -238,6 +247,15 @@ public class MainScanActivity extends Activity {
 				// Toast.makeText(MainScanActivity.this, values[arg2],
 				// 0).show();
 				zhuangtai = values[arg2];
+				if(zhuangtai.equals("null")){
+					tv2.setText("资产状态：");
+				}
+				else if (zhuangtai.equals("2")) {
+					tv2.setText("资产状态：在运");
+				}else if (zhuangtai.equals("1")) {
+					tv2.setText("资产状态：库存");
+				}
+				
 				bangongsi = "";
 				quyu = "";
 				huojia = "";
@@ -309,6 +327,12 @@ public class MainScanActivity extends Activity {
 				// selectDLayout.setVisibility(View.VISIBLE);
 				// }
 				quyu = values[arg2];
+				if(quyu.equals("null")){
+					tv3.setText("位置：");
+				}else{
+					tv3.setText("位置："+quyu);
+				}
+				
 				huojia = "";
 				initHuoJia();
 			}
@@ -357,6 +381,9 @@ public class MainScanActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				huojia = values[arg2];
+				if(!huojia.equals("null")){
+					tv3.setText(tv3.getText().toString()+" "+huojia);
+				}
 				if(huojia == null || "null".equals(huojia)) {
 					huojia = "";
 				}
@@ -406,8 +433,15 @@ public class MainScanActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0,
 					View arg1, int arg2, long arg3) {
 				bangongsi = values[arg2];
+				if(bangongsi.equals("null")){
+					tv3.setText("位置：");
+				}else{
+					tv3.setText("位置："+bangongsi);
+				}
+				
 				pw.dismiss();
 			}
 		});
 	}
+		
 }
