@@ -138,8 +138,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_gu_zhang_deng_ji"
             android:screenOrientation="sensor"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-             >
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" >
         </activity>
         <activity
             android:name="com.gdht.itasset.XiuGaiZaiYunActivity"
@@ -195,13 +194,18 @@
             android:label="@string/title_activity_option"
             android:screenOrientation="sensor" >
         </activity>
-                <activity
+        <activity
             android:name="com.gdht.itasset.PlanListActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_option"
             android:screenOrientation="sensor" >
         </activity>
-        
+        <activity
+            android:name="com.gdht.itasset.RfidCheckActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_option"
+            android:screenOrientation="sensor" >
+        </activity>
 
         <service android:name="com.gdht.itasset.version.VersionServiceIndex" >
         </service>

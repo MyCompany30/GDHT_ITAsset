@@ -3,6 +3,7 @@ package com.gdht.itasset;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import com.gdht.itasset.db.service.RFIDSDBService;
 import com.gdht.itasset.pojo.PlanAssetInfo;
 import com.gdht.itasset.utils.GlobalParams;
@@ -16,6 +17,7 @@ import com.senter.support.openapi.StUhf.InterrogatorModelDs.UmdErrorCode;
 import com.senter.support.openapi.StUhf.InterrogatorModelDs.UmdFrequencyPoint;
 import com.senter.support.openapi.StUhf.InterrogatorModelDs.UmdOnIso18k6cRealTimeInventory;
 import com.senter.support.openapi.StUhf.InterrogatorModelDs.UmdRssi;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -27,12 +29,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class ScanActivity extends Activity {
 	private ImageView startBtn;
@@ -52,6 +56,7 @@ public class ScanActivity extends Activity {
 	private RFIDSDBService rfidsdbService;
 	private ProgressDialog pd;
 	private TextView number;
+	private String checkStr;
 	//放入timertask内执行
 	private final Runnable accompainimentRunnable = new Runnable() {
 		@Override
@@ -75,7 +80,9 @@ public class ScanActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scan);
+		checkStr = this.getIntent().getStringExtra("check");
 		number = (TextView) this.findViewById(R.id.number);
+		complateBtn = (LinearLayout)findViewById(R.id.scan_complate);
 		if(SelectDeptActivity.instance!=null){
 			SelectDeptActivity.instance.finish();
 		}
@@ -169,7 +176,9 @@ public class ScanActivity extends Activity {
 		htHandlerThread.start();
 		accompainimentsHandler = new Handler(htHandlerThread.getLooper());
 		accompaniment.init();
-	
+		if(checkStr != null && "check".equals(checkStr)) {
+			complateBtn.setVisibility(View.GONE);
+		}
 	}
 
 	private void setOnClicks() {
@@ -237,6 +246,17 @@ public class ScanActivity extends Activity {
 		clearBtn = (LinearLayout)findViewById(R.id.scan_clear);
 		rfidListAdapter = new MyListAdapter();
 		scanListView.setAdapter(rfidListAdapter);
+		scanListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent intent = new Intent(ScanActivity.this, RfidCheckActivity.class);
+				intent.putExtra("code", rfidArray.get(arg2));
+				intent.putExtra("assetInfoList", planAssetArrayList);
+				startActivity(intent);
+			}
+		});
 	}
 	
 	// 启动

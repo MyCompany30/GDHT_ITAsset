@@ -15,10 +15,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class ErWeiScanActivity extends Activity {
 	private Intent intent;
@@ -29,12 +32,15 @@ public class ErWeiScanActivity extends Activity {
 	private RFIDSDBService rfidsdbService;
 	private ProgressDialog pd;
 	private SaveRFIDAsyncTask asyncTask;
+	private String checkStr;
+	private LinearLayout complateBtn;
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_scan_erwei);
 		//planAssetArrayList = (ArrayList<PlanAssetInfo>) getIntent().getSerializableExtra("assetInfoList");
+		checkStr = this.getIntent().getStringExtra("check");
 		Intent intent = getIntent();
 		//获取需要盘点的资产列表
 		//获取需要盘点的资产列表
@@ -82,12 +88,27 @@ public class ErWeiScanActivity extends Activity {
 		pd = new ProgressDialog(this);
 		pd.setMessage("数据保存中...");
 		findViews();
+		if(checkStr != null && "check".equals(checkStr)) {
+			complateBtn.setVisibility(View.GONE);
+		}
 	}
 
 	private void findViews() {
 		listView = (ListView) this.findViewById(R.id.listView);
+		complateBtn = (LinearLayout) this.findViewById(R.id.scan_complate);
 		rfidListAdapter = new MyListAdapter();
 		listView.setAdapter(rfidListAdapter);
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent intent = new Intent(ErWeiScanActivity.this, RfidCheckActivity.class);
+				intent.putExtra("code", rfidArray.get(arg2));
+				intent.putExtra("assetInfoList", planAssetArrayList);
+				startActivity(intent);
+			}
+		});
 	}
 
 	public void btnClick(View view) {

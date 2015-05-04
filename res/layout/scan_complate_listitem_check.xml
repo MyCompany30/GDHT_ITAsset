@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f6fafd"
+    android:orientation="vertical"
+    android:paddingBottom="10dp" >
+
+    <RelativeLayout
+        android:id="@+id/l1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible" >
+
+
+        <TextView
+            android:id="@+id/rfid_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/chkBox"
+            android:layout_toRightOf="@+id/chkBox"
+            android:text="RFID标签编号："
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+			android:layout_margin="15dp"
+            />
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/rfid_"
+            android:layout_toRightOf="@+id/rfid_"
+            android:text="adfasdfe123e12e32fd1"
+            android:textColor="#ef8200"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/assetType_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/rfid_"
+            android:layout_below="@+id/rfid_"
+            android:text="资产类别："
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/assetType_"
+            android:layout_toRightOf="@+id/assetType_"
+            android:text="不动产"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/assetName_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/assetType_"
+            android:layout_marginLeft="150dp"
+            android:layout_toRightOf="@id/assetType_"
+            android:text="资产名称："
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/assetName_"
+            android:layout_toRightOf="@id/assetName_"
+            android:text="台式机"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/brand_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/assetType_"
+            android:layout_below="@id/assetType_"
+            android:layout_marginTop="20dp"
+            android:text="品牌-型号："
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/brand_"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/brand_"
+            android:text="联想T2100"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/dept_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv4"
+            android:layout_alignBottom="@+id/brand_"
+            android:layout_alignLeft="@+id/assetName_"
+            android:text="部门办公室："
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/dept_"
+            android:layout_toRightOf="@+id/dept_"
+            android:text="行政人资部"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/person_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/brand_"
+            android:layout_below="@id/brand_"
+            android:layout_marginTop="20dp"
+            android:text="负责人："
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/person_"
+            android:layout_toRightOf="@+id/person_"
+            android:text="郝莎莎"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/status_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/person_"
+            android:layout_alignLeft="@+id/dept_"
+            android:text="盘点状态："
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/status_"
+            android:layout_toRightOf="@+id/status_"
+            android:text="已盘"
+            android:textColor="#ef8200"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/pointBtn"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/point_up"
+            android:tag="point_up" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/l2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical" >
+
+        <CheckBox
+            android:id="@+id/chkBox_"
+            style="@drawable/pandian_checkbox_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp" />
+
+        <TextView
+            android:id="@+id/rfid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/chkBox_"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/chkBox_"
+            android:text="RFID标签编号："
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv1_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/chkBox_"
+            android:layout_toRightOf="@+id/rfid"
+            android:text="adfasdfe123e12e32fd1"
+            android:layout_weight="1"
+            android:textColor="#ef8200"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/pointBtn2"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/point_down"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
+</LinearLayout>
