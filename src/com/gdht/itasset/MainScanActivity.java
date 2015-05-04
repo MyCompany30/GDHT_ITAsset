@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -18,6 +20,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gdht.itasset.adapter.CommenListAdapter;
 import com.gdht.itasset.pojo.PlanAssetInfo;
@@ -51,6 +54,7 @@ public class MainScanActivity extends Activity {
 		tv1 = (TextView) this.findViewById(R.id.tv1);
 		tv2 = (TextView) this.findViewById(R.id.tv2);
 		tv3 = (TextView) this.findViewById(R.id.tv3);
+		refreshSelectTitle();
 		dbLayout = (LinearLayout) this.findViewById(R.id.localDB);
 		checkStr = this.getIntent().getStringExtra("check");
 		if(checkStr != null && "check".equals(checkStr)){
@@ -140,6 +144,11 @@ public class MainScanActivity extends Activity {
 			startActivity(intent);
 			break;
 		case R.id.back:
+			GlobalParams.bumen = "";
+			GlobalParams.zhuangtai = "";
+			GlobalParams.bangongsi = "";
+			GlobalParams.quyu = "";
+			GlobalParams.huojia = "";
 			this.finish();
 			break;
 		case R.id.more:
@@ -152,7 +161,22 @@ public class MainScanActivity extends Activity {
 			break;
 		}
 	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		switch (keyCode) {
+		case KeyEvent.KEYCODE_BACK:
+			GlobalParams.bumen = "";
+			GlobalParams.zhuangtai = "";
+			GlobalParams.bangongsi = "";
+			GlobalParams.quyu = "";
+			GlobalParams.huojia = "";
+			this.finish();
+			break;
+		}
+		return true;
 
+	}
 	private void initBumens() {
 		ArrayList<String> deptValueArray = new ArrayList<String>();
 		// ArrayList<PlanAssetInfo> deptArrayList = new
@@ -180,6 +204,7 @@ public class MainScanActivity extends Activity {
 				// Toast.makeText(MainScanActivity.this, values[arg2],
 				// 0).show();
 				bumen = values[arg2];
+				GlobalParams.bumen = bumen;
 				if(bumen.equals(null)){
 					tv1.setText("部门：");
 				}else{
@@ -191,6 +216,10 @@ public class MainScanActivity extends Activity {
 				bangongsi = "";
 				quyu = "";
 				huojia = "";
+				GlobalParams.zhuangtai = "";
+				GlobalParams.bangongsi = "";
+				GlobalParams.quyu = "";
+				GlobalParams.huojia = "";
 				initZhuangTai();
 			}
 		});
@@ -257,6 +286,7 @@ public class MainScanActivity extends Activity {
 				// Toast.makeText(MainScanActivity.this, values[arg2],
 				// 0).show();
 				zhuangtai = values[arg2];
+				GlobalParams.zhuangtai = zhuangtai;
 				if(zhuangtai.equals("null")){
 					tv2.setText("资产状态：");
 				}
@@ -269,6 +299,9 @@ public class MainScanActivity extends Activity {
 				bangongsi = "";
 				quyu = "";
 				huojia = "";
+				GlobalParams.bangongsi = "";
+				GlobalParams.quyu = "";
+				GlobalParams.huojia = "";
 				if (zhuangtai.equals("2")) {
 					// 3
 					selectCText.setText("办公室");
@@ -337,6 +370,7 @@ public class MainScanActivity extends Activity {
 				// selectDLayout.setVisibility(View.VISIBLE);
 				// }
 				quyu = values[arg2];
+				GlobalParams.quyu = quyu;
 				if(quyu.equals("null")){
 					tv3.setText("位置：");
 				}else{
@@ -344,6 +378,7 @@ public class MainScanActivity extends Activity {
 				}
 				
 				huojia = "";
+				GlobalParams.huojia = "";
 				initHuoJia();
 			}
 		});
@@ -397,6 +432,7 @@ public class MainScanActivity extends Activity {
 				if(huojia == null || "null".equals(huojia)) {
 					huojia = "";
 				}
+				GlobalParams.huojia = huojia;
 				pw.dismiss();
 				
 			}
@@ -443,6 +479,7 @@ public class MainScanActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0,
 					View arg1, int arg2, long arg3) {
 				bangongsi = values[arg2];
+				GlobalParams.bangongsi = bangongsi;
 				if(bangongsi.equals("null")){
 					tv3.setText("位置：");
 				}else{
@@ -453,5 +490,51 @@ public class MainScanActivity extends Activity {
 			}
 		});
 	}
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+	}
 		
+	private void refreshSelectTitle(){
+		if(GlobalParams.bumen.equals(null)){
+			tv1.setText("部门：");
+		}else{
+			tv1.setText("部门："+GlobalParams.bumen);
+		}
+		
+		if(GlobalParams.zhuangtai.equals("null")){
+			tv2.setText("资产状态：");
+		}
+		else if (GlobalParams.zhuangtai.equals("2")) {
+			tv2.setText("资产状态：在运");
+			if(GlobalParams.bangongsi.equals("null")){
+				tv3.setText("位置：");
+			}else{
+				tv3.setText("位置："+GlobalParams.bangongsi);
+			}
+		}else if (GlobalParams.zhuangtai.equals("1")) {
+			tv2.setText("资产状态：库存");
+			if(GlobalParams.quyu.equals("null")){
+				tv3.setText("位置：");
+			}else{
+				tv3.setText("位置："+GlobalParams.quyu);
+			}
+			
+			if(!GlobalParams.huojia.equals("null")){
+				tv3.setText(tv3.getText().toString()+" "+GlobalParams.huojia);
+			}
+		}
+	}
+	
+//	@Override
+//	protected void onDestroy() {
+//		super.onDestroy();
+//		GlobalParams.bumen = "";
+//		GlobalParams.zhuangtai = "";
+//		GlobalParams.bangongsi = "";
+//		GlobalParams.quyu = "";
+//		GlobalParams.huojia = "";
+//	}
+	
 }

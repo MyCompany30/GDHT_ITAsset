@@ -15,4 +15,9 @@ public class GlobalParams {
 	public static boolean isLogin;
 	public static String isck = "1"; // 1 仓库， 2在运
 	public static ArrayList<PlanAssetInfo> planAssetInfoList = new ArrayList<PlanAssetInfo>();
+	public static String bumen = "";
+	public static String zhuangtai = "";
+	public static String bangongsi = "";
+	public static String quyu = "";
+	public static String huojia = "";
 }
