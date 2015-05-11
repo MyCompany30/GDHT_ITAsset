@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.gdht.itasset.MainActivity;
 import com.gdht.itasset.PlanActivity;
 import com.gdht.itasset.PlanListActivity;
+import com.gdht.itasset.PlanListActivityBAK;
 import com.gdht.itasset.R;
 import com.gdht.itasset.adapter.PlanListAdapter;
 import com.gdht.itasset.http.HttpClientUtil;
@@ -81,17 +82,18 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 				Toast.makeText(activity, "用户名或密码错误", Toast.LENGTH_SHORT).show();
 			}else if(result.equals("没有权限")){
 				Toast.makeText(activity, "没有权限", Toast.LENGTH_SHORT).show();
-			}else if(result.equals("网络异常")||result.equals("未知错误")){
-				Toast.makeText(activity, result, Toast.LENGTH_SHORT).show();
-				Intent intent = new Intent();
-				intent.putExtra("planId","");
-				intent.putExtra("operator",name);
-				intent.setClass(activity, PlanActivity.class);
-				activity.startActivity(intent);
-				Toast.makeText(activity, "离线登录", Toast.LENGTH_SHORT).show();
-			}else{
-				Toast.makeText(activity, result, Toast.LENGTH_SHORT).show();
 			}
+//			else if(result.equals("网络异常")||result.equals("未知错误")){
+//				Toast.makeText(activity, result, Toast.LENGTH_SHORT).show();
+//				Intent intent = new Intent();
+//				intent.putExtra("planId","");
+//				intent.putExtra("operator",name);
+//				intent.setClass(activity, PlanActivity.class);
+//				activity.startActivity(intent);
+//				Toast.makeText(activity, "离线登录", Toast.LENGTH_SHORT).show();
+//			}else{
+//				Toast.makeText(activity, result, Toast.LENGTH_SHORT).show();
+//			}
 		}
 		Toast.makeText(activity, result, Toast.LENGTH_SHORT).show();
 	}

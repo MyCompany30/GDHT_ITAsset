@@ -7,6 +7,8 @@ package com.gdht.itasset.xintong;
 import com.senter.support.openapi.StUhf;
 import com.senter.support.openapi.StUhf.Function;
 import com.senter.support.openapi.StUhf.InterrogatorModel;
+import com.senter.support.openapi.StUhf.InterrogatorModelC;
+
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;

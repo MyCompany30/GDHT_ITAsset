@@ -76,6 +76,7 @@
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="60dp"
@@ -117,29 +118,32 @@
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/optionTv"
                 android:scaleType="centerInside"
-                android:src="@drawable/option_btn"
                 android:scaleX="0.8"
-                android:scaleY="0.8" >
+                android:scaleY="0.8"
+                android:src="@drawable/option_btn" >
             </ImageView>
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/onLineLogin"
+            android:layout_width="447dp"
+            android:layout_height="62dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="@drawable/zaixianlogin_btn"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="40dp" >
+            android:orientation="horizontal" >
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/loginBtn"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:background="@drawable/loginbtn_bg"
-                android:gravity="center"
-                android:text="登　录"
-                android:textColor="@android:color/white" />
+        <LinearLayout
+            android:id="@+id/offLineLogin"
+            android:layout_width="447dp"
+            android:layout_height="62dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="@drawable/lixianlogin_btn"
+            android:gravity="center"
+            android:orientation="horizontal" >
         </LinearLayout>
     </LinearLayout>
 

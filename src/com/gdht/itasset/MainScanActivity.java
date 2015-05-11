@@ -60,7 +60,6 @@ public class MainScanActivity extends Activity {
 		if(checkStr != null && "check".equals(checkStr)){
 			dbLayout.setVisibility(View.GONE);
 		}
-		
 	}
 	
 	private void initPopupWindow() {

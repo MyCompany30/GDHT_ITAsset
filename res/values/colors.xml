@@ -11,4 +11,6 @@
     <color name="line_color">#a9a9a9</color>
     <color name="color_orange">#f28d01</color>
         <color name="orange_txt">#ff6600</color>
+        <color name="blue">#5aa1d7</color>
+        <color name="white">#ffffff</color>
 </resources>

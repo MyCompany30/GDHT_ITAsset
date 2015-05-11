@@ -6,11 +6,14 @@ import java.util.TimerTask;
 
 import com.gdht.itasset.db.service.RFIDSDBService;
 import com.gdht.itasset.pojo.PlanAssetInfo;
+import com.gdht.itasset.utils.AppSharedPreferences;
 import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.xintong.Accompaniment;
 import com.gdht.itasset.xintong.App;
 import com.gdht.itasset.xintong.DataTransfer;
 import com.senter.support.openapi.StPonTest;
+import com.senter.support.openapi.StUhf;
+import com.senter.support.openapi.StUhf.InterrogatorModel;
 import com.senter.support.openapi.StUhf.UII;
 import com.senter.support.openapi.StUhf.InterrogatorModelDs.InterrogatorModelD2;
 import com.senter.support.openapi.StUhf.InterrogatorModelDs.UmdErrorCode;
@@ -163,6 +166,9 @@ public class ScanActivity extends Activity {
 				
 				case InterrogatorModelD2:
 				{
+					AppSharedPreferences asp = new AppSharedPreferences(ScanActivity.this, "gdht");
+					App.getRfid().setPower(asp.getGongLv());
+					Toast.makeText(ScanActivity.this, "当前功率是  = " + App.getRfid().getPower(), 0).show();
 					findViews();
 					setOnClicks();
 					break;

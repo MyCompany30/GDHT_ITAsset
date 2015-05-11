@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
 	public static final String SETTING_NAME = "LOGIN_NAME";
 	public static final String SETTING_PWD = "LOGIN_PWD";
 	public static final String SETTING_AUTOLOGIN = "AUTO_LOGIN";
-	private TextView loginBtn = null;
+	private LinearLayout onLineLogin, offLineLogin;
 	private EditText userName = null;
 	private EditText userPwd = null;
 	private CheckBox chkBox = null;
@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
 
 	private void setOnClicks() {
 		// 登录按钮
-		loginBtn.setOnClickListener(new OnClickListener() {
+		onLineLogin.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				String name, pwd;
@@ -108,11 +108,38 @@ public class MainActivity extends Activity {
 				editor.commit();
 			}
 		});
+		
+		offLineLogin.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				String name, pwd;
+				name = userName.getText().toString().trim();
+				pwd = userPwd.getText().toString().trim();
+				if (name.equals("") || pwd.equals("")) {
+					Toast.makeText(getApplicationContext(), "用户名或密码为空！",
+							Toast.LENGTH_LONG).show();
+					return;
+				}
+				// 记住登录名
+				Editor editor = loginSettings.edit();
+				editor.putString(SETTING_NAME, name);
+				// 记住密码
+				if (chkBox.isChecked()) {
+					editor.putString(SETTING_PWD, pwd);
+				} else {
+					editor.remove(SETTING_PWD);
+				}
+				editor.commit();
+				Toast.makeText(MainActivity.this, "离线登陆", 0).show();
+			}
+		});
 
 	}
 
 	private void findViews() {
-		loginBtn = (TextView) this.findViewById(R.id.loginBtn);
+		onLineLogin = (LinearLayout) this.findViewById(R.id.onLineLogin);
+		offLineLogin = (LinearLayout) this.findViewById(R.id.offLineLogin);
 		userName = (EditText) this.findViewById(R.id.userName);
 		userPwd = (EditText) this.findViewById(R.id.userPwd);
 		chkBox = (CheckBox) this.findViewById(R.id.savePwd);
