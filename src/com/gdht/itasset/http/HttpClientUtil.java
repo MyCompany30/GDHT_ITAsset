@@ -252,12 +252,31 @@ public class HttpClientUtil {
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = new String(EntityUtils.toString(httpResponse.getEntity()).getBytes(),"UTF-8");
 				jsonArray = new JSONArray(result);
+				/*
+				 * 	id;//计划id
+				 *  title;//计划名称
+				 * 	type;//计划部门类型(1.仓库2.在运)
+				 *	depts;//仓库(部门)
+				 *	number;//计划盘点数
+				 *	planstate;//计划状态(0已完成；1执行中)
+				 *	detail;
+				 *	deptcode;//仓库部门的code
+				 *	qdtime;//启动日期
+				 *  wctime;//完成日期
+				 */
 				for(int i = 0; i<jsonArray.length(); i++){
 					PlanInfo planInfo = new PlanInfo();
 					jsonObject = jsonArray.getJSONObject(i);
-					planInfo.setTitle(jsonObject.getString("title"));
-					planInfo.setDepts(jsonObject.getString("depts"));
 					planInfo.setId(jsonObject.getString("id"));
+					planInfo.setTitle(jsonObject.getString("title"));
+					planInfo.setType(jsonObject.getString("type"));
+					planInfo.setDepts(jsonObject.getString("depts"));
+					planInfo.setNumber(jsonObject.getInt("number"));
+					planInfo.setPlanstate(jsonObject.getString("planstate"));
+					planInfo.setDetail(jsonObject.getString("detail"));
+					planInfo.setDeptcode(jsonObject.getString("deptcode"));
+					planInfo.setQdtime(jsonObject.getString("qdtime"));
+					planInfo.setWctime(jsonObject.getString("wctime"));
 					arrayList.add(planInfo);
 				}
 				

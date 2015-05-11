@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">IT资产监察管理系统</string>
@@ -12,7 +11,7 @@
     <string name="title_activity_waiting">WaitingActivity</string>
     <string name="MakeSurePDAexitRfid">没有找到Rfid超高频通信模块，请确定当前PDA内存在该模块</string>
     <string name="url_login">/moveCheck/applogin.s</string>
-    <string name="url_getPlans">/moveCheck/getCheckPlansByLoginUser.s</string>
+    <string name="url_getPlans">/moveCheck/getPlanByUserid.s</string>
     <string name="url_getPlanInfoById">/moveCheck/getInfoByPlanid.s</string>
     <string name="url_checkAssetByRfid">/moveCheck/checkAssetByRfid.s</string>
     <string name="url_checkAssetBybarCode">/moveCheck/checkAssetBybarCode.s</string>

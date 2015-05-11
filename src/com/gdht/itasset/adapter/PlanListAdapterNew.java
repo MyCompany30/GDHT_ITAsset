@@ -10,13 +10,14 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.gdht.itasset.R;
+import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.PlanInfoNew;
 
 public class PlanListAdapterNew extends BaseAdapter {
 	private LayoutInflater inflater;
 	private Context context;
-	private List<PlanInfoNew> plans;
-	public PlanListAdapterNew(Context context, List<PlanInfoNew> plans) {
+	private List<PlanInfo> plans;
+	public PlanListAdapterNew(Context context, List<PlanInfo> plans) {
 		this.inflater = LayoutInflater.from(context);
 		this.context =context;
 		this.plans = plans;
@@ -48,9 +49,9 @@ public class PlanListAdapterNew extends BaseAdapter {
 			convertView.setTag(vh);
 		}
 		vh = (ViewHolder) convertView.getTag();
-		PlanInfoNew pi = plans.get(position);
-		vh.name.setText(pi.getName());
-		vh.location.setText(pi.getCangku());
+		PlanInfo pi = plans.get(position);
+		vh.name.setText(pi.getTitle());
+		vh.location.setText(pi.getDepts());
 		return convertView;
 	}
 	
