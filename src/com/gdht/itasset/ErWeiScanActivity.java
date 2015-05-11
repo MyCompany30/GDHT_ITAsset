@@ -2,7 +2,7 @@ package com.gdht.itasset;
 
 import java.util.ArrayList;
 
-import com.gdht.itasset.db.service.RFIDSDBService;
+import com.gdht.itasset.db.service.ScanCheckRFIDSDBService;
 import com.gdht.itasset.pojo.PlanAssetInfo;
 import com.gdht.itasset.utils.GlobalParams;
 
@@ -29,7 +29,7 @@ public class ErWeiScanActivity extends Activity {
 	private MyListAdapter rfidListAdapter;
 	private ArrayList<String> rfidArray = new ArrayList<String>();
 	private ArrayList<PlanAssetInfo> planAssetArrayList = new ArrayList<PlanAssetInfo>();
-	private RFIDSDBService rfidsdbService;
+	private ScanCheckRFIDSDBService rfidsdbService;
 	private ProgressDialog pd;
 	private SaveRFIDAsyncTask asyncTask;
 	private String checkStr;
@@ -84,7 +84,7 @@ public class ErWeiScanActivity extends Activity {
 		}else{
 			planAssetArrayList = GlobalParams.planAssetInfoList;
 		}
-		rfidsdbService = new RFIDSDBService(this);
+		rfidsdbService = new ScanCheckRFIDSDBService(this);
 		pd = new ProgressDialog(this);
 		pd.setMessage("数据保存中...");
 		findViews();
@@ -131,8 +131,8 @@ public class ErWeiScanActivity extends Activity {
 //				asyncTask.execute("");
 				pd.show();
 				for(String s : rfidArray) {
-					Log.i("a", "rfid = " + s);
-					rfidsdbService.saveRFID(s);
+//					Log.i("a", "rfid = " + s);
+//					rfidsdbService.saveRFID(s);
 				}
 				pd.dismiss();
 				Intent intent = new Intent();
@@ -157,7 +157,7 @@ public class ErWeiScanActivity extends Activity {
 			Log.i("a", "rfidArray.size = " + rfidArray.size());
 			for(String s : rfidArray) {
 				Log.i("a", "rfid = " + s);
-				rfidsdbService.saveRFID(s);
+//				rfidsdbService.saveRFID(s);
 			}
 			return null;
 		}

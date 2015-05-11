@@ -47,7 +47,7 @@
             android:screenOrientation="sensor" >
         </activity>
         <activity
-            android:name="com.gdht.itasset.ScanActivity"
+            android:name="com.gdht.itasset.ScanActivityBak"
             android:configChanges="screenSize|orientation|keyboardHidden"
             android:label="@string/title_activity_scan"
             android:screenOrientation="sensor" >
@@ -213,6 +213,14 @@
             android:label="@string/title_activity_option"
             android:screenOrientation="sensor" >
         </activity>
+        
+                <activity
+            android:name="com.gdht.itasset.ScanActivityNew"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_option"
+            android:screenOrientation="sensor" >
+        </activity>
+        
 
         <service android:name="com.gdht.itasset.version.VersionServiceIndex" >
         </service>

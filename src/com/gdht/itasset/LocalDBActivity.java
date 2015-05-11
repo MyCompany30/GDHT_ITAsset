@@ -2,7 +2,7 @@ package com.gdht.itasset;
 
 import java.util.ArrayList;
 
-import com.gdht.itasset.db.service.RFIDSDBService;
+import com.gdht.itasset.db.service.ScanCheckRFIDSDBService;
 import com.gdht.itasset.pojo.PlanAssetInfo;
 import com.gdht.itasset.utils.GlobalParams;
 
@@ -31,7 +31,7 @@ public class LocalDBActivity extends Activity {
 	private MyListAdapter rfidListAdapter;
 	private ArrayList<String> rfidArray = new ArrayList<String>();
 	private ArrayList<PlanAssetInfo> planAssetArrayList = new ArrayList<PlanAssetInfo>();
-	private RFIDSDBService rfidsdbService;
+	private ScanCheckRFIDSDBService rfidsdbService;
 	private ProgressDialog pd, deletePd;
 	private AlertDialog deleteAd;
 	private String deleteTag = "";
@@ -82,7 +82,7 @@ public class LocalDBActivity extends Activity {
 			planAssetArrayList = GlobalParams.planAssetInfoList;
 		}
 		findViews();
-		rfidsdbService = new RFIDSDBService(this);
+		rfidsdbService = new ScanCheckRFIDSDBService(this);
 //		new LoadDataAsyncTask().execute("");
 		new LoadDataAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -148,7 +148,7 @@ public class LocalDBActivity extends Activity {
 		@Override
 		protected String doInBackground(String... arg0) {
 			rfidArray.clear();
-			rfidArray.addAll(rfidsdbService.loadDatas());
+//			rfidArray.addAll(rfidsdbService.loadDatas());
 			return null;
 		}
 		
@@ -178,7 +178,7 @@ public class LocalDBActivity extends Activity {
 				pd.show();
 				for(String s : rfidArray) {
 					Log.i("a", "rfid = " + s);
-					rfidsdbService.saveRFID(s);
+//					rfidsdbService.saveRFID(s);
 				}
 				pd.dismiss();
 				Intent intent = new Intent();
@@ -202,7 +202,7 @@ public class LocalDBActivity extends Activity {
 		@Override
 		protected String doInBackground(String... params) {
 			if("".equals(params[0])) {
-				rfidsdbService.deleteAll();
+//				rfidsdbService.deleteAll();
 			}else {
 				rfidsdbService.deleteByRFID(params[0]);
 			}

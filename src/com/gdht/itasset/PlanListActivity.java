@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -195,11 +196,18 @@ public class PlanListActivity extends Activity {
 
 	public void btnClick(View view) {
 		switch (view.getId()) {
+		case R.id.back:
+			this.finish();
+			break;
 		case R.id.zhengzai:
 			viewPager.setCurrentItem(0);
 			break;
 		case R.id.yipan:
 			viewPager.setCurrentItem(1);
+			break;
+		case R.id.scanBtn:
+			Intent intent = new Intent(this, ScanActivityNew.class);
+			startActivity(intent);
 			break;
 		}
 	}

@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="IP设置"
                 android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                android:textSize="22dp" />
         </LinearLayout>
     </RelativeLayout>
 

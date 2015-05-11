@@ -23,8 +23,8 @@ public class GDHTOpenHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		Log.i("a", "创建数据库");
-		db.execSQL("create table if not exists rfids("
-				+ "idx integer primary key autoincrement, rfid text"
+		db.execSQL("create table if not exists scan_check_rfids("
+				+ "idx integer primary key autoincrement, rfid text, user text"
 				+ ")");
 		db.execSQL("create table if not exists loginLog("
 				+ "idx integer primary key autoincrement, login_name text, login_time text"

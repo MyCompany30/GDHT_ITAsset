@@ -6,7 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.gdht.itasset.adapter.YingPanXinZenItemAdapter;
-import com.gdht.itasset.db.service.RFIDSDBService;
+import com.gdht.itasset.db.service.ScanCheckRFIDSDBService;
 import com.gdht.itasset.eventbus.RefreshNumberListener;
 import com.gdht.itasset.eventbus.SelectCangKuListener;
 import com.gdht.itasset.http.HttpClientUtil;
@@ -58,7 +58,7 @@ public class XinZengScanActivity extends Activity {
 			R.raw.tag_inventoried);
 	private Handler accompainimentsHandler;
 	private String uii;
-	private RFIDSDBService rfidsdbService;
+	private ScanCheckRFIDSDBService rfidsdbService;
 	private ProgressDialog pd;
 	private StringBuffer rfidSb = new StringBuffer();
 	private boolean isStop = true;
@@ -113,7 +113,7 @@ public class XinZengScanActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scan_xinzeng);
-		rfidsdbService = new RFIDSDBService(this);
+		rfidsdbService = new ScanCheckRFIDSDBService(this);
 		number = (TextView) this.findViewById(R.id.number);
 		EventBus.getDefault().register(this);
 		pd = new ProgressDialog(this);

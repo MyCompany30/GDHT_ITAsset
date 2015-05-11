@@ -19,8 +19,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -66,6 +69,12 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 	@Override
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
+		
+//		Intent intent2 = new Intent();
+//		intent2.setClass(activity, PlanListActivity.class);
+//		intent2.putExtra("planList", dataList);
+//		activity.startActivity(intent2);
+		
 		//登陆成功进入主界面，失败返回登录界面
 		dialog.dismiss();
 		GlobalParams.username = name;
@@ -73,6 +82,9 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 			if(result.equals("登录成功")){
 				//登录成功
 				GlobalParams.isLogin = true;
+				SharedPreferences loginSettings = activity.getSharedPreferences("GDHT_ITASSET_SETTINGS", Context.MODE_PRIVATE);
+				Editor editor = loginSettings.edit();
+				editor.putString("LOGIN_NAME", name);
 				//new AppSharedPreferences(activity, "gdht").saveIP(ipStr);
 				Intent intent = new Intent();
 				intent.setClass(activity, PlanListActivity.class);
