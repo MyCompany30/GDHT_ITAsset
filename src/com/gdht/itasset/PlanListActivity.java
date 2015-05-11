@@ -18,8 +18,11 @@ import android.widget.ListView;
 
 import com.gdht.itasset.adapter.GuideActivityPagerViewAdapter;
 import com.gdht.itasset.adapter.PlanListAdapterNew;
+import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.PlanInfo;
+import com.gdht.itasset.pojo.StockItem;
+import com.gdht.itasset.pojo.StockItemNew;
 
 public class PlanListActivity extends Activity {
 	private ViewPager viewPager;
@@ -48,10 +51,22 @@ public class PlanListActivity extends Activity {
 				null);
 		zzListView = (ListView) view.findViewById(R.id.listView);
 		zzListView.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
+				// TODO Auto-generated method stub
+				final String planId = zzPlanInfos.get(arg2).getId();
+				Intent intent = new Intent();
+				intent.putExtra("planId", planId);
+				new AsyncTask<Void, Void, Void>(){
+
+					@Override
+					protected Void doInBackground(Void... params) {
+						new HttpClientUtil(PlanListActivity.this).getPlanInfoById(PlanListActivity.this, planId);
+						return null;
+					}
+					
+				}.execute();
 				
 			}
 		});
@@ -65,6 +80,18 @@ public class PlanListActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
+				final String planId = ypPlanInfos.get(arg2).getId();
+				Intent intent = new Intent();
+				intent.putExtra("planId", planId);
+				new AsyncTask<Void, Void, Void>(){
+
+					@Override
+					protected Void doInBackground(Void... params) {
+						new HttpClientUtil(PlanListActivity.this).getPlanInfoById(PlanListActivity.this, planId);
+						return null;
+					}
+					
+				}.execute();
 				
 			}
 		});

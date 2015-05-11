@@ -12,7 +12,10 @@
     <string name="MakeSurePDAexitRfid">没有找到Rfid超高频通信模块，请确定当前PDA内存在该模块</string>
     <string name="url_login">/moveCheck/applogin.s</string>
     <string name="url_getPlans">/moveCheck/getPlanByUserid.s</string>
-    <string name="url_getPlanInfoById">/moveCheck/getInfoByPlanid.s</string>
+    <string name="url_getPlanInfoById">/moveCheck/getPlanInfoById.s</string>
+    <string name="url_getRfidByPlanIdAndState">/moveCheck/getRfidByPlanIdAndState.s</string>
+    <string name="url_checkAssetByRfidOnly">/moveCheck/checkAssetByRfidOnly.s</string>
+    
     <string name="url_checkAssetByRfid">/moveCheck/checkAssetByRfid.s</string>
     <string name="url_checkAssetBybarCode">/moveCheck/checkAssetBybarCode.s</string>
     <string name="url_checkAssetByqrCode">/moveCheck/checkAssetByqrCode.s</string>

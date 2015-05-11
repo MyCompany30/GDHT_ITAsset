@@ -31,6 +31,7 @@ import com.gdht.itasset.pojo.DeptInfo;
 import com.gdht.itasset.pojo.PlanAssetInfo;
 import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.StockItem;
+import com.gdht.itasset.pojo.StockItemNew;
 import com.gdht.itasset.pojo.YingPanXinZengItem;
 import com.gdht.itasset.pojo.ZiChanFenLeiInfo;
 import com.gdht.itasset.pojo.ZiChanZiFenLeiInfo;
@@ -51,6 +52,43 @@ public class HttpClientUtil {
 		}
 		return httpClient;
 	}
+	
+	
+	/**
+	 * 根据rfid查询资产详情信息
+	 * 参数：Rfid(可批量，中间用逗号隔开)
+	 */
+	public synchronized ArrayList<StockItemNew> checkAssetByRfidOnly(Activity activity, ArrayList<StockItemNew> dataArray, String rfids){
+		String uri = null;
+		uri = activity.getResources().getString(R.string.url_checkAssetByRfidOnly);
+		HttpPost post = new HttpPost(ip + uri);
+		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
+		formparams.add(new BasicNameValuePair("Rfid", rfids));
+		HttpEntity entity = null;
+		try {
+			entity = new UrlEncodedFormEntity(formparams, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		post.setEntity(entity);		
+		try {
+			HttpResponse httpResponse = getHttpClient().execute(post);
+			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				String result = EntityUtils.toString(httpResponse.getEntity());
+				System.out.println(result);
+				//处理返回结果
+			}else{
+				Toast.makeText(activity, "消息异常，状态码："+httpResponse.getStatusLine().getStatusCode(), Toast.LENGTH_SHORT).show();
+			}
+		} catch (Exception e) {
+			Toast.makeText(activity, "网络异常", Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
+			return null;
+		}
+		return dataArray;
+	}
+	
 	//获取rfid对应的详细信息
 	/**
 	 * 
@@ -162,7 +200,73 @@ public class HttpClientUtil {
 		return arrayList;
 	}
 	
+	/** 根据计划id和盘点状态获取资产
+	 * @param planid 盘点计划主键
+	 * @param status 盘点状态  0未盘、1已盘、2盘盈、3盘亏
+	 * @return 盘点计划中的资产清单集合
+	*/
+	public ArrayList<StockItem> getRfidByPlanIdAndState(Activity activity, ArrayList<StockItem> arrayList, String planid, String status){
+		String result = null;
+		String uri = null;
+		uri = activity.getResources().getString(R.string.url_getAssetList);
+		HttpPost post = new HttpPost(ip + uri);
+		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
+		formparams.add(new BasicNameValuePair("assetCheckplanId", planid));
+		formparams.add(new BasicNameValuePair("status", status));
+		HttpEntity entity = null;
+		try {
+			entity = new UrlEncodedFormEntity(formparams, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		post.setEntity(entity);
+		try {
+			HttpResponse httpResponse = getHttpClient().execute(post);
+			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				result = EntityUtils.toString(httpResponse.getEntity());
+				JSONArray jsonArray = new JSONArray(result);
+				for(int i = 0; i< jsonArray.length(); i++){
+					JSONObject jsonObject = jsonArray.getJSONObject(i);
+					StockItem stockItem = new StockItem();
+					stockItem.setChecked(false);
+					stockItem.setAssetName(jsonObject.has("name")?jsonObject.getString("name"):"");
+					stockItem.setAssetType(jsonObject.has("type")?jsonObject.getString("type"):"");
+					stockItem.setBrandModel((jsonObject.has("brand")?jsonObject.getString("brand"):"")+"-"+(jsonObject.has("model")?jsonObject.getString("model"):""));
+					stockItem.setCheckstate(jsonObject.has("checkstate")?jsonObject.getString("checkstate"):"");
+					stockItem.setKeeper(jsonObject.has("keeper")?jsonObject.getString("keeper"):"");
+					//stockItem.setName(jsonObject.getString("name"));
+					stockItem.setUseType(jsonObject.has("usetype")?jsonObject.getString("usetype"):"");
+					if(stockItem.getUseType().equals("1")){
+						//库存
+						stockItem.setDeptQyHj((jsonObject.has("dept")?jsonObject.getString("dept"):"")+(jsonObject.has("warehouseArea")?jsonObject.getString("warehouseArea"):"")+(jsonObject.has("goodsShelves")?jsonObject.getString("goodsShelves"):""));
+						stockItem.setDept(jsonObject.has("dept")?jsonObject.getString("dept"):"");
+						stockItem.setQy(jsonObject.has("warehouseArea")?jsonObject.getString("warehouseArea"):"");
+						stockItem.setHj(jsonObject.has("goodsShelves")?jsonObject.getString("goodsShelves"):"");
+					}else if(stockItem.getUseType().equals("2")){
+						//在运
+						stockItem.setDeptOffice((jsonObject.has("dept")?jsonObject.getString("dept"):"")+(jsonObject.has("office")?jsonObject.getString("office"):""));
+						stockItem.setDept(jsonObject.has("dept")?jsonObject.getString("dept"):"");
+						stockItem.setOffice(jsonObject.has("office")?jsonObject.getString("office"):"");
+					}
+					stockItem.setRfidLabelnum(jsonObject.has("rfidnumber")?jsonObject.getString("rfidnumber"):"");
+					stockItem.setBarNumber(jsonObject.has("barnumber")?jsonObject.getString("barnumber"):"");
+					stockItem.setQrNumber(jsonObject.has("qrnumber")?jsonObject.getString("qrnumber"):"");
+					stockItem.setAssetInfoId(jsonObject.has("assetInfoId")?jsonObject.getString("assetInfoId"):"");
+					stockItem.setAssetChecklistId(jsonObject.has("assetChecklistId")?jsonObject.getString("assetChecklistId"):"");
+					stockItem.setAssetCheckplanId(jsonObject.has("assetCheckplanId")?jsonObject.getString("assetCheckplanId"):"");
+					arrayList.add(stockItem);
+				}
+
+			}
+		} catch (Exception e) {
+			//网络异常
+			e.printStackTrace();
+			return null;
+		}
 	
+		return arrayList;
+	}
 	
 	
 	public ArrayList<StockItem> strToJsonList(String result, ArrayList<StockItem> dataArray) throws JSONException {
@@ -252,18 +356,6 @@ public class HttpClientUtil {
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = new String(EntityUtils.toString(httpResponse.getEntity()).getBytes(),"UTF-8");
 				jsonArray = new JSONArray(result);
-				/*
-				 * 	id;//计划id
-				 *  title;//计划名称
-				 * 	type;//计划部门类型(1.仓库2.在运)
-				 *	depts;//仓库(部门)
-				 *	number;//计划盘点数
-				 *	planstate;//计划状态(0已完成；1执行中)
-				 *	detail;
-				 *	deptcode;//仓库部门的code
-				 *	qdtime;//启动日期
-				 *  wctime;//完成日期
-				 */
 				for(int i = 0; i<jsonArray.length(); i++){
 					PlanInfo planInfo = new PlanInfo();
 					jsonObject = jsonArray.getJSONObject(i);
@@ -305,16 +397,6 @@ public class HttpClientUtil {
 				for(int i = 0; i<jsonArray.length(); i++){
 					PlanAssetInfo planAssetInfo = new PlanAssetInfo();
 					jsonObject = jsonArray.getJSONObject(i);
-					planAssetInfo.setAssetName(jsonObject.getString("assetName"));// 资产名称
-					planAssetInfo.setRfidnumber(jsonObject.getString("rfidnumber"));// rfid标签号
-					planAssetInfo.setBarnumber(jsonObject.getString("barnumber"));// 条形码标签号
-					planAssetInfo.setQrnumber(jsonObject.getString("qrnumber"));// 二维码标签号
-					planAssetInfo.setUsetype(jsonObject.getString("usetype"));// 资产状态(1库存备用 2.在运)
-					planAssetInfo.setDept(jsonObject.getString("dept"));// 部门
-					planAssetInfo.setOffice(jsonObject.getString("office"));// 办公室
-					planAssetInfo.setWarehouseArea(jsonObject.getString("warehouseArea"));//仓库区域
-					planAssetInfo.setGoodsShelves(jsonObject.getString("goodsShelves"));//区域货架
-					//planAssetInfo.setId(jsonObject.getString("id"));// 资产id主键
 
 					arrayList.add(planAssetInfo);
 				}
