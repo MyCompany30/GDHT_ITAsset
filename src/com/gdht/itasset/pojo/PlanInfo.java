@@ -7,17 +7,16 @@ public class PlanInfo implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 3178209081701721579L;
-	private String id;
-	private String title;
-	private String depts;
+	private String id;//计划id
+	private String title;//计划名称
+	private String type;//计划部门类型(1.仓库2.在运)
+	private String depts;//仓库(部门)
+	private int number;//计划盘点数
+	private String planstate;//计划状态(0已完成；1执行中)
 	private String detail;
-	private String planstate;
-	private String registerdate1;
-	private String registerdate2;
-	private String registerdate3;
-	private String registrant1;
-	private String registrant2;
-	private String registrant3;
+	private String deptcode;//仓库部门的code
+	private String qdtime;//启动日期
+	private String wctime;//完成日期
 	public String getId() {
 		return id;
 	}
@@ -30,17 +29,23 @@ public class PlanInfo implements Serializable{
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getDepts() {
 		return depts;
 	}
 	public void setDepts(String depts) {
 		this.depts = depts;
 	}
-	public String getDetail() {
-		return detail;
+	public int getNumber() {
+		return number;
 	}
-	public void setDetail(String detail) {
-		this.detail = detail;
+	public void setNumber(int number) {
+		this.number = number;
 	}
 	public String getPlanstate() {
 		return planstate;
@@ -48,40 +53,35 @@ public class PlanInfo implements Serializable{
 	public void setPlanstate(String planstate) {
 		this.planstate = planstate;
 	}
-	public String getRegisterdate1() {
-		return registerdate1;
+	public String getDetail() {
+		return detail;
 	}
-	public void setRegisterdate1(String registerdate1) {
-		this.registerdate1 = registerdate1;
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
-	public String getRegisterdate2() {
-		return registerdate2;
+	public String getDeptcode() {
+		return deptcode;
 	}
-	public void setRegisterdate2(String registerdate2) {
-		this.registerdate2 = registerdate2;
+	public void setDeptcode(String deptcode) {
+		this.deptcode = deptcode;
 	}
-	public String getRegisterdate3() {
-		return registerdate3;
+	public String getQdtime() {
+		return qdtime;
 	}
-	public void setRegisterdate3(String registerdate3) {
-		this.registerdate3 = registerdate3;
+	public void setQdtime(String qdtime) {
+		this.qdtime = qdtime;
 	}
-	public String getRegistrant1() {
-		return registrant1;
+	public String getWctime() {
+		return wctime;
 	}
-	public void setRegistrant1(String registrant1) {
-		this.registrant1 = registrant1;
+	public void setWctime(String wctime) {
+		this.wctime = wctime;
 	}
-	public String getRegistrant2() {
-		return registrant2;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
-	public void setRegistrant2(String registrant2) {
-		this.registrant2 = registrant2;
-	}
-	public String getRegistrant3() {
-		return registrant3;
-	}
-	public void setRegistrant3(String registrant3) {
-		this.registrant3 = registrant3;
-	}
+	
+	
+	
+	
 }

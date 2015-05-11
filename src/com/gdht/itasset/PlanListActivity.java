@@ -17,12 +17,13 @@ import android.widget.ListView;
 
 import com.gdht.itasset.adapter.GuideActivityPagerViewAdapter;
 import com.gdht.itasset.adapter.PlanListAdapterNew;
-import com.gdht.itasset.pojo.PlanInfoNew;
+import com.gdht.itasset.pojo.PlanInfo;
+import com.gdht.itasset.pojo.PlanInfo;
 
 public class PlanListActivity extends Activity {
 	private ViewPager viewPager;
-	private List<PlanInfoNew> zzPlanInfos = new ArrayList<PlanInfoNew>();
-	private List<PlanInfoNew> ypPlanInfos = new ArrayList<PlanInfoNew>();
+	private List<PlanInfo> zzPlanInfos = new ArrayList<PlanInfo>();
+	private List<PlanInfo> ypPlanInfos = new ArrayList<PlanInfo>();
 	private ArrayList<View> views;
 	private LayoutInflater inflater;
 	private ListView zzListView, ypListView;
@@ -109,83 +110,19 @@ public class PlanListActivity extends Activity {
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
-			PlanInfoNew pi = new PlanInfoNew();
-			pi.setName("未盘点计划1");
-			pi.setZk(true);
-			pi.setCangku("仓库1");
-			zzPlanInfos.add(pi);
-			pi = new PlanInfoNew();
-			pi.setName("未盘点计划2");
-			pi.setZk(true);
-			pi.setCangku("仓库2");
-			zzPlanInfos.add(pi);
-			pi = new PlanInfoNew();
-			pi.setName("未盘点计划3");
-			pi.setZk(false);
-			pi.setCangku("仓库3");
-			zzPlanInfos.add(pi);
-			pi = new PlanInfoNew();
-			pi.setName("未盘点计划4");
-			pi.setZk(true);
-			pi.setCangku("仓库4");
-			zzPlanInfos.add(pi);
-			pi = new PlanInfoNew();
-			pi.setName("未盘点计划5");
-			pi.setZk(true);
-			pi.setCangku("仓库5");
-			zzPlanInfos.add(pi);
+			ArrayList<PlanInfo> plans = (ArrayList<PlanInfo>) getIntent().getSerializableExtra("planList");
+			for(int i = 0; i<plans.size(); i++){
+				if(plans.get(i).getPlanstate().equals("0")){
+					//已完成
+					ypPlanInfos.add(plans.get(i));
+				}else if(plans.get(i).getPlanstate().equals("1")){
+					//进行中
+					zzPlanInfos.add(plans.get(i));
+				}
+			}
 			zzAdapter = new PlanListAdapterNew(PlanListActivity.this, zzPlanInfos);
 			zzListView.setAdapter(zzAdapter);
-			pi = new PlanInfoNew();
-			pi.setName("已盘点计划1");
-			pi.setZk(true);
-			pi.setCangku("仓库1");
-			ypPlanInfos.add(pi);
-			pi = new PlanInfoNew();
-			pi.setName("已盘点计划2");
-			pi.setZk(true);
-			pi.setCangku("仓库2");
-			ypPlanInfos.add(pi);
-			pi = new PlanInfoNew();
-			pi.setName("已盘点计划3");
-			pi.setZk(false);
-			pi.setCangku("仓库3");
-			ypPlanInfos.add(pi);
-			pi = new PlanInfoNew();
-			pi.setName("已盘点计划4");
-			pi.setZk(true);
-			pi.setCangku("仓库4");
-			ypPlanInfos.add(pi);
-			pi = new PlanInfoNew();
-			pi.setName("已盘点计划5");
-			pi.setZk(true);
-			pi.setCangku("仓库5");
-			ypPlanInfos.add(pi);
-			pi = new PlanInfoNew();
-			pi.setName("已盘点计划6");
-			pi.setZk(true);
-			pi.setCangku("仓库6");
-			ypPlanInfos.add(pi);
-			pi = new PlanInfoNew();
-			pi.setName("已盘点计划7");
-			pi.setZk(true);
-			pi.setCangku("仓库7");
-			ypPlanInfos.add(pi);
-			pi = new PlanInfoNew();
-			pi.setName("已盘点计划8");
-			pi.setZk(false);
-			pi.setCangku("仓库8");
-			ypPlanInfos.add(pi);
-			pi = new PlanInfoNew();
-			pi.setName("已盘点计划9");
-			pi.setZk(true);
-			pi.setCangku("仓库9");
-			ypPlanInfos.add(pi);
-			pi = new PlanInfoNew();
-			pi.setName("已盘点计划10");
-			pi.setZk(true);
-			pi.setCangku("仓库10");
-			ypPlanInfos.add(pi);
+
 			ypAdapter = new PlanListAdapterNew(PlanListActivity.this, ypPlanInfos);
 			ypListView.setAdapter(ypAdapter);
 		}
