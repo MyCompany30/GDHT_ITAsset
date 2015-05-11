@@ -15,6 +15,7 @@
     <string name="url_getPlanInfoById">/moveCheck/getPlanInfoById.s</string>
     <string name="url_getRfidByPlanIdAndState">/moveCheck/getRfidByPlanIdAndState.s</string>
     <string name="url_checkAssetByRfidOnly">/moveCheck/checkAssetByRfidOnly.s</string>
+    <string name="url_updateManyRfidToYp">/moveCheck/updateManyRfidToYp.s</string>
     
     <string name="url_checkAssetByRfid">/moveCheck/checkAssetByRfid.s</string>
     <string name="url_checkAssetBybarCode">/moveCheck/checkAssetBybarCode.s</string>

@@ -89,9 +89,47 @@ public class HttpClientUtil {
 		return dataArray;
 	}
 	
+	/**
+	 * 将选中的rfid对应的资产批量设置为已盘状态
+	 * 参数：planid
+     * rfid (用逗号隔开，每个rfid都需要有单引号包含)
+	 */
+	public synchronized boolean updateManyRfidToYp(Activity activity, String planId, String rfid){
+		String uri = null;
+		uri = activity.getResources().getString(R.string.url_updateManyRfidToYp);
+		HttpPost post = new HttpPost(ip + uri);
+		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
+		formparams.add(new BasicNameValuePair("planId", planId));
+		formparams.add(new BasicNameValuePair("rfid", rfid));
+		HttpEntity entity = null;
+		try {
+			entity = new UrlEncodedFormEntity(formparams, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		post.setEntity(entity);		
+		try {
+			HttpResponse httpResponse = getHttpClient().execute(post);
+			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				String result = EntityUtils.toString(httpResponse.getEntity());
+				if(Integer.parseInt(result) > 0){
+					return true;
+				}
+			}else{
+				Toast.makeText(activity, "消息异常，状态码："+httpResponse.getStatusLine().getStatusCode(), Toast.LENGTH_SHORT).show();
+				return false;
+			}
+		} catch (Exception e) {
+			Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
+	
 	//获取rfid对应的详细信息
 	/**
-	 * 
 	 * @param activity
 	 * @param urlResoucesId  strings文件里对应的url地址id
 	 * @param paramName     rfid标签号：Rfid  条码：barCode  二维码：qrCode
@@ -132,6 +170,9 @@ public class HttpClientUtil {
 		}
 		return dataArray;
 	}
+	
+	
+	
 	/** 根据计划id和盘点状态获取资产
 	 * @param assetCheckplanId 盘点计划主键
 	 * @param checkstate 盘点状态  0未盘、1已盘、2盘盈、3盘亏
