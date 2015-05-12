@@ -114,7 +114,7 @@ public class HttpClientUtil {
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				String result = EntityUtils.toString(httpResponse.getEntity());
 				if(Integer.parseInt(result) > 0){
-					return true;
+				 	return true;
 				}
 			}else{
 				Toast.makeText(activity, "消息异常，状态码："+httpResponse.getStatusLine().getStatusCode(), Toast.LENGTH_SHORT).show();
@@ -127,6 +127,44 @@ public class HttpClientUtil {
 		}
 		return false;
 	}
+	
+	/**
+	 * 将盘点计划设为已盘状态
+	 * 参数：planid
+	 */
+	public synchronized boolean finishInventoryPlan(Activity activity, String planId){
+		String uri = null;
+		uri = activity.getResources().getString(R.string.url_finishInventoryPlan);
+		HttpPost post = new HttpPost(ip + uri);
+		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
+		formparams.add(new BasicNameValuePair("planId", planId));
+		HttpEntity entity = null;
+		try {
+			entity = new UrlEncodedFormEntity(formparams, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		post.setEntity(entity);		
+		try {
+			HttpResponse httpResponse = getHttpClient().execute(post);
+			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				String result = EntityUtils.toString(httpResponse.getEntity());
+				if(result.equals("1")){
+				 	return true;
+				}
+			}else{
+				Toast.makeText(activity, "消息异常，状态码："+httpResponse.getStatusLine().getStatusCode(), Toast.LENGTH_SHORT).show();
+				return false;
+			}
+		} catch (Exception e) {
+			Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
+	
 	
 	//获取rfid对应的详细信息
 	/**
