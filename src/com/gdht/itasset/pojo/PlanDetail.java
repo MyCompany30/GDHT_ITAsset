@@ -78,6 +78,13 @@ public class PlanDetail {
 	public void setPy(String py) {
 		this.py = py;
 	}
+	@Override
+	public String toString() {
+		return "PlanDetail [id=" + id + ", title=" + title + ", depts=" + depts
+				+ ", number=" + number + ", detail=" + detail + ", qdtime="
+				+ qdtime + ", wctime=" + wctime + ", yp=" + yp + ", wp=" + wp
+				+ ", pk=" + pk + ", py=" + py + "]";
+	}
 	
 	
 
