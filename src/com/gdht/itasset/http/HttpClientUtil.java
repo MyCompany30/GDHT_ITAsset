@@ -125,13 +125,15 @@ public class HttpClientUtil {
 	 * 参数：planid
      * rfid (用逗号隔开，每个rfid都需要有单引号包含)
 	 */
-	public synchronized boolean updateManyRfidToYp(Activity activity, String planId, String rfid){
+	public synchronized boolean updateManyRfidToYp(Activity activity, String planId, String rfid, String userid){
+		Log.i("a", "planId = " + planId + " rfid = " + rfid + " userid = " + userid);
 		String uri = null;
 		uri = activity.getResources().getString(R.string.url_updateManyRfidToYp);
 		HttpPost post = new HttpPost(ip + uri);
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
-		formparams.add(new BasicNameValuePair("planId", planId));
+		formparams.add(new BasicNameValuePair("planid", planId));
 		formparams.add(new BasicNameValuePair("rfid", rfid));
+		formparams.add(new BasicNameValuePair("userid", userid));
 		HttpEntity entity = null;
 		try {
 			entity = new UrlEncodedFormEntity(formparams, "UTF-8");
@@ -144,15 +146,14 @@ public class HttpClientUtil {
 			HttpResponse httpResponse = getHttpClient().execute(post);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				String result = EntityUtils.toString(httpResponse.getEntity());
+				Log.i("a", "pandian result = " + result);
 				if(Integer.parseInt(result) > 0){
 				 	return true;
 				}
 			}else{
-				Toast.makeText(activity, "消息异常，状态码："+httpResponse.getStatusLine().getStatusCode(), Toast.LENGTH_SHORT).show();
 				return false;
 			}
 		} catch (Exception e) {
-			Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 			return false;
 		}

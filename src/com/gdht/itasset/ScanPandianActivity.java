@@ -6,7 +6,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -19,8 +22,11 @@ import android.widget.Toast;
 
 import com.gdht.itasset.R.id;
 import com.gdht.itasset.adapter.RfidPanDianAdapter;
+import com.gdht.itasset.eventbus.RefreshDatas;
 import com.gdht.itasset.eventbus.RefreshNumberListener;
+import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.utils.AppSharedPreferences;
+import com.gdht.itasset.widget.WaitingDialog;
 import com.gdht.itasset.xintong.Accompaniment;
 import com.gdht.itasset.xintong.App;
 import com.gdht.itasset.xintong.DataTransfer;
@@ -46,6 +52,11 @@ public class ScanPandianActivity extends Activity {
 	private UII uii_change;
 	private LinearLayout finishBtn, stopBtn, startBtn;
 	private TextView num1;
+	private WaitingDialog wd;
+	private SharedPreferences loginSettings = null;
+	private String planId;
+	private String userid;
+	private StringBuffer sb;
 	private final Runnable accompainimentRunnable = new Runnable() {
 		@Override
 		public void run() {
@@ -71,6 +82,10 @@ public class ScanPandianActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_scan_pandian_new);
 		de.greenrobot.event.EventBus.getDefault().register(this);
+		wd = new WaitingDialog(this);
+		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS", Context.MODE_PRIVATE);
+		userid = loginSettings.getString("LOGIN_NAME", "");
+		planId = this.getIntent().getStringExtra("planId");
 		findViews();
 
 		if (App.getRfid() == null) {
@@ -124,9 +139,20 @@ public class ScanPandianActivity extends Activity {
 			this.finish();
 			break;
 		case R.id.finish:
-			for (String s : selectRifds) {
-				Log.i("a", "rfid = " + s);
+			
+			if(selectRifds.size() <= 0) {
+				Toast.makeText(this, "请先选择要盘点的资产!", 0).show();
+			}else {
+				sb = new StringBuffer();
+				for(String s : selectRifds) {
+					sb.append("'").append(s).append("'").append(",");
+				}
+				sb.deleteCharAt(sb.length() - 1);
+//				Log.i("a", "sb = " + sb.toString());
+				new PanDianAt().execute("");
 			}
+			
+			
 			break;
 		case R.id.stop:
 			stopBtn.setVisibility(View.GONE);
@@ -245,5 +271,32 @@ public class ScanPandianActivity extends Activity {
 		super.onDestroy();
 		de.greenrobot.event.EventBus.getDefault().unregister(this);
 		stop();
+	}
+	
+	private class PanDianAt extends AsyncTask<String, Integer, Boolean> {
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			wd.show();
+		}
+		
+		@Override
+		protected Boolean doInBackground(String... arg0) {
+			return new HttpClientUtil(ScanPandianActivity.this).updateManyRfidToYp(ScanPandianActivity.this, planId, sb.toString(), userid);
+		}
+		
+		@Override
+		protected void onPostExecute(Boolean result) {
+			super.onPostExecute(result);
+			wd.dismiss();
+			if(result) {
+				de.greenrobot.event.EventBus.getDefault().post(new RefreshDatas());
+				ScanPandianActivity.this.finish();
+			}else {
+				Toast.makeText(ScanPandianActivity.this, "资产盘点失败，请稍后再试!", 0).show();
+			}
+		}
+	
 	}
 }

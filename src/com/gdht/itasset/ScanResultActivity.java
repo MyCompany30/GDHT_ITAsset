@@ -19,9 +19,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gdht.itasset.eventbus.RefreshDatas;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.PlanDetail;
 import com.gdht.itasset.widget.WaitingDialog;
+
+import de.greenrobot.event.EventBus;
 
 public class ScanResultActivity extends Activity {
 	private LinearLayout yipanBtn, weipanBtn, panyingBtn, pankuiBtn;
@@ -42,6 +45,7 @@ public class ScanResultActivity extends Activity {
 		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS", Context.MODE_PRIVATE);
 		userid = loginSettings.getString("LOGIN_NAME", "");
 		initViews();
+		EventBus.getDefault().register(this);
 		new GetInfoAt().execute("");
 	}
 	
@@ -211,6 +215,7 @@ public class ScanResultActivity extends Activity {
 			break;
 		case R.id.start:
 			Intent intent = new Intent(this, ScanPandianActivity.class);
+			intent.putExtra("planId", planId);
 			startActivity(intent);
 			break;
 		case R.id.finish:
@@ -218,4 +223,30 @@ public class ScanResultActivity extends Activity {
 		}
 	}
 	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		EventBus.getDefault().unregister(this);
+	}
+	
+	public void onEvent(RefreshDatas event) {
+		new GetInfoAt().execute("");
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
