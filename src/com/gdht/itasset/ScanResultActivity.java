@@ -1,7 +1,14 @@
 package com.gdht.itasset;
 
+import java.util.ArrayList;
+
+import com.gdht.itasset.http.HttpClientUtil;
+import com.gdht.itasset.pojo.PlanDetail;
+import com.gdht.itasset.widget.WaitingDialog;
+
 import android.app.Activity;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,13 +26,37 @@ public class ScanResultActivity extends Activity {
 	private int width, nameWidth, lineWidth;
 	private View lineLeft, lineRight;
 	private String planId;
+	private WaitingDialog wd;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_scan_result);
+		wd = new WaitingDialog(this);
 		planId = this.getIntent().getStringExtra("planId");
 		initViews();
 	}
+	
+	private class GetInfoAt extends AsyncTask<String, Integer, PlanDetail> {
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			wd.show();
+		}
+		
+		@Override
+		protected PlanDetail doInBackground(String... arg0) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(PlanDetail result) {
+			super.onPostExecute(result);
+		}
+		
+	}
+	
 	private void initViews() {
 		width = this.getResources().getDisplayMetrics().widthPixels;
 		name = (TextView) this.findViewById(R.id.name);
@@ -62,7 +93,7 @@ public class ScanResultActivity extends Activity {
 				if(event.getAction() == MotionEvent.ACTION_DOWN) {
 					yipanTxt.setTextColor(Color.WHITE);
 				}else if(event.getAction() == MotionEvent.ACTION_UP) {
-					yipanTxt.setTextColor(Color.GREEN);
+					yipanTxt.setTextColor(ScanResultActivity.this.getResources().getColor(R.color.yipanColor));
 				}
 				
 				return false;
@@ -82,7 +113,7 @@ public class ScanResultActivity extends Activity {
 				if(event.getAction() == MotionEvent.ACTION_DOWN) {
 					weipanTxt.setTextColor(Color.WHITE);
 				}else if(event.getAction() == MotionEvent.ACTION_UP) {
-					weipanTxt.setTextColor(Color.YELLOW);
+					weipanTxt.setTextColor(ScanResultActivity.this.getResources().getColor(R.color.weipanColor));
 				}
 				
 				return false;
@@ -102,7 +133,7 @@ public class ScanResultActivity extends Activity {
 				if(event.getAction() == MotionEvent.ACTION_DOWN) {
 					panyingTxt.setTextColor(Color.WHITE);
 				}else if(event.getAction() == MotionEvent.ACTION_UP) {
-					panyingTxt.setTextColor(Color.RED);
+					panyingTxt.setTextColor(ScanResultActivity.this.getResources().getColor(R.color.panyingColor));
 				}
 				
 				return false;
@@ -122,7 +153,7 @@ public class ScanResultActivity extends Activity {
 				if(event.getAction() == MotionEvent.ACTION_DOWN) {
 					pankuiTxt.setTextColor(Color.WHITE);
 				}else if(event.getAction() == MotionEvent.ACTION_UP) {
-					pankuiTxt.setTextColor(Color.BLUE);
+					pankuiTxt.setTextColor(ScanResultActivity.this.getResources().getColor(R.color.pankuiColor));
 				}
 				
 				return false;

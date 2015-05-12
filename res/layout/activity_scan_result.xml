@@ -145,8 +145,8 @@
                         android:id="@+id/yipanTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="已盘：21"
-                        android:textColor="#66cc00"
+                        android:text="已盘：0"
+                        android:textColor="@color/yipanColor"
                         android:textSize="20dp" />
                 </LinearLayout>
             </LinearLayout>
@@ -170,8 +170,8 @@
                         android:id="@+id/weipanTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="未盘：21"
-                        android:textColor="#66cc00"
+                        android:text="未盘：0"
+                        android:textColor="@color/weipanColor"
                         android:textSize="20dp" />
                 </LinearLayout>
             </LinearLayout>
@@ -200,8 +200,8 @@
                         android:id="@+id/panyingTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="盘盈：21"
-                        android:textColor="#66cc00"
+                        android:text="盘盈：0"
+                        android:textColor="@color/panyingColor"
                         android:textSize="20dp" />
                 </LinearLayout>
             </LinearLayout>
@@ -225,8 +225,8 @@
                         android:id="@+id/pankuiTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="未盘：21"
-                        android:textColor="#66cc00"
+                        android:text="盘亏：0"
+                        android:textColor="@color/pankuiColor"
                         android:textSize="20dp" />
                 </LinearLayout>
             </LinearLayout>
