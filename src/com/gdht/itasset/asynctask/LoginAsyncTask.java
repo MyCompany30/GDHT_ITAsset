@@ -11,6 +11,7 @@ import com.gdht.itasset.R;
 import com.gdht.itasset.adapter.PlanListAdapter;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.PlanInfo;
+import com.gdht.itasset.pojo.StockItem;
 import com.gdht.itasset.utils.AppSharedPreferences;
 import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.widget.WaitingDialog;

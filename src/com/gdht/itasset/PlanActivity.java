@@ -42,7 +42,7 @@ public class PlanActivity extends Activity {
 
 			@Override
 			protected String doInBackground(Void... params) {
-				GlobalParams.planAssetInfoList = new HttpClientUtil(PlanActivity.this).getPlanInfoById(PlanActivity.this, GlobalParams.planId);
+				//GlobalParams.planAssetInfoList = new HttpClientUtil(PlanActivity.this).getPlanInfoById(PlanActivity.this, GlobalParams.planId);
 				if(GlobalParams.planAssetInfoList.size()>0){
 					return "盘点资产清单获取成功";
 				}
