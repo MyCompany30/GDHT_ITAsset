@@ -284,13 +284,13 @@ public class HttpClientUtil {
 	 * @param status 盘点状态  0未盘、1已盘、2盘盈、3盘亏
 	 * @return 盘点计划中的资产清单集合
 	*/
-	public ArrayList<StockItem> getRfidByPlanIdAndState(Activity activity, ArrayList<StockItem> arrayList, String planid, String status){
+	public ArrayList<String> getRfidByPlanIdAndState(Activity activity, ArrayList<String> arrayList, String planid, String status){
 		String result = null;
 		String uri = null;
-		uri = activity.getResources().getString(R.string.url_getAssetList);
+		uri = activity.getResources().getString(R.string.url_getRfidByPlanIdAndState);
 		HttpPost post = new HttpPost(ip + uri);
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
-		formparams.add(new BasicNameValuePair("assetCheckplanId", planid));
+		formparams.add(new BasicNameValuePair("planid", planid));
 		formparams.add(new BasicNameValuePair("status", status));
 		HttpEntity entity = null;
 		try {
@@ -304,38 +304,6 @@ public class HttpClientUtil {
 			HttpResponse httpResponse = getHttpClient().execute(post);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity());
-				JSONArray jsonArray = new JSONArray(result);
-				for(int i = 0; i< jsonArray.length(); i++){
-					JSONObject jsonObject = jsonArray.getJSONObject(i);
-					StockItem stockItem = new StockItem();
-					stockItem.setChecked(false);
-					stockItem.setAssetName(jsonObject.has("name")?jsonObject.getString("name"):"");
-					stockItem.setAssetType(jsonObject.has("type")?jsonObject.getString("type"):"");
-					stockItem.setBrandModel((jsonObject.has("brand")?jsonObject.getString("brand"):"")+"-"+(jsonObject.has("model")?jsonObject.getString("model"):""));
-					stockItem.setCheckstate(jsonObject.has("checkstate")?jsonObject.getString("checkstate"):"");
-					stockItem.setKeeper(jsonObject.has("keeper")?jsonObject.getString("keeper"):"");
-					//stockItem.setName(jsonObject.getString("name"));
-					stockItem.setUseType(jsonObject.has("usetype")?jsonObject.getString("usetype"):"");
-					if(stockItem.getUseType().equals("1")){
-						//库存
-						stockItem.setDeptQyHj((jsonObject.has("dept")?jsonObject.getString("dept"):"")+(jsonObject.has("warehouseArea")?jsonObject.getString("warehouseArea"):"")+(jsonObject.has("goodsShelves")?jsonObject.getString("goodsShelves"):""));
-						stockItem.setDept(jsonObject.has("dept")?jsonObject.getString("dept"):"");
-						stockItem.setQy(jsonObject.has("warehouseArea")?jsonObject.getString("warehouseArea"):"");
-						stockItem.setHj(jsonObject.has("goodsShelves")?jsonObject.getString("goodsShelves"):"");
-					}else if(stockItem.getUseType().equals("2")){
-						//在运
-						stockItem.setDeptOffice((jsonObject.has("dept")?jsonObject.getString("dept"):"")+(jsonObject.has("office")?jsonObject.getString("office"):""));
-						stockItem.setDept(jsonObject.has("dept")?jsonObject.getString("dept"):"");
-						stockItem.setOffice(jsonObject.has("office")?jsonObject.getString("office"):"");
-					}
-					stockItem.setRfidLabelnum(jsonObject.has("rfidnumber")?jsonObject.getString("rfidnumber"):"");
-					stockItem.setBarNumber(jsonObject.has("barnumber")?jsonObject.getString("barnumber"):"");
-					stockItem.setQrNumber(jsonObject.has("qrnumber")?jsonObject.getString("qrnumber"):"");
-					stockItem.setAssetInfoId(jsonObject.has("assetInfoId")?jsonObject.getString("assetInfoId"):"");
-					stockItem.setAssetChecklistId(jsonObject.has("assetChecklistId")?jsonObject.getString("assetChecklistId"):"");
-					stockItem.setAssetCheckplanId(jsonObject.has("assetCheckplanId")?jsonObject.getString("assetCheckplanId"):"");
-					arrayList.add(stockItem);
-				}
 
 			}
 		} catch (Exception e) {
@@ -461,12 +429,13 @@ public class HttpClientUtil {
 	}
 	
 	//获取盘点计划详细信息
-	public synchronized ArrayList<PlanDetail> getPlanInfoById(Activity activity, String planid){
+	public synchronized PlanDetail getPlanInfoById(Activity activity, String planid){
 		ArrayList<PlanDetail> arrayList = new ArrayList<PlanDetail>();
 		JSONObject jsonObject = null;
 		JSONArray jsonArray = null;
 		String result = null;
 		String uri = null;
+		PlanDetail planDetail = new PlanDetail();
 		uri = activity.getResources().getString(R.string.url_getPlanInfoById)+"?planid="+planid;
 		HttpPost get = new HttpPost(ip + uri);
 		try {
@@ -474,30 +443,24 @@ public class HttpClientUtil {
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = new String(EntityUtils.toString(httpResponse.getEntity()).getBytes(),"UTF-8");
 				Log.i("a", "result  = " +result);
-				jsonArray = new JSONArray(result);
-				for(int i = 0; i<jsonArray.length(); i++){
-					PlanDetail planDetail = new PlanDetail();
-					jsonObject = jsonArray.getJSONObject(i);
-					planDetail.setId(jsonObject.getString("id"));
-					planDetail.setTitle(jsonObject.getString("title"));
-					planDetail.setDepts(jsonObject.getString("depts"));
-					planDetail.setNumber(jsonObject.getString("number"));
-					planDetail.setDetail(jsonObject.getString("detail"));
-					planDetail.setQdtime(jsonObject.getString("qdtime"));
-					planDetail.setWctime(jsonObject.getString("wctime"));
-					planDetail.setYp(jsonObject.getString("yp"));
-					planDetail.setWp(jsonObject.getString("wp"));
-					planDetail.setPk(jsonObject.getString("pk"));
-					planDetail.setPy(jsonObject.getString("py"));
-					arrayList.add(planDetail);
-				}
-				
+				jsonObject = new JSONObject(result);
+				planDetail.setId(jsonObject.getString("id"));
+				planDetail.setTitle(jsonObject.getString("title"));
+				planDetail.setDepts(jsonObject.getString("depts"));
+				planDetail.setNumber(jsonObject.getString("number"));
+				planDetail.setDetail(jsonObject.getString("detail"));
+				planDetail.setQdtime(jsonObject.getString("qdtime"));
+				planDetail.setWctime(jsonObject.getString("wctime"));
+				planDetail.setYp(jsonObject.getString("yp"));
+				planDetail.setWp(jsonObject.getString("wp"));
+				planDetail.setPk(jsonObject.getString("pk"));
+				planDetail.setPy(jsonObject.getString("py"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return arrayList;
+			return null;
 		}
-		return arrayList;
+		return planDetail;
 	}
 	
 	/**
