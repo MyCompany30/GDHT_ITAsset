@@ -25,7 +25,7 @@ import com.gdht.itasset.widget.WaitingDialog;
 
 public class ScanResultActivity extends Activity {
 	private LinearLayout yipanBtn, weipanBtn, panyingBtn, pankuiBtn;
-	private TextView yipanTxt, weipanTxt, panyingTxt, pankuiTxt, name,date, keeper;
+	private TextView yipanTxt, weipanTxt, panyingTxt, pankuiTxt, name,date, keeper, planNum;
 	private int width, nameWidth, lineWidth;
 	private View lineLeft, lineRight;
 	private String planId;
@@ -95,6 +95,8 @@ public class ScanResultActivity extends Activity {
 				weipanTxt.setText("未盘：" + result.getWp());
 				panyingTxt.setText("盘盈：" + result.getPy());
 				pankuiTxt.setText("盘亏：" + result.getPk());
+				keeper.setText(result.getPersons());
+				planNum.setText(result.getNumber());
 				
 			}else {
 				Toast.makeText(ScanResultActivity.this, "获取服务器数据失败", 0).show();
@@ -111,7 +113,7 @@ public class ScanResultActivity extends Activity {
 		lineRight = this.findViewById(R.id.lineRight);
 		dateLayout = (RelativeLayout) this.findViewById(R.id.dateLayout);
 		keeper = (TextView) this.findViewById(R.id.keeper);
-		
+		planNum = (TextView) this.findViewById(R.id.planNum);
 		yipanBtn = (LinearLayout) this.findViewById(R.id.yipanBtn);
 		yipanTxt = (TextView) this.findViewById(R.id.yipanTxt);
 		weipanBtn = (LinearLayout) this.findViewById(R.id.weipanBtn);
