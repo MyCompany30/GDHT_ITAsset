@@ -77,6 +77,7 @@ public class HttpClientUtil {
 		try {
 			HttpResponse httpResponse = getHttpClient().execute(post);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				dataArray = new ArrayList<StockItemNew>();
 				String result = EntityUtils.toString(httpResponse.getEntity());
 				JSONArray jsonArray = new JSONArray(result);
 				for(int i = 0; i < jsonArray.length(); i++){
@@ -109,10 +110,10 @@ public class HttpClientUtil {
 				}
 				
 			}else{
-				Toast.makeText(activity, "消息异常，状态码："+httpResponse.getStatusLine().getStatusCode(), Toast.LENGTH_SHORT).show();
+				//Toast.makeText(activity, "消息异常，状态码："+httpResponse.getStatusLine().getStatusCode(), Toast.LENGTH_SHORT).show();
 			}
 		} catch (Exception e) {
-			Toast.makeText(activity, "网络异常", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(activity, "网络异常", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 			return null;
 		}

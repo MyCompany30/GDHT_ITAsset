@@ -61,7 +61,7 @@
                     android:layout_alignBaseline="@id/rfid_title"
                     android:layout_toRightOf="@id/rfid_title"
                     android:gravity="center_vertical"
-                    android:text="jlsadjfldsjflksdjdfjadslfj"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="22sp" >
                 </TextView>
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView1"
                 android:layout_toRightOf="@+id/textView1"
-                android:text="A仓库B货架"
+                android:text=""
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
@@ -96,7 +96,7 @@
                 android:layout_alignBaseline="@+id/textView1"
                 android:layout_alignRight="@+id/rfid_layout"
                 android:layout_marginRight="20dp"
-                android:text="主机"
+                android:text=""
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView3"
                 android:layout_toRightOf="@+id/textView3"
-                android:text="笔记本"
+                android:text=""
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
@@ -139,7 +139,7 @@
                 android:layout_alignBaseline="@+id/textView3"
                 android:layout_alignRight="@+id/rfid_layout"
                 android:layout_marginRight="20dp"
-                android:text="在运"
+                android:text=""
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView5"
                 android:layout_toRightOf="@+id/textView5"
-                android:text="已盘"
+                android:text=""
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
@@ -193,7 +193,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView6"
                 android:layout_toRightOf="@+id/textView6"
-                android:text="惠普"
+                android:text=""
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
@@ -204,7 +204,7 @@
                 android:layout_alignBaseline="@+id/textView6"
                 android:layout_alignRight="@+id/rfid_layout"
                 android:layout_marginRight="20dp"
-                android:text="I9001"
+                android:text=""
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
@@ -249,7 +249,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView8"
                 android:layout_toRightOf="@+id/textView8"
-                android:text="研发部"
+                android:text=""
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
@@ -260,7 +260,7 @@
                 android:layout_alignBaseline="@+id/textView8"
                 android:layout_alignRight="@+id/rfid_layout"
                 android:layout_marginRight="20dp"
-                android:text="李文志"
+                android:text=""
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
@@ -291,7 +291,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView10"
                 android:layout_toRightOf="@+id/textView10"
-                android:text="102办公室"
+                android:text=""
                 android:textColor="#000000"
                 android:textSize="18sp" />
             <TextView
@@ -313,7 +313,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView11"
                 android:layout_toRightOf="@+id/textView11"
-                android:text="2015-5-15"
+                android:text=""
                 android:textColor="#000000"
                 android:textSize="18sp" />
             
