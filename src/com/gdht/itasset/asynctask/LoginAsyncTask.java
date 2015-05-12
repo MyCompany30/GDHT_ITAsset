@@ -63,6 +63,7 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 		//登录成功获取查询盘点计划中指定的盘点人是自己的盘点计划
 		if(loginFlag!=null && loginFlag.equals("登录成功")){
 			dataList = new HttpClientUtil(activity).getPlans(activity, name);
+			new HttpClientUtil(activity).getRfidByPlanIdAndState(activity, "c6baeca9e2d24eeca11552935364cb8a", "0");
 		}
 		return loginFlag;
 	}

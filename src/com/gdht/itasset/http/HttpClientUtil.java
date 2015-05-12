@@ -284,9 +284,10 @@ public class HttpClientUtil {
 	 * @param status 盘点状态  0未盘、1已盘、2盘盈、3盘亏
 	 * @return 盘点计划中的资产清单集合
 	*/
-	public ArrayList<String> getRfidByPlanIdAndState(Activity activity, ArrayList<String> arrayList, String planid, String status){
+	public String [] getRfidByPlanIdAndState(Activity activity, String planid, String status){
 		String result = null;
 		String uri = null;
+		String [] rfids = null;
 		uri = activity.getResources().getString(R.string.url_getRfidByPlanIdAndState);
 		HttpPost post = new HttpPost(ip + uri);
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
@@ -303,8 +304,10 @@ public class HttpClientUtil {
 		try {
 			HttpResponse httpResponse = getHttpClient().execute(post);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				
 				result = EntityUtils.toString(httpResponse.getEntity());
-
+				result = result.substring(1,result.length()-1).replace("\"", "");
+				rfids = result.split(",");
 			}
 		} catch (Exception e) {
 			//网络异常
@@ -312,7 +315,7 @@ public class HttpClientUtil {
 			return null;
 		}
 	
-		return arrayList;
+		return rfids;
 	}
 	
 	
