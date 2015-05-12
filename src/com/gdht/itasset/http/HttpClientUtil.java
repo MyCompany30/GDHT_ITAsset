@@ -28,7 +28,7 @@ import com.gdht.itasset.R;
 import com.gdht.itasset.pojo.BuMenInfo;
 import com.gdht.itasset.pojo.CangKuInfo;
 import com.gdht.itasset.pojo.DeptInfo;
-import com.gdht.itasset.pojo.PlanAssetInfo;
+import com.gdht.itasset.pojo.PlanDetail;
 import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.StockItem;
 import com.gdht.itasset.pojo.StockItemNew;
@@ -461,8 +461,8 @@ public class HttpClientUtil {
 	}
 	
 	//获取盘点计划详细信息
-	public synchronized ArrayList<PlanAssetInfo> getPlanInfoById(Activity activity, String planid){
-		ArrayList<PlanAssetInfo> arrayList = new ArrayList<PlanAssetInfo>();
+	public synchronized ArrayList<PlanDetail> getPlanInfoById(Activity activity, String planid){
+		ArrayList<PlanDetail> arrayList = new ArrayList<PlanDetail>();
 		JSONObject jsonObject = null;
 		JSONArray jsonArray = null;
 		String result = null;
@@ -476,10 +476,20 @@ public class HttpClientUtil {
 				Log.i("a", "result  = " +result);
 				jsonArray = new JSONArray(result);
 				for(int i = 0; i<jsonArray.length(); i++){
-					PlanAssetInfo planAssetInfo = new PlanAssetInfo();
+					PlanDetail planDetail = new PlanDetail();
 					jsonObject = jsonArray.getJSONObject(i);
-
-					arrayList.add(planAssetInfo);
+					planDetail.setId(jsonObject.getString("id"));
+					planDetail.setTitle(jsonObject.getString("title"));
+					planDetail.setDepts(jsonObject.getString("depts"));
+					planDetail.setNumber(jsonObject.getString("number"));
+					planDetail.setDetail(jsonObject.getString("detail"));
+					planDetail.setQdtime(jsonObject.getString("qdtime"));
+					planDetail.setWctime(jsonObject.getString("wctime"));
+					planDetail.setYp(jsonObject.getString("yp"));
+					planDetail.setWp(jsonObject.getString("wp"));
+					planDetail.setPk(jsonObject.getString("pk"));
+					planDetail.setPy(jsonObject.getString("py"));
+					arrayList.add(planDetail);
 				}
 				
 			}
