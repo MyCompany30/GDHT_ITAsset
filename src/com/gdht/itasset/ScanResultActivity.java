@@ -1,7 +1,9 @@
 package com.gdht.itasset;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -29,12 +31,16 @@ public class ScanResultActivity extends Activity {
 	private String planId;
 	private WaitingDialog wd;
 	private RelativeLayout dateLayout;
+	private SharedPreferences loginSettings = null;
+	private String userid;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_scan_result);
 		wd = new WaitingDialog(this);
 		planId = this.getIntent().getStringExtra("planId");
+		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS", Context.MODE_PRIVATE);
+		userid = loginSettings.getString("LOGIN_NAME", "");
 		initViews();
 		new GetInfoAt().execute("");
 	}
@@ -50,7 +56,7 @@ public class ScanResultActivity extends Activity {
 		@Override
 		protected PlanDetail doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
-			return new HttpClientUtil(ScanResultActivity.this).getPlanInfoById(ScanResultActivity.this, planId);
+			return new HttpClientUtil(ScanResultActivity.this).getPlanInfoById(ScanResultActivity.this, planId, userid);
 		}
 		
 		@Override

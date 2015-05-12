@@ -462,14 +462,14 @@ public class HttpClientUtil {
 	}
 	
 	//获取盘点计划详细信息
-	public synchronized PlanDetail getPlanInfoById(Activity activity, String planid){
+	public synchronized PlanDetail getPlanInfoById(Activity activity, String planid, String userid){
 		ArrayList<PlanDetail> arrayList = new ArrayList<PlanDetail>();
 		JSONObject jsonObject = null;
 		JSONArray jsonArray = null;
 		String result = null;
 		String uri = null;
 		PlanDetail planDetail = new PlanDetail();
-		uri = activity.getResources().getString(R.string.url_getPlanInfoById)+"?planid="+planid;
+		uri = activity.getResources().getString(R.string.url_getPlanInfoById)+"?planid="+planid + "&userid=" + userid;
 		HttpPost get = new HttpPost(ip + uri);
 		try {
 			HttpResponse httpResponse = getHttpClient().execute(get);
@@ -480,6 +480,8 @@ public class HttpClientUtil {
 				planDetail.setId(jsonObject.getString("id"));
 				planDetail.setTitle(jsonObject.getString("title"));
 				planDetail.setDepts(jsonObject.getString("depts"));
+				planDetail.setPersons(jsonObject.getString("persons").equals("null")?null:jsonObject.getString("persons"));
+				planDetail.setWcr(jsonObject.getString("wcr").equals("null")?null:jsonObject.getString("wcr"));
 				planDetail.setNumber(jsonObject.getString("number"));
 				planDetail.setDetail(jsonObject.getString("detail"));
 				planDetail.setQdtime(jsonObject.getString("qdtime"));

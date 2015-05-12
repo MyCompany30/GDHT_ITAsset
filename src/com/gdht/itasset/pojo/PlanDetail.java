@@ -4,10 +4,12 @@ public class PlanDetail {
 	private String id;     //id
 	private String title;  //名称
 	private String depts;  //部门（仓库）
+	private String persons; //盘点人
 	private String number;	   //数量
 	private String detail; //备注
 	private String qdtime; //启动日期
 	private String wctime; //完成日期
+	private String wcr;    //完成人
 	private String yp;     //已盘数量
 	private String wp;	   //未盘数量
 	private String pk;	   //盘亏数量
@@ -78,12 +80,25 @@ public class PlanDetail {
 	public void setPy(String py) {
 		this.py = py;
 	}
+	public String getPersons() {
+		return persons;
+	}
+	public void setPersons(String persons) {
+		this.persons = persons;
+	}
+	public String getWcr() {
+		return wcr;
+	}
+	public void setWcr(String wcr) {
+		this.wcr = wcr;
+	}
 	@Override
 	public String toString() {
 		return "PlanDetail [id=" + id + ", title=" + title + ", depts=" + depts
-				+ ", number=" + number + ", detail=" + detail + ", qdtime="
-				+ qdtime + ", wctime=" + wctime + ", yp=" + yp + ", wp=" + wp
-				+ ", pk=" + pk + ", py=" + py + "]";
+				+ ", persons=" + persons + ", number=" + number + ", detail="
+				+ detail + ", qdtime=" + qdtime + ", wctime=" + wctime
+				+ ", wcr=" + wcr + ", yp=" + yp + ", wp=" + wp + ", pk=" + pk
+				+ ", py=" + py + "]";
 	}
 	
 	

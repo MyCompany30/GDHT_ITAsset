@@ -95,7 +95,7 @@ public class PlanListActivity extends Activity {
 
 					@Override
 					protected Void doInBackground(Void... params) {
-						new HttpClientUtil(PlanListActivity.this).getPlanInfoById(PlanListActivity.this, planId);
+//						new HttpClientUtil(PlanListActivity.this).getPlanInfoById(PlanListActivity.this, planId);
 						return null;
 					}
 					
