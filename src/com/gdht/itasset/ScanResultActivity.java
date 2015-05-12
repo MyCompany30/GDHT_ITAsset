@@ -1,15 +1,11 @@
 package com.gdht.itasset;
 
-import java.util.ArrayList;
-
-import com.gdht.itasset.http.HttpClientUtil;
-import com.gdht.itasset.pojo.PlanDetail;
-import com.gdht.itasset.widget.WaitingDialog;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,16 +13,22 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gdht.itasset.http.HttpClientUtil;
+import com.gdht.itasset.pojo.PlanDetail;
+import com.gdht.itasset.widget.WaitingDialog;
+
 public class ScanResultActivity extends Activity {
 	private LinearLayout yipanBtn, weipanBtn, panyingBtn, pankuiBtn;
-	private TextView yipanTxt, weipanTxt, panyingTxt, pankuiTxt, name;
+	private TextView yipanTxt, weipanTxt, panyingTxt, pankuiTxt, name,date, keeper;
 	private int width, nameWidth, lineWidth;
 	private View lineLeft, lineRight;
 	private String planId;
 	private WaitingDialog wd;
+	private RelativeLayout dateLayout;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,6 +36,7 @@ public class ScanResultActivity extends Activity {
 		wd = new WaitingDialog(this);
 		planId = this.getIntent().getStringExtra("planId");
 		initViews();
+		new GetInfoAt().execute("");
 	}
 	
 	private class GetInfoAt extends AsyncTask<String, Integer, PlanDetail> {
@@ -47,12 +50,49 @@ public class ScanResultActivity extends Activity {
 		@Override
 		protected PlanDetail doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
-			return null;
+			return new HttpClientUtil(ScanResultActivity.this).getPlanInfoById(ScanResultActivity.this, planId);
 		}
 		
 		@Override
 		protected void onPostExecute(PlanDetail result) {
 			super.onPostExecute(result);
+			wd.dismiss();
+			if(result != null) {
+				Log.i("a", "result = " + result.toString());
+				name.setText(result.getTitle());
+				name.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+					
+					@Override
+					public void onGlobalLayout() {
+						nameWidth = name.getWidth();
+						lineWidth = (width - nameWidth) / 2 - 20;
+						LayoutParams lp1 = lineLeft.getLayoutParams();
+						lp1.width = lineWidth;
+						lineLeft.setLayoutParams(lp1);
+						LayoutParams lp2 = lineRight.getLayoutParams();
+						lp2.width = lineWidth;
+						lineRight.setLayoutParams(lp2);
+						name.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+					}
+				});
+				String pandianDate = result.getWctime();
+				if(pandianDate == null || "".equals(pandianDate) || "null".equals(pandianDate)) {
+					pandianDate = result.getQdtime();
+				}
+				if(pandianDate == null || "".equals(pandianDate) || "null".equals(pandianDate)) {
+					dateLayout.setVisibility(View.GONE);
+				}else {
+					pandianDate = pandianDate.substring(0, pandianDate.indexOf(" "));
+					date.setText(pandianDate);
+				}
+				yipanTxt.setText("已盘：" + result.getYp());
+				weipanTxt.setText("未盘：" + result.getWp());
+				panyingTxt.setText("盘盈：" + result.getPy());
+				pankuiTxt.setText("盘亏：" + result.getPk());
+				
+			}else {
+				Toast.makeText(ScanResultActivity.this, "获取服务器数据失败", 0).show();
+			}
 		}
 		
 	}
@@ -60,23 +100,11 @@ public class ScanResultActivity extends Activity {
 	private void initViews() {
 		width = this.getResources().getDisplayMetrics().widthPixels;
 		name = (TextView) this.findViewById(R.id.name);
+		date = (TextView) this.findViewById(R.id.date);
 		lineLeft = this.findViewById(R.id.lineLeft);
 		lineRight = this.findViewById(R.id.lineRight);
-		name.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-			
-			@Override
-			public void onGlobalLayout() {
-				nameWidth = name.getWidth();
-				lineWidth = (width - nameWidth) / 2 - 20;
-				LayoutParams lp1 = lineLeft.getLayoutParams();
-				lp1.width = lineWidth;
-				lineLeft.setLayoutParams(lp1);
-				LayoutParams lp2 = lineRight.getLayoutParams();
-				lp2.width = lineWidth;
-				lineRight.setLayoutParams(lp2);
-				name.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-			}
-		});
+		dateLayout = (RelativeLayout) this.findViewById(R.id.dateLayout);
+		keeper = (TextView) this.findViewById(R.id.keeper);
 		
 		yipanBtn = (LinearLayout) this.findViewById(R.id.yipanBtn);
 		yipanTxt = (TextView) this.findViewById(R.id.yipanTxt);
@@ -174,6 +202,8 @@ public class ScanResultActivity extends Activity {
 			this.finish();
 			break;
 		case R.id.start:
+			Intent intent = new Intent(this, ScanPandianActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.finish:
 			break;
