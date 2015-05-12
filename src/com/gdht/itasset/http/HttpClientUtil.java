@@ -58,8 +58,10 @@ public class HttpClientUtil {
 	 * 根据rfid查询资产详情信息
 	 * 参数：Rfid(可批量，中间用逗号隔开)
 	 */
-	public synchronized ArrayList<StockItemNew> checkAssetByRfidOnly(Activity activity, ArrayList<StockItemNew> dataArray, String rfids){
+	@SuppressWarnings("null")
+	public synchronized ArrayList<StockItemNew> checkAssetByRfidOnly(Activity activity, String rfids){
 		String uri = null;
+		ArrayList<StockItemNew> dataArray = null;
 		uri = activity.getResources().getString(R.string.url_checkAssetByRfidOnly);
 		HttpPost post = new HttpPost(ip + uri);
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
@@ -76,8 +78,36 @@ public class HttpClientUtil {
 			HttpResponse httpResponse = getHttpClient().execute(post);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				String result = EntityUtils.toString(httpResponse.getEntity());
-				System.out.println(result);
-				//处理返回结果
+				JSONArray jsonArray = new JSONArray(result);
+				for(int i = 0; i < jsonArray.length(); i++){
+					JSONObject jsonObject = jsonArray.getJSONObject(i);
+					StockItemNew item = new StockItemNew();
+					item.setAssetChecklistId(jsonObject.getString("assetChecklistId").equals("null")?null:jsonObject.getString("assetChecklistId"));
+					item.setAssetCheckplanId(jsonObject.getString("assetCheckplanId").equals("null")?null:jsonObject.getString("assetCheckplanId"));
+					item.setAssetInfoId(jsonObject.getString("assetInfoId").equals("null")?null:jsonObject.getString("assetInfoId"));
+					item.setClassify(jsonObject.getString("classify").equals("null")?null:jsonObject.getString("classify"));
+					item.setType(jsonObject.getString("type").equals("null")?null:jsonObject.getString("type"));
+					item.setRfidnumber(jsonObject.getString("rfidnumber").equals("null")?null:jsonObject.getString("rfidnumber"));
+					item.setBarnumber(jsonObject.getString("barnumber").equals("null")?null:jsonObject.getString("barnumber"));
+					item.setQrnumber(jsonObject.getString("qrnumber").equals("null")?null:jsonObject.getString("qrnumber"));
+					item.setBrand(jsonObject.getString("brand").equals("null")?null:jsonObject.getString("brand"));
+					item.setModel(jsonObject.getString("model").equals("null")?null:jsonObject.getString("model"));
+					item.setUsetype(jsonObject.getString("usetype").equals("null")?null:jsonObject.getString("usetype"));
+					item.setCheckstate(jsonObject.getString("checkstate").equals("null")?null:jsonObject.getString("checkstate"));
+					item.setDept(jsonObject.getString("dept").equals("null")?null:jsonObject.getString("dept"));
+					item.setDetil(jsonObject.getString("detil").equals("null")?null:jsonObject.getString("detil"));
+					item.setId(jsonObject.getString("id").equals("null")?null:jsonObject.getString("id"));
+					item.setKeeper(jsonObject.getString("keeper").equals("null")?null:jsonObject.getString("keeper"));
+					item.setName(jsonObject.getString("name").equals("null")?null:jsonObject.getString("name"));
+					item.setOffice(jsonObject.getString("office").equals("null")?null:jsonObject.getString("office"));
+					item.setWarehouseArea(jsonObject.getString("warehouseArea").equals("null")?null:jsonObject.getString("warehouseArea"));
+					item.setGoodsShelves(jsonObject.getString("goodsShelves").equals("null")?null:jsonObject.getString("goodsShelves"));
+					item.setRegisterdate(jsonObject.getString("registerdate").equals("null")?null:jsonObject.getString("registerdate"));
+					item.setRegistrant(jsonObject.getString("registrant").equals("null")?null:jsonObject.getString("registrant"));
+					
+					dataArray.add(item);
+				}
+				
 			}else{
 				Toast.makeText(activity, "消息异常，状态码："+httpResponse.getStatusLine().getStatusCode(), Toast.LENGTH_SHORT).show();
 			}

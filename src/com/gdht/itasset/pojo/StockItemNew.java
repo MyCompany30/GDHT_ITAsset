@@ -6,7 +6,6 @@ public class StockItemNew {
 	private String assetChecklistId;// 盘点清单表主键，用于更改盘点状态
 	private String assetCheckplanId;// 盘点计划ID,用于盘盈新增
 	private String assetInfoId;// 资产基本信息表主键，用于调拨
-	private String assetName;// 资产名称
 	private String classify;// 资产分类
 	private String type;// 资产类别
 	private String rfidnumber;// rfid标签号
@@ -14,8 +13,8 @@ public class StockItemNew {
 	private String qrnumber;// 二维码标签号
 	private String brand;// 品牌
 	private String model;// 型号
-	private int usetype;// 资产状态(1库存备用 2.在运 3.退役)
-	private int checkstate;// 盘点状态
+	private String usetype;// 资产状态(1库存备用 2.在运 3.退役)
+	private String checkstate;// 盘点状态
 	private String dept;// 部门
 	private String detil;// 盘点状态改变原因
 	private String id;// 资产id主键
@@ -24,9 +23,8 @@ public class StockItemNew {
 	private String office;// 办公室
 	private String warehouseArea;//仓库区域
 	private String goodsShelves;//所在货架
-	private Date registerdate;// 盘点日期
+	private String registerdate;// 盘点日期
 	private String registrant;// 盘点人
-	private String rfidLabelnum;// RFID标签编号
 	public String getAssetChecklistId() {
 		return assetChecklistId;
 	}
@@ -44,12 +42,6 @@ public class StockItemNew {
 	}
 	public void setAssetInfoId(String assetInfoId) {
 		this.assetInfoId = assetInfoId;
-	}
-	public String getAssetName() {
-		return assetName;
-	}
-	public void setAssetName(String assetName) {
-		this.assetName = assetName;
 	}
 	public String getClassify() {
 		return classify;
@@ -93,16 +85,16 @@ public class StockItemNew {
 	public void setModel(String model) {
 		this.model = model;
 	}
-	public int getUsetype() {
+	public String getUsetype() {
 		return usetype;
 	}
-	public void setUsetype(int usetype) {
+	public void setUsetype(String usetype) {
 		this.usetype = usetype;
 	}
-	public int getCheckstate() {
+	public String getCheckstate() {
 		return checkstate;
 	}
-	public void setCheckstate(int checkstate) {
+	public void setCheckstate(String checkstate) {
 		this.checkstate = checkstate;
 	}
 	public String getDept() {
@@ -153,10 +145,10 @@ public class StockItemNew {
 	public void setGoodsShelves(String goodsShelves) {
 		this.goodsShelves = goodsShelves;
 	}
-	public Date getRegisterdate() {
+	public String getRegisterdate() {
 		return registerdate;
 	}
-	public void setRegisterdate(Date registerdate) {
+	public void setRegisterdate(String registerdate) {
 		this.registerdate = registerdate;
 	}
 	public String getRegistrant() {
@@ -164,12 +156,6 @@ public class StockItemNew {
 	}
 	public void setRegistrant(String registrant) {
 		this.registrant = registrant;
-	}
-	public String getRfidLabelnum() {
-		return rfidLabelnum;
-	}
-	public void setRfidLabelnum(String rfidLabelnum) {
-		this.rfidLabelnum = rfidLabelnum;
 	}
 	
 }

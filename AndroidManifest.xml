@@ -192,8 +192,8 @@
             android:name="com.gdht.itasset.OptionActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_option"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-            android:screenOrientation="sensor" >
+            android:screenOrientation="sensor"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" >
         </activity>
         <activity
             android:name="com.gdht.itasset.PlanListActivityBAK"
@@ -201,7 +201,7 @@
             android:label="@string/title_activity_option"
             android:screenOrientation="sensor" >
         </activity>
-                <activity
+        <activity
             android:name="com.gdht.itasset.PlanListActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_option"
@@ -213,14 +213,13 @@
             android:label="@string/title_activity_option"
             android:screenOrientation="sensor" >
         </activity>
-        
-                <activity
+        <activity
             android:name="com.gdht.itasset.ScanActivityNew"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_option"
             android:screenOrientation="sensor" >
         </activity>
-                        <activity
+        <activity
             android:name="com.gdht.itasset.ScanResultActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_option"
@@ -229,6 +228,11 @@
 
         <service android:name="com.gdht.itasset.version.VersionServiceIndex" >
         </service>
+
+        <activity
+            android:name="com.gdht.itasset.AssetDetailActivity"
+            android:label="@string/title_activity_asset_detail" >
+        </activity>
     </application>
 
 </manifest>

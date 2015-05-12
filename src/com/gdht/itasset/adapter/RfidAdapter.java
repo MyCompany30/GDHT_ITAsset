@@ -2,11 +2,14 @@ package com.gdht.itasset.adapter;
 
 import java.util.List;
 
+import com.gdht.itasset.AssetDetailActivity;
 import com.gdht.itasset.R;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
@@ -37,7 +40,7 @@ public class RfidAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup arg2) {
+	public View getView(final int position, View convertView, ViewGroup arg2) {
 		ViewHolder vh;
 		if(convertView == null) {
 			convertView = inflater.inflate(R.layout.item_rfid_list, null);
@@ -47,6 +50,17 @@ public class RfidAdapter extends BaseAdapter {
 		}
 		vh = (ViewHolder) convertView.getTag();
 		vh.rfid.setText(rfids.get(position));
+		convertView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String rfid = rfids.get(position);
+				Intent intent = new Intent();
+				intent.setClass(context, AssetDetailActivity.class);
+				intent.putExtra("rfid", rfid);
+				context.startActivity(intent);
+			}
+		});
 		return convertView;
 	}
 	
