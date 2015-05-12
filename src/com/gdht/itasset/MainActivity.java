@@ -1,51 +1,29 @@
 package com.gdht.itasset;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.util.ArrayList;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import com.gdht.itasset.asynctask.LoginAsyncTask;
-import com.gdht.itasset.http.HttpClientUtil;
-import com.gdht.itasset.utils.AppSharedPreferences;
-import com.gdht.itasset.version.VersionServiceIndex;
-
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.text.TextUtils;
+import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.gdht.itasset.asynctask.LoginAsyncTask;
+import com.gdht.itasset.utils.AppSharedPreferences;
 
 public class MainActivity extends Activity {
 	public static final String SETTINGS = "GDHT_ITASSET_SETTINGS";
@@ -83,6 +61,11 @@ public class MainActivity extends Activity {
 							Toast.LENGTH_LONG).show();
 					return;
 				}
+				
+//				Intent intent2 = new Intent();
+//				intent2.setClass(MainActivity.this, PlanListActivity.class);
+//				intent2.putExtra("planList", new ArrayList<String>());
+//				startActivity(intent2);
 				/*
 				 * if(TextUtils.isEmpty(ip.getText().toString())) { ipStr = new
 				 * AppSharedPreferences(MainActivity.this, "gdht").getIP();

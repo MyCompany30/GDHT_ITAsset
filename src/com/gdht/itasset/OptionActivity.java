@@ -1,13 +1,17 @@
 package com.gdht.itasset;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +26,7 @@ public class OptionActivity extends Activity {
 	private int maxGongLv = 30;
 	private ProgressDialog pd;
 	private AppSharedPreferences asp;
+	private AlertDialog ad;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -101,7 +106,8 @@ public class OptionActivity extends Activity {
 			break;
 		case R.id.gengxin:
 //			Toast.makeText(this, "gengxin", 0).show();
-			new RefreshDataSourceAt().execute("");
+//			new RefreshDataSourceAt().execute("");
+			initAd();
 			break;
 		}
 	}
@@ -140,6 +146,21 @@ public class OptionActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		asp.setGongLv(Integer.parseInt(gonglvEt.getText().toString().trim()));
+	}
+	
+	private void initAd() {
+		ad = new AlertDialog.Builder(this).create();
+		View convertView = LayoutInflater.from(this).inflate(R.layout.dialog_datasource_finish, null);
+		ImageView close = (ImageView) convertView.findViewById(R.id.close);
+		close.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				ad.dismiss();
+			}
+		});
+		ad.setView(convertView, 0, 0, 0, 0);
+		ad.show();
 	}
 	
 }

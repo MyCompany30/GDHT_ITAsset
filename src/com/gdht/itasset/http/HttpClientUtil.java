@@ -435,6 +435,7 @@ public class HttpClientUtil {
 			HttpResponse httpResponse = getHttpClient().execute(get);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = new String(EntityUtils.toString(httpResponse.getEntity()).getBytes(),"UTF-8");
+				Log.i("a", "result  = " +result);
 				jsonArray = new JSONArray(result);
 				for(int i = 0; i<jsonArray.length(); i++){
 					PlanAssetInfo planAssetInfo = new PlanAssetInfo();

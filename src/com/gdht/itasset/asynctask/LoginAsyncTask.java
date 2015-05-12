@@ -70,10 +70,7 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
 		
-//		Intent intent2 = new Intent();
-//		intent2.setClass(activity, PlanListActivity.class);
-//		intent2.putExtra("planList", dataList);
-//		activity.startActivity(intent2);
+
 		
 		//登陆成功进入主界面，失败返回登录界面
 		dialog.dismiss();
