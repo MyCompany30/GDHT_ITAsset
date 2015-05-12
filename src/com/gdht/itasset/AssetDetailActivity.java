@@ -79,7 +79,7 @@ public class AssetDetailActivity extends Activity {
 						tv12.setText(item.getGoodsShelves());
 						tv11.setText(item.getRegisterdate());
 						
-					}else if(item.equals("2")){
+					}else if(item.getUsetype().equals("2")){
 						//在运
 						AssetDetailActivity.this.setContentView(R.layout.activity_asset_detail_zy);
 						TextView rfidTv = (TextView)AssetDetailActivity.this.findViewById(R.id.rfid_code);
@@ -116,8 +116,10 @@ public class AssetDetailActivity extends Activity {
 						tv9.setText(item.getKeeper());
 						tv10.setText(item.getOffice());
 						tv11.setText(item.getRegisterdate());
-					}else{
+					}else if(item.getUsetype().equals("0")){
 						AssetDetailActivity.this.setContentView(R.layout.activity_asset_detail_ck);
+						TextView rfidTv = (TextView)AssetDetailActivity.this.findViewById(R.id.rfid_code);
+						rfidTv.setText(item.getRfidnumber());
 					}
 				}else{
 					Toast.makeText(AssetDetailActivity.this, "获取详情失败", Toast.LENGTH_SHORT).show();
