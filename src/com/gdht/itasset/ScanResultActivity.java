@@ -194,7 +194,7 @@ public class ScanResultActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(ScanResultActivity.this, ScanResultDetailActivity.class);
+				Intent intent = new Intent(ScanResultActivity.this, ScanResultDetailPYActivity.class);
 				intent.putExtra("type", "2");
 				intent.putExtra("planId", planId);
 				startActivity(intent);

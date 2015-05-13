@@ -82,7 +82,7 @@ public class ScanActivityNew extends Activity {
 		num1.setText("0");
 		num2 = (TextView) this.findViewById(R.id.num2);
 		num2.setText("0");
-		adapter = new RfidAdapter(this, rfidArray);
+		adapter = new RfidAdapter(this, rfidArray, null);
 		listView.setAdapter(adapter);
 		checkRFIDSDBService = new ScanCheckRFIDSDBService(this);
 		SharedPreferences loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS", Context.MODE_PRIVATE);

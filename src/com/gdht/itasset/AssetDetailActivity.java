@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 public class AssetDetailActivity extends Activity {
 	private ArrayList<StockItemNew> dataArray = null;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,8 +32,8 @@ public class AssetDetailActivity extends Activity {
 			protected Void doInBackground(Void... params) {
 				String rfid = getIntent().getStringExtra("rfid");
 				String planId = null;
-				if(getIntent().hasExtra("planid")) {
-					planId = getIntent().getStringExtra("planid");
+				if(getIntent().hasExtra("planId")) {
+					planId = getIntent().getStringExtra("planId");
 				}
 				dataArray = new HttpClientUtil(AssetDetailActivity.this).checkAssetByRfidOnly(AssetDetailActivity.this, rfid, planId);
 				
