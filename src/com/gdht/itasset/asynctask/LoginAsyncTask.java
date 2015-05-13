@@ -70,8 +70,6 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
 		
-
-		
 		//登陆成功进入主界面，失败返回登录界面
 		dialog.dismiss();
 		GlobalParams.username = name;

@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.gdht.itasset.eventbus.RefreshDatas;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.PlanDetail;
@@ -143,7 +142,9 @@ public class ScanResultActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				Toast.makeText(ScanResultActivity.this, "yipan", 0).show();
+				Intent intent = new Intent(ScanResultActivity.this, ScanResultDetailActivity.class);
+				intent.putExtra("type", "1");
+				startActivity(intent);
 			}
 		});
 		weipanBtn.setOnTouchListener(new OnTouchListener() {
@@ -163,7 +164,9 @@ public class ScanResultActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				Toast.makeText(ScanResultActivity.this, "weipan", 0).show();
+				Intent intent = new Intent(ScanResultActivity.this, ScanResultDetailActivity.class);
+				intent.putExtra("type", "0");
+				startActivity(intent);
 			}
 		});
 		panyingBtn.setOnTouchListener(new OnTouchListener() {
@@ -183,7 +186,9 @@ public class ScanResultActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				Toast.makeText(ScanResultActivity.this, "panying", 0).show();
+				Intent intent = new Intent(ScanResultActivity.this, ScanResultDetailActivity.class);
+				intent.putExtra("type", "2");
+				startActivity(intent);
 			}
 		});
 		pankuiBtn.setOnTouchListener(new OnTouchListener() {
@@ -203,7 +208,9 @@ public class ScanResultActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				Toast.makeText(ScanResultActivity.this, "yi盘亏pan", 0).show();
+				Intent intent = new Intent(ScanResultActivity.this, ScanResultDetailActivity.class);
+				intent.putExtra("type", "3");
+				startActivity(intent);
 			}
 		});
 	}
