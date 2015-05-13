@@ -18,10 +18,14 @@ public class RfidAdapter extends BaseAdapter {
 	private LayoutInflater inflater;
 	private Context context;
 	private List<String> rfids;
-	public RfidAdapter(Context context, List<String> rfids) {
+	private String planId;
+	public RfidAdapter(Context context, List<String> rfids, String planId) {
 		this.inflater = LayoutInflater.from(context);
 		this.context = context;
 		this.rfids = rfids;
+		if(planId != null){
+			this.planId = planId;
+		}
 	}
 	
 	@Override
@@ -58,6 +62,9 @@ public class RfidAdapter extends BaseAdapter {
 				Intent intent = new Intent();
 				intent.setClass(context, AssetDetailActivity.class);
 				intent.putExtra("rfid", rfid);
+				if(planId != null){
+					intent.putExtra("planId", planId);
+				}
 				context.startActivity(intent);
 			}
 		});

@@ -39,7 +39,7 @@ public class ScanResultDetailActivity extends Activity {
 			}
 			
 			protected void onPostExecute(Void result) {
-				adapter = new RfidAdapter(ScanResultDetailActivity.this, rfids);
+				adapter = new RfidAdapter(ScanResultDetailActivity.this, rfids, planId);
 				listView.setAdapter(adapter);
 			};
 			

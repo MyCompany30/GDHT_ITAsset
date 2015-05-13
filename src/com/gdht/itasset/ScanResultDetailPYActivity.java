@@ -51,7 +51,7 @@ public class ScanResultDetailPYActivity extends Activity {
 			}
 			
 			protected void onPostExecute(Void result) {
-				adapter = new RfidAdapter(ScanResultDetailPYActivity.this, rfids);
+				adapter = new RfidAdapter(ScanResultDetailPYActivity.this, rfids, planId);
 				listView.setAdapter(adapter);
 			};
 			
