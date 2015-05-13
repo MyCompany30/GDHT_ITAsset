@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,20 +14,21 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.gdht.itasset.adapter.GuideActivityPagerViewAdapter;
 import com.gdht.itasset.adapter.PlanListAdapterNew;
-<<<<<<< HEAD
-=======
+import com.gdht.itasset.db.service.LocalPlanResultService;
 import com.gdht.itasset.db.service.LocalPlanService;
 import com.gdht.itasset.db.service.LocalStockService;
->>>>>>> origin/master
 import com.gdht.itasset.http.HttpClientUtil;
+import com.gdht.itasset.pojo.LocalPlanResult;
 import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.StockItemNew;
 
@@ -42,13 +44,15 @@ public class PlanListActivity extends Activity {
 	private LinearLayout zzBtn, ypBtn;
 	private LocalStockService localStockService;
 	private LocalPlanService localPlanService;
-
+	private LocalPlanResultService localPlanResultService;
+	private AlertDialog ad;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_plan_list);
 		localStockService = new LocalStockService(this);
 		localPlanService = new LocalPlanService(this);
+		localPlanResultService = new LocalPlanResultService(this);
 		viewPager = (ViewPager) this.findViewById(R.id.viewPager);
 		zzBtn = (LinearLayout) this.findViewById(R.id.zhengzai);
 		ypBtn = (LinearLayout) this.findViewById(R.id.yipan);
@@ -185,7 +189,8 @@ public class PlanListActivity extends Activity {
 			// new RefreshAssetDataSourceAt().execute("");
 //			new RefreshPlanDataSourceAt().execute("");
 			new RefreshResultDataSourceAt().execute("");
-			// this.finish();s
+			// this.finish();
+//			initAd();
 			break;
 		case R.id.zhengzai:
 			viewPager.setCurrentItem(0);
@@ -276,7 +281,7 @@ public class PlanListActivity extends Activity {
 	}
 
 	private class RefreshResultDataSourceAt extends
-			AsyncTask<String, Integer, String> {
+			AsyncTask<String, Integer, Integer> {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -288,27 +293,26 @@ public class PlanListActivity extends Activity {
 		}
 
 		@Override
-		protected String doInBackground(String... arg0) {
-			 new HttpClientUtil(PlanListActivity.this)
+		protected Integer doInBackground(String... arg0) {
+			ArrayList<LocalPlanResult> lprs =  new HttpClientUtil(PlanListActivity.this)
 					.getAllCheckPlanInfo(PlanListActivity.this);
-//			if (pis == null) {
-//				return 0;
-//			} else {
-//				localPlanService.save(pis);
-//				return 1;
-//			}
-			return "";
+			if (lprs == null) {
+				return 0;
+			} else {
+				localPlanResultService.save(lprs);
+				return 1;
+			}
 		}
 
 		@Override
-		protected void onPostExecute(String result) {
+		protected void onPostExecute(Integer result) {
 			super.onPostExecute(result);
 			pd.dismiss();
-//			if (1 == result) {
-//				Toast.makeText(PlanListActivity.this, "盘点计划数据库更新完成！", 0).show();
-//			} else {
-//				Toast.makeText(PlanListActivity.this, "盘点计划数据库更新失败！", 0).show();
-//			}
+			if (1 == result) {
+				Toast.makeText(PlanListActivity.this, "盘点结果数据库更新完成！", 0).show();
+			} else {
+				Toast.makeText(PlanListActivity.this, "盘点结果数据库更新失败！", 0).show();
+			}
 		}
 	}
 
@@ -317,6 +321,30 @@ public class PlanListActivity extends Activity {
 		super.onDestroy();
 		localStockService.close();
 		localPlanService.close();
+		localPlanResultService.close();
+	}
+	
+	private void initAd() {
+		ad = new AlertDialog.Builder(this).create();
+		View convertView = LayoutInflater.from(this).inflate(R.layout.dialog_datasource_finish, null);
+		ImageView close = (ImageView) convertView.findViewById(R.id.close);
+		ImageView sure = (ImageView) convertView.findViewById(R.id.sure);
+		close.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				ad.dismiss();
+			}
+		});
+		sure.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				ad.dismiss();
+			}
+		});
+		ad.setView(convertView, 0, 0, 0, 0);
+		ad.show();
 	}
 
 }

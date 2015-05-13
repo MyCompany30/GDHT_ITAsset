@@ -28,6 +28,7 @@ import com.gdht.itasset.R;
 import com.gdht.itasset.pojo.BuMenInfo;
 import com.gdht.itasset.pojo.CangKuInfo;
 import com.gdht.itasset.pojo.DeptInfo;
+import com.gdht.itasset.pojo.LocalPlanResult;
 import com.gdht.itasset.pojo.PlanDetail;
 import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.StockItem;
@@ -1231,46 +1232,81 @@ public class HttpClientUtil {
 		return arrayList;
 	}
 	
-	public String getAllCheckPlanInfo(Activity activity) {
-		ArrayList<PlanInfo> arrayList = null;
+	public ArrayList<LocalPlanResult> getAllCheckPlanInfo(Activity activity) {
+		ArrayList<LocalPlanResult> arrayList = null;
+		LocalPlanResult result;
 		JSONObject jsonObject = null;
 		JSONArray jsonArray = null;
-		String result = null;
+		String resultStr = null;
 		String uri = null;
 		uri = activity.getResources().getString(R.string.url_getAllCheckPlanInfo);
 		HttpPost get = new HttpPost(ip + uri);
 		try {
 			HttpResponse httpResponse = getHttpClient().execute(get);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
-				result = new String(EntityUtils.toString(httpResponse.getEntity()).getBytes(),"UTF-8");
-				Log.i("a", "json = " + result);
-				arrayList = new ArrayList<PlanInfo>();
-				jsonArray = new JSONArray(result);
-//				for(int i = 0; i<jsonArray.length(); i++){
-//					PlanInfo planInfo = new PlanInfo();
-//					jsonObject = jsonArray.getJSONObject(i);
-//					Log.i("a", "jo = " + jsonObject.toString());
-//					planInfo.setId(jsonObject.getString("id"));
-//					planInfo.setTitle(jsonObject.getString("title"));
-//					planInfo.setPersons(jsonObject.getString("persons"));
-//					planInfo.setType(jsonObject.getString("type"));
-//					planInfo.setDepts(jsonObject.getString("depts"));
-//					planInfo.setNumber(jsonObject.getInt("number"));
-//					planInfo.setPlanstate(jsonObject.getString("planstate"));
-//					planInfo.setDetail(jsonObject.getString("detail"));
-//					planInfo.setDeptcode(jsonObject.getString("deptcode"));
-//					planInfo.setQdtime(jsonObject.getString("qdtime"));
-//					planInfo.setWctime(jsonObject.getString("wctime"));
-//
-//					arrayList.add(planInfo);
-//				}
+				resultStr = new String(EntityUtils.toString(httpResponse.getEntity()).getBytes(),"UTF-8");
+				Log.i("a", "json = " + resultStr);
+				arrayList = new ArrayList<LocalPlanResult>();
+				jsonArray = new JSONArray(resultStr);
+				for(int i = 0; i<jsonArray.length(); i++){
+					PlanInfo planInfo = new PlanInfo();
+					result = new LocalPlanResult();
+					jsonObject = jsonArray.getJSONObject(i);
+					Log.i("a", "jo = " + jsonObject.toString());
+					result.setId(jsonObject.getString("id"));
+					result.setTitle(jsonObject.getString("title"));
+					result.setDepts(jsonObject.getString("depts"));
+					result.setPersons(jsonObject.getString("persons"));
+					result.setNumber(String.valueOf(jsonObject.getInt("number")));
+					result.setDetail(jsonObject.getString("detail"));
+					result.setPlanstate(jsonObject.getString("planstate"));
+					result.setQdtime(jsonObject.getString("qdtime"));
+					result.setWctime(jsonObject.getString("wctime"));
+					result.setWcr(jsonObject.getString("wcr"));
+					result.setYp(jsonObject.getString("yp"));
+					result.setWp(jsonObject.getString("wp"));
+					result.setPk(jsonObject.getString("pk"));
+					result.setPy(jsonObject.getString("py"));
+					result.setDeptcode(jsonObject.getString("deptcode"));
+					result.setType(jsonObject.getString("type"));
+					JSONObject rfidObject = jsonObject.getJSONObject("rfid");
+					JSONArray ypJa = rfidObject.getJSONArray("yp");
+					JSONArray wpJa = rfidObject.getJSONArray("wp");
+					JSONArray pyJa = rfidObject.getJSONArray("py");
+					JSONArray pkja = rfidObject.getJSONArray("pk");
+					if(ypJa.length() > 0) {
+						String str = ypJa.toString();
+						str = str.replace("[", "");
+						str = str.replace("]", "");
+						result.setYpRfids(str);
+					}
+					if(wpJa.length() > 0) {
+						String str = wpJa.toString();
+						str = str.replace("[", "");
+						str = str.replace("]", "");
+						result.setWpRfids(str);
+					}
+					if(pyJa.length() > 0) {
+						String str = pyJa.toString();
+						str = str.replace("[", "");
+						str = str.replace("]", "");
+						result.setPyRfids(str);
+					}
+					if(pkja.length() > 0) {
+						String str = pkja.toString();
+						str = str.replace("[", "");
+						str = str.replace("]", "");
+						result.setPkRfids(str);
+					}
+					arrayList.add(result);
+				}
 				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
-		return "";
+		return arrayList;
 	}
 }
 

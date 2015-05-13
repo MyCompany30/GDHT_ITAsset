@@ -36,6 +36,10 @@ public class GDHTOpenHelper extends SQLiteOpenHelper {
 		db.execSQL("create table if not exists local_plan("
 				+ "idx integer primary key autoincrement, id text, title text,type text, depts text, number text, planstate text, detail text, deptcode text, qdtime text, wctime text, persons text"
 				+ ")");
+		db.execSQL("create table if not exists local_planresult("
+				+ "idx integer primary key autoincrement, id text, title text,depts text, persons text, number text, detail text, planstate text, qdtime text, wctime text, wcr text, yp text,"
+				+ "wp text, pk text, py text, deptcode text, type text, yprfids text, wprfids text, pkrfids text, pyrfids text"
+				+ ")");
 		db.execSQL("create table if not exists loginLog("
 				+ "idx integer primary key autoincrement, login_name text, login_time text"
 				+ ")");
