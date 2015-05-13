@@ -69,6 +69,8 @@ public class AssetDetailActivity extends Activity {
 							checkState = "盘盈";
 						}else if(item.getCheckstate().equals("3")){
 							checkState = "盘亏";
+						}else{
+							checkState = "";
 						}
 						tv5.setText(checkState);
 						tv6.setText(item.getBrand());

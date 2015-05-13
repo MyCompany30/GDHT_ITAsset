@@ -150,6 +150,7 @@ public class ScanResultActivity extends Activity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(ScanResultActivity.this, ScanResultDetailActivity.class);
 				intent.putExtra("type", "1");
+				intent.putExtra("planId", planId);
 				startActivity(intent);
 			}
 		});
@@ -172,6 +173,7 @@ public class ScanResultActivity extends Activity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(ScanResultActivity.this, ScanResultDetailActivity.class);
 				intent.putExtra("type", "0");
+				intent.putExtra("planId", planId);
 				startActivity(intent);
 			}
 		});
@@ -194,6 +196,7 @@ public class ScanResultActivity extends Activity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(ScanResultActivity.this, ScanResultDetailActivity.class);
 				intent.putExtra("type", "2");
+				intent.putExtra("planId", planId);
 				startActivity(intent);
 			}
 		});
@@ -216,6 +219,7 @@ public class ScanResultActivity extends Activity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(ScanResultActivity.this, ScanResultDetailActivity.class);
 				intent.putExtra("type", "3");
+				intent.putExtra("planId", planId);
 				startActivity(intent);
 			}
 		});
