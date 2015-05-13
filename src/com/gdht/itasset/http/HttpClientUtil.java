@@ -1231,7 +1231,47 @@ public class HttpClientUtil {
 		return arrayList;
 	}
 	
-	
+	public String getAllCheckPlanInfo(Activity activity) {
+		ArrayList<PlanInfo> arrayList = null;
+		JSONObject jsonObject = null;
+		JSONArray jsonArray = null;
+		String result = null;
+		String uri = null;
+		uri = activity.getResources().getString(R.string.url_getAllCheckPlanInfo);
+		HttpPost get = new HttpPost(ip + uri);
+		try {
+			HttpResponse httpResponse = getHttpClient().execute(get);
+			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				result = new String(EntityUtils.toString(httpResponse.getEntity()).getBytes(),"UTF-8");
+				Log.i("a", "json = " + result);
+				arrayList = new ArrayList<PlanInfo>();
+				jsonArray = new JSONArray(result);
+//				for(int i = 0; i<jsonArray.length(); i++){
+//					PlanInfo planInfo = new PlanInfo();
+//					jsonObject = jsonArray.getJSONObject(i);
+//					Log.i("a", "jo = " + jsonObject.toString());
+//					planInfo.setId(jsonObject.getString("id"));
+//					planInfo.setTitle(jsonObject.getString("title"));
+//					planInfo.setPersons(jsonObject.getString("persons"));
+//					planInfo.setType(jsonObject.getString("type"));
+//					planInfo.setDepts(jsonObject.getString("depts"));
+//					planInfo.setNumber(jsonObject.getInt("number"));
+//					planInfo.setPlanstate(jsonObject.getString("planstate"));
+//					planInfo.setDetail(jsonObject.getString("detail"));
+//					planInfo.setDeptcode(jsonObject.getString("deptcode"));
+//					planInfo.setQdtime(jsonObject.getString("qdtime"));
+//					planInfo.setWctime(jsonObject.getString("wctime"));
+//
+//					arrayList.add(planInfo);
+//				}
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return "";
+	}
 }
 
 

@@ -179,8 +179,9 @@ public class PlanListActivity extends Activity {
 	public void btnClick(View view) {
 		switch (view.getId()) {
 		case R.id.back:
-//			new RefreshAssetDataSourceAt().execute("");
-			new RefreshPlanDataSourceAt().execute("");
+			// new RefreshAssetDataSourceAt().execute("");
+//			new RefreshPlanDataSourceAt().execute("");
+			new RefreshResultDataSourceAt().execute("");
 			// this.finish();s
 			break;
 		case R.id.zhengzai:
@@ -249,7 +250,8 @@ public class PlanListActivity extends Activity {
 
 		@Override
 		protected Integer doInBackground(String... arg0) {
-			ArrayList<PlanInfo> pis =  new HttpClientUtil(PlanListActivity.this).getAllCheckPlan(PlanListActivity.this);
+			ArrayList<PlanInfo> pis = new HttpClientUtil(PlanListActivity.this)
+					.getAllCheckPlan(PlanListActivity.this);
 			if (pis == null) {
 				return 0;
 			} else {
@@ -267,6 +269,43 @@ public class PlanListActivity extends Activity {
 			} else {
 				Toast.makeText(PlanListActivity.this, "盘点计划数据库更新失败！", 0).show();
 			}
+		}
+	}
+
+	private class RefreshResultDataSourceAt extends
+			AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pd = new ProgressDialog(PlanListActivity.this);
+			pd.setTitle("提示");
+			pd.setMessage("盘点结果数据库更新中...");
+			pd.setCancelable(true);
+			pd.show();
+		}
+
+		@Override
+		protected String doInBackground(String... arg0) {
+			 new HttpClientUtil(PlanListActivity.this)
+					.getAllCheckPlanInfo(PlanListActivity.this);
+//			if (pis == null) {
+//				return 0;
+//			} else {
+//				localPlanService.save(pis);
+//				return 1;
+//			}
+			return "";
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			pd.dismiss();
+//			if (1 == result) {
+//				Toast.makeText(PlanListActivity.this, "盘点计划数据库更新完成！", 0).show();
+//			} else {
+//				Toast.makeText(PlanListActivity.this, "盘点计划数据库更新失败！", 0).show();
+//			}
 		}
 	}
 
