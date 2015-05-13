@@ -1,5 +1,7 @@
 package com.gdht.itasset;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -7,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gdht.itasset.http.HttpClientUtil;
+import com.gdht.itasset.pojo.StockItemNew;
 import com.gdht.itasset.utils.AppSharedPreferences;
 import com.gdht.itasset.widget.WaitingDialog;
 
@@ -129,13 +133,17 @@ public class OptionActivity extends Activity {
 		@Override
 		protected String doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
-			return new HttpClientUtil(OptionActivity.this).getAssetInfos(OptionActivity.this);
+//			return new HttpClientUtil(OptionActivity.this).getAssetInfos(OptionActivity.this);
 //			return new HttpClientUtil(OptionActivity.this).getAllCheckPlan(OptionActivity.this);
+			return "";
 		}
 		
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
+//			for(StockItemNew s : result) {
+//				Log.i("a", "s = " + s.toString());
+//			}
 			pd.dismiss();
 		}
 	}
