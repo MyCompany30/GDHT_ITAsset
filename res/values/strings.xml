@@ -36,6 +36,8 @@
     <string name="url_isHasRfid">/assetmanager/isHasRfid.s</string>
     <string name="url_rfidfilter">/moveCheck/rfidfilter.s</string>
     <string name="url_lastAppVersion">/app/lastAppVersion.s</string>
+    <string name="url_getAssetInfos">/moveCheck/getAssetInfos.s</string>
+    <string name="url_getAllCheckPlan">/moveCheck/getAllCheckPlan.s</string>
     <string name="submit"> 确 定 </string>
     <string name="title_activity_plan">盘点计划</string>
     <string name="title_activity_scan">扫描</string>
