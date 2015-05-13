@@ -85,5 +85,6 @@
     <string name="title_activity_plan_list">PlanListActivity</string>
     <string name="title_activity_asset_detail">AssetDetailActivity</string>
     <string name="title_activity_scan_result_detail">ScanResultDetailActivity</string>
+    <string name="title_activity_scan_result_detail_py">ScanResultDetailPYActivity</string>
 
 </resources>
