@@ -236,6 +236,28 @@ public class ScanResultActivity extends Activity {
 			startActivity(intent);
 			break;
 		case R.id.finish:
+			new AsyncTask<Void, Void, Boolean>() {
+				WaitingDialog dialog = new WaitingDialog(ScanResultActivity.this);
+				protected void onPreExecute() {
+					dialog.show();
+				};
+
+				@Override
+				protected Boolean doInBackground(Void... params) {
+					
+					return new HttpClientUtil(ScanResultActivity.this).finishInventoryPlan(ScanResultActivity.this, planId);
+				}
+				
+				protected void onPostExecute(Boolean result) {
+					dialog.dismiss();
+					if(result){
+						Toast.makeText(ScanResultActivity.this, "完成计划请求成功", Toast.LENGTH_SHORT).show();
+						ScanResultActivity.this.finish();
+					}else{
+						Toast.makeText(ScanResultActivity.this, "完成计划请求失败", Toast.LENGTH_SHORT).show();
+					}
+				};
+			}.execute();
 			break;
 		}
 	}

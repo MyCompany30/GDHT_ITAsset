@@ -21,19 +21,16 @@ import android.widget.Toast;
 
 import com.gdht.itasset.adapter.GuideActivityPagerViewAdapter;
 import com.gdht.itasset.adapter.PlanListAdapterNew;
-<<<<<<< HEAD
-=======
 import com.gdht.itasset.db.service.LocalPlanService;
 import com.gdht.itasset.db.service.LocalStockService;
->>>>>>> origin/master
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.StockItemNew;
 
 public class PlanListActivity extends Activity {
 	private ViewPager viewPager;
-	private List<PlanInfo> zzPlanInfos = new ArrayList<PlanInfo>();
-	private List<PlanInfo> ypPlanInfos = new ArrayList<PlanInfo>();
+	private List<PlanInfo> zzPlanInfos = null;
+	private List<PlanInfo> ypPlanInfos = null;
 	private ArrayList<View> views;
 	private LayoutInflater inflater;
 	private ListView zzListView, ypListView;
@@ -42,20 +39,43 @@ public class PlanListActivity extends Activity {
 	private LinearLayout zzBtn, ypBtn;
 	private LocalStockService localStockService;
 	private LocalPlanService localPlanService;
-
+	private String name;
+	private ArrayList<PlanInfo> plans;
+	private int currentSelected;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_plan_list);
-		localStockService = new LocalStockService(this);
-		localPlanService = new LocalPlanService(this);
+		name = getIntent().getStringExtra("name");
 		viewPager = (ViewPager) this.findViewById(R.id.viewPager);
 		zzBtn = (LinearLayout) this.findViewById(R.id.zhengzai);
 		ypBtn = (LinearLayout) this.findViewById(R.id.yipan);
 		inflater = LayoutInflater.from(this);
-		initPagerView();
 	}
-
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		zzPlanInfos = new ArrayList<PlanInfo>();
+		ypPlanInfos = new ArrayList<PlanInfo>();
+		localStockService = new LocalStockService(this);
+		localPlanService = new LocalPlanService(this);
+		initPagerView();
+		switch (currentSelected) {
+		case 0:
+			currentSelected = 0;
+			zzBtn.setBackgroundResource(R.drawable.tab_selected);
+			ypBtn.setBackgroundResource(R.drawable.tab_normal);
+			break;
+		case 1:
+			currentSelected = 1;
+			zzBtn.setBackgroundResource(R.drawable.tab_normal);
+			ypBtn.setBackgroundResource(R.drawable.tab_selected);
+			break;
+		}
+		
+		viewPager.setCurrentItem(currentSelected);
+	}
 	private void initPagerView() {
 		views = new ArrayList<View>();
 		View view = inflater.inflate(R.layout.activity_plan_views, null);
@@ -120,10 +140,12 @@ public class PlanListActivity extends Activity {
 			public void onPageSelected(int arg0) {
 				switch (arg0) {
 				case 0:
+					currentSelected = 0;
 					zzBtn.setBackgroundResource(R.drawable.tab_selected);
 					ypBtn.setBackgroundResource(R.drawable.tab_normal);
 					break;
 				case 1:
+					currentSelected = 1;
 					zzBtn.setBackgroundResource(R.drawable.tab_normal);
 					ypBtn.setBackgroundResource(R.drawable.tab_selected);
 					break;
@@ -148,14 +170,14 @@ public class PlanListActivity extends Activity {
 	private class GetPlanListAt extends AsyncTask<String, Integer, String> {
 		@Override
 		protected String doInBackground(String... arg0) {
+			plans = new HttpClientUtil(PlanListActivity.this).getPlans(PlanListActivity.this, name);
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
-			ArrayList<PlanInfo> plans = (ArrayList<PlanInfo>) getIntent()
-					.getSerializableExtra("planList");
+			
 			for (int i = 0; i < plans.size(); i++) {
 				if (plans.get(i).getPlanstate().equals("0")) {
 					// 已完成
@@ -168,12 +190,10 @@ public class PlanListActivity extends Activity {
 			// PlanInfo pi = new PlanInfo();
 			// pi.setId("aaaa");
 			// zzPlanInfos.add(pi);
-			zzAdapter = new PlanListAdapterNew(PlanListActivity.this,
-					zzPlanInfos);
+			zzAdapter = new PlanListAdapterNew(PlanListActivity.this, zzPlanInfos);
 			zzListView.setAdapter(zzAdapter);
 
-			ypAdapter = new PlanListAdapterNew(PlanListActivity.this,
-					ypPlanInfos);
+			ypAdapter = new PlanListAdapterNew(PlanListActivity.this, ypPlanInfos);
 			ypListView.setAdapter(ypAdapter);
 		}
 

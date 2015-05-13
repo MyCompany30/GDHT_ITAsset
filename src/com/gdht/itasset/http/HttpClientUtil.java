@@ -153,8 +153,6 @@ public class HttpClientUtil {
 				if(Integer.parseInt(result) > 0){
 				 	return true;
 				}
-			}else{
-				return false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -188,12 +186,8 @@ public class HttpClientUtil {
 				if(result.equals("1")){
 				 	return true;
 				}
-			}else{
-				Toast.makeText(activity, "消息异常，状态码："+httpResponse.getStatusLine().getStatusCode(), Toast.LENGTH_SHORT).show();
-				return false;
 			}
 		} catch (Exception e) {
-			Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 			return false;
 		}

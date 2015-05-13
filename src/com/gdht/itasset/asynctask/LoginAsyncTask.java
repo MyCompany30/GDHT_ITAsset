@@ -62,7 +62,7 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 		loginFlag = new HttpClientUtil(activity).login(activity,name,pwd,tm.getDeviceId(),"IT资产移动巡检", params[2]);
 		//登录成功获取查询盘点计划中指定的盘点人是自己的盘点计划
 		if(loginFlag!=null && loginFlag.equals("登录成功")){
-			dataList = new HttpClientUtil(activity).getPlans(activity, name);
+			//dataList = new HttpClientUtil(activity).getPlans(activity, name);
 		}
 		return loginFlag;
 	}
@@ -84,6 +84,7 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 				Intent intent = new Intent();
 				intent.setClass(activity, PlanListActivity.class);
 				intent.putExtra("planList", dataList);
+				intent.putExtra("name", name);
 				activity.startActivity(intent);
 			}else if(result.equals("用户名或密码错误")){
 				Toast.makeText(activity, "用户名或密码错误", Toast.LENGTH_SHORT).show();

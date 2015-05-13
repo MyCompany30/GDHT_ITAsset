@@ -29,6 +29,15 @@ public class ScanResultDetailActivity extends Activity {
 		titleTv = (TextView)findViewById(R.id.title);
 		listView = (ListView)findViewById(R.id.listView);
 		type = getIntent().getStringExtra("type");
+		if(type.equals("0")){
+			titleTv.setText("未盘资产");
+		}else if(type.equals("1")){
+			titleTv.setText("已盘资产");
+		}else if(type.equals("2")){
+			titleTv.setText("盘盈资产");
+		}else if(type.equals("3")){
+			titleTv.setText("盘亏资产");
+		}
 		planId = getIntent().getStringExtra("planId");
 		new AsyncTask<Void, Void, Void>() {
 
