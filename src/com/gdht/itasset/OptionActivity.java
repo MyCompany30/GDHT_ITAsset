@@ -133,8 +133,9 @@ public class OptionActivity extends Activity {
 		@Override
 		protected String doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
-			return new HttpClientUtil(OptionActivity.this).getAssetInfos(OptionActivity.this);
+//			return new HttpClientUtil(OptionActivity.this).getAssetInfos(OptionActivity.this);
 //			return new HttpClientUtil(OptionActivity.this).getAllCheckPlan(OptionActivity.this);
+			return "";
 		}
 		
 		@Override

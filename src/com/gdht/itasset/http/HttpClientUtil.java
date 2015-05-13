@@ -1129,10 +1129,10 @@ public class HttpClientUtil {
 	 * 批量获取资产详情
 	 */
 	@SuppressWarnings("null")
-	public synchronized ArrayList<StockItemNew> getAllCheckPlan(Activity activity){
+	public synchronized ArrayList<StockItemNew> getAssetInfos(Activity activity){
 		String uri = null;
 		ArrayList<StockItemNew> dataArray = null;
-		uri = activity.getResources().getString(R.string.url_getAllCheckPlan);
+		uri = activity.getResources().getString(R.string.url_getAssetInfos);
 		HttpPost post = new HttpPost(ip + uri);
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
 		HttpEntity entity = null;
@@ -1147,7 +1147,7 @@ public class HttpClientUtil {
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				dataArray = new ArrayList<StockItemNew>();
 				String result = EntityUtils.toString(httpResponse.getEntity());
-				Log.i("a", "getAllCheckPlan = " + result);
+				Log.i("a", "getAssetInfos = " + result);
 				JSONArray jsonArray = new JSONArray(result);
 				for(int i = 0; i < jsonArray.length(); i++){
 					JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -1189,38 +1189,46 @@ public class HttpClientUtil {
 		return dataArray;
 	}
 	
-	public String getAssetInfos(Activity activity) {
-		List<ZiChanFenLeiInfo> infos = new ArrayList<ZiChanFenLeiInfo>();
-		String uri = null;
-		String result = null;
+	public ArrayList<PlanInfo> getAllCheckPlan(Activity activity) {
+		ArrayList<PlanInfo> arrayList = null;
 		JSONObject jsonObject = null;
 		JSONArray jsonArray = null;
-		uri = activity.getResources().getString(
-				R.string.url_getAssetInfos);
-		HttpPost post = new HttpPost(ip + uri);
-		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
-		HttpEntity entity = null;
+		String result = null;
+		String uri = null;
+		uri = activity.getResources().getString(R.string.url_getAllCheckPlan);
+		HttpPost get = new HttpPost(ip + uri);
 		try {
-			entity = new UrlEncodedFormEntity(pairs, "UTF-8");
-			post.setEntity(entity);
-			HttpResponse httpResponse = getHttpClient().execute(post);
-			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-				result = EntityUtils.toString(httpResponse.getEntity());
-				Log.i("a", "资产信息 = " + result);
-//				jsonArray = new JSONArray(result);
-//				for (int i = 0; i < jsonArray.length(); i++) {
-//					jsonObject = jsonArray.getJSONObject(i);
-//					// Log.i("a", "value = " + jsonObject.getString("value"));
-//					ZiChanFenLeiInfo info = new ZiChanFenLeiInfo();
-//					info.setKey(jsonObject.getString("key"));
-//					info.setValue(jsonObject.getString("value"));
-//					infos.add(info);
-//				}
+			HttpResponse httpResponse = getHttpClient().execute(get);
+			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				result = new String(EntityUtils.toString(httpResponse.getEntity()).getBytes(),"UTF-8");
+				Log.i("a", "json = " + result);
+				arrayList = new ArrayList<PlanInfo>();
+				jsonArray = new JSONArray(result);
+				for(int i = 0; i<jsonArray.length(); i++){
+					PlanInfo planInfo = new PlanInfo();
+					jsonObject = jsonArray.getJSONObject(i);
+					Log.i("a", "jo = " + jsonObject.toString());
+					planInfo.setId(jsonObject.getString("id"));
+					planInfo.setTitle(jsonObject.getString("title"));
+					planInfo.setPersons(jsonObject.getString("persons"));
+					planInfo.setType(jsonObject.getString("type"));
+					planInfo.setDepts(jsonObject.getString("depts"));
+					planInfo.setNumber(jsonObject.getInt("number"));
+					planInfo.setPlanstate(jsonObject.getString("planstate"));
+					planInfo.setDetail(jsonObject.getString("detail"));
+					planInfo.setDeptcode(jsonObject.getString("deptcode"));
+					planInfo.setQdtime(jsonObject.getString("qdtime"));
+					planInfo.setWctime(jsonObject.getString("wctime"));
+
+					arrayList.add(planInfo);
+				}
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		return "";
+		return arrayList;
 	}
 	
 	

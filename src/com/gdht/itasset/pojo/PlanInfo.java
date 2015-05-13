@@ -17,6 +17,7 @@ public class PlanInfo implements Serializable{
 	private String deptcode;//仓库部门的code
 	private String qdtime;//启动日期
 	private String wctime;//完成日期
+	private String persons;  //所属人
 	public String getId() {
 		return id;
 	}
@@ -79,6 +80,20 @@ public class PlanInfo implements Serializable{
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public String getPersons() {
+		return persons;
+	}
+	public void setPersons(String persons) {
+		this.persons = persons;
+	}
+	@Override
+	public String toString() {
+		return "PlanInfo [id=" + id + ", title=" + title + ", type=" + type
+				+ ", depts=" + depts + ", number=" + number + ", planstate="
+				+ planstate + ", detail=" + detail + ", deptcode=" + deptcode
+				+ ", qdtime=" + qdtime + ", wctime=" + wctime + ", persons="
+				+ persons + "]";
 	}
 	
 	
