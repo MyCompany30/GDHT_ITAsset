@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,7 +20,9 @@ import android.widget.ListView;
 
 import com.gdht.itasset.adapter.GuideActivityPagerViewAdapter;
 import com.gdht.itasset.adapter.PlanListAdapterNew;
+import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.PlanInfo;
+import com.gdht.itasset.pojo.StockItemNew;
 
 public class PlanListActivity extends Activity {
 	private ViewPager viewPager;
@@ -195,12 +198,15 @@ public class PlanListActivity extends Activity {
 		protected String doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
 			return new HttpClientUtil(PlanListActivity.this).getAssetInfos(PlanListActivity.this);
-//			return new HttpClientUtil(OptionActivity.this).getAllCheckPlan(OptionActivity.this);
+//			return new HttpClientUtil(PlanListActivity.this).getAllCheckPlan(PlanListActivity.this);
 		}
 		
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
+//			for(StockItemNew s : result) {
+//				Log.i("a", "s = " + s.toString());
+//			}
 			pd.dismiss();
 		}
 	}

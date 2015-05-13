@@ -1123,38 +1123,70 @@ public class HttpClientUtil {
 		return result;
 	}
 	
-	public String getAllCheckPlan(Activity activity) {
-		List<ZiChanFenLeiInfo> infos = new ArrayList<ZiChanFenLeiInfo>();
+	
+	
+	/**
+	 * 批量获取资产详情
+	 */
+	@SuppressWarnings("null")
+	public synchronized ArrayList<StockItemNew> getAllCheckPlan(Activity activity){
 		String uri = null;
-		String result = null;
-		JSONObject jsonObject = null;
-		JSONArray jsonArray = null;
-		uri = activity.getResources().getString(
-				R.string.url_getAllCheckPlan);
+		ArrayList<StockItemNew> dataArray = null;
+		uri = activity.getResources().getString(R.string.url_getAllCheckPlan);
 		HttpPost post = new HttpPost(ip + uri);
-		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
 		HttpEntity entity = null;
 		try {
-			entity = new UrlEncodedFormEntity(pairs, "UTF-8");
-			post.setEntity(entity);
+			entity = new UrlEncodedFormEntity(formparams, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+		post.setEntity(entity);		
+		try {
 			HttpResponse httpResponse = getHttpClient().execute(post);
-			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-				result = EntityUtils.toString(httpResponse.getEntity());
-				Log.i("a", "盘点计划 = " + result);
-//				jsonArray = new JSONArray(result);
-//				for (int i = 0; i < jsonArray.length(); i++) {
-//					jsonObject = jsonArray.getJSONObject(i);
-//					// Log.i("a", "value = " + jsonObject.getString("value"));
-//					ZiChanFenLeiInfo info = new ZiChanFenLeiInfo();
-//					info.setKey(jsonObject.getString("key"));
-//					info.setValue(jsonObject.getString("value"));
-//					infos.add(info);
-//				}
+			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				dataArray = new ArrayList<StockItemNew>();
+				String result = EntityUtils.toString(httpResponse.getEntity());
+				Log.i("a", "getAllCheckPlan = " + result);
+				JSONArray jsonArray = new JSONArray(result);
+				for(int i = 0; i < jsonArray.length(); i++){
+					JSONObject jsonObject = jsonArray.getJSONObject(i);
+					StockItemNew item = new StockItemNew();
+					item.setAssetChecklistId(jsonObject.getString("assetChecklistId").equals("null")?null:jsonObject.getString("assetChecklistId"));
+					item.setAssetCheckplanId(jsonObject.getString("assetCheckplanId").equals("null")?null:jsonObject.getString("assetCheckplanId"));
+					item.setAssetInfoId(jsonObject.getString("assetInfoId").equals("null")?null:jsonObject.getString("assetInfoId"));
+					item.setClassify(jsonObject.getString("classify").equals("null")?null:jsonObject.getString("classify"));
+					item.setType(jsonObject.getString("type").equals("null")?null:jsonObject.getString("type"));
+					item.setRfidnumber(jsonObject.getString("rfidnumber").equals("null")?null:jsonObject.getString("rfidnumber"));
+					item.setBarnumber(jsonObject.getString("barnumber").equals("null")?null:jsonObject.getString("barnumber"));
+					item.setQrnumber(jsonObject.getString("qrnumber").equals("null")?null:jsonObject.getString("qrnumber"));
+					item.setBrand(jsonObject.getString("brand").equals("null")?null:jsonObject.getString("brand"));
+					item.setModel(jsonObject.getString("model").equals("null")?null:jsonObject.getString("model"));
+					item.setUsetype(jsonObject.getString("usetype").equals("null")?null:jsonObject.getString("usetype"));
+					item.setCheckstate(jsonObject.getString("checkstate").equals("null")?null:jsonObject.getString("checkstate"));
+					item.setDept(jsonObject.getString("dept").equals("null")?null:jsonObject.getString("dept"));
+					item.setDetil(jsonObject.getString("detil").equals("null")?null:jsonObject.getString("detil"));
+					item.setId(jsonObject.getString("id").equals("null")?null:jsonObject.getString("id"));
+					item.setKeeper(jsonObject.getString("keeper").equals("null")?null:jsonObject.getString("keeper"));
+					item.setName(jsonObject.getString("name").equals("null")?null:jsonObject.getString("name"));
+					item.setOffice(jsonObject.getString("office").equals("null")?null:jsonObject.getString("office"));
+					item.setWarehouseArea(jsonObject.getString("warehouseArea").equals("null")?null:jsonObject.getString("warehouseArea"));
+					item.setGoodsShelves(jsonObject.getString("goodsShelves").equals("null")?null:jsonObject.getString("goodsShelves"));
+					item.setRegisterdate(jsonObject.getString("registerdate").equals("null")?null:jsonObject.getString("registerdate"));
+					item.setRegistrant(jsonObject.getString("registrant").equals("null")?null:jsonObject.getString("registrant"));
+					
+					dataArray.add(item);
+				}
+				
+			}else{
+				//Toast.makeText(activity, "消息异常，状态码："+httpResponse.getStatusLine().getStatusCode(), Toast.LENGTH_SHORT).show();
 			}
 		} catch (Exception e) {
+			//Toast.makeText(activity, "网络异常", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
+			return null;
 		}
-		return "";
+		return dataArray;
 	}
 	
 	public String getAssetInfos(Activity activity) {

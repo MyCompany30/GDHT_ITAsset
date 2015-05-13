@@ -157,5 +157,19 @@ public class StockItemNew {
 	public void setRegistrant(String registrant) {
 		this.registrant = registrant;
 	}
+	@Override
+	public String toString() {
+		return "StockItemNew [assetChecklistId=" + assetChecklistId
+				+ ", assetCheckplanId=" + assetCheckplanId + ", assetInfoId="
+				+ assetInfoId + ", classify=" + classify + ", type=" + type
+				+ ", rfidnumber=" + rfidnumber + ", barnumber=" + barnumber
+				+ ", qrnumber=" + qrnumber + ", brand=" + brand + ", model="
+				+ model + ", usetype=" + usetype + ", checkstate=" + checkstate
+				+ ", dept=" + dept + ", detil=" + detil + ", id=" + id
+				+ ", keeper=" + keeper + ", name=" + name + ", office="
+				+ office + ", warehouseArea=" + warehouseArea
+				+ ", goodsShelves=" + goodsShelves + ", registerdate="
+				+ registerdate + ", registrant=" + registrant + "]";
+	}
 	
 }
