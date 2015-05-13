@@ -94,6 +94,12 @@ public class ScanResultActivity extends Activity {
 					pandianDate = pandianDate.substring(0, pandianDate.indexOf(" "));
 					date.setText(pandianDate);
 				}
+				if(result.getPy().equals("0")){
+					panyingBtn.setVisibility(View.INVISIBLE);
+				}
+				if(result.getPk().equals("0")){
+					pankuiBtn.setVisibility(View.INVISIBLE);
+				}
 				yipanTxt.setText("已盘：" + result.getYp());
 				weipanTxt.setText("未盘：" + result.getWp());
 				panyingTxt.setText("盘盈：" + result.getPy());
