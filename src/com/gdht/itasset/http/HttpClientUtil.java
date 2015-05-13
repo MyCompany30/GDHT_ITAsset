@@ -340,6 +340,9 @@ public class HttpClientUtil {
 				result = result.substring(1,result.length()-1).replace("\"", "");
 				rfids = result.split(",");
 				for(String rfid : rfids){
+					if(rfid.equals("")){
+						continue;
+					}
 					rfidArray.add(rfid);
 				}
 			}

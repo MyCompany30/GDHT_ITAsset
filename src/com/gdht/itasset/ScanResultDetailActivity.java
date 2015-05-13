@@ -4,13 +4,10 @@ import java.util.ArrayList;
 
 import com.gdht.itasset.adapter.RfidAdapter;
 import com.gdht.itasset.http.HttpClientUtil;
-import com.gdht.itasset.utils.GlobalParams;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;

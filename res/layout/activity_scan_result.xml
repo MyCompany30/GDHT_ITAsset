@@ -347,6 +347,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/bottomBtnGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 

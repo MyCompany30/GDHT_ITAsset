@@ -35,10 +35,22 @@ public class ScanResultActivity extends Activity {
 	private RelativeLayout dateLayout;
 	private SharedPreferences loginSettings = null;
 	private String userid;
+	private String planState;
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if(planState.equals("0")){
+			this.findViewById(R.id.bottomBtnGroup).setVisibility(View.INVISIBLE);
+		}
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_scan_result);
+		if(getIntent().hasExtra("planState")){
+			planState = getIntent().getStringExtra("planState");
+		}
 		wd = new WaitingDialog(this);
 		planId = this.getIntent().getStringExtra("planId");
 		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS", Context.MODE_PRIVATE);

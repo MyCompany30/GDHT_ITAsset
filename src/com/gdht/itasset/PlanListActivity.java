@@ -11,7 +11,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -99,6 +98,7 @@ public class PlanListActivity extends Activity {
 				Intent intent = new Intent(PlanListActivity.this,
 						ScanResultActivity.class);
 				intent.putExtra("planId", planId);
+				intent.putExtra("planState","1");
 				startActivity(intent);
 				// new AsyncTask<Void, Void, Void>(){
 				//
@@ -124,20 +124,10 @@ public class PlanListActivity extends Activity {
 					long arg3) {
 				// TODO Auto-generated method stub
 				final String planId = ypPlanInfos.get(arg2).getId();
-				Intent intent = new Intent();
+				Intent intent = new Intent(PlanListActivity.this, ScanResultActivity.class);
+				intent.putExtra("planState","0");
 				intent.putExtra("planId", planId);
-				new AsyncTask<Void, Void, Void>() {
-
-					@Override
-					protected Void doInBackground(Void... params) {
-						// new
-						// HttpClientUtil(PlanListActivity.this).getPlanInfoById(PlanListActivity.this,
-						// planId);
-
-						return null;
-					}
-
-				}.execute();
+				startActivity(intent);
 
 			}
 		});
