@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -163,7 +164,8 @@ public class PlanListActivity extends Activity {
 	public void btnClick(View view) {
 		switch (view.getId()) {
 		case R.id.back:
-			this.finish();
+			new RefreshDataSourceAt().execute("");
+//			this.finish();s
 			break;
 		case R.id.zhengzai:
 			viewPager.setCurrentItem(0);
@@ -175,6 +177,31 @@ public class PlanListActivity extends Activity {
 			Intent intent = new Intent(this, ScanActivityNew.class);
 			startActivity(intent);
 			break;
+		}
+	}
+	private ProgressDialog pd;
+	private class RefreshDataSourceAt extends AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pd = new ProgressDialog(PlanListActivity.this);
+			pd.setTitle("提示");
+			pd.setMessage("资产信息数据库更新中...");
+			pd.setCancelable(true);
+			pd.show();
+		}
+		
+		@Override
+		protected String doInBackground(String... arg0) {
+			// TODO Auto-generated method stub
+			return new HttpClientUtil(PlanListActivity.this).getAssetInfos(PlanListActivity.this);
+//			return new HttpClientUtil(OptionActivity.this).getAllCheckPlan(OptionActivity.this);
+		}
+		
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			pd.dismiss();
 		}
 	}
 	

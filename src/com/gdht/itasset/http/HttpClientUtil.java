@@ -59,13 +59,16 @@ public class HttpClientUtil {
 	 * 参数：Rfid(可批量，中间用逗号隔开)
 	 */
 	@SuppressWarnings("null")
-	public synchronized ArrayList<StockItemNew> checkAssetByRfidOnly(Activity activity, String rfids){
+	public synchronized ArrayList<StockItemNew> checkAssetByRfidOnly(Activity activity, String rfids, String planid){
 		String uri = null;
 		ArrayList<StockItemNew> dataArray = null;
 		uri = activity.getResources().getString(R.string.url_checkAssetByRfidOnly);
 		HttpPost post = new HttpPost(ip + uri);
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
 		formparams.add(new BasicNameValuePair("Rfid", rfids));
+		if(planid != null) {
+			formparams.add(new BasicNameValuePair("planid", planid));
+		}
 		HttpEntity entity = null;
 		try {
 			entity = new UrlEncodedFormEntity(formparams, "UTF-8");
@@ -1116,4 +1119,100 @@ public class HttpClientUtil {
 		return result;
 	}
 	
+	public String getAllCheckPlan(Activity activity) {
+		List<ZiChanFenLeiInfo> infos = new ArrayList<ZiChanFenLeiInfo>();
+		String uri = null;
+		String result = null;
+		JSONObject jsonObject = null;
+		JSONArray jsonArray = null;
+		uri = activity.getResources().getString(
+				R.string.url_getAllCheckPlan);
+		HttpPost post = new HttpPost(ip + uri);
+		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		HttpEntity entity = null;
+		try {
+			entity = new UrlEncodedFormEntity(pairs, "UTF-8");
+			post.setEntity(entity);
+			HttpResponse httpResponse = getHttpClient().execute(post);
+			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+				result = EntityUtils.toString(httpResponse.getEntity());
+				Log.i("a", "盘点计划 = " + result);
+//				jsonArray = new JSONArray(result);
+//				for (int i = 0; i < jsonArray.length(); i++) {
+//					jsonObject = jsonArray.getJSONObject(i);
+//					// Log.i("a", "value = " + jsonObject.getString("value"));
+//					ZiChanFenLeiInfo info = new ZiChanFenLeiInfo();
+//					info.setKey(jsonObject.getString("key"));
+//					info.setValue(jsonObject.getString("value"));
+//					infos.add(info);
+//				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
+	public String getAssetInfos(Activity activity) {
+		List<ZiChanFenLeiInfo> infos = new ArrayList<ZiChanFenLeiInfo>();
+		String uri = null;
+		String result = null;
+		JSONObject jsonObject = null;
+		JSONArray jsonArray = null;
+		uri = activity.getResources().getString(
+				R.string.url_getAssetInfos);
+		HttpPost post = new HttpPost(ip + uri);
+		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		HttpEntity entity = null;
+		try {
+			entity = new UrlEncodedFormEntity(pairs, "UTF-8");
+			post.setEntity(entity);
+			HttpResponse httpResponse = getHttpClient().execute(post);
+			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+				result = EntityUtils.toString(httpResponse.getEntity());
+				Log.i("a", "资产信息 = " + result);
+//				jsonArray = new JSONArray(result);
+//				for (int i = 0; i < jsonArray.length(); i++) {
+//					jsonObject = jsonArray.getJSONObject(i);
+//					// Log.i("a", "value = " + jsonObject.getString("value"));
+//					ZiChanFenLeiInfo info = new ZiChanFenLeiInfo();
+//					info.setKey(jsonObject.getString("key"));
+//					info.setValue(jsonObject.getString("value"));
+//					infos.add(info);
+//				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

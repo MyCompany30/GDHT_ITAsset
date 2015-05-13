@@ -31,7 +31,11 @@ public class AssetDetailActivity extends Activity {
 			@Override
 			protected Void doInBackground(Void... params) {
 				String rfid = getIntent().getStringExtra("rfid");
-				dataArray = new HttpClientUtil(AssetDetailActivity.this).checkAssetByRfidOnly(AssetDetailActivity.this, rfid);
+				String planId = null;
+				if(getIntent().hasExtra("planid")) {
+					planId = getIntent().getStringExtra("planid");
+				}
+				dataArray = new HttpClientUtil(AssetDetailActivity.this).checkAssetByRfidOnly(AssetDetailActivity.this, rfid, planId);
 				
 				return null;
 			}

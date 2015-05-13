@@ -15,7 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.utils.AppSharedPreferences;
+import com.gdht.itasset.widget.WaitingDialog;
 
 public class OptionActivity extends Activity {
 	private EditText ipEdt = null;
@@ -107,7 +109,8 @@ public class OptionActivity extends Activity {
 		case R.id.gengxin:
 //			Toast.makeText(this, "gengxin", 0).show();
 //			new RefreshDataSourceAt().execute("");
-			initAd();
+//			initAd();
+			new RefreshDataSourceAt().execute("");
 			break;
 		}
 	}
@@ -126,19 +129,14 @@ public class OptionActivity extends Activity {
 		@Override
 		protected String doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
-			return null;
+			return new HttpClientUtil(OptionActivity.this).getAssetInfos(OptionActivity.this);
+//			return new HttpClientUtil(OptionActivity.this).getAllCheckPlan(OptionActivity.this);
 		}
 		
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
-			try {
-				Thread.sleep(3000);
-				pd.dismiss();
-				pd = null;
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			pd.dismiss();
 		}
 	}
 
