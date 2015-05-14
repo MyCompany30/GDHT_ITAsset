@@ -39,7 +39,27 @@ public class LocalPlanResultService {
 		LocalPlanResult lpr = null;
 		Cursor cursor = db.rawQuery("select * from local_planresult where id = ?", new String[]{planId});
 		if(cursor.moveToFirst()) {
-			
+			lpr = new LocalPlanResult();
+			lpr.setId(cursor.getString(cursor.getColumnIndex("id")));
+			lpr.setTitle(cursor.getString(cursor.getColumnIndex("title")));
+			lpr.setDepts(cursor.getString(cursor.getColumnIndex("depts")));
+			lpr.setPersons(cursor.getString(cursor.getColumnIndex("persons")));
+			lpr.setNumber(cursor.getString(cursor.getColumnIndex("number")));
+			lpr.setDetail(cursor.getString(cursor.getColumnIndex("detail")));
+			lpr.setPlanstate(cursor.getString(cursor.getColumnIndex("planstate")));
+			lpr.setQdtime(cursor.getString(cursor.getColumnIndex("qdtime")));
+			lpr.setWctime(cursor.getString(cursor.getColumnIndex("wctime")));
+			lpr.setWcr(cursor.getString(cursor.getColumnIndex("wcr")));
+			lpr.setYp(cursor.getString(cursor.getColumnIndex("yp")));
+			lpr.setWp(cursor.getString(cursor.getColumnIndex("wp")));
+			lpr.setPy(cursor.getString(cursor.getColumnIndex("py")));
+			lpr.setPk(cursor.getString(cursor.getColumnIndex("pk")));
+			lpr.setDeptcode(cursor.getString(cursor.getColumnIndex("deptcode")));
+			lpr.setType(cursor.getString(cursor.getColumnIndex("type")));
+			lpr.setYpRfids(cursor.getString(cursor.getColumnIndex("yprfids")));
+			lpr.setWpRfids(cursor.getString(cursor.getColumnIndex("wprfids")));
+			lpr.setPyRfids(cursor.getString(cursor.getColumnIndex("pkrfids")));
+			lpr.setPkRfids(cursor.getString(cursor.getColumnIndex("pyrfids")));
 		}
 		return lpr;
 	}

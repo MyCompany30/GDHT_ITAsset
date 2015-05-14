@@ -43,6 +43,10 @@ public class GDHTOpenHelper extends SQLiteOpenHelper {
 		db.execSQL("create table if not exists loginLog("
 				+ "idx integer primary key autoincrement, login_name text, login_time text"
 				+ ")");
+		
+		db.execSQL("create table if not exists realnames("
+				+ "idx integer primary key autoincrement, username text, realname text"
+				+ ")");
 	}
 
 	@Override
