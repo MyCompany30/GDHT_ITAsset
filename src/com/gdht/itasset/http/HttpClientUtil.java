@@ -31,6 +31,7 @@ import com.gdht.itasset.pojo.DeptInfo;
 import com.gdht.itasset.pojo.LocalPlanResult;
 import com.gdht.itasset.pojo.PlanDetail;
 import com.gdht.itasset.pojo.PlanInfo;
+import com.gdht.itasset.pojo.RealName;
 import com.gdht.itasset.pojo.StockItem;
 import com.gdht.itasset.pojo.StockItemNew;
 import com.gdht.itasset.pojo.YingPanXinZengItem;
@@ -1295,6 +1296,38 @@ public class HttpClientUtil {
 						str = str.replace("]", "");
 						result.setPkRfids(str);
 					}
+					arrayList.add(result);
+				}
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return arrayList;
+	}
+	
+	public ArrayList<RealName> nameCompare(Activity activity) {
+		ArrayList<RealName> arrayList = null;
+		RealName result;
+		JSONObject jsonObject = null;
+		JSONArray jsonArray = null;
+		String resultStr = null;
+		String uri = null;
+		uri = activity.getResources().getString(R.string.url_nameCompare);
+		HttpPost get = new HttpPost(ip + uri);
+		try {
+			HttpResponse httpResponse = getHttpClient().execute(get);
+			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				resultStr = new String(EntityUtils.toString(httpResponse.getEntity()).getBytes(),"UTF-8");
+				Log.i("a", "json = " + resultStr);
+				arrayList = new ArrayList<RealName>();
+				jsonArray = new JSONArray(resultStr);
+				for(int i = 0; i<jsonArray.length(); i++){
+					result = new RealName();
+					jsonObject = jsonArray.getJSONObject(i);
+					result.setUsername(jsonObject.getString("key"));
+					result.setRealname(jsonObject.getString("value"));
 					arrayList.add(result);
 				}
 				

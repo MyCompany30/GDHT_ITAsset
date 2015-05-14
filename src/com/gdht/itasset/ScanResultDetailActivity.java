@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.gdht.itasset.adapter.RfidAdapter;
 import com.gdht.itasset.http.HttpClientUtil;
+import com.gdht.itasset.utils.GlobalParams;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ScanResultDetailActivity extends Activity {
 	private TextView titleTv = null;
@@ -19,6 +21,7 @@ public class ScanResultDetailActivity extends Activity {
 	private String planId = null;
 	private ArrayList<String> rfids = null;
 	private RfidAdapter adapter = null;
+	private String ypRfid = "";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,20 +39,28 @@ public class ScanResultDetailActivity extends Activity {
 			titleTv.setText("盘亏资产");
 		}
 		planId = getIntent().getStringExtra("planId");
-		new AsyncTask<Void, Void, Void>() {
+		if(GlobalParams.LOGIN_TYPE == 1){
+			new AsyncTask<Void, Void, Void>() {
 
-			@Override
-			protected Void doInBackground(Void... params) {
-				rfids = new HttpClientUtil(ScanResultDetailActivity.this).getRfidByPlanIdAndState(ScanResultDetailActivity.this, planId, type);
-				return null;
-			}
-			
-			protected void onPostExecute(Void result) {
-				adapter = new RfidAdapter(ScanResultDetailActivity.this, rfids, planId);
-				listView.setAdapter(adapter);
-			};
-			
-		}.execute();
+				@Override
+				protected Void doInBackground(Void... params) {
+					rfids = new HttpClientUtil(ScanResultDetailActivity.this).getRfidByPlanIdAndState(ScanResultDetailActivity.this, planId, type);
+					return null;
+				}
+				
+				protected void onPostExecute(Void result) {
+					adapter = new RfidAdapter(ScanResultDetailActivity.this, rfids, planId);
+					listView.setAdapter(adapter);
+				};
+				
+			}.execute();
+		}else {
+			ypRfid = this.getIntent().getStringExtra("ypRfid");
+			Toast.makeText(ScanResultDetailActivity.this, "ypRfid = " + ypRfid, 0).show();
+		}
+		
+		
+
 	}
 
 	public void btnClick(View view) {

@@ -27,10 +27,12 @@ import com.gdht.itasset.adapter.GuideActivityPagerViewAdapter;
 import com.gdht.itasset.adapter.PlanListAdapterNew;
 import com.gdht.itasset.db.service.LocalPlanResultService;
 import com.gdht.itasset.db.service.LocalPlanService;
+import com.gdht.itasset.db.service.LocalRealNameService;
 import com.gdht.itasset.db.service.LocalStockService;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.LocalPlanResult;
 import com.gdht.itasset.pojo.PlanInfo;
+import com.gdht.itasset.pojo.RealName;
 import com.gdht.itasset.pojo.StockItemNew;
 import com.gdht.itasset.utils.GlobalParams;
 
@@ -47,12 +49,14 @@ public class PlanListActivity extends Activity {
 	private LocalStockService localStockService;
 	private LocalPlanService localPlanService;
 	private LocalPlanResultService localPlanResultService;
+	private LocalRealNameService localRealNameService;
 	private AlertDialog ad;
 	private String name;
 	private ArrayList<PlanInfo> plans;
 	private int currentSelected;
 	private Long assetNumber = 0l, planNumber = 0l, planResultNumber = 0l;
 	private LinearLayout shujukugengxin;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -60,6 +64,7 @@ public class PlanListActivity extends Activity {
 		localStockService = new LocalStockService(this);
 		localPlanService = new LocalPlanService(this);
 		localPlanResultService = new LocalPlanResultService(this);
+		localRealNameService = new LocalRealNameService(this);
 		name = getIntent().getStringExtra("name");
 		viewPager = (ViewPager) this.findViewById(R.id.viewPager);
 		zzBtn = (LinearLayout) this.findViewById(R.id.zhengzai);
@@ -89,9 +94,9 @@ public class PlanListActivity extends Activity {
 			ypBtn.setBackgroundResource(R.drawable.tab_selected);
 			break;
 		}
-		if(GlobalParams.LOGIN_TYPE == 1) {
+		if (GlobalParams.LOGIN_TYPE == 1) {
 			shujukugengxin.setVisibility(View.VISIBLE);
-		}else  {
+		} else {
 			shujukugengxin.setVisibility(View.GONE);
 		}
 		viewPager.setCurrentItem(currentSelected);
@@ -177,22 +182,22 @@ public class PlanListActivity extends Activity {
 
 			}
 		});
-		if(GlobalParams.LOGIN_TYPE == 2){
+		if (GlobalParams.LOGIN_TYPE == 2) {
 			new GetLocalPlanListAt().execute("");
-		}else {
+		} else {
 			new GetPlanListAt().execute("");
 		}
-		
+
 	}
-	
+
 	private class GetLocalPlanListAt extends AsyncTask<String, Integer, String> {
 		@Override
 		protected String doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
-			plans =  localPlanService.getPlanInfoByUsername(name);
+			plans = localPlanService.getPlanInfoByUsername(name);
 			return null;
 		}
-		
+
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
@@ -270,7 +275,7 @@ public class PlanListActivity extends Activity {
 			startActivity(intent);
 			break;
 		case R.id.shujukugengxin:
-			new RefreshAssetDataSourceAt().execute("");
+			 new RefreshAssetDataSourceAt().execute("");
 			break;
 		}
 	}
@@ -357,13 +362,40 @@ public class PlanListActivity extends Activity {
 		@Override
 		protected void onPostExecute(Long result) {
 			super.onPostExecute(result);
+			planResultNumber = result;
+			new RefreshRealNameSourceAt().execute("");
+		}
+	}
+
+	private class RefreshRealNameSourceAt extends
+			AsyncTask<String, Integer, Long> {
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Long doInBackground(String... arg0) {
+			ArrayList<RealName> lprs = new HttpClientUtil(
+					PlanListActivity.this)
+					.nameCompare(PlanListActivity.this);
+			if (lprs == null) {
+				return 0l;
+			} else {
+				return localRealNameService.save(lprs);
+			}
+		}
+
+		@Override
+		protected void onPostExecute(Long result) {
+			super.onPostExecute(result);
 			if (pd != null && pd.isShowing()) {
 				pd.dismiss();
 				pd = null;
 			}
-			planResultNumber = result;
-			String contentStr = "资产数据更新完成，共计" + assetNumber + "条。\n盘点计划数据更新完成，共计"
-					+ planNumber + "条。\n盘点结果数据更新完成，共计" + planResultNumber + "条。";
+			String contentStr = "资产数据更新完成，共计" + assetNumber
+					+ "条。\n盘点计划数据更新完成，共计" + planNumber + "条。\n盘点结果数据更新完成，共计"
+					+ planResultNumber + "条。";
 			initAd(contentStr);
 		}
 	}
@@ -377,18 +409,19 @@ public class PlanListActivity extends Activity {
 	}
 
 	private void initAd(String contentStr) {
-		
-		View dialogView = (RelativeLayout)LayoutInflater.from(this).inflate(R.layout.dialog_datasource_finish, null);
-		
+
+		View dialogView = (RelativeLayout) LayoutInflater.from(this).inflate(
+				R.layout.dialog_datasource_finish, null);
+
 		ad = new AlertDialog.Builder(this).create();
 		ad.setCanceledOnTouchOutside(false);
-		
+
 		ImageView close = (ImageView) dialogView.findViewById(R.id.close);
 		ImageView sure = (ImageView) dialogView.findViewById(R.id.sure);
 		TextView content = (TextView) dialogView.findViewById(R.id.content);
 		content.setText(contentStr);
 		close.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				ad.dismiss();
@@ -396,7 +429,7 @@ public class PlanListActivity extends Activity {
 			}
 		});
 		sure.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				ad.dismiss();
