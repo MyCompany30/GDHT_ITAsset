@@ -28,7 +28,6 @@ import de.greenrobot.event.EventBus;
 public class ScanResultActivity extends Activity {
 	private LinearLayout yipanBtn, weipanBtn, panyingBtn, pankuiBtn;
 	private TextView yipanTxt, weipanTxt, panyingTxt, pankuiTxt, name,date, keeper, planNum;
-	private LinearLayout btnGroup; 
 	private int width, nameWidth, lineWidth;
 	private View lineLeft, lineRight;
 	private String planId;
@@ -108,12 +107,14 @@ public class ScanResultActivity extends Activity {
 					date.setText(pandianDate);
 				}
 				if(result.getPy().equals("0")){
-					//panyingBtn.setVisibility(View.INVISIBLE);
-					btnGroup.removeView(panyingBtn);
+					panyingBtn.setVisibility(View.GONE);
+				}else{
+					panyingBtn.setVisibility(View.VISIBLE);
 				}
 				if(result.getPk().equals("0")){
-					//pankuiBtn.setVisibility(View.INVISIBLE);
-					btnGroup.removeView(pankuiBtn);
+					pankuiBtn.setVisibility(View.GONE);
+				}else{
+					pankuiBtn.setVisibility(View.VISIBLE);
 				}
 				yipanTxt.setText("已盘：" + result.getYp());
 				weipanTxt.setText("未盘：" + result.getWp());
@@ -146,7 +147,7 @@ public class ScanResultActivity extends Activity {
 		panyingTxt = (TextView) this.findViewById(R.id.panyingTxt);
 		pankuiBtn = (LinearLayout) this.findViewById(R.id.pankuiBtn);
 		pankuiTxt = (TextView) this.findViewById(R.id.pankuiTxt);
-		btnGroup = (LinearLayout)this.findViewById(R.id.btnGroup);
+		
 		yipanBtn.setOnTouchListener(new OnTouchListener() {
 			
 			@Override
