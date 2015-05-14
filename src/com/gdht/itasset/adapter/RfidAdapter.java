@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.gdht.itasset.AssetDetailActivity;
 import com.gdht.itasset.R;
+import com.gdht.itasset.utils.GlobalParams;
 
 import android.content.Context;
 import android.content.Intent;
@@ -76,25 +77,3 @@ public class RfidAdapter extends BaseAdapter {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
