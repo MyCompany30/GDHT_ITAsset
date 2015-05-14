@@ -1,57 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#ffffff"
-     >
-    <RelativeLayout
+    android:layout_height="wrap_content"
+    android:layout_margin="50dp"
+    android:background="@android:color/transparent"
+    android:gravity="center" >
+
+    <LinearLayout
+        android:id="@+id/LL_this"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        >
-        
-        <ImageView
-        android:id="@+id/close"  
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/guanbi_03"
-        android:layout_alignParentRight="true"
-        />
-    <TextView 
-        android:id="@+id/tishi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="提示"
-        android:textColor="@color/orange_txt"
-        android:textSize="30dp"
-        android:layout_below="@+id/close"
-        android:layout_centerHorizontal="true"
-        />
-    
-        <TextView 
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_bg"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tishi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/close"
+            android:layout_centerHorizontal="true"
+            android:text="提示"
+            android:textColor="@color/orange_txt"
+            android:textSize="30dp" />
+
+        <TextView
             android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#000000"
-        android:textSize="18dp"
-        android:layout_below="@+id/tishi"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        />
-        
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tishi"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:textColor="#000000"
+            android:textSize="18dp" />
+
         <ImageView
             android:id="@+id/sure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/selector_dialog_sure_single"
             android:layout_below="@+id/content"
-            android:scaleX=".7"
-            android:scaleY=".7"
+            android:background="@drawable/selector_dialog_sure_single"
             android:clickable="true"
-            />
-        
-    </RelativeLayout>
-    
+            android:scaleX=".7"
+            android:scaleY=".7" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/guanbi_03" />
 
 </RelativeLayout>

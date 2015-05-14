@@ -19,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -344,11 +345,15 @@ public class PlanListActivity extends Activity {
 	}
 
 	private void initAd(String contentStr) {
+		
+		View dialogView = (RelativeLayout)LayoutInflater.from(this).inflate(R.layout.dialog_datasource_finish, null);
+		
 		ad = new AlertDialog.Builder(this).create();
-		View convertView = LayoutInflater.from(this).inflate(R.layout.dialog_datasource_finish, null);
-		ImageView close = (ImageView) convertView.findViewById(R.id.close);
-		ImageView sure = (ImageView) convertView.findViewById(R.id.sure);
-		TextView content = (TextView) convertView.findViewById(R.id.content);
+		ad.setCanceledOnTouchOutside(false);
+		
+		ImageView close = (ImageView) dialogView.findViewById(R.id.close);
+		ImageView sure = (ImageView) dialogView.findViewById(R.id.sure);
+		TextView content = (TextView) dialogView.findViewById(R.id.content);
 		content.setText(contentStr);
 		close.setOnClickListener(new OnClickListener() {
 			
@@ -366,7 +371,7 @@ public class PlanListActivity extends Activity {
 				ad = null;
 			}
 		});
-		ad.setView(convertView, 0, 0, 0, 0);
 		ad.show();
+		ad.getWindow().setContentView((RelativeLayout) dialogView);
 	}
 }
