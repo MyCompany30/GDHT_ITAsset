@@ -18,13 +18,21 @@ public class LocalStockService {
 		db = helper.getWritableDatabase();
 	}
 
-	public void save(List<StockItemNew> lists) {
+	public Long save(List<StockItemNew> lists) {
 		delete();
 		for (StockItemNew si : lists) {
 			db.execSQL(
 					"insert into local_stock (assetChecklistId, assetCheckplanId,assetInfoId,classify, type,rfidnumber,barnumber,qrnumber,brand,model,usetype,checkstate,dept,detil,id,keeper,name,office,warehouseArea,goodsShelves,registerdate,registrant) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?)",
 					new String[] { si.getAssetChecklistId(), si.getAssetCheckplanId(), si.getAssetInfoId(), si.getClassify(), si.getType(), si.getRfidnumber(), si.getBarnumber(), si.getQrnumber(), si.getBrand(), si.getModel(), si.getUsetype(), si.getCheckstate(), si.getDept(), si.getDetil(), si.getId(), si.getKeeper(), si.getName(), si.getOffice(),si.getWarehouseArea(), si.getGoodsShelves(), si.getRegisterdate(), si.getRegistrant() });
 		}
+		return getCountNumber();
+	}
+	
+	public Long getCountNumber() {
+		Cursor cursor = db.rawQuery("select count(*) from local_stock", null);
+		cursor.moveToNext();
+		Long count = cursor.getLong(0);
+		return count;
 	}
 	
 	public void delete() {

@@ -38,7 +38,6 @@
         android:layout_below="@+id/tishi"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
-        
         />
         
         <ImageView
