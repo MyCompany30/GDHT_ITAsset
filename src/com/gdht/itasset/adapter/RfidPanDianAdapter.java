@@ -2,14 +2,17 @@ package com.gdht.itasset.adapter;
 
 import java.util.List;
 
+import com.gdht.itasset.AssetDetailActivity;
 import com.gdht.itasset.R;
 import com.gdht.itasset.eventbus.RefreshNumberListener;
 
 import de.greenrobot.event.EventBus;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -21,11 +24,13 @@ public class RfidPanDianAdapter extends BaseAdapter {
 	private Context context;
 	private List<String> rfids;
 	private List<String> selectRifds;
-	public RfidPanDianAdapter(Context context, List<String> rfids, List<String> selectRifds) {
+	private String planId;
+	public RfidPanDianAdapter(Context context, List<String> rfids, List<String> selectRifds, String planId) {
 		this.inflater = LayoutInflater.from(context);
 		this.context = context;
 		this.rfids = rfids;
 		this.selectRifds = selectRifds;
+		this.planId = planId;
 	}
 	
 	@Override
@@ -44,7 +49,7 @@ public class RfidPanDianAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup arg2) {
+	public View getView(final int position, View convertView, ViewGroup arg2) {
 //		ViewHolder vh;
 //		if(convertView == null) {
 //			convertView = inflater.inflate(R.layout.item_rfid_pandian_list, null);
@@ -59,6 +64,22 @@ public class RfidPanDianAdapter extends BaseAdapter {
 		TextView rfid = (TextView) convertView.findViewById(R.id.rfid);
 		rfid.setText(rfids.get(position));
 		CheckBox cb = (CheckBox) convertView.findViewById(R.id.cb);
+		
+		convertView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String rfid = rfids.get(position);
+				Intent intent = new Intent();
+				intent.setClass(context, AssetDetailActivity.class);
+				intent.putExtra("rfid", rfid);
+				if(planId != null){
+					intent.putExtra("planId", planId);
+				}
+				context.startActivity(intent);
+			}
+		});
+		
 		final int location = position;
 		cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			

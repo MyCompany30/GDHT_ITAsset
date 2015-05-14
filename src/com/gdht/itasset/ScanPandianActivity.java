@@ -145,7 +145,7 @@ public class ScanPandianActivity extends Activity {
 
 	private void findViews() {
 		listView = (ListView) this.findViewById(R.id.listView);
-		adapter = new RfidPanDianAdapter(this, rfids, selectRifds);
+		adapter = new RfidPanDianAdapter(this, rfids, selectRifds, planId);
 		listView.setAdapter(adapter);
 		finishBtn = (LinearLayout) this.findViewById(R.id.finish);
 		startBtn = (LinearLayout) this.findViewById(R.id.start);

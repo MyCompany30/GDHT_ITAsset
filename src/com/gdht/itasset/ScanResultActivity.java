@@ -1,7 +1,10 @@
 package com.gdht.itasset;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -253,28 +256,41 @@ public class ScanResultActivity extends Activity {
 			startActivity(intent);
 			break;
 		case R.id.finish:
-			new AsyncTask<Void, Void, Boolean>() {
-				WaitingDialog dialog = new WaitingDialog(ScanResultActivity.this);
-				protected void onPreExecute() {
-					dialog.show();
-				};
-
-				@Override
-				protected Boolean doInBackground(Void... params) {
+			new AlertDialog.Builder(ScanResultActivity.this)
+			 .setTitle("完成计划？") 
+			 .setNegativeButton("取消", null)
+			 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
 					
-					return new HttpClientUtil(ScanResultActivity.this).finishInventoryPlan(ScanResultActivity.this, planId);
-				}
-				
-				protected void onPostExecute(Boolean result) {
-					dialog.dismiss();
-					if(result){
-						Toast.makeText(ScanResultActivity.this, "完成计划请求成功", Toast.LENGTH_SHORT).show();
-						ScanResultActivity.this.finish();
-					}else{
-						Toast.makeText(ScanResultActivity.this, "完成计划请求失败", Toast.LENGTH_SHORT).show();
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						new AsyncTask<Void, Void, Boolean>() {
+							WaitingDialog dialog = new WaitingDialog(ScanResultActivity.this);
+							protected void onPreExecute() {
+								dialog.show();
+							};
+
+							@Override
+							protected Boolean doInBackground(Void... params) {
+								
+								return new HttpClientUtil(ScanResultActivity.this).finishInventoryPlan(ScanResultActivity.this, planId);
+							}
+							
+							protected void onPostExecute(Boolean result) {
+								dialog.dismiss();
+								if(result){
+									Toast.makeText(ScanResultActivity.this, "完成计划请求成功", Toast.LENGTH_SHORT).show();
+									ScanResultActivity.this.finish();
+								}else{
+									Toast.makeText(ScanResultActivity.this, "完成计划请求失败", Toast.LENGTH_SHORT).show();
+								}
+							};
+						}.execute();
 					}
-				};
-			}.execute();
+				})
+			 	.show();
+			
+
 			break;
 		}
 	}
