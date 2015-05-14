@@ -97,7 +97,7 @@ public class ScanResultActivity extends Activity {
 		@Override
 		protected LocalPlanResult doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
-			return localPlanResultService.getLocalPlanResultByPlanId(planId);
+			return localPlanResultService.getLocalPlanResultByPlanId(planId, userid);
 		}
 
 		@Override

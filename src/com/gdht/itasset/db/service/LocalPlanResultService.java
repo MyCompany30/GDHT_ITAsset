@@ -35,15 +35,21 @@ public class LocalPlanResultService {
 		return getCountNumber();
 	}
 	
-	public LocalPlanResult getLocalPlanResultByPlanId(String planId) {
+	public LocalPlanResult getLocalPlanResultByPlanId(String planId, String username) {
 		LocalPlanResult lpr = null;
-		Cursor cursor = db.rawQuery("select * from local_planresult where id = ?", new String[]{planId});
+		Cursor cursor = db.rawQuery("select * from realnames where username = ?", new String[]{ username });
+		String realname = "未知";
+		if(cursor.moveToFirst()) {
+			realname = cursor.getString(cursor.getColumnIndex("realname"));
+		}
+		cursor = db.rawQuery("select * from local_planresult where id = ?", new String[]{planId});
 		if(cursor.moveToFirst()) {
 			lpr = new LocalPlanResult();
 			lpr.setId(cursor.getString(cursor.getColumnIndex("id")));
 			lpr.setTitle(cursor.getString(cursor.getColumnIndex("title")));
 			lpr.setDepts(cursor.getString(cursor.getColumnIndex("depts")));
-			lpr.setPersons(cursor.getString(cursor.getColumnIndex("persons")));
+//			lpr.setPersons(cursor.getString(cursor.getColumnIndex("persons")));
+			lpr.setPersons(realname);
 			lpr.setNumber(cursor.getString(cursor.getColumnIndex("number")));
 			lpr.setDetail(cursor.getString(cursor.getColumnIndex("detail")));
 			lpr.setPlanstate(cursor.getString(cursor.getColumnIndex("planstate")));
