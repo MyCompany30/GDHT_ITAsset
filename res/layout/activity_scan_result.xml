@@ -148,6 +148,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/btnGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -349,12 +350,12 @@
     <LinearLayout
         android:id="@+id/bottomBtnGroup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="80dp" >
 
         <LinearLayout
             android:id="@+id/start"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/selector_kaishisaomiao"
             android:clickable="true"
@@ -365,7 +366,7 @@
         <LinearLayout
             android:id="@+id/finish"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/selector_wanchengjihua"
             android:clickable="true"
