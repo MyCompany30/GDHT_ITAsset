@@ -192,7 +192,12 @@ public class ScanPandianActivity extends Activity {
 			Intent intent = new Intent(this, ErWeiScanCaptureActivity.class);
 			startActivityForResult(intent, 100);
 			break;
-
+		case R.id.clear:
+			rfids.clear();
+			selectRifds.clear();
+			checkRFIDSDBService.deleteAll(userid);
+			adapter.notifyDataSetChanged();
+			break;
 		}
 	}
 

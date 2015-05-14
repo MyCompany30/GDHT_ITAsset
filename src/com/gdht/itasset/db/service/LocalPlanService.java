@@ -51,8 +51,8 @@ public class LocalPlanService {
 	 * @param username
 	 * @return
 	 */
-	public List<PlanInfo> getPlanInfoByUsername(String username) {
-		List<PlanInfo> pis = new ArrayList<PlanInfo>();
+	public ArrayList<PlanInfo> getPlanInfoByUsername(String username) {
+		ArrayList<PlanInfo> pis = new ArrayList<PlanInfo>();
 		PlanInfo pi = null;
 		String sql = "select * from local_plan where persons like '" + username +",%' or persons like '%," + username + 
 				",%' or persons like '" + username + "' or persons like '%," + username + "'";
@@ -71,6 +71,7 @@ public class LocalPlanService {
 			pi.setQdtime(cursor.getString(cursor.getColumnIndex("qdtime")));
 			pi.setWctime(cursor.getString(cursor.getColumnIndex("wctime")));
 			pi.setPersons(cursor.getString(cursor.getColumnIndex("persons")));
+			pis.add(pi);
 		}
 		return pis;
 	}

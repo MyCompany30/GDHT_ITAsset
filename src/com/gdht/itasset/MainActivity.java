@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.gdht.itasset.asynctask.LoginAsyncTask;
 import com.gdht.itasset.utils.AppSharedPreferences;
+import com.gdht.itasset.utils.GlobalParams;
 
 public class MainActivity extends Activity {
 	public static final String SETTINGS = "GDHT_ITASSET_SETTINGS";
@@ -114,6 +115,7 @@ public class MainActivity extends Activity {
 					editor.remove(SETTING_PWD);
 				}
 				editor.commit();
+				GlobalParams.LOGIN_TYPE = 2;
 //				Toast.makeText(MainActivity.this, "离线登陆", 0).show();
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, PlanListActivity.class);

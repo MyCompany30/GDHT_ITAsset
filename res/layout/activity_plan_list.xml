@@ -105,7 +105,9 @@
             android:background="@drawable/selector_shujukugengxin_novalue"
             android:clickable="true"
             android:onClick="btnClick"
-            tools:ignore="Orientation" >
+            tools:ignore="Orientation" 
+            android:visibility="gone"
+            >
         </LinearLayout>
 
     </LinearLayout>

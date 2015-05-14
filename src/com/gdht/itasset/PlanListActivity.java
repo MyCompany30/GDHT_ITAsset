@@ -52,6 +52,7 @@ public class PlanListActivity extends Activity {
 	private ArrayList<PlanInfo> plans;
 	private int currentSelected;
 	private Long assetNumber = 0l, planNumber = 0l, planResultNumber = 0l;
+	private LinearLayout shujukugengxin;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,6 +64,7 @@ public class PlanListActivity extends Activity {
 		viewPager = (ViewPager) this.findViewById(R.id.viewPager);
 		zzBtn = (LinearLayout) this.findViewById(R.id.zhengzai);
 		ypBtn = (LinearLayout) this.findViewById(R.id.yipan);
+		shujukugengxin = (LinearLayout) this.findViewById(R.id.shujukugengxin);
 		inflater = LayoutInflater.from(this);
 	}
 
@@ -87,7 +89,11 @@ public class PlanListActivity extends Activity {
 			ypBtn.setBackgroundResource(R.drawable.tab_selected);
 			break;
 		}
-
+		if(GlobalParams.LOGIN_TYPE == 1) {
+			shujukugengxin.setVisibility(View.VISIBLE);
+		}else  {
+			shujukugengxin.setVisibility(View.GONE);
+		}
 		viewPager.setCurrentItem(currentSelected);
 	}
 
@@ -183,7 +189,33 @@ public class PlanListActivity extends Activity {
 		@Override
 		protected String doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
+			plans =  localPlanService.getPlanInfoByUsername(name);
 			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+
+			for (int i = 0; i < plans.size(); i++) {
+				if (plans.get(i).getPlanstate().equals("0")) {
+					// 已完成
+					ypPlanInfos.add(plans.get(i));
+				} else if (plans.get(i).getPlanstate().equals("1")) {
+					// 进行中
+					zzPlanInfos.add(plans.get(i));
+				}
+			}
+			// PlanInfo pi = new PlanInfo();
+			// pi.setId("aaaa");
+			// zzPlanInfos.add(pi);
+			zzAdapter = new PlanListAdapterNew(PlanListActivity.this,
+					zzPlanInfos);
+			zzListView.setAdapter(zzAdapter);
+
+			ypAdapter = new PlanListAdapterNew(PlanListActivity.this,
+					ypPlanInfos);
+			ypListView.setAdapter(ypAdapter);
 		}
 	}
 

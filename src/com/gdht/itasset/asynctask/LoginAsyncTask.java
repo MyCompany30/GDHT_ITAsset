@@ -77,6 +77,7 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 			if(result.equals("登录成功")){
 				//登录成功
 				GlobalParams.isLogin = true;
+				GlobalParams.LOGIN_TYPE = 1;
 				SharedPreferences loginSettings = activity.getSharedPreferences("GDHT_ITASSET_SETTINGS", Context.MODE_PRIVATE);
 				Editor editor = loginSettings.edit();
 				editor.putString("LOGIN_NAME", name);

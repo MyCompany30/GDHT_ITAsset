@@ -254,6 +254,19 @@
             android:onClick="btnClick"
             tools:ignore="Orientation" >
         </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/shujutongbu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_shujutongbu"
+            android:clickable="true"
+            android:onClick="btnClick"
+            tools:ignore="Orientation" 
+            android:visibility="gone"
+            >
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

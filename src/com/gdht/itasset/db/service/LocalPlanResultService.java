@@ -34,6 +34,16 @@ public class LocalPlanResultService {
 		}
 		return getCountNumber();
 	}
+	
+	public LocalPlanResult getLocalPlanResultByPlanId(String planId) {
+		LocalPlanResult lpr = null;
+		Cursor cursor = db.rawQuery("select * from local_planresult where id = ?", new String[]{planId});
+		if(cursor.moveToFirst()) {
+			
+		}
+		return lpr;
+	}
+	
 
 	public Long getCountNumber() {
 		Cursor cursor = db.rawQuery("select count(*) from local_planresult",

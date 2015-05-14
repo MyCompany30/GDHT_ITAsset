@@ -47,74 +47,91 @@
         android:listSelector="@drawable/selector_list_blue" >
     </ListView>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp" >
+        android:layout_height="wrap_content" >
 
         <LinearLayout
-            android:id="@+id/finish"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/selector_pandian_saomiao"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="btnClick"
-            tools:ignore="Orientation" >
+            android:layout_width="match_parent"
+            android:layout_height="80dp" 
+            android:layout_gravity="bottom"
+            >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="完成扫描"
-                android:textColor="#ffffff"
-                android:textSize="24dp" />
+            <LinearLayout
+                android:id="@+id/finish"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_pandian_saomiao"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="btnClick"
+                tools:ignore="Orientation" 
+                >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="("
-                android:textColor="#ffffff"
-                android:textSize="24dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="完成扫描"
+                    android:textColor="#ffffff"
+                    android:textSize="24dp" />
 
-            <TextView
-                android:id="@+id/num1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="24dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="("
+                    android:textColor="#ffffff"
+                    android:textSize="24dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=")"
-                android:textColor="#ffffff"
-                android:textSize="24dp" />
+                <TextView
+                    android:id="@+id/num1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#ffffff"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=")"
+                    android:textColor="#ffffff"
+                    android:textSize="24dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/stop"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_pandian_zanting"
+                android:clickable="true"
+                android:onClick="btnClick"
+                android:scaleType="center"
+                tools:ignore="Orientation" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/start"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_kaishisaomiao"
+                android:clickable="true"
+                android:onClick="btnClick"
+                android:visibility="gone"
+                tools:ignore="Orientation" >
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/stop"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/selector_pandian_zanting"
-            android:clickable="true"
+        <ImageView 
+            android:id="@+id/clear"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/shanchu_13"
+            android:layout_gravity="center"
             android:onClick="btnClick"
-            android:scaleType="center"
-            tools:ignore="Orientation" >
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/start"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/selector_kaishisaomiao"
             android:clickable="true"
-            android:onClick="btnClick"
-            android:visibility="gone"
-            tools:ignore="Orientation" >
-        </LinearLayout>
-    </LinearLayout>
+            />
+    </FrameLayout>
 
 </LinearLayout>

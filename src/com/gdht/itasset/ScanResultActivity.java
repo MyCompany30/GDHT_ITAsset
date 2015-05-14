@@ -21,9 +21,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.gdht.itasset.eventbus.RefreshDatas;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.PlanDetail;
+import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.widget.WaitingDialog;
 
 import de.greenrobot.event.EventBus;
@@ -39,6 +41,7 @@ public class ScanResultActivity extends Activity {
 	private SharedPreferences loginSettings = null;
 	private String userid;
 	private String planState;
+	private LinearLayout finishBtn, tongbuBtn;
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -58,10 +61,20 @@ public class ScanResultActivity extends Activity {
 		planId = this.getIntent().getStringExtra("planId");
 		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS", Context.MODE_PRIVATE);
 		userid = loginSettings.getString("LOGIN_NAME", "");
+		finishBtn = (LinearLayout) this.findViewById(R.id.finish);
+		tongbuBtn = (LinearLayout) this.findViewById(R.id.shujutongbu);
 		initViews();
 		EventBus.getDefault().register(this);
-		new GetInfoAt().execute("");
+		if(GlobalParams.LOGIN_TYPE == 1) {
+			tongbuBtn.setVisibility(View.GONE);
+			finishBtn.setVisibility(View.VISIBLE);
+			new GetInfoAt().execute("");
+		}else {
+			tongbuBtn.setVisibility(View.VISIBLE);
+			finishBtn.setVisibility(View.GONE);
+		}
 	}
+	
 	
 	private class GetInfoAt extends AsyncTask<String, Integer, PlanDetail> {
 		
