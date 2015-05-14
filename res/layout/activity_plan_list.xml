@@ -34,6 +34,7 @@
             android:scaleX=".7"
             android:scaleY=".7" />
     </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
@@ -79,36 +80,32 @@
                 android:textSize="18dp" />
         </LinearLayout>
     </LinearLayout>
-<android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/toolBar"
-            android:layout_above="@+id/bottomBtnGroup"
-            android:layout_marginTop="10dp"
-            >
 
-            
-        </android.support.v4.view.ViewPager>
-        <LinearLayout
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomBtnGroup"
+        android:layout_below="@+id/toolBar"
+        android:layout_marginTop="10dp" >
+    </android.support.v4.view.ViewPager>
+
+    <LinearLayout
         android:id="@+id/bottomBtnGroup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:layout_alignParentBottom="true"
-        >
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
 
-        <LinearLayout
+        <ImageView
             android:id="@+id/shujukugengxin"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:background="@drawable/selector_shujukugengxin_novalue"
             android:clickable="true"
             android:onClick="btnClick"
-            tools:ignore="Orientation" 
-            android:visibility="gone"
-            >
-        </LinearLayout>
-
+            tools:ignore="Orientation" >
+        </ImageView>
     </LinearLayout>
+
 </RelativeLayout>
