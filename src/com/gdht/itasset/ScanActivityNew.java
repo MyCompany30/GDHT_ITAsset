@@ -121,7 +121,7 @@ public class ScanActivityNew extends Activity {
 		
 		start();
 		
-		saveHandler.postDelayed(saveRunnable, 10000);
+//		saveHandler.postDelayed(saveRunnable, 10000);
 		
 	}
 	

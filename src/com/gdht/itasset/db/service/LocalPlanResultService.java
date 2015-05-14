@@ -18,7 +18,7 @@ public class LocalPlanResultService {
 		db = helper.getWritableDatabase();
 	}
 
-	public void save(List<LocalPlanResult> lists) {
+	public Long save(List<LocalPlanResult> lists) {
 		delete();
 		for (LocalPlanResult lpr : lists) {
 			db.execSQL(
@@ -32,8 +32,17 @@ public class LocalPlanResultService {
 							lpr.getWpRfids(), lpr.getPkRfids(),
 							lpr.getPyRfids() });
 		}
+		return getCountNumber();
 	}
 
+	public Long getCountNumber() {
+		Cursor cursor = db.rawQuery("select count(*) from local_planresult",
+				null);
+		cursor.moveToNext();
+		Long count = cursor.getLong(0);
+		return count;
+	}
+	
 	public void delete() {
 		if (getCount()) {
 			db.execSQL("delete from local_planresult");

@@ -18,13 +18,21 @@ public class LocalPlanService {
 		db = helper.getWritableDatabase();
 	}
 	
-	public void save(List<PlanInfo> lists) {
+	public Long save(List<PlanInfo> lists) {
 		delete();
 		for (PlanInfo si : lists) {
 			db.execSQL(
 					"insert into local_plan (id, title, type, depts, number, planstate, detail, deptcode, qdtime, wctime, persons) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 					new String[] { si.getId(), si.getTitle(), si.getType(), si.getDepts(), String.valueOf(si.getNumber()), si.getPlanstate(), si.getDetail(), si.getDeptcode(), si.getQdtime(), si.getWctime(), si.getPersons() });
 		}
+		return getCountNumber();
+	}
+	
+	public Long getCountNumber() {
+		Cursor cursor = db.rawQuery("select count(*) from local_plan", null);
+		cursor.moveToNext();
+		Long count = cursor.getLong(0);
+		return count;
 	}
 	
 	public void delete() {

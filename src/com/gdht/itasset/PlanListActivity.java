@@ -19,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gdht.itasset.adapter.GuideActivityPagerViewAdapter;
@@ -48,6 +49,8 @@ public class PlanListActivity extends Activity {
 	private String name;
 	private ArrayList<PlanInfo> plans;
 	private int currentSelected;
+	private Long assetNumber = 0l, planNumber = 0l, planResultNumber = 0l;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,6 +64,7 @@ public class PlanListActivity extends Activity {
 		ypBtn = (LinearLayout) this.findViewById(R.id.yipan);
 		inflater = LayoutInflater.from(this);
 	}
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -82,9 +86,10 @@ public class PlanListActivity extends Activity {
 			ypBtn.setBackgroundResource(R.drawable.tab_selected);
 			break;
 		}
-		
+
 		viewPager.setCurrentItem(currentSelected);
 	}
+
 	private void initPagerView() {
 		views = new ArrayList<View>();
 		View view = inflater.inflate(R.layout.activity_plan_views, null);
@@ -98,7 +103,7 @@ public class PlanListActivity extends Activity {
 				Intent intent = new Intent(PlanListActivity.this,
 						ScanResultActivity.class);
 				intent.putExtra("planId", planId);
-				intent.putExtra("planState","1");
+				intent.putExtra("planState", "1");
 				startActivity(intent);
 				// new AsyncTask<Void, Void, Void>(){
 				//
@@ -124,8 +129,9 @@ public class PlanListActivity extends Activity {
 					long arg3) {
 				// TODO Auto-generated method stub
 				final String planId = ypPlanInfos.get(arg2).getId();
-				Intent intent = new Intent(PlanListActivity.this, ScanResultActivity.class);
-				intent.putExtra("planState","0");
+				Intent intent = new Intent(PlanListActivity.this,
+						ScanResultActivity.class);
+				intent.putExtra("planState", "0");
 				intent.putExtra("planId", planId);
 				startActivity(intent);
 
@@ -170,14 +176,15 @@ public class PlanListActivity extends Activity {
 	private class GetPlanListAt extends AsyncTask<String, Integer, String> {
 		@Override
 		protected String doInBackground(String... arg0) {
-			plans = new HttpClientUtil(PlanListActivity.this).getPlans(PlanListActivity.this, name);
+			plans = new HttpClientUtil(PlanListActivity.this).getPlans(
+					PlanListActivity.this, name);
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
-			
+
 			for (int i = 0; i < plans.size(); i++) {
 				if (plans.get(i).getPlanstate().equals("0")) {
 					// 已完成
@@ -190,10 +197,12 @@ public class PlanListActivity extends Activity {
 			// PlanInfo pi = new PlanInfo();
 			// pi.setId("aaaa");
 			// zzPlanInfos.add(pi);
-			zzAdapter = new PlanListAdapterNew(PlanListActivity.this, zzPlanInfos);
+			zzAdapter = new PlanListAdapterNew(PlanListActivity.this,
+					zzPlanInfos);
 			zzListView.setAdapter(zzAdapter);
 
-			ypAdapter = new PlanListAdapterNew(PlanListActivity.this, ypPlanInfos);
+			ypAdapter = new PlanListAdapterNew(PlanListActivity.this,
+					ypPlanInfos);
 			ypListView.setAdapter(ypAdapter);
 		}
 
@@ -202,11 +211,7 @@ public class PlanListActivity extends Activity {
 	public void btnClick(View view) {
 		switch (view.getId()) {
 		case R.id.back:
-			// new RefreshAssetDataSourceAt().execute("");
-//			new RefreshPlanDataSourceAt().execute("");
-			new RefreshResultDataSourceAt().execute("");
-			// this.finish();
-//			initAd();
+			this.finish();
 			break;
 		case R.id.zhengzai:
 			viewPager.setCurrentItem(0);
@@ -218,13 +223,18 @@ public class PlanListActivity extends Activity {
 			Intent intent = new Intent(this, ScanActivityNew.class);
 			startActivity(intent);
 			break;
+		case R.id.shujukugengxin:
+			new RefreshAssetDataSourceAt().execute("");
+			break;
+		case R.id.shujutijiao:
+			break;
 		}
 	}
 
 	private ProgressDialog pd;
 
 	private class RefreshAssetDataSourceAt extends
-			AsyncTask<String, Integer, Integer> {
+			AsyncTask<String, Integer, Long> {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -236,99 +246,81 @@ public class PlanListActivity extends Activity {
 		}
 
 		@Override
-		protected Integer doInBackground(String... arg0) {
+		protected Long doInBackground(String... arg0) {
 			// TODO Auto-generated method stub
 			ArrayList<StockItemNew> sis = new HttpClientUtil(
 					PlanListActivity.this).getAssetInfos(PlanListActivity.this);
 			if (sis == null) {
-				return 0;
+				return 0l;
 			} else {
-				localStockService.save(sis);
-				return 1;
+				return localStockService.save(sis);
 			}
 		}
 
 		@Override
-		protected void onPostExecute(Integer result) {
+		protected void onPostExecute(Long result) {
 			super.onPostExecute(result);
-			pd.dismiss();
-			if (1 == result) {
-				Toast.makeText(PlanListActivity.this, "资产信息数据库更新完成！", 0).show();
-			} else {
-				Toast.makeText(PlanListActivity.this, "资产信息数据库更新失败！", 0).show();
-			}
+			assetNumber = result;
+			new RefreshPlanDataSourceAt().execute("");
 		}
 	}
 
 	private class RefreshPlanDataSourceAt extends
-			AsyncTask<String, Integer, Integer> {
+			AsyncTask<String, Integer, Long> {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			pd = new ProgressDialog(PlanListActivity.this);
-			pd.setTitle("提示");
-			pd.setMessage("盘点计划数据库更新中...");
-			pd.setCancelable(true);
-			pd.show();
 		}
 
 		@Override
-		protected Integer doInBackground(String... arg0) {
+		protected Long doInBackground(String... arg0) {
 			ArrayList<PlanInfo> pis = new HttpClientUtil(PlanListActivity.this)
 					.getAllCheckPlan(PlanListActivity.this);
 			if (pis == null) {
-				return 0;
+				return 0l;
 			} else {
-				localPlanService.save(pis);
-				return 1;
+				return localPlanService.save(pis);
 			}
 		}
 
 		@Override
-		protected void onPostExecute(Integer result) {
+		protected void onPostExecute(Long result) {
 			super.onPostExecute(result);
-			pd.dismiss();
-			if (1 == result) {
-				Toast.makeText(PlanListActivity.this, "盘点计划数据库更新完成！", 0).show();
-			} else {
-				Toast.makeText(PlanListActivity.this, "盘点计划数据库更新失败！", 0).show();
-			}
+			planNumber = result;
+			new RefreshResultDataSourceAt().execute("");
 		}
 	}
 
 	private class RefreshResultDataSourceAt extends
-			AsyncTask<String, Integer, Integer> {
+			AsyncTask<String, Integer, Long> {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			pd = new ProgressDialog(PlanListActivity.this);
-			pd.setTitle("提示");
-			pd.setMessage("盘点结果数据库更新中...");
-			pd.setCancelable(true);
-			pd.show();
 		}
 
 		@Override
-		protected Integer doInBackground(String... arg0) {
-			ArrayList<LocalPlanResult> lprs =  new HttpClientUtil(PlanListActivity.this)
+		protected Long doInBackground(String... arg0) {
+			ArrayList<LocalPlanResult> lprs = new HttpClientUtil(
+					PlanListActivity.this)
 					.getAllCheckPlanInfo(PlanListActivity.this);
 			if (lprs == null) {
-				return 0;
+				return 0l;
 			} else {
-				localPlanResultService.save(lprs);
-				return 1;
+				return localPlanResultService.save(lprs);
 			}
 		}
 
 		@Override
-		protected void onPostExecute(Integer result) {
+		protected void onPostExecute(Long result) {
 			super.onPostExecute(result);
-			pd.dismiss();
-			if (1 == result) {
-				Toast.makeText(PlanListActivity.this, "盘点结果数据库更新完成！", 0).show();
-			} else {
-				Toast.makeText(PlanListActivity.this, "盘点结果数据库更新失败！", 0).show();
+			if (pd != null && pd.isShowing()) {
+				pd.dismiss();
+				pd = null;
 			}
+			planResultNumber = result;
+			String contentStr = "资产数据更新完成，共计" + assetNumber + "条。\n盘点计划数据更新完成，共计"
+					+ planNumber + "条。\n盘点结果数据更新完成，共计" + planResultNumber + "条。";
+			initAd(contentStr);
 		}
 	}
 
@@ -339,17 +331,20 @@ public class PlanListActivity extends Activity {
 		localPlanService.close();
 		localPlanResultService.close();
 	}
-	
-	private void initAd() {
+
+	private void initAd(String contentStr) {
 		ad = new AlertDialog.Builder(this).create();
 		View convertView = LayoutInflater.from(this).inflate(R.layout.dialog_datasource_finish, null);
 		ImageView close = (ImageView) convertView.findViewById(R.id.close);
 		ImageView sure = (ImageView) convertView.findViewById(R.id.sure);
+		TextView content = (TextView) convertView.findViewById(R.id.content);
+		content.setText(contentStr);
 		close.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
 				ad.dismiss();
+				ad = null;
 			}
 		});
 		sure.setOnClickListener(new OnClickListener() {
@@ -357,10 +352,10 @@ public class PlanListActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				ad.dismiss();
+				ad = null;
 			}
 		});
 		ad.setView(convertView, 0, 0, 0, 0);
 		ad.show();
 	}
-
 }

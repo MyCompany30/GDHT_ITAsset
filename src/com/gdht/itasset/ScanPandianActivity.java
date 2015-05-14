@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.gdht.itasset.R.id;
 import com.gdht.itasset.adapter.RfidPanDianAdapter;
+import com.gdht.itasset.db.service.ScanCheckRFIDSDBService;
 import com.gdht.itasset.eventbus.RefreshDatas;
 import com.gdht.itasset.eventbus.RefreshNumberListener;
 import com.gdht.itasset.http.HttpClientUtil;
@@ -57,6 +58,8 @@ public class ScanPandianActivity extends Activity {
 	private String planId;
 	private String userid;
 	private StringBuffer sb;
+	private Handler saveHandler = new Handler();
+	private ScanCheckRFIDSDBService checkRFIDSDBService;
 	private final Runnable accompainimentRunnable = new Runnable() {
 		@Override
 		public void run() {
@@ -83,9 +86,11 @@ public class ScanPandianActivity extends Activity {
 		this.setContentView(R.layout.activity_scan_pandian_new);
 		de.greenrobot.event.EventBus.getDefault().register(this);
 		wd = new WaitingDialog(this);
+		checkRFIDSDBService = new ScanCheckRFIDSDBService(this);
 		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS", Context.MODE_PRIVATE);
 		userid = loginSettings.getString("LOGIN_NAME", "");
 		planId = this.getIntent().getStringExtra("planId");
+		
 		findViews();
 
 		if (App.getRfid() == null) {
@@ -116,8 +121,27 @@ public class ScanPandianActivity extends Activity {
 		accompaniment.init();
 
 		startBtn.setVisibility(View.GONE);
+		rfids.addAll(checkRFIDSDBService.loadDatas(userid));
+		selectRifds.addAll(rfids);
+		if (selectRifds.size() > 0) {
+			num1.setText(selectRifds.size() + "");
+		}
 		start();
+		saveHandler.postDelayed(saveRunnable, 10000);
 	}
+	
+	Runnable saveRunnable = new Runnable() {
+		
+		@Override
+		public void run() {
+			Log.i("a", "save !!!!!!!!!!!!!!");
+			checkRFIDSDBService.deleteAll(userid);
+			for(String s : rfids) {
+				checkRFIDSDBService.saveRFID(s, userid);
+			}
+			saveHandler.postDelayed(this, 10000);
+		}
+	};
 
 	private void findViews() {
 		listView = (ListView) this.findViewById(R.id.listView);
@@ -271,6 +295,8 @@ public class ScanPandianActivity extends Activity {
 		super.onDestroy();
 		de.greenrobot.event.EventBus.getDefault().unregister(this);
 		stop();
+		saveHandler.removeCallbacks(saveRunnable);
+		checkRFIDSDBService.closeDB();
 	}
 	
 	private class PanDianAt extends AsyncTask<String, Integer, Boolean> {
