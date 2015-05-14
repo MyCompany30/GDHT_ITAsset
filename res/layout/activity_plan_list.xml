@@ -108,15 +108,5 @@
             tools:ignore="Orientation" >
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/shujutijiao"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:background="@drawable/selector_shujukutongbu_novalue"
-            android:clickable="true"
-            android:onClick="btnClick"
-            tools:ignore="Orientation" >
-        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

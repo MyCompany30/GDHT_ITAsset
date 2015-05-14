@@ -31,6 +31,7 @@ import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.LocalPlanResult;
 import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.StockItemNew;
+import com.gdht.itasset.utils.GlobalParams;
 
 public class PlanListActivity extends Activity {
 	private ViewPager viewPager;
@@ -50,7 +51,6 @@ public class PlanListActivity extends Activity {
 	private ArrayList<PlanInfo> plans;
 	private int currentSelected;
 	private Long assetNumber = 0l, planNumber = 0l, planResultNumber = 0l;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -170,7 +170,20 @@ public class PlanListActivity extends Activity {
 
 			}
 		});
-		new GetPlanListAt().execute("");
+		if(GlobalParams.LOGIN_TYPE == 2){
+			new GetLocalPlanListAt().execute("");
+		}else {
+			new GetPlanListAt().execute("");
+		}
+		
+	}
+	
+	private class GetLocalPlanListAt extends AsyncTask<String, Integer, String> {
+		@Override
+		protected String doInBackground(String... arg0) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}
 
 	private class GetPlanListAt extends AsyncTask<String, Integer, String> {
@@ -225,8 +238,6 @@ public class PlanListActivity extends Activity {
 			break;
 		case R.id.shujukugengxin:
 			new RefreshAssetDataSourceAt().execute("");
-			break;
-		case R.id.shujutijiao:
 			break;
 		}
 	}

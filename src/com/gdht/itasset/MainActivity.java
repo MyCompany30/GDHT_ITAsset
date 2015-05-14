@@ -114,7 +114,11 @@ public class MainActivity extends Activity {
 					editor.remove(SETTING_PWD);
 				}
 				editor.commit();
-				Toast.makeText(MainActivity.this, "离线登陆", 0).show();
+//				Toast.makeText(MainActivity.this, "离线登陆", 0).show();
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, PlanListActivity.class);
+				intent.putExtra("name", name);
+				startActivity(intent);
 			}
 		});
 
