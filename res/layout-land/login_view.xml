@@ -84,7 +84,8 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="60dp"
-                android:paddingTop="20dp" >
+                android:layout_marginTop="20dp"
+                >
 
                 <CheckBox
                     android:id="@+id/savePwd"
@@ -92,7 +93,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleX="0.8"
-                    android:scaleY="0.8" />
+                    android:scaleY="0.8" 
+                    android:layout_centerVertical="true"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -102,7 +105,9 @@
                     android:paddingLeft="10dp"
                     android:text="记住密码"
                     android:textColor="#1d4f92"
-                    android:textSize="15sp" />
+                    android:textSize="15sp" 
+                    android:layout_centerVertical="true"
+                    />
 
                 <TextView
                     android:id="@+id/optionTv"
@@ -115,7 +120,9 @@
                     android:text="IP设置"
                     android:textColor="#1d4f92"
                     android:textSize="15sp"
-                    android:visibility="visible" />
+                    android:visibility="visible" 
+                    android:layout_centerVertical="true"
+                    />
 
                 <ImageView
                     android:id="@+id/optionImg"
@@ -125,34 +132,32 @@
                     android:scaleType="centerInside"
                     android:scaleX="0.9"
                     android:scaleY="0.9"
-                    android:src="@drawable/option_btn" >
+                    android:src="@drawable/option_btn" 
+                    android:layout_centerVertical="true"
+                    >
                 </ImageView>
             </RelativeLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingTop="40dp"
-                android:layout_marginBottom="20dp"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
-                android:textColor="@android:color/white" >
-
-                <TextView
-                    android:id="@+id/loginBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginRight="50dp"
-                    android:background="@drawable/loginbtn_bg"
-                    android:gravity="center"
-                    android:text="登　录"
-                    android:textColor="#ffffff"
-                    android:textSize="20dp" 
-                    />
-            </LinearLayout>
+            android:id="@+id/onLineLogin"
+            android:layout_width="447dp"
+            android:layout_height="62dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="@drawable/zaixianlogin_btn"
+            android:gravity="center"
+            android:orientation="horizontal" >
+        </LinearLayout>
+<LinearLayout
+            android:id="@+id/offLineLogin"
+            android:layout_width="447dp"
+            android:layout_height="62dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="@drawable/lixianlogin_btn"
+            android:gravity="center"
+            android:orientation="horizontal" >
+        </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
