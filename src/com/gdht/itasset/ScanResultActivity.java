@@ -275,12 +275,11 @@ public class ScanResultActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(ScanResultActivity.this,
-						ScanResultDetailActivity.class);
+				Intent intent = new Intent(ScanResultActivity.this,	ScanResultDetailActivity.class);
 				intent.putExtra("type", "1");
 				intent.putExtra("planId", planId);
 				if(GlobalParams.LOGIN_TYPE == 2 && localPlanResult != null) {
-					intent.putExtra("ypRfid", localPlanResult.getYpRfids());
+					intent.putExtra("rfids", localPlanResult.getYpRfids());
 				}
 				startActivity(intent);
 			}
@@ -303,10 +302,12 @@ public class ScanResultActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(ScanResultActivity.this,
-						ScanResultDetailActivity.class);
+				Intent intent = new Intent(ScanResultActivity.this, ScanResultDetailActivity.class);
 				intent.putExtra("type", "0");
 				intent.putExtra("planId", planId);
+				if(GlobalParams.LOGIN_TYPE == 2 && localPlanResult != null) {
+					intent.putExtra("rfids", localPlanResult.getWpRfids());
+				}
 				startActivity(intent);
 			}
 		});
@@ -329,9 +330,12 @@ public class ScanResultActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(ScanResultActivity.this,
-						ScanResultDetailPYActivity.class);
+						ScanResultDetailActivity.class);
 				intent.putExtra("type", "2");
 				intent.putExtra("planId", planId);
+				if(GlobalParams.LOGIN_TYPE == 2 && localPlanResult != null) {
+					intent.putExtra("rfids", localPlanResult.getPyRfids());
+				}
 				startActivity(intent);
 			}
 		});
@@ -357,6 +361,9 @@ public class ScanResultActivity extends Activity {
 						ScanResultDetailActivity.class);
 				intent.putExtra("type", "3");
 				intent.putExtra("planId", planId);
+				if(GlobalParams.LOGIN_TYPE == 2 && localPlanResult != null) {
+					intent.putExtra("rfids", localPlanResult.getPkRfids());
+				}
 				startActivity(intent);
 			}
 		});
