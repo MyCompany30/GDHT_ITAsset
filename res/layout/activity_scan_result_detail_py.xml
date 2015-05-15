@@ -46,6 +46,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:scaleType="centerInside"
+            android:visibility="gone"
             android:src="@drawable/xinzengbtn" >
         </ImageView>
     </LinearLayout>

@@ -55,7 +55,7 @@ public class PlanListActivity extends Activity {
 	private ArrayList<PlanInfo> plans;
 	private int currentSelected;
 	private Long assetNumber = 0l, planNumber = 0l, planResultNumber = 0l;
-	private LinearLayout shujukugengxin;
+	private ImageView shujukugengxin;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +69,10 @@ public class PlanListActivity extends Activity {
 		viewPager = (ViewPager) this.findViewById(R.id.viewPager);
 		zzBtn = (LinearLayout) this.findViewById(R.id.zhengzai);
 		ypBtn = (LinearLayout) this.findViewById(R.id.yipan);
-		shujukugengxin = (LinearLayout) this.findViewById(R.id.shujukugengxin);
+		shujukugengxin = (ImageView) this.findViewById(R.id.shujukugengxin);
 		inflater = LayoutInflater.from(this);
 	}
-
+	
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -100,6 +100,11 @@ public class PlanListActivity extends Activity {
 			shujukugengxin.setVisibility(View.GONE);
 		}
 		viewPager.setCurrentItem(currentSelected);
+		if(PlanListActivity.this.getResources().getConfiguration().orientation == 0){
+			shujukugengxin.setImageResource(R.drawable.selector_shujukugengxin_novalue_land);
+		}else {
+			shujukugengxin.setImageResource(R.drawable.selector_shujukugengxin_novalue);
+		}
 	}
 
 	private void initPagerView() {
