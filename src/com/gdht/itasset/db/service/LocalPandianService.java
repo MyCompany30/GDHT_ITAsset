@@ -27,7 +27,6 @@ public class LocalPandianService {
 					"insert into local_pandian (username, planid, rfids) values (?, ?, ?)",
 					new String[] { username, planid, rfids });
 		}else {
-			Log.i("a", "local_pandian 数据库已经存在  " + rfidList.toString());
 		}
 	}
 
