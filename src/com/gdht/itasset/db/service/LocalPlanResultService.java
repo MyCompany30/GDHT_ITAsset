@@ -49,7 +49,7 @@ public class LocalPlanResultService {
 			lpr.setTitle(cursor.getString(cursor.getColumnIndex("title")));
 			lpr.setDepts(cursor.getString(cursor.getColumnIndex("depts")));
 //			lpr.setPersons(cursor.getString(cursor.getColumnIndex("persons")));
-			lpr.setPersons(realname);
+			lpr.setPersons(realname); 
 			lpr.setNumber(cursor.getString(cursor.getColumnIndex("number")));
 			lpr.setDetail(cursor.getString(cursor.getColumnIndex("detail")));
 			lpr.setPlanstate(cursor.getString(cursor.getColumnIndex("planstate")));
