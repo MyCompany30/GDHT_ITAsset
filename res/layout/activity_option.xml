@@ -143,6 +143,45 @@
                         android:textColor="#ffffff"
                         android:textSize="18dp" />
                 </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#58a1d8" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="60dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="本地数据库更新"
+                        android:textColor="#58a1d8"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/gengxinDB"
+                        android:layout_width="117dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/gengxin_04"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:onClick="btnClick"
+                        android:textColor="#ffffff"
+                        android:textSize="18dp" />
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#58a1d8" />
             </LinearLayout>
         </LinearLayout>
 

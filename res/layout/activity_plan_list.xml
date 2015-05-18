@@ -105,6 +105,7 @@
             android:background="@drawable/selector_shujukugengxin_novalue"
             android:clickable="true"
             android:onClick="btnClick"
+            android:visibility="gone"
             tools:ignore="Orientation" >
         </ImageView>
                 <ImageView

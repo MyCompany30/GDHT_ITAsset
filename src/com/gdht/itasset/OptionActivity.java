@@ -1,7 +1,6 @@
 package com.gdht.itasset;
 
 import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -9,19 +8,25 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.gdht.itasset.db.service.LocalPandianService;
+import com.gdht.itasset.db.service.LocalPlanResultService;
+import com.gdht.itasset.db.service.LocalPlanService;
+import com.gdht.itasset.db.service.LocalRealNameService;
+import com.gdht.itasset.db.service.LocalStockService;
 import com.gdht.itasset.http.HttpClientUtil;
+import com.gdht.itasset.pojo.LocalPlanResult;
+import com.gdht.itasset.pojo.PlanInfo;
+import com.gdht.itasset.pojo.RealName;
 import com.gdht.itasset.pojo.StockItemNew;
 import com.gdht.itasset.utils.AppSharedPreferences;
-import com.gdht.itasset.widget.WaitingDialog;
 
 public class OptionActivity extends Activity {
 	private EditText ipEdt = null;
@@ -36,11 +41,27 @@ public class OptionActivity extends Activity {
 	private View optionView = null;
 	private View ipconfigView =  null;
 	private String model;
+	private Long assetNumber = 0l, planNumber = 0l, planResultNumber = 0l;
+	private LocalStockService localStockService;
+	private LocalPlanService localPlanService;
+	private LocalPlanResultService localPlanResultService;
+	private LocalRealNameService localRealNameService;
+	private LocalPandianService localPandianService;
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		localStockService = new LocalStockService(this);
+		localPlanService = new LocalPlanService(this);
+		super.onResume();
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_option);
-		
+		localPlanResultService = new LocalPlanResultService(this);
+		localRealNameService = new LocalRealNameService(this);
+		localPandianService = new LocalPandianService(this);
 		optionView = findViewById(R.id.option);
 		ipconfigView = findViewById(R.id.ipconfig);
 		model = getIntent().getStringExtra("model");
@@ -128,6 +149,9 @@ public class OptionActivity extends Activity {
 //			initAd();
 			new RefreshDataSourceAt().execute("");
 			break;
+		case R.id.gengxinDB:
+			new RefreshAssetDataSourceAt().execute("");
+			break;
 		}
 	}
 	
@@ -163,6 +187,7 @@ public class OptionActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		localStockService.close();
 		asp.setGongLv(Integer.parseInt(gonglvEt.getText().toString().trim()));
 	}
 	
@@ -181,4 +206,146 @@ public class OptionActivity extends Activity {
 		ad.show();
 	}
 	
+
+	private class RefreshAssetDataSourceAt extends AsyncTask<String, Integer, Long> {
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pd = new ProgressDialog(OptionActivity.this);
+			pd.setTitle("提示");
+			pd.setMessage("资产信息数据库更新中...");
+			pd.setCancelable(true);
+			pd.show();
+		}
+
+		@Override
+		protected Long doInBackground(String... arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<StockItemNew> sis = new HttpClientUtil(
+					OptionActivity.this).getAssetInfos(OptionActivity.this);
+			if (sis == null) {
+				return 0l;
+			} else {
+				return localStockService.save(sis);
+			}
+		}
+
+		@Override
+		protected void onPostExecute(Long result) {
+			super.onPostExecute(result);
+			assetNumber = result;
+			new RefreshPlanDataSourceAt().execute("");
+		}
+	}
+	private class RefreshPlanDataSourceAt extends AsyncTask<String, Integer, Long> {
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		}
+		
+		@Override
+		protected Long doInBackground(String... arg0) {
+			ArrayList<PlanInfo> pis = new HttpClientUtil(OptionActivity.this)
+					.getAllCheckPlan(OptionActivity.this);
+			if (pis == null) {
+				return 0l;
+			} else {
+				return localPlanService.save(pis);
+			}
+		}
+		
+		@Override
+		protected void onPostExecute(Long result) {
+			super.onPostExecute(result);
+			planNumber = result;
+			new RefreshResultDataSourceAt().execute("");
+		}
+	}
+	private class RefreshResultDataSourceAt extends AsyncTask<String, Integer, Long> {
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		}
+		
+		@Override
+		protected Long doInBackground(String... arg0) {
+			ArrayList<LocalPlanResult> lprs = new HttpClientUtil(
+					OptionActivity.this)
+					.getAllCheckPlanInfo(OptionActivity.this);
+			if (lprs == null) {
+				return 0l;
+			} else {
+				return localPlanResultService.save(lprs);
+			}
+		}
+		
+		@Override
+		protected void onPostExecute(Long result) {
+			super.onPostExecute(result);
+			planResultNumber = result;
+			new RefreshRealNameSourceAt().execute("");
+		}
+	}
+	private class RefreshRealNameSourceAt extends AsyncTask<String, Integer, Long> {
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		}
+		
+		@Override
+		protected Long doInBackground(String... arg0) {
+			ArrayList<RealName> lprs = new HttpClientUtil(
+					OptionActivity.this)
+					.nameCompare(OptionActivity.this);
+			if (lprs == null) {
+				return 0l;
+			} else {
+				return localRealNameService.save(lprs);
+			}
+		}
+		
+		@Override
+		protected void onPostExecute(Long result) {
+			super.onPostExecute(result);
+			if (pd != null && pd.isShowing()) {
+				pd.dismiss();
+				pd = null;
+			}
+			String contentStr = "资产数据更新完成，共计" + assetNumber
+					+ "条。\n盘点计划数据更新完成，共计" + planNumber + "条。\n盘点结果数据更新完成，共计"
+					+ planResultNumber + "条。";
+			initAd(contentStr);
+		}
+	}
+	private void initAd(String contentStr) {
+
+		View dialogView = (RelativeLayout) LayoutInflater.from(this).inflate(
+				R.layout.dialog_datasource_finish, null);
+
+		ad = new AlertDialog.Builder(this).create();
+		ad.setCanceledOnTouchOutside(false);
+
+		ImageView close = (ImageView) dialogView.findViewById(R.id.close);
+		ImageView sure = (ImageView) dialogView.findViewById(R.id.sure);
+		TextView content = (TextView) dialogView.findViewById(R.id.content);
+		content.setText(contentStr);
+		close.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				ad.dismiss();
+				ad = null;
+			}
+		});
+		sure.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				ad.dismiss();
+				ad = null;
+			}
+		});
+		ad.show();
+		ad.getWindow().setContentView((RelativeLayout) dialogView);
+	}
 }

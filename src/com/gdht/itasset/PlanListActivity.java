@@ -101,17 +101,21 @@ public class PlanListActivity extends Activity {
 			ypBtn.setBackgroundResource(R.drawable.tab_selected);
 			break;
 		}
+		/*
 		if (GlobalParams.LOGIN_TYPE == 1) {
 			shujukugengxin.setVisibility(View.VISIBLE);
 		} else {
 			shujukugengxin.setVisibility(View.GONE);
 		}
+		*/
 		viewPager.setCurrentItem(currentSelected);
+		/*
 		if(PlanListActivity.this.getResources().getConfiguration().orientation == 0){
 			shujukugengxin.setImageResource(R.drawable.selector_shujukugengxin_novalue_land);
 		}else {
 			shujukugengxin.setImageResource(R.drawable.selector_shujukugengxin_novalue);
 		}
+		*/
 	}
 
 	private void initPagerView() {
@@ -289,7 +293,7 @@ public class PlanListActivity extends Activity {
 			startActivity(intent);
 			break;
 		case R.id.shujukugengxin:
-			 new RefreshAssetDataSourceAt().execute("");
+			new RefreshAssetDataSourceAt().execute("");
 			break;
 		}
 	}
