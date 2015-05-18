@@ -243,9 +243,13 @@
             android:name="com.gdht.itasset.ScanResultDetailPYActivity"
             android:label="@string/title_activity_scan_result_detail_py" >
         </activity>
-                <activity
+        <activity
             android:name="com.gdht.itasset.ScanResultDetailActivity"
             android:label="@string/title_activity_scan_result_detail_py" >
+        </activity>
+        <activity
+            android:name="com.gdht.itasset.HomePageActivity"
+            android:label="@string/title_activity_home_page" >
         </activity>
     </application>
 
