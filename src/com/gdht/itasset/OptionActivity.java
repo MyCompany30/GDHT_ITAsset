@@ -47,6 +47,7 @@ public class OptionActivity extends Activity {
 	private LocalPlanResultService localPlanResultService;
 	private LocalRealNameService localRealNameService;
 	private LocalPandianService localPandianService;
+	private TextView titleTv = null;
 	
 	@Override
 	protected void onResume() {
@@ -64,11 +65,14 @@ public class OptionActivity extends Activity {
 		localPandianService = new LocalPandianService(this);
 		optionView = findViewById(R.id.option);
 		ipconfigView = findViewById(R.id.ipconfig);
+		titleTv = (TextView) findViewById(R.id.title);
 		model = getIntent().getStringExtra("model");
 		if(model.equals("0")){
 			optionView.setVisibility(View.GONE);
+			titleTv.setText("ＩＰ设置");
 		}else if(model.equals("1")){
 			ipconfigView.setVisibility(View.GONE);
+			titleTv.setText("设置");
 		}
 		asp = new AppSharedPreferences(this, "gdht");
 		jiaBtn = (TextView) findViewById(R.id.jia);
