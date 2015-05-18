@@ -21,4 +21,5 @@ public class GlobalParams {
 	public static String quyu = "";
 	public static String huojia = "";
 	public static int LOGIN_TYPE = 1;  //1 在线登陆， 2离线登陆
+	public static String pandian_str = "";
 }

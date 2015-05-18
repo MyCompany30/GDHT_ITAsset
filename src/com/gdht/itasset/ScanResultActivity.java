@@ -22,7 +22,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gdht.itasset.db.service.LocalPandianService;
 import com.gdht.itasset.db.service.LocalPlanResultService;
+import com.gdht.itasset.eventbus.GetPandianStrListener;
 import com.gdht.itasset.eventbus.RefreshDatas;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.LocalPlanResult;
@@ -47,6 +49,8 @@ public class ScanResultActivity extends Activity {
 	private LinearLayout finishBtn, tongbuBtn;
 	private LocalPlanResultService localPlanResultService;
 	private LocalPlanResult localPlanResult;
+	private String pandianStr = "";
+	private LocalPandianService localPandianService;
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -65,6 +69,7 @@ public class ScanResultActivity extends Activity {
 			planState = getIntent().getStringExtra("planState");
 		}
 		localPlanResultService = new LocalPlanResultService(this);
+		localPandianService = new LocalPandianService(this);
 		wd = new WaitingDialog(this);
 		planId = this.getIntent().getStringExtra("planId");
 		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS",
@@ -79,8 +84,8 @@ public class ScanResultActivity extends Activity {
 			finishBtn.setVisibility(View.VISIBLE);
 			new GetInfoAt().execute("");
 		} else {
-			tongbuBtn.setVisibility(View.VISIBLE);
-			finishBtn.setVisibility(View.GONE);
+			tongbuBtn.setVisibility(View.GONE);
+			finishBtn.setVisibility(View.VISIBLE);
 			new GetLoccalInfoAt().execute("");
 		}
 	}
@@ -380,58 +385,63 @@ public class ScanResultActivity extends Activity {
 			startActivity(intent);
 			break;
 		case R.id.finish:
-			new AlertDialog.Builder(ScanResultActivity.this)
-					.setTitle("完成计划？")
-					.setNegativeButton("取消", null)
-					.setPositiveButton("确定",
-							new DialogInterface.OnClickListener() {
+			if(GlobalParams.LOGIN_TYPE == 1) {
+				new AlertDialog.Builder(ScanResultActivity.this)
+				.setTitle("完成计划？")
+				.setNegativeButton("取消", null)
+				.setPositiveButton("确定",
+						new DialogInterface.OnClickListener() {
 
-								@Override
-								public void onClick(DialogInterface dialog,
-										int which) {
-									// TODO Auto-generated method stub
-									new AsyncTask<Void, Void, Boolean>() {
-										WaitingDialog dialog = new WaitingDialog(
-												ScanResultActivity.this);
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// TODO Auto-generated method stub
+								new AsyncTask<Void, Void, Boolean>() {
+									WaitingDialog dialog = new WaitingDialog(
+											ScanResultActivity.this);
 
-										protected void onPreExecute() {
-											dialog.show();
-										};
+									protected void onPreExecute() {
+										dialog.show();
+									};
 
-										@Override
-										protected Boolean doInBackground(
-												Void... params) {
+									@Override
+									protected Boolean doInBackground(
+											Void... params) {
 
-											return new HttpClientUtil(
-													ScanResultActivity.this)
-													.finishInventoryPlan(
-															ScanResultActivity.this,
-															planId);
+										return new HttpClientUtil(
+												ScanResultActivity.this)
+												.finishInventoryPlan(
+														ScanResultActivity.this,
+														planId);
+									}
+
+									protected void onPostExecute(
+											Boolean result) {
+										dialog.dismiss();
+										if (result) {
+											Toast.makeText(
+													ScanResultActivity.this,
+													"完成计划请求成功",
+													Toast.LENGTH_SHORT)
+													.show();
+											ScanResultActivity.this
+													.finish();
+										} else {
+											Toast.makeText(
+													ScanResultActivity.this,
+													"完成计划请求失败",
+													Toast.LENGTH_SHORT)
+													.show();
 										}
+									};
+								}.execute();
+							}
+						}).show();
 
-										protected void onPostExecute(
-												Boolean result) {
-											dialog.dismiss();
-											if (result) {
-												Toast.makeText(
-														ScanResultActivity.this,
-														"完成计划请求成功",
-														Toast.LENGTH_SHORT)
-														.show();
-												ScanResultActivity.this
-														.finish();
-											} else {
-												Toast.makeText(
-														ScanResultActivity.this,
-														"完成计划请求失败",
-														Toast.LENGTH_SHORT)
-														.show();
-											}
-										};
-									}.execute();
-								}
-							}).show();
-
+			}else {
+//				Toast.makeText(ScanResultActivity.this, GlobalParams.pandian_str, 0).show();
+				localPandianService.save(planId, userid, GlobalParams.pandian_str);
+			}
 			break;
 		}
 	}
@@ -440,10 +450,12 @@ public class ScanResultActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		EventBus.getDefault().unregister(this);
+		localPandianService.close();
 	}
 
 	public void onEvent(RefreshDatas event) {
 		new GetInfoAt().execute("");
 	}
 
+	
 }

@@ -24,6 +24,7 @@ import com.gdht.itasset.R.id;
 import com.gdht.itasset.adapter.RfidPanDianAdapter;
 import com.gdht.itasset.db.service.LocalPandianService;
 import com.gdht.itasset.db.service.ScanCheckRFIDSDBService;
+import com.gdht.itasset.eventbus.GetPandianStrListener;
 import com.gdht.itasset.eventbus.RefreshDatas;
 import com.gdht.itasset.eventbus.RefreshNumberListener;
 import com.gdht.itasset.http.HttpClientUtil;
@@ -62,7 +63,6 @@ public class ScanPandianActivity extends Activity {
 	private StringBuffer sb;
 	private Handler saveHandler = new Handler();
 	private ScanCheckRFIDSDBService checkRFIDSDBService;
-	private LocalPandianService localPandianService;
 	private final Runnable accompainimentRunnable = new Runnable() {
 		@Override
 		public void run() {
@@ -90,7 +90,6 @@ public class ScanPandianActivity extends Activity {
 		de.greenrobot.event.EventBus.getDefault().register(this);
 		wd = new WaitingDialog(this);
 		checkRFIDSDBService = new ScanCheckRFIDSDBService(this);
-		localPandianService = new LocalPandianService(this);
 		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS", Context.MODE_PRIVATE);
 		userid = loginSettings.getString("LOGIN_NAME", "");
 		planId = this.getIntent().getStringExtra("planId");
@@ -131,7 +130,7 @@ public class ScanPandianActivity extends Activity {
 			num1.setText(selectRifds.size() + "");
 		}
 		start();
-		saveHandler.postDelayed(saveRunnable, 10000);
+		saveHandler.postDelayed(saveRunnable, 300000);
 	}
 	
 	Runnable saveRunnable = new Runnable() {
@@ -143,7 +142,7 @@ public class ScanPandianActivity extends Activity {
 			for(String s : rfids) {
 				checkRFIDSDBService.saveRFID(s, userid);
 			}
-			saveHandler.postDelayed(this, 10000);
+			saveHandler.postDelayed(this, 300000);
 		}
 	};
 
@@ -179,8 +178,8 @@ public class ScanPandianActivity extends Activity {
 				if(GlobalParams.LOGIN_TYPE == 1) {
 					new PanDianAt().execute("");
 				}else {
-//					Toast.makeText(ScanPandianActivity.this, sb.toString(), 0).show();
-					localPandianService.save(planId, userid, sb.toString());
+					GlobalParams.pandian_str = sb.toString();
+					ScanPandianActivity.this.finish();
 				}
 			}
 			
@@ -311,7 +310,6 @@ public class ScanPandianActivity extends Activity {
 		stop();
 		saveHandler.removeCallbacks(saveRunnable);
 		checkRFIDSDBService.closeDB();
-		localPandianService.close();
 	}
 	
 	private class PanDianAt extends AsyncTask<String, Integer, Boolean> {

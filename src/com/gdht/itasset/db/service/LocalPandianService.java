@@ -21,13 +21,18 @@ public class LocalPandianService {
 	}
 
 	public void save(String planid, String username, String rfids) {
-		ArrayList<String> rfidList = getRifdsByPlanId(planid, username);
-		if(rfidList == null) {
-			db.execSQL(
-					"insert into local_pandian (username, planid, rfids) values (?, ?, ?)",
-					new String[] { username, planid, rfids });
-		}else {
-			Log.i("a", "local_pandian 数据库已经存在  " + rfidList.toString());
+		String[] keys = rfids.split(",");
+		for(String s : keys) {
+			String ss = s.replaceAll("'", "");
+			String stockPlanId = getPlanIdFromStock(ss);
+			Log.i("a", "stockPlanId = " + stockPlanId + " planId = " + planid);
+			if(stockPlanId.equals(planid)) {
+				if(getCountByRfid(username, planid, s)) {
+					
+				}else {
+					db.execSQL("insert into local_pandian(username, planid, rfid) values (?, ?, ?)", new String[]{username, planid, s});
+				}
+			}
 		}
 	}
 
@@ -36,7 +41,7 @@ public class LocalPandianService {
 		Cursor cursor = db.rawQuery("select rfids from local_pandian where planid = ? and username = ?", new String[] {planid, username});
 		String rfidStr = "";
 		if(cursor.moveToFirst()) {
-			rfidStr = cursor.getString(cursor.getColumnIndex("rfids"));
+			rfidStr = cursor.getString(cursor.getColumnIndex("rfid"));
 			String[] str = rfidStr.split(",");
 			if(str.length > 0) {
 				rfids = new ArrayList<String>();
@@ -50,12 +55,28 @@ public class LocalPandianService {
 
 	public void delete() {
 		if (getCount()) {
-			db.execSQL("delete from realnames");
+			db.execSQL("delete from local_pandian");
 		}
+	}
+	
+	public String getPlanIdFromStock(String rfid) {
+		String result = "";
+		Cursor cursor = db.rawQuery("select assetCheckplanId from local_stock where rfidnumber = ? ", new String[]{ rfid });
+		if(cursor.moveToFirst()) {
+			result = cursor.getString(cursor.getColumnIndex("assetCheckplanId"));
+		}
+		return result;
 	}
 
 	public boolean getCount() {
-		Cursor cursor = db.rawQuery("select count(*) from realnames", null);
+		Cursor cursor = db.rawQuery("select count(*) from local_pandian", null);
+		cursor.moveToNext();
+		Long count = cursor.getLong(0);
+		return count > 0 ? true : false;
+	}
+	
+	public boolean getCountByRfid(String username,String planid,String rfid) {
+		Cursor cursor = db.rawQuery("select count(*) from local_pandian where username = ? and planid = ? and rfid = ?", new String[]{username, planid, rfid});
 		cursor.moveToNext();
 		Long count = cursor.getLong(0);
 		return count > 0 ? true : false;

@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.gdht.itasset.adapter.GuideActivityPagerViewAdapter;
 import com.gdht.itasset.adapter.PlanListAdapterNew;
+import com.gdht.itasset.db.service.LocalPandianService;
 import com.gdht.itasset.db.service.LocalPlanResultService;
 import com.gdht.itasset.db.service.LocalPlanService;
 import com.gdht.itasset.db.service.LocalRealNameService;
@@ -50,26 +51,27 @@ public class PlanListActivity extends Activity {
 	private LocalPlanService localPlanService;
 	private LocalPlanResultService localPlanResultService;
 	private LocalRealNameService localRealNameService;
+	private LocalPandianService localPandianService;
 	private AlertDialog ad;
 	private String name;
 	private ArrayList<PlanInfo> plans;
 	private int currentSelected;
 	private Long assetNumber = 0l, planNumber = 0l, planResultNumber = 0l;
-	private ImageView shujukugengxin;
+	private ImageView shujukugengxin, shujutongbu;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_plan_list);
-		localStockService = new LocalStockService(this);
-		localPlanService = new LocalPlanService(this);
 		localPlanResultService = new LocalPlanResultService(this);
 		localRealNameService = new LocalRealNameService(this);
+		localPandianService = new LocalPandianService(this);
 		name = getIntent().getStringExtra("name");
 		viewPager = (ViewPager) this.findViewById(R.id.viewPager);
 		zzBtn = (LinearLayout) this.findViewById(R.id.zhengzai);
 		ypBtn = (LinearLayout) this.findViewById(R.id.yipan);
 		shujukugengxin = (ImageView) this.findViewById(R.id.shujukugengxin);
+		shujutongbu = (ImageView) this.findViewById(R.id.shujutongbu);
 		inflater = LayoutInflater.from(this);
 	}
 	
@@ -81,6 +83,11 @@ public class PlanListActivity extends Activity {
 		ypPlanInfos = new ArrayList<PlanInfo>();
 		localStockService = new LocalStockService(this);
 		localPlanService = new LocalPlanService(this);
+		if(localPandianService.getCount()) {
+			shujutongbu.setVisibility(View.VISIBLE);
+		}else {
+			shujutongbu.setVisibility(View.GONE);
+		}
 		initPagerView();
 		switch (currentSelected) {
 		case 0:
@@ -188,8 +195,10 @@ public class PlanListActivity extends Activity {
 			}
 		});
 		if (GlobalParams.LOGIN_TYPE == 2) {
+			Toast.makeText(PlanListActivity.this, "2", 0).show();
 			new GetLocalPlanListAt().execute("");
 		} else {
+			Toast.makeText(PlanListActivity.this, "1", 0).show();
 			new GetPlanListAt().execute("");
 		}
 
@@ -411,6 +420,7 @@ public class PlanListActivity extends Activity {
 		localStockService.close();
 		localPlanService.close();
 		localPlanResultService.close();
+		localPandianService.close();
 	}
 
 	private void initAd(String contentStr) {
