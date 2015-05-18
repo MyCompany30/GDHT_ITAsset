@@ -47,7 +47,9 @@ public class HomePageActivity extends Activity {
 			HomePageActivity.this.startActivity(intent);
 			break;
 		case R.id.shezhi:
-			startActivity(new Intent().setClass(HomePageActivity.this, OptionActivity.class));
+			Intent shezhiIntent = new Intent().setClass(HomePageActivity.this, OptionActivity.class);
+			shezhiIntent.putExtra("model", "1");
+			startActivity(shezhiIntent);
 			break;
 		}
 	}

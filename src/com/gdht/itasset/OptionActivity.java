@@ -33,10 +33,22 @@ public class OptionActivity extends Activity {
 	private ProgressDialog pd;
 	private AppSharedPreferences asp;
 	private AlertDialog ad;
+	private View optionView = null;
+	private View ipconfigView =  null;
+	private String model;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_option);
+		
+		optionView = findViewById(R.id.option);
+		ipconfigView = findViewById(R.id.ipconfig);
+		model = getIntent().getStringExtra("model");
+		if(model.equals("0")){
+			optionView.setVisibility(View.GONE);
+		}else if(model.equals("1")){
+			ipconfigView.setVisibility(View.GONE);
+		}
 		asp = new AppSharedPreferences(this, "gdht");
 		jiaBtn = (TextView) findViewById(R.id.jia);
 		jianBtn = (TextView) findViewById(R.id.jian);

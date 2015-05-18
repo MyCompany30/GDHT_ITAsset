@@ -115,7 +115,6 @@
                 android:text="IP设置"
                 android:textColor="#1d4f92"
                 android:textSize="15sp" 
-                android:visibility="invisible"
                 android:layout_centerVertical="true"/>
 
             <ImageView
@@ -127,7 +126,6 @@
                 android:scaleX="0.8"
                 android:scaleY="0.8"
                 android:src="@drawable/option_btn" 
-                android:visibility="invisible"
                 android:layout_centerVertical="true">
             </ImageView>
         </RelativeLayout>

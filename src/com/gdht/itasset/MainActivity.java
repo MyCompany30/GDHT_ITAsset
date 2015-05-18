@@ -141,6 +141,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, OptionActivity.class);
+				intent.putExtra("model", "0");
 				startActivity(intent);
 			}
 		});
