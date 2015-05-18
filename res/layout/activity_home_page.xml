@@ -74,6 +74,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="25dp"
                 android:layout_marginRight="50dp"
+                android:layout_marginLeft="20dp"
                 android:clickable="true"
                 android:gravity="center"
                 android:onClick="btnClick"
@@ -101,7 +102,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/rfidScan"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="50dp"
                 android:layout_toLeftOf="@+id/rfidScan"
                 android:clickable="true"
                 android:gravity="center"
@@ -119,7 +121,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:text="扫描"
                     android:textColor="#000000"
                     android:textSize="25dp" />
