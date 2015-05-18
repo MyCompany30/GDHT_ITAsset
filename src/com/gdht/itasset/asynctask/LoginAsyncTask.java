@@ -3,6 +3,7 @@ package com.gdht.itasset.asynctask;
 
 import java.util.ArrayList;
 
+import com.gdht.itasset.HomePageActivity;
 import com.gdht.itasset.MainActivity;
 import com.gdht.itasset.PlanActivity;
 import com.gdht.itasset.PlanListActivity;
@@ -83,7 +84,7 @@ public class LoginAsyncTask extends AsyncTask<String, String, String> {
 				editor.putString("LOGIN_NAME", name);
 				//new AppSharedPreferences(activity, "gdht").saveIP(ipStr);
 				Intent intent = new Intent();
-				intent.setClass(activity, PlanListActivity.class);
+				intent.setClass(activity, HomePageActivity.class);
 				intent.putExtra("planList", dataList);
 				intent.putExtra("name", name);
 				activity.startActivity(intent);

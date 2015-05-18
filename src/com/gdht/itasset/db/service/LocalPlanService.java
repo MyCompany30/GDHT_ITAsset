@@ -56,7 +56,6 @@ public class LocalPlanService {
 		PlanInfo pi = null;
 		String sql = "select * from local_plan where persons like '" + username +",%' or persons like '%," + username + 
 				",%' or persons like '" + username + "' or persons like '%," + username + "'";
-		Log.i("a", "sql = " + sql);
 		Cursor cursor = db.rawQuery(sql, null);
 		while(cursor.moveToNext()) {
 			pi = new PlanInfo();

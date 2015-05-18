@@ -35,7 +35,6 @@ public class TimeLabeler extends Labeler {
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(time);
         c.set(Calendar.MINUTE, c.get(Calendar.MINUTE)/MINUTEINTERVAL*MINUTEINTERVAL);
-        Log.v("GETELEM","getelem: "+c.get(Calendar.MINUTE));
         return timeObjectfromCalendar(c);
     }
 

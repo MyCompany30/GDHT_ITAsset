@@ -88,5 +88,6 @@
     <string name="title_activity_asset_detail">AssetDetailActivity</string>
     <string name="title_activity_scan_result_detail">ScanResultDetailActivity</string>
     <string name="title_activity_scan_result_detail_py">ScanResultDetailPYActivity</string>
+    <string name="title_activity_home_page">HomePageActivity</string>
 
 </resources>

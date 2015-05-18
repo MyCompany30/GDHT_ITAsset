@@ -118,7 +118,7 @@ public class MainActivity extends Activity {
 				GlobalParams.LOGIN_TYPE = 2;
 //				Toast.makeText(MainActivity.this, "离线登陆", 0).show();
 				Intent intent = new Intent();
-				intent.setClass(MainActivity.this, PlanListActivity.class);
+				intent.setClass(MainActivity.this, HomePageActivity.class);
 				intent.putExtra("name", name);
 				startActivity(intent);
 			}
