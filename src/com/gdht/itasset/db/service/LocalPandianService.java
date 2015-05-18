@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.gdht.itasset.db.GDHTOpenHelper;
+import com.gdht.itasset.pojo.LocalPandian;
 import com.gdht.itasset.pojo.RealName;
 
 public class LocalPandianService {
@@ -26,13 +27,13 @@ public class LocalPandianService {
 			String ss = s.replaceAll("'", "");
 			String stockPlanId = getPlanIdFromStock(ss);
 			Log.i("a", "stockPlanId = " + stockPlanId + " planId = " + planid);
-			if(stockPlanId.equals(planid)) {
+//			if(stockPlanId.equals(planid)) {
 				if(getCountByRfid(username, planid, s)) {
 					
 				}else {
 					db.execSQL("insert into local_pandian(username, planid, rfid) values (?, ?, ?)", new String[]{username, planid, s});
 				}
-			}
+//			}
 		}
 	}
 
@@ -80,6 +81,35 @@ public class LocalPandianService {
 		cursor.moveToNext();
 		Long count = cursor.getLong(0);
 		return count > 0 ? true : false;
+	}
+	
+	public boolean getCountByPlanId(String username,String planid) {
+		Cursor cursor = db.rawQuery("select count(*) from local_pandian where username = ? and planid = ? ", new String[]{username, planid});
+		cursor.moveToNext();
+		Long count = cursor.getLong(0);
+		return count > 0 ? true : false;
+	}
+	
+	public List<LocalPandian> getLocalPandian(String username) {
+		List<LocalPandian> lps = new ArrayList<LocalPandian>();
+		List<String> planIds = new ArrayList<String>();
+		Cursor cursor = db.rawQuery("select planid from  local_pandian where username = ? group by planid  ", new String[]{username});
+		while(cursor.moveToNext()) {
+			planIds.add(cursor.getString(cursor.getColumnIndex("planid")));
+		}
+		for(String s : planIds) {
+			LocalPandian lp = new LocalPandian();
+			lp.setPlanId(s);
+			StringBuffer sb = new StringBuffer();
+			cursor = db.rawQuery("select rfid from local_pandian where username = ? and planid = ?", new String[]{username, s});
+			while(cursor.moveToNext()) {
+				sb.append(cursor.getString(cursor.getColumnIndex("rfid"))).append(",");
+			}
+			sb.deleteCharAt(sb.length() - 1);
+			lp.setRfids(sb.toString());
+			lps.add(lp);
+		}
+		return lps;
 	}
 	
 	public void close() {

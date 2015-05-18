@@ -3,14 +3,19 @@ package com.gdht.itasset;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,11 +36,14 @@ import com.gdht.itasset.db.service.LocalPlanService;
 import com.gdht.itasset.db.service.LocalRealNameService;
 import com.gdht.itasset.db.service.LocalStockService;
 import com.gdht.itasset.http.HttpClientUtil;
+import com.gdht.itasset.pojo.LocalPandian;
 import com.gdht.itasset.pojo.LocalPlanResult;
 import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.RealName;
 import com.gdht.itasset.pojo.StockItemNew;
+import com.gdht.itasset.utils.AppSharedPreferences;
 import com.gdht.itasset.utils.GlobalParams;
+import com.google.gson.Gson;
 
 public class PlanListActivity extends Activity {
 	private ViewPager viewPager;
@@ -58,11 +66,15 @@ public class PlanListActivity extends Activity {
 	private int currentSelected;
 	private Long assetNumber = 0l, planNumber = 0l, planResultNumber = 0l;
 	private ImageView shujukugengxin, shujutongbu;
-
+	private String userid;
+	private SharedPreferences loginSettings;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_plan_list);
+		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS",
+				Context.MODE_PRIVATE);
+		userid = loginSettings.getString("LOGIN_NAME", "");
 		localPlanResultService = new LocalPlanResultService(this);
 		localRealNameService = new LocalRealNameService(this);
 		localPandianService = new LocalPandianService(this);
@@ -195,10 +207,8 @@ public class PlanListActivity extends Activity {
 			}
 		});
 		if (GlobalParams.LOGIN_TYPE == 2) {
-			Toast.makeText(PlanListActivity.this, "2", 0).show();
 			new GetLocalPlanListAt().execute("");
 		} else {
-			Toast.makeText(PlanListActivity.this, "1", 0).show();
 			new GetPlanListAt().execute("");
 		}
 
@@ -229,7 +239,7 @@ public class PlanListActivity extends Activity {
 			// pi.setId("aaaa");
 			// zzPlanInfos.add(pi);
 			zzAdapter = new PlanListAdapterNew(PlanListActivity.this,
-					zzPlanInfos);
+					zzPlanInfos, userid, "1", localPandianService);
 			zzListView.setAdapter(zzAdapter);
 
 			ypAdapter = new PlanListAdapterNew(PlanListActivity.this,
@@ -263,7 +273,7 @@ public class PlanListActivity extends Activity {
 			// pi.setId("aaaa");
 			// zzPlanInfos.add(pi);
 			zzAdapter = new PlanListAdapterNew(PlanListActivity.this,
-					zzPlanInfos);
+					zzPlanInfos, userid, "1", localPandianService);
 			zzListView.setAdapter(zzAdapter);
 
 			ypAdapter = new PlanListAdapterNew(PlanListActivity.this,
@@ -289,8 +299,27 @@ public class PlanListActivity extends Activity {
 			startActivity(intent);
 			break;
 		case R.id.shujukugengxin:
-			 new RefreshAssetDataSourceAt().execute("");
+			new RefreshAssetDataSourceAt().execute("");
 			break;
+		case R.id.shujutongbu:
+			List<LocalPandian> lps = localPandianService.getLocalPandian(userid);
+			if(lps.size() <= 0) {
+				Toast.makeText(PlanListActivity.this, "暂时没有未提交的盘点数据.", 0).show();
+			}else {
+				Gson gson = new Gson();
+				String str = gson.toJson(lps);
+				str = str.replace("\\u0027", "'");
+				Log.i("a", "json = " + str);
+				new DataCommitAt().execute(str);
+			}
+			break;
+		}
+	}
+	
+	private class DataCommitAt extends AsyncTask<String, Integer, String> {
+		@Override
+		protected String doInBackground(String... params) {
+			return new HttpClientUtil(PlanListActivity.this).test(PlanListActivity.this, params[0]);
 		}
 	}
 

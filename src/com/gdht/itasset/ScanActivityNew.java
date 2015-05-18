@@ -117,7 +117,7 @@ public class ScanActivityNew extends Activity {
 		accompaniment.init();
 		
 		startBtn.setVisibility(View.GONE);
-		rfidArray.addAll(checkRFIDSDBService.loadDatas(user));
+//		rfidArray.addAll(checkRFIDSDBService.loadDatas(user));
 		
 		start();
 		

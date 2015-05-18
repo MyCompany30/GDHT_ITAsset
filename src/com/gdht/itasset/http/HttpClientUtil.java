@@ -1338,6 +1338,32 @@ public class HttpClientUtil {
 		}
 		return arrayList;
 	}
+	
+	
+	public String test(Activity activity, String json) {
+		String uri = null;
+		String result = "0";
+		JSONObject jsonObject = null;
+		JSONArray jsonArray = null;
+		uri = context.getResources().getString(R.string.url_test);
+		 Log.i("a", "uri = " + ip + uri);
+		HttpPost post = new HttpPost(ip + uri);
+		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		pairs.add(new BasicNameValuePair("list", json));
+		HttpEntity entity = null;
+		try {
+			entity = new UrlEncodedFormEntity(pairs, "UTF-8");
+			post.setEntity(entity);
+			HttpResponse httpResponse = getHttpClient().execute(post);
+			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+				result = EntityUtils.toString(httpResponse.getEntity());
+				 Log.i("a", "版本号 = " + result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
 
 
