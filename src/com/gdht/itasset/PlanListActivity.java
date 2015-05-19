@@ -43,6 +43,7 @@ import com.gdht.itasset.pojo.RealName;
 import com.gdht.itasset.pojo.StockItemNew;
 import com.gdht.itasset.utils.AppSharedPreferences;
 import com.gdht.itasset.utils.GlobalParams;
+import com.gdht.itasset.widget.WaitingDialog;
 import com.google.gson.Gson;
 
 public class PlanListActivity extends Activity {
@@ -68,12 +69,14 @@ public class PlanListActivity extends Activity {
 	private ImageView shujukugengxin, shujutongbu;
 	private String userid;
 	private SharedPreferences loginSettings;
+	private WaitingDialog wd = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_plan_list);
 		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS",
 				Context.MODE_PRIVATE);
+		wd = new WaitingDialog(this);
 		userid = loginSettings.getString("LOGIN_NAME", "");
 		localPlanResultService = new LocalPlanResultService(this);
 		localRealNameService = new LocalRealNameService(this);
@@ -321,10 +324,29 @@ public class PlanListActivity extends Activity {
 	}
 	
 	private class DataCommitAt extends AsyncTask<String, Integer, String> {
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			wd.dismiss();
+		}
+		
 		@Override
 		protected String doInBackground(String... params) {
-			return new HttpClientUtil(PlanListActivity.this).test(PlanListActivity.this, params[0]);
+			return new HttpClientUtil(PlanListActivity.this).plupdaterfidandplan(PlanListActivity.this, params[0]);
 		}
+		
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			wd.dismiss();
+			if("1".equals(result)) {
+				Toast.makeText(PlanListActivity.this, "数据提交成功!", 0).show();
+			}else {
+				Toast.makeText(PlanListActivity.this, "数据提交失败!", 0).show();
+			}
+		}
+		
 	}
 
 	private ProgressDialog pd;

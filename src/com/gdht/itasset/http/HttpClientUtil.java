@@ -1,6 +1,7 @@
 package com.gdht.itasset.http;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -1340,16 +1341,16 @@ public class HttpClientUtil {
 	}
 	
 	
-	public String test(Activity activity, String json) {
+	public String plupdaterfidandplan(Activity activity, String json) {
 		String uri = null;
 		String result = "0";
 		JSONObject jsonObject = null;
 		JSONArray jsonArray = null;
-		uri = context.getResources().getString(R.string.url_test);
+		uri = context.getResources().getString(R.string.url_plupdaterfidandplan);
 		 Log.i("a", "uri = " + ip + uri);
 		HttpPost post = new HttpPost(ip + uri);
 		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
-		pairs.add(new BasicNameValuePair("list", json));
+		pairs.add(new BasicNameValuePair("data", json));
 		HttpEntity entity = null;
 		try {
 			entity = new UrlEncodedFormEntity(pairs, "UTF-8");
@@ -1357,10 +1358,11 @@ public class HttpClientUtil {
 			HttpResponse httpResponse = getHttpClient().execute(post);
 			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				result = EntityUtils.toString(httpResponse.getEntity());
-				 Log.i("a", "版本号 = " + result);
+//				 Log.i("a", "版本号 = " + result);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			return result;
 		}
 		return result;
 	}
