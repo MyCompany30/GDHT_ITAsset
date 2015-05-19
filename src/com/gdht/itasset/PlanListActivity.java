@@ -72,7 +72,7 @@ public class PlanListActivity extends Activity {
 	private String userid;
 	private SharedPreferences loginSettings;
 	private WaitingDialog wd = null;
-	public static final String CONNECTIVITY_CHANGE_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +92,7 @@ public class PlanListActivity extends Activity {
 		shujukugengxin = (ImageView) this.findViewById(R.id.shujukugengxin);
 		shujutongbu = (ImageView) this.findViewById(R.id.shujutongbu);
 		inflater = LayoutInflater.from(this);
-		registerDateTransReceiver();
+
 	}
 
 	@Override
@@ -485,7 +485,6 @@ public class PlanListActivity extends Activity {
 		localPlanService.close();
 		localPlanResultService.close();
 		localPandianService.close();
-		unregisterReceiver(ccr);
 	}
 
 	private void initAd(String contentStr) {
@@ -519,12 +518,5 @@ public class PlanListActivity extends Activity {
 		ad.show();
 		ad.getWindow().setContentView((RelativeLayout) dialogView);
 	}
-	ConnectionChangeReceiver ccr = null;
-	private void registerDateTransReceiver() {
-		IntentFilter filter = new IntentFilter();
-		filter.addAction(CONNECTIVITY_CHANGE_ACTION);
-		filter.setPriority(1000);
-		ccr = new ConnectionChangeReceiver();
-		registerReceiver(ccr, filter);
-	}
+
 }

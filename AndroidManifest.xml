@@ -251,15 +251,11 @@
             android:name="com.gdht.itasset.HomePageActivity"
             android:label="@string/title_activity_home_page" >
         </activity>
-
-        <receiver
-            android:name="com.gdht.itasset.receiver.ConnectionChangeReceiver"
-            android:label="NetworkConnection" >
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-            </intent-filter>
-        </receiver>
+		<activity android:name="com.gdht.itasset.BlankActivity"
+		    android:theme="@android:style/Theme.Translucent.NoTitleBar"
+		    >
+		    
+		</activity>
     </application>
 
 </manifest>
