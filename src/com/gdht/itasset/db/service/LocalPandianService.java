@@ -60,6 +60,13 @@ public class LocalPandianService {
 		}
 	}
 	
+	public void deleteByUser(String username)  {
+		if(getCountByUser(username)) {
+			db.execSQL("delete from local_pandian  where username = ?", new String[]{username});
+		}
+	}
+	
+	
 	public String getPlanIdFromStock(String rfid) {
 		String result = "";
 		Cursor cursor = db.rawQuery("select assetCheckplanId from local_stock where rfidnumber = ? ", new String[]{ rfid });
@@ -71,6 +78,13 @@ public class LocalPandianService {
 
 	public boolean getCount() {
 		Cursor cursor = db.rawQuery("select count(*) from local_pandian", null);
+		cursor.moveToNext();
+		Long count = cursor.getLong(0);
+		return count > 0 ? true : false;
+	}
+	
+	public boolean getCountByUser(String username) {
+		Cursor cursor = db.rawQuery("select count(*) from local_pandian  where username = ? ", new String[]{username});
 		cursor.moveToNext();
 		Long count = cursor.getLong(0);
 		return count > 0 ? true : false;

@@ -23,10 +23,10 @@ public class ConnectionChangeReceiver extends BroadcastReceiver {
 
 		if (!mobNetInfo.isConnected() && !wifiNetInfo.isConnected()) {
 			// unconnect network
-			Toast.makeText(context, "unconnect network", Toast.LENGTH_LONG).show();
+//			Toast.makeText(context, "unconnect network", Toast.LENGTH_LONG).show();
 		} else {
 			// connect network
-			Toast.makeText(context, "connect network", Toast.LENGTH_LONG).show();
+//			Toast.makeText(context, "connect network", Toast.LENGTH_LONG).show();
 		}
 	}
 }
