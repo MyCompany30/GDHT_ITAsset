@@ -441,6 +441,7 @@ public class ScanResultActivity extends Activity {
 			}else {
 //				Toast.makeText(ScanResultActivity.this, GlobalParams.pandian_str, 0).show();
 				localPandianService.save(planId, userid, GlobalParams.pandian_str);
+				ScanResultActivity.this.finish();
 			}
 			break;
 		}

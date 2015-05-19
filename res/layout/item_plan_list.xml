@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#ffffff"
      >
     
     <View
@@ -16,16 +17,17 @@
         android:padding="10dp"
         >
         <RelativeLayout 
-            android:layout_toLeftOf="@+id/arrow"
+            android:id="@+id/left"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_toLeftOf="@+id/weitijiao"
+            android:layout_centerVertical="true"
             >
             <TextView 
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="看的看的"
                 android:textColor="#000000"
                 android:textSize="20dp"
                 />
@@ -35,7 +37,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
                 android:textColor="#000000"
-                android:text="位置：" 
                 android:layout_below="@+id/name"
                 android:layout_marginTop="5dp"
                 />
@@ -45,12 +46,21 @@
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
                 android:textColor="#000000"
-                android:text="A仓库B货架" 
                 android:layout_below="@+id/name"
                 android:layout_toRightOf="@+id/wz"
                 android:layout_marginTop="5dp"
                 />
         </RelativeLayout>
+        <ImageView
+            android:id="@+id/weitijiao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:background="@drawable/weitijiao_03"
+            android:layout_toLeftOf="@+id/arrow"
+            android:visibility="visible"
+            android:scaleX=".8"
+            android:scaleY=".8"
+            />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
