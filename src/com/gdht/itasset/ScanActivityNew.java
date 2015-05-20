@@ -36,7 +36,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ScanActivityNew extends Activity {
+public class ScanActivityNew extends BaseActivity {
 	private final Accompaniment accompaniment = new Accompaniment(this,	R.raw.tag_inventoried);
 	private Handler accompainimentsHandler;
 	private Timer mTimer;
@@ -101,7 +101,7 @@ public class ScanActivityNew extends Activity {
 				{
 					AppSharedPreferences asp = new AppSharedPreferences(ScanActivityNew.this, "gdht");
 					App.getRfid().setPower(asp.getGongLv());
-					Toast.makeText(ScanActivityNew.this, "当前功率是  = " + App.getRfid().getPower(), 0).show();
+//					Toast.makeText(ScanActivityNew.this, "当前功率是  = " + App.getRfid().getPower(), 0).show();
 //					findViews();
 //					setOnClicks();
 					break;
@@ -253,5 +253,6 @@ public class ScanActivityNew extends Activity {
 			saveHandler.removeCallbacks(saveRunnable);
 			stop();
 			checkRFIDSDBService.closeDB();
+			unregisterReceiver(ccr);
 		}
 }

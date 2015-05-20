@@ -1,8 +1,11 @@
 package com.gdht.itasset;
 
+import com.gdht.itasset.receiver.ConnectionChangeReceiver;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,12 +15,12 @@ public class HomePageActivity extends Activity {
 	private ImageView saomiaoBtn = null;
 	private ImageView pandianBtn = null;
 	private ImageView shezhiBtn = null;
-
+	public static final String CONNECTIVITY_CHANGE_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_page);
-		
+		registerDateTransReceiver();
 		findViews();
 	}
 
@@ -52,5 +55,20 @@ public class HomePageActivity extends Activity {
 			startActivity(shezhiIntent);
 			break;
 		}
+	}
+	
+	ConnectionChangeReceiver ccr = null;
+	private void registerDateTransReceiver() {
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(CONNECTIVITY_CHANGE_ACTION);
+		filter.setPriority(1000);
+		ccr = new ConnectionChangeReceiver();
+		registerReceiver(ccr, filter);
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(ccr);
 	}
 }

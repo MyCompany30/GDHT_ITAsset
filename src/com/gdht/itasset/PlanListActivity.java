@@ -10,6 +10,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ import com.gdht.itasset.pojo.LocalPlanResult;
 import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.RealName;
 import com.gdht.itasset.pojo.StockItemNew;
+import com.gdht.itasset.receiver.ConnectionChangeReceiver;
 import com.gdht.itasset.utils.AppSharedPreferences;
 import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.widget.WaitingDialog;
@@ -70,6 +72,8 @@ public class PlanListActivity extends Activity {
 	private String userid;
 	private SharedPreferences loginSettings;
 	private WaitingDialog wd = null;
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,19 +92,21 @@ public class PlanListActivity extends Activity {
 		shujukugengxin = (ImageView) this.findViewById(R.id.shujukugengxin);
 		shujutongbu = (ImageView) this.findViewById(R.id.shujutongbu);
 		inflater = LayoutInflater.from(this);
+
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+//		Toast.makeText(this, "onResume", 0).show();
 		zzPlanInfos = new ArrayList<PlanInfo>();
 		ypPlanInfos = new ArrayList<PlanInfo>();
 		localStockService = new LocalStockService(this);
 		localPlanService = new LocalPlanService(this);
-		if(localPandianService.getCount()) {
+		if (localPandianService.getCount()) {
 			shujutongbu.setVisibility(View.VISIBLE);
-		}else {
+		} else {
 			shujutongbu.setVisibility(View.GONE);
 		}
 		initPagerView();
@@ -117,20 +123,18 @@ public class PlanListActivity extends Activity {
 			break;
 		}
 		/*
-		if (GlobalParams.LOGIN_TYPE == 1) {
-			shujukugengxin.setVisibility(View.VISIBLE);
-		} else {
-			shujukugengxin.setVisibility(View.GONE);
-		}
-		*/
+		 * if (GlobalParams.LOGIN_TYPE == 1) {
+		 * shujukugengxin.setVisibility(View.VISIBLE); } else {
+		 * shujukugengxin.setVisibility(View.GONE); }
+		 */
 		viewPager.setCurrentItem(currentSelected);
 		/*
-		if(PlanListActivity.this.getResources().getConfiguration().orientation == 0){
-			shujukugengxin.setImageResource(R.drawable.selector_shujukugengxin_novalue_land);
-		}else {
-			shujukugengxin.setImageResource(R.drawable.selector_shujukugengxin_novalue);
-		}
-		*/
+		 * if(PlanListActivity.this.getResources().getConfiguration().orientation
+		 * == 0){ shujukugengxin.setImageResource(R.drawable.
+		 * selector_shujukugengxin_novalue_land); }else {
+		 * shujukugengxin.setImageResource
+		 * (R.drawable.selector_shujukugengxin_novalue); }
+		 */
 	}
 
 	private void initPagerView() {
@@ -309,44 +313,50 @@ public class PlanListActivity extends Activity {
 			new RefreshAssetDataSourceAt().execute("");
 			break;
 		case R.id.shujutongbu:
-			List<LocalPandian> lps = localPandianService.getLocalPandian(userid);
-			if(lps.size() <= 0) {
-				Toast.makeText(PlanListActivity.this, "暂时没有未提交的盘点数据.", 0).show();
-			}else {
+			List<LocalPandian> lps = localPandianService
+					.getLocalPandian(userid);
+			if (lps.size() <= 0) {
+				Toast.makeText(PlanListActivity.this, "暂时没有未提交的盘点数据.", 0)
+						.show();
+			} else {
 				Gson gson = new Gson();
 				String str = gson.toJson(lps);
 				str = str.replace("\\u0027", "'");
-				Log.i("a", "json = " + str);
+//				Log.i("a", "json = " + str);
 				new DataCommitAt().execute(str);
 			}
 			break;
 		}
 	}
-	
+
 	private class DataCommitAt extends AsyncTask<String, Integer, String> {
-		
+
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			wd.dismiss();
+			wd.show();
 		}
-		
+
 		@Override
 		protected String doInBackground(String... params) {
-			return new HttpClientUtil(PlanListActivity.this).plupdaterfidandplan(PlanListActivity.this, params[0]);
+			return new HttpClientUtil(PlanListActivity.this)
+					.plupdaterfidandplan(PlanListActivity.this, params[0]);
+			
 		}
-		
+
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
 			wd.dismiss();
-			if("1".equals(result)) {
+			if ("1".equals(result)) {
+				localPandianService.deleteByUser(userid);
+				onResume();
 				Toast.makeText(PlanListActivity.this, "数据提交成功!", 0).show();
-			}else {
+			} else {
 				Toast.makeText(PlanListActivity.this, "数据提交失败!", 0).show();
 			}
 		}
-		
+
 	}
 
 	private ProgressDialog pd;
@@ -445,8 +455,7 @@ public class PlanListActivity extends Activity {
 
 		@Override
 		protected Long doInBackground(String... arg0) {
-			ArrayList<RealName> lprs = new HttpClientUtil(
-					PlanListActivity.this)
+			ArrayList<RealName> lprs = new HttpClientUtil(PlanListActivity.this)
 					.nameCompare(PlanListActivity.this);
 			if (lprs == null) {
 				return 0l;
@@ -509,4 +518,5 @@ public class PlanListActivity extends Activity {
 		ad.show();
 		ad.getWindow().setContentView((RelativeLayout) dialogView);
 	}
+
 }
