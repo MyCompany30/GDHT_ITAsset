@@ -49,7 +49,7 @@ public class RfidSelectAdapter extends RfidAdapter {
 					checkedRfid.remove(rfidTv.getText().toString());
 				}else{
 					if(!checkedRfid.contains(rfidTv.getText().toString())){
-						checkedRfid.add(position, rfidTv.getText().toString());
+						checkedRfid.add(rfidTv.getText().toString());
 					}
 				}
 			}

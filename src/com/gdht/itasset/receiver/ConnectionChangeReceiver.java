@@ -18,12 +18,9 @@ public class ConnectionChangeReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		packnameString = context.getPackageName();
-		ConnectivityManager connectMgr = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo mobNetInfo = connectMgr
-				.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-		NetworkInfo wifiNetInfo = connectMgr
-				.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+		ConnectivityManager connectMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo mobNetInfo = connectMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+		NetworkInfo wifiNetInfo = connectMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
 		if (flag && !mobNetInfo.isConnected() && !wifiNetInfo.isConnected() && GlobalParams.LOGIN_TYPE == 1) {
 			// unconnect network
