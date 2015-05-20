@@ -40,6 +40,7 @@ public class MainActivity extends Activity {
 	private TextView optionTv = null;
 	private SharedPreferences loginSettings = null;
 	public static String ipStr = "";
+	private LoginAsyncTask lat;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -76,7 +77,8 @@ public class MainActivity extends Activity {
 					ipStr = new AppSharedPreferences(MainActivity.this, "gdht")
 							.getIP();
 				}
-				new LoginAsyncTask(MainActivity.this, ipStr).execute(name, pwd,
+				lat = new LoginAsyncTask(MainActivity.this, ipStr);
+				lat.execute(name, pwd,
 						ipStr);
 				loginSettings = MainActivity.this.getSharedPreferences(
 						SETTINGS, Context.MODE_PRIVATE);
@@ -97,6 +99,9 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
+				if(lat != null){
+					lat.cancel(true);
+				}
 				String name, pwd;
 				name = userName.getText().toString().trim();
 				pwd = userPwd.getText().toString().trim();

@@ -1297,7 +1297,7 @@ public class HttpClientUtil {
 			HttpResponse httpResponse = getHttpClient().execute(get);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				resultStr = new String(EntityUtils.toString(httpResponse.getEntity()).getBytes(),"UTF-8");
-				Log.i("a", "json = " + resultStr);
+				Log.i("a", "checkPlanInfo = " + resultStr);
 				arrayList = new ArrayList<LocalPlanResult>();
 				jsonArray = new JSONArray(resultStr);
 				for(int i = 0; i<jsonArray.length(); i++){
