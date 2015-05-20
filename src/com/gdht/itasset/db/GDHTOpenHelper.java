@@ -47,7 +47,7 @@ public class GDHTOpenHelper extends SQLiteOpenHelper {
 				+ "idx integer primary key autoincrement, username text, realname text"
 				+ ")");
 		db.execSQL("create table if not exists local_pandian("
-				+ "idx integer primary key autoincrement, username text, planid text, rfid text"
+				+ "idx integer primary key autoincrement, username text, planid text, rfid text,assetid text, type text"
 				+ ")");
 	}
 

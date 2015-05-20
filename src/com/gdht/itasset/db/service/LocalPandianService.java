@@ -32,12 +32,15 @@ public class LocalPandianService {
 			// planid);
 			if (stockPlanId.equals(planid)) {
 				if (getCountByRfid(username, planid, s)) {
-
+					db.execSQL("update local_pandian set type = ?  where username = ? and planid = ? and rfid = ?"
+							, new String[] {"1", username, planid, s}
+							);
+					
 				} else {
 					if (!"".equals(ss)) {
 						db.execSQL(
-								"insert into local_pandian(username, planid, rfid) values (?, ?, ?)",
-								new String[] { username, planid, s });
+								"insert into local_pandian(username, planid, rfid, type) values (?, ?, ?, ?)",
+								new String[] { username, planid, s , "1"});
 					}
 				}
 			}
@@ -83,7 +86,7 @@ public class LocalPandianService {
 				}
 				if (wpRfids.contains(rfidTemp)) {
 					wpRfids = wpRfids.replace(rfidTemp, "");
-					wpRfids.replaceAll(",,", ",");
+					wpRfids = wpRfids.replaceAll(",,", ",");
 					if (wpRfids.startsWith(",")) {
 						wpRfids = wpRfids.substring(1, wpRfids.length());
 					}
@@ -93,7 +96,7 @@ public class LocalPandianService {
 				}
 				if (pkRfids.contains(rfidTemp)) {
 					pkRfids = pkRfids.replace(rfidTemp, "");
-					pkRfids.replaceAll(",,", ",");
+					pkRfids = pkRfids.replaceAll(",,", ",");
 					if (pkRfids.startsWith(",")) {
 						pkRfids = pkRfids.substring(1, pkRfids.length());
 					}
