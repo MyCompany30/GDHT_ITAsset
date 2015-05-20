@@ -56,8 +56,7 @@ public class ScanResultActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		if (planState.equals("0")) {
-			this.findViewById(R.id.bottomBtnGroup)
-					.setVisibility(View.INVISIBLE);
+			this.findViewById(R.id.bottomBtnGroup).setVisibility(View.INVISIBLE);
 		}
 		new GetInfoAt().execute("");
 	}
@@ -127,8 +126,7 @@ public class ScanResultActivity extends Activity {
 								LayoutParams lp2 = lineRight.getLayoutParams();
 								lp2.width = lineWidth;
 								lineRight.setLayoutParams(lp2);
-								name.getViewTreeObserver()
-										.removeGlobalOnLayoutListener(this);
+								name.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 							}
 						});
 				String pandianDate = result.getWctime();

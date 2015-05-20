@@ -68,7 +68,8 @@ public class PlanListActivity extends Activity {
 	private ArrayList<PlanInfo> plans;
 	private int currentSelected;
 	private Long assetNumber = 0l, planNumber = 0l, planResultNumber = 0l;
-	private ImageView shujukugengxin, shujutongbu;
+	private ImageView shujukugengxin;
+	private View shujutongbu;
 	private String userid;
 	private SharedPreferences loginSettings;
 	private WaitingDialog wd = null;
@@ -90,7 +91,7 @@ public class PlanListActivity extends Activity {
 		zzBtn = (LinearLayout) this.findViewById(R.id.zhengzai);
 		ypBtn = (LinearLayout) this.findViewById(R.id.yipan);
 		shujukugengxin = (ImageView) this.findViewById(R.id.shujukugengxin);
-		shujutongbu = (ImageView) this.findViewById(R.id.shujutongbu);
+		shujutongbu = this.findViewById(R.id.shujutongbu);
 		inflater = LayoutInflater.from(this);
 
 	}
