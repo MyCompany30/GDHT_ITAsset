@@ -74,7 +74,6 @@ public class PlanListActivity extends Activity {
 	private SharedPreferences loginSettings;
 	private WaitingDialog wd = null;
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -100,42 +99,46 @@ public class PlanListActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-//		Toast.makeText(this, "onResume", 0).show();
-		zzPlanInfos = new ArrayList<PlanInfo>();
-		ypPlanInfos = new ArrayList<PlanInfo>();
-		localStockService = new LocalStockService(this);
-		localPlanService = new LocalPlanService(this);
-		if (localPandianService.getCount()) {
-			shujutongbu.setVisibility(View.VISIBLE);
-		} else {
-			shujutongbu.setVisibility(View.GONE);
+		if(!GlobalParams.isOffLineDialogRefresh){
+	//		Toast.makeText(this, "onResume", 0).show();
+			zzPlanInfos = new ArrayList<PlanInfo>();
+			ypPlanInfos = new ArrayList<PlanInfo>();
+			localStockService = new LocalStockService(this);
+			localPlanService = new LocalPlanService(this);
+			if (localPandianService.getCount()) {
+				shujutongbu.setVisibility(View.VISIBLE);
+			} else {
+				shujutongbu.setVisibility(View.GONE);
+			}
+			initPagerView();
+			switch (currentSelected) {
+			case 0:
+				currentSelected = 0;
+				zzBtn.setBackgroundResource(R.drawable.tab_selected);
+				ypBtn.setBackgroundResource(R.drawable.tab_normal);
+				break;
+			case 1:
+				currentSelected = 1;
+				zzBtn.setBackgroundResource(R.drawable.tab_normal);
+				ypBtn.setBackgroundResource(R.drawable.tab_selected);
+				break;
+			}
+			/*
+			 * if (GlobalParams.LOGIN_TYPE == 1) {
+			 * shujukugengxin.setVisibility(View.VISIBLE); } else {
+			 * hujukugengxin.setVisibility(View.GONE); }
+			 */
+			viewPager.setCurrentItem(currentSelected);
+			/*
+			 * if(PlanListActivity.this.getResources().getConfiguration().orientation
+			 * == 0){ shujukugengxin.setImageResource(R.drawable.
+			 * selector_shujukugengxin_novalue_land); }else {
+			 * shujukugengxin.setImageResource
+			 * (R.drawable.selector_shujukugengxin_novalue); }
+			 */
 		}
-		initPagerView();
-		switch (currentSelected) {
-		case 0:
-			currentSelected = 0;
-			zzBtn.setBackgroundResource(R.drawable.tab_selected);
-			ypBtn.setBackgroundResource(R.drawable.tab_normal);
-			break;
-		case 1:
-			currentSelected = 1;
-			zzBtn.setBackgroundResource(R.drawable.tab_normal);
-			ypBtn.setBackgroundResource(R.drawable.tab_selected);
-			break;
-		}
-		/*
-		 * if (GlobalParams.LOGIN_TYPE == 1) {
-		 * shujukugengxin.setVisibility(View.VISIBLE); } else {
-		 * shujukugengxin.setVisibility(View.GONE); }
-		 */
-		viewPager.setCurrentItem(currentSelected);
-		/*
-		 * if(PlanListActivity.this.getResources().getConfiguration().orientation
-		 * == 0){ shujukugengxin.setImageResource(R.drawable.
-		 * selector_shujukugengxin_novalue_land); }else {
-		 * shujukugengxin.setImageResource
-		 * (R.drawable.selector_shujukugengxin_novalue); }
-		 */
+		//重置标记
+		GlobalParams.isOffLineDialogRefresh = false;
 	}
 
 	private void initPagerView() {
@@ -317,8 +320,7 @@ public class PlanListActivity extends Activity {
 			List<LocalPandian> lps = localPandianService
 					.getLocalPandian(userid);
 			if (lps.size() <= 0) {
-				Toast.makeText(PlanListActivity.this, "暂时没有未提交的盘点数据.", 0)
-						.show();
+				Toast.makeText(PlanListActivity.this, "暂时没有未提交的盘点数据.", 0)	.show();
 			} else {
 				Gson gson = new Gson();
 				String str = gson.toJson(lps);

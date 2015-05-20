@@ -24,9 +24,11 @@ public class BlankActivity extends Activity {
 		switch (view.getId()) {
 		case R.id.sure:
 			GlobalParams.LOGIN_TYPE = 2;
+			GlobalParams.isOffLineDialogRefresh = true;
 			this.finish();
 			break;
 		case R.id.close:
+			GlobalParams.isOffLineDialogRefresh = true;
 			this.finish();
 			break;
 		}

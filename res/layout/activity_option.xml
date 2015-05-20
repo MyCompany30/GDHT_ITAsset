@@ -116,11 +116,13 @@
                 android:orientation="vertical" >
 
                 <View
+                    android:id="@+id/view2_1"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#58a1d8" />
 
                 <RelativeLayout
+                    android:id="@+id/view2_2"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"

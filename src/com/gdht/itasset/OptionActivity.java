@@ -27,6 +27,7 @@ import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.RealName;
 import com.gdht.itasset.pojo.StockItemNew;
 import com.gdht.itasset.utils.AppSharedPreferences;
+import com.gdht.itasset.utils.GlobalParams;
 
 public class OptionActivity extends Activity {
 	private EditText ipEdt = null;
@@ -48,18 +49,24 @@ public class OptionActivity extends Activity {
 	private LocalRealNameService localRealNameService;
 	private LocalPandianService localPandianService;
 	private TextView titleTv = null;
-	
+	private View view1,view2;
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		localStockService = new LocalStockService(this);
 		localPlanService = new LocalPlanService(this);
+		if(GlobalParams.LOGIN_TYPE == 2){
+			view1.setVisibility(View.GONE);
+			view2.setVisibility(View.GONE);
+		}
 		super.onResume();
 	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_option);
+		view1 = findViewById(R.id.view2_1);
+		view2 = findViewById(R.id.view2_2);
 		localPlanResultService = new LocalPlanResultService(this);
 		localRealNameService = new LocalRealNameService(this);
 		localPandianService = new LocalPandianService(this);
