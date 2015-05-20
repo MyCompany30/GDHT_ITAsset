@@ -43,8 +43,9 @@ public class LocalPandianService {
 								new String[] { username, planid, s , "1"});
 					}
 				}
+				
+				db.execSQL("update local_stock set checkstate = 1 where rfidnumber = ?", new String[]{ ss });
 			}
-
 		}
 		Cursor cursor = db
 				.rawQuery(
