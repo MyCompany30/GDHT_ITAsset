@@ -31,9 +31,9 @@
             android:background="@drawable/saoyisao_03"
             android:clickable="true"
             android:onClick="btnClick"
-            android:visibility="invisible"
             android:scaleX=".7"
-            android:scaleY=".7" />
+            android:scaleY=".7"
+            android:visibility="invisible" />
     </RelativeLayout>
 
     <LinearLayout
@@ -108,7 +108,8 @@
             android:visibility="gone"
             tools:ignore="Orientation" >
         </ImageView>
-                <ImageView
+
+        <ImageView
             android:id="@+id/shujutongbu"
             android:layout_width="0dp"
             android:layout_height="80dp"
@@ -116,9 +117,8 @@
             android:background="@drawable/selector_shujutongbu"
             android:clickable="true"
             android:onClick="btnClick"
-            tools:ignore="Orientation" 
             android:visibility="gone"
-            >
+            tools:ignore="Orientation" >
         </ImageView>
     </LinearLayout>
 

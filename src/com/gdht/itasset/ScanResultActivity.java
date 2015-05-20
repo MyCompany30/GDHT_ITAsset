@@ -59,6 +59,7 @@ public class ScanResultActivity extends Activity {
 			this.findViewById(R.id.bottomBtnGroup)
 					.setVisibility(View.INVISIBLE);
 		}
+		new GetInfoAt().execute("");
 	}
 
 	@Override

@@ -22,7 +22,6 @@
             android:text="详情"
             android:textColor="@android:color/white"
             android:textSize="22dp" />
-
     </RelativeLayout>
 
     <ListView
@@ -30,11 +29,44 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:listSelector="@drawable/selector_list_blue" 
-        android:dividerHeight="10dp"
         android:divider="#00000000"
-        >
+        android:dividerHeight="10dp"
+        android:listSelector="@drawable/selector_list_blue" >
     </ListView>
 
+    <LinearLayout
+        android:id="@+id/pankuiLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#d4efff"
+        android:gravity="center"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@+id/pankuiBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/pankui_btn" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/xinzengLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#d4efff"
+        android:gravity="center"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@+id/xinzengBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/xinzengbtn" >
+        </ImageView>
+    </LinearLayout>
 
 </LinearLayout>

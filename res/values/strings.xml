@@ -40,7 +40,9 @@
     <string name="url_getAllCheckPlan">/moveCheck/getAllCheckPlan.s</string>
     <string name="url_getAllCheckPlanInfo">/moveCheck/getAllCheckPlanInfo.s</string>
     <string name="url_nameCompare">/moveCheck/nameCompare.s</string>
-        <string name="url_plupdaterfidandplan">/moveCheck/plupdaterfidandplan.s</string>
+    <string name="url_plupdaterfidandplan">/moveCheck/plupdaterfidandplan.s</string>
+    <string name="url_getIdByRfid">/moveCheck/getIdByRfid.s</string>
+    
     <string name="submit"> 确 定 </string>
     <string name="title_activity_plan">盘点计划</string>
     <string name="title_activity_scan">扫描</string>

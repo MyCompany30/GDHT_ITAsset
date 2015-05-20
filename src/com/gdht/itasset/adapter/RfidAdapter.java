@@ -16,10 +16,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class RfidAdapter extends BaseAdapter {
-	private LayoutInflater inflater;
-	private Context context;
-	private List<String> rfids;
-	private String planId;
+	protected LayoutInflater inflater;
+	protected Context context;
+	protected List<String> rfids;
+	protected String planId;
 	public RfidAdapter(Context context, List<String> rfids, String planId) {
 		this.inflater = LayoutInflater.from(context);
 		this.context = context;

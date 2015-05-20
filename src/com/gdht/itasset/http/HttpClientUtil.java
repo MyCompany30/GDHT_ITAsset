@@ -549,6 +549,59 @@ public class HttpClientUtil {
 	}
 	
 	/**
+	 * 
+	 * @param activity
+	 * @param rfids
+	 * @return
+	 */
+	public String getIdByRfid(Activity activity, String rfids, ArrayList<String> rfidList){
+		String result = null;
+		String uri = null;
+		String idStr = "";
+		uri = activity.getResources().getString(R.string.url_getIdByRfid);
+		HttpPost post = new HttpPost(ip + uri);
+		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
+		formparams.add(new BasicNameValuePair("rfid", rfids));
+		HttpEntity entity = null;
+		try {
+			entity = new UrlEncodedFormEntity(formparams, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		post.setEntity(entity);
+		try {
+			HttpResponse httpResponse = getHttpClient().execute(post);
+			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				
+				result = EntityUtils.toString(httpResponse.getEntity());
+				JSONArray jsonArray = new JSONArray(result);
+				for(int i = 0; i < jsonArray.length(); i++){
+					JSONObject object = jsonArray.getJSONObject(i);
+					if(rfidList.contains(object.getString("rfid"))){
+						if(i==0){
+							idStr += "'";
+						}
+						idStr += object.getString("id");
+						if(i == jsonArray.length()-1){
+							idStr += "'";
+							continue;
+						}
+						idStr += "','";
+					}
+				}
+			}
+		} catch (Exception e) {
+			//网络异常
+			e.printStackTrace();
+			return idStr;
+		}
+	
+		return idStr;
+	}
+	
+	
+	/**
 	 * 增加使用记录(更新标签号设备系信息)
 	 * @param assetInfoId 资产主键id
 	 * @param dept 部门仓库key
