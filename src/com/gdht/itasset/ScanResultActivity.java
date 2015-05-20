@@ -58,7 +58,15 @@ public class ScanResultActivity extends Activity {
 		if (planState.equals("0")) {
 			this.findViewById(R.id.bottomBtnGroup).setVisibility(View.INVISIBLE);
 		}
-		new GetInfoAt().execute("");
+		if (GlobalParams.LOGIN_TYPE == 1) {
+			tongbuBtn.setVisibility(View.GONE);
+			finishBtn.setVisibility(View.VISIBLE);
+			new GetInfoAt().execute("");
+		} else {
+			tongbuBtn.setVisibility(View.GONE);
+			finishBtn.setVisibility(View.VISIBLE);
+			new GetLoccalInfoAt().execute("");
+		}
 	}
 
 	@Override

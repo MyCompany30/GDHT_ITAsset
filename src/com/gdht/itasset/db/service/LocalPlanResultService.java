@@ -65,7 +65,7 @@ public class LocalPlanResultService {
 			lpr.setYpRfids(cursor.getString(cursor.getColumnIndex("yprfids")));
 			lpr.setWpRfids(cursor.getString(cursor.getColumnIndex("wprfids")));
 			lpr.setPyRfids(cursor.getString(cursor.getColumnIndex("pyrfids")));
-			lpr.setPkRfids(cursor.getString(cursor.getColumnIndex("Pkrfids")));
+			lpr.setPkRfids(cursor.getString(cursor.getColumnIndex("pkrfids")));
 		}
 		return lpr;
 	}
