@@ -21,20 +21,33 @@ public class LocalPandianService {
 		db = helper.getWritableDatabase();
 	}
 
-	public void save(String planid, String username, String rfids) {
+	public List<String> save(String planid, String username, String rfids) {
 		String[] keys = rfids.split(",");
+		String result = "";
+		List<String> lists = new ArrayList<String>();
 		for(String s : keys) {
 			String ss = s.replaceAll("'", "");
 			String stockPlanId = getPlanIdFromStock(ss);
-			Log.i("a", "stockPlanId = " + stockPlanId + " planId = " + planid);
-//			if(stockPlanId.equals(planid)) {
+//			Log.i("a", "stockPlanId = " + stockPlanId + " planId = " + planid);
+			if(stockPlanId.equals(planid)) {
 				if(getCountByRfid(username, planid, s)) {
 					
 				}else {
-					db.execSQL("insert into local_pandian(username, planid, rfid) values (?, ?, ?)", new String[]{username, planid, s});
+					if(!"".equals(ss)) {
+						db.execSQL("insert into local_pandian(username, planid, rfid) values (?, ?, ?)", new String[]{username, planid, s});
+					}
 				}
-//			}
+			}
+			
 		}
+		Cursor cursor = db.rawQuery("select rfid from local_pandian where username = ? and planid = ?", new String[]{username, planid});
+		while(cursor.moveToNext()){
+			lists.add(cursor.getString(cursor.getColumnIndex("rfid")));
+		}
+		for(String s : lists) {
+			Log.i("a", "s = " + s);
+		}
+		return lists;
 	}
 
 	public ArrayList<String> getRifdsByPlanId(String planid, String username) {
