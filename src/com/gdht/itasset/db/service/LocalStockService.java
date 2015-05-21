@@ -85,7 +85,6 @@ public class LocalStockService {
 		}
 		return stockItemNew;
 	}
-
 	
 	public void close() {
 		db.close();
