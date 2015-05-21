@@ -14,7 +14,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp" >
+            android:padding="5dp" 
+            android:background="#00bfc6"
+            >
 
             <TextView
                 android:id="@+id/lable"
