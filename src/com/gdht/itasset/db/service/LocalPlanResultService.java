@@ -1,7 +1,9 @@
 package com.gdht.itasset.db.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -84,7 +86,7 @@ public class LocalPlanResultService {
 			db.execSQL("delete from local_planresult");
 		}
 	}
-
+	
 	public boolean getCount() {
 		Cursor cursor = db.rawQuery("select count(*) from local_planresult",
 				null);
@@ -96,4 +98,5 @@ public class LocalPlanResultService {
 	public void close() {
 		db.close();
 	}
+	
 }
