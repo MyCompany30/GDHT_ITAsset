@@ -199,7 +199,7 @@ public class ScanResultDetailActivity extends Activity {
 		}else if(type.equals("2")){
 			pankuiLayout.setVisibility(View.GONE);
 			titleTv.setText("盘盈资产");
-			xinzengLayout.setVisibility(View.VISIBLE);
+			xinzengLayout.setVisibility(View.GONE);
 			xinzengBtn.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {

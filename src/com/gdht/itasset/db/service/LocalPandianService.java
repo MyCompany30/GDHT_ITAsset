@@ -227,8 +227,8 @@ public class LocalPandianService {
 		List<String> planIds = new ArrayList<String>();
 		Cursor cursor = db
 				.rawQuery(
-						"select planid from  local_pandian where username = ? group by planid  ",
-						new String[] { username });
+						"select planid from  local_pandian where username = ? and type = ? group by planid  ",
+						new String[] { username, "1" });
 		while (cursor.moveToNext()) {
 			planIds.add(cursor.getString(cursor.getColumnIndex("planid")));
 		}
@@ -238,8 +238,8 @@ public class LocalPandianService {
 			StringBuffer sb = new StringBuffer();
 			cursor = db
 					.rawQuery(
-							"select rfid from local_pandian where username = ? and planid = ?",
-							new String[] { username, s });
+							"select rfid from local_pandian where username = ? and planid = ? and type = ?",
+							new String[] { username, s , "1"});
 			while (cursor.moveToNext()) {
 				sb.append(cursor.getString(cursor.getColumnIndex("rfid")))
 						.append(",");

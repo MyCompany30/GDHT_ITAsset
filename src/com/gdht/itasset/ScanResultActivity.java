@@ -44,7 +44,7 @@ public class ScanResultActivity extends Activity {
 	private WaitingDialog wd;
 	private RelativeLayout dateLayout;
 	private SharedPreferences loginSettings = null;
-	private String userid;
+	private String userid, deptcode, isCk;
 	private String planState;
 	private LinearLayout finishBtn, tongbuBtn;
 	private LocalPlanResultService localPlanResultService;
@@ -80,6 +80,8 @@ public class ScanResultActivity extends Activity {
 		localPandianService = new LocalPandianService(this);
 		wd = new WaitingDialog(this);
 		planId = this.getIntent().getStringExtra("planId");
+		deptcode = this.getIntent().getStringExtra("deptcode");
+		isCk = this.getIntent().getStringExtra("isCk");
 		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS",
 				Context.MODE_PRIVATE);
 		userid = loginSettings.getString("LOGIN_NAME", "");
@@ -452,6 +454,14 @@ public class ScanResultActivity extends Activity {
 				}
 				ScanResultActivity.this.finish();
 			}
+			break;
+		case R.id.pyxx:
+			intent = new Intent(this, XinZengScanNewActivity.class);
+			intent.putExtra("planId", planId);
+			intent.putExtra("userid", userid);
+			intent.putExtra("deptcode", deptcode);
+			intent.putExtra("isCk", isCk);
+			startActivity(intent);
 			break;
 		}
 	}

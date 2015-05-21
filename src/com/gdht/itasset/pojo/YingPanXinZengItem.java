@@ -1,5 +1,8 @@
 package com.gdht.itasset.pojo;
 
+import android.widget.EditText;
+import android.widget.TextView;
+
 public class YingPanXinZengItem {
 
 	private String assetCheckplanId;// 盘点计划主键id
@@ -16,6 +19,15 @@ public class YingPanXinZengItem {
 	private String lifetime; //预计寿命   int型  按月算
 	private String shfwdqsj; //售后服务到期时间  时间戳精确到日
 	private String isck = "1";// 仓库新增还是在运新增(1仓库 2在运)
+	private EditText fuzerennameEt;
+	private TextView rfidCodeTv;
+	private EditText assetNameEt;
+	private TextView zcflTv;
+	private TextView zclbTv;
+	private String zcflCode;
+	private String zcflName;
+	private String zclxCode;
+	private String zclxName;
 	public String getAssetCheckplanId() {
 		return assetCheckplanId;
 	}
@@ -100,16 +112,74 @@ public class YingPanXinZengItem {
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
 	}
+	public EditText getFuzerennameEt() {
+		return fuzerennameEt;
+	}
+	public void setFuzerennameEt(EditText fuzerennameEt) {
+		this.fuzerennameEt = fuzerennameEt;
+	}
+	public TextView getRfidCodeTv() {
+		return rfidCodeTv;
+	}
+	public void setRfidCodeTv(TextView rfidCodeTv) {
+		this.rfidCodeTv = rfidCodeTv;
+	}
+	public EditText getAssetNameEt() {
+		return assetNameEt;
+	}
+	public void setAssetNameEt(EditText assetNameEt) {
+		this.assetNameEt = assetNameEt;
+	}
+	
+	
+	
+	public TextView getZcflTv() {
+		return zcflTv;
+	}
+	public void setZcflTv(TextView zcflTv) {
+		this.zcflTv = zcflTv;
+	}
+	public TextView getZclbTv() {
+		return zclbTv;
+	}
+	public void setZclbTv(TextView zclbTv) {
+		this.zclbTv = zclbTv;
+	}
+	public String getZcflCode() {
+		return zcflCode;
+	}
+	public void setZcflCode(String zcflCode) {
+		this.zcflCode = zcflCode;
+	}
+	public String getZcflName() {
+		return zcflName;
+	}
+	public void setZcflName(String zcflName) {
+		this.zcflName = zcflName;
+	}
+	public String getZclxCode() {
+		return zclxCode;
+	}
+	public void setZclxCode(String zclxCode) {
+		this.zclxCode = zclxCode;
+	}
+	public String getZclxName() {
+		return zclxName;
+	}
+	public void setZclxName(String zclxName) {
+		this.zclxName = zclxName;
+	}
 	@Override
 	public String toString() {
 		return "YingPanXinZengItem [assetCheckplanId=" + assetCheckplanId
-				+ ", rfid_labelnum=" + rfid_labelnum + ", classify=" + classify
-				+ ", type=" + type + ", name=" + name + ", registrant="
-				+ registrant + ", dept=" + dept + ", deptName=" + deptName
-				+ ", office=" + office + ", keeper=" + keeper + ", buyDate="
-				+ buyDate + ", lifetime=" + lifetime + ", shfwdqsj=" + shfwdqsj
-				+ ", isck=" + isck + "]";
+				+ ", rfid_labelnum=" + rfid_labelnum + ", name=" + name
+				+ ", registrant=" + registrant + ", dept=" + dept + ", office="
+				+ office + ", keeper=" + keeper + ", isck=" + isck
+				+ ", zcflCode=" + zcflCode + ", zclxCode=" + zclxCode + "]";
 	}
+	
+	
+	
 	
 	
 	

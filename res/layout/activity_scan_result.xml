@@ -22,6 +22,18 @@
             android:text="盘点结果"
             android:textColor="@android:color/white"
             android:textSize="22dp" />
+
+        <ImageView
+            android:id="@+id/pyxx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="btnClick"
+            android:clickable="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/tianjia_03"
+            android:layout_marginRight="10dp"
+            />
     </RelativeLayout>
 
     <LinearLayout
@@ -254,7 +266,7 @@
             android:onClick="btnClick"
             tools:ignore="Orientation" >
         </LinearLayout>
-        
+
         <LinearLayout
             android:id="@+id/shujutongbu"
             android:layout_width="0dp"
@@ -263,9 +275,8 @@
             android:background="@drawable/selector_shujutongbu"
             android:clickable="true"
             android:onClick="btnClick"
-            tools:ignore="Orientation" 
             android:visibility="gone"
-            >
+            tools:ignore="Orientation" >
         </LinearLayout>
     </LinearLayout>
 

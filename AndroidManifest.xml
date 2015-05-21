@@ -251,11 +251,23 @@
             android:name="com.gdht.itasset.HomePageActivity"
             android:label="@string/title_activity_home_page" >
         </activity>
-		<activity android:name="com.gdht.itasset.BlankActivity"
-		    android:theme="@android:style/Theme.Translucent.NoTitleBar"
-		    >
-		    
-		</activity>
+        <activity
+            android:name="com.gdht.itasset.BlankActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.gdht.itasset.XinZengScanNewActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.gdht.itasset.SelectZCFLActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+                <activity
+            android:name="com.gdht.itasset.SelectZCLXActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        
     </application>
 
 </manifest>
