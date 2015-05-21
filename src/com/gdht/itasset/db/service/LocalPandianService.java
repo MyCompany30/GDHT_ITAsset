@@ -235,6 +235,7 @@ public class LocalPandianService {
 		for (String s : planIds) {
 			LocalPandian lp = new LocalPandian();
 			lp.setPlanId(s);
+			lp.setType("1");
 			StringBuffer sb = new StringBuffer();
 			cursor = db
 					.rawQuery(
@@ -247,6 +248,25 @@ public class LocalPandianService {
 			sb.deleteCharAt(sb.length() - 1);
 			lp.setRfids(sb.toString());
 			lps.add(lp);
+		}
+		for (String s : planIds) {
+			LocalPandian lp = new LocalPandian();
+			lp.setPlanId(s);
+			lp.setType("3");
+			StringBuffer sb = new StringBuffer();
+			cursor = db
+					.rawQuery(
+							"select rfid from local_pandian where username = ? and planid = ? and type = ?",
+							new String[] { username, s , "3"});
+			while (cursor.moveToNext()) {
+				sb.append(cursor.getString(cursor.getColumnIndex("rfid")))
+						.append(",");
+			}
+			if(sb.length() > 0){
+				sb.deleteCharAt(sb.length() - 1);
+				lp.setRfids(sb.toString());
+				lps.add(lp);
+			}
 		}
 		return lps;
 	}
