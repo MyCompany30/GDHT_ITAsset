@@ -7,12 +7,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.storage.StorageManager;
-import android.provider.ContactsContract.DeletedContacts;
-
 import com.gdht.itasset.db.GDHTOpenHelper;
 import com.gdht.itasset.pojo.StockItemNew;
-import com.senter.co;
+import com.gdht.itasset.utils.GlobalParams;
 
 public class LocalStockService {
 	SQLiteDatabase db;
@@ -130,18 +127,46 @@ public class LocalStockService {
 					cv1.put("wp", wpCount);
 					db.update("local_planresult", cv1, "id = ?", new String[]{ planId });
 				}
+				cursor.close();
 				//更新盘亏rfid字段
 				Cursor cursor1 = db.rawQuery("select pkrfids from local_planresult where id = ?", new String[]{ planId });
 				String rfidStrPk = "";
 				if(cursor1.moveToFirst()){
 					String str = cursor1.getString(cursor1.getColumnIndex("pkrfids"));
-					rfidStrPk = str + ",\""+ rfid +"\"";
+					if(str.equals("")){
+						rfidStrPk = "\""+rfid+"\"";
+					}else{
+						rfidStrPk = str + ",\""+ rfid +"\"";
+					}
+					
 				}
+				cursor1.close();
 				ContentValues cv2 = new ContentValues();
 				cv2.put("pk", rfidStrPk.split("\",\"").length);
 				cv2.put("pkrfids", rfidStrPk);
 				db.update("local_planresult", cv2, "id = ?", new String[]{ planId });
-				
+				//更新local_pandian表数据
+				Cursor cursor2 = db.rawQuery("select assetInfoId from local_stock where rfidnumber = ? ", new String []{rfid});
+				String assetId = null;
+				if(cursor2.moveToFirst()){
+					assetId = cursor2.getString(0);
+				}
+				cursor2.close();
+				Cursor cursor3 = db.rawQuery("select * from local_pandian where rfid = ? ", new String[]{"'"+rfid+"'"});
+				if(cursor3.moveToFirst()){
+					ContentValues cv1 = new ContentValues();
+					cv1.put("type", "3");
+					db.update("local_pandian", cv1, "rfid = ?", new String []{"'"+rfid+"'"});
+				}else{
+					ContentValues cv21 = new ContentValues();
+					cv21.put("username", GlobalParams.username);
+					cv21.put("planid", planId);
+					cv21.put("rfid", "'"+rfid+"'");
+					cv21.put("assetid", assetId);
+					cv21.put("type", "3");
+					db.insert("local_pandian", null, cv21);
+				}
+				cursor3.close();
 			}
 		}
 		

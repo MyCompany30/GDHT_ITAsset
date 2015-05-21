@@ -3,6 +3,7 @@ package com.gdht.itasset.db.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -49,8 +50,8 @@ public class LocalPandianService {
 		}
 		Cursor cursor = db
 				.rawQuery(
-						"select rfid from local_pandian where username = ? and planid = ?",
-						new String[] { username, planid });
+						"select rfid from local_pandian where username = ? and planid = ? and type = ?",
+						new String[] { username, planid, "1" });
 		Cursor ypC = db.rawQuery(
 				"select yprfids from local_planresult where id = ?",
 				new String[] { planid });
@@ -122,7 +123,7 @@ public class LocalPandianService {
 		}
 		int pkNum = 0;
 		if(!pkRfids.equals("")) {
-			String[] pkArrays = wpRfids.split(",");
+			String[] pkArrays = pkRfids.split(",");
 			pkNum = pkArrays.length;
 		}
 		
@@ -253,5 +254,6 @@ public class LocalPandianService {
 	public void close() {
 		db.close();
 	}
+
 
 }
