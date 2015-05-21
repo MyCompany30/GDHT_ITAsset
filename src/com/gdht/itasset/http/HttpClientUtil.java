@@ -1030,6 +1030,48 @@ public class HttpClientUtil {
 		}
 		return result;
 	}
+	
+	public synchronized String pyxzNew(Context context, YingPanXinZengItem item) {
+		String result = null;
+		String uri = null;
+		uri = context.getResources().getString(R.string.url_pyxz);
+		HttpPost post = new HttpPost(ip + uri);
+		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
+		formparams.add(new BasicNameValuePair("assetCheckplanId", item
+				.getAssetCheckplanId()));
+		formparams.add(new BasicNameValuePair("rfidLabelnum", item
+				.getRfid_labelnum()));
+		formparams.add(new BasicNameValuePair("classify", item.getZcflCode()));
+		formparams.add(new BasicNameValuePair("type", item.getZclxCode()));
+		formparams.add(new BasicNameValuePair("name", item.getName()));
+		formparams.add(new BasicNameValuePair("registrant", item
+				.getRegistrant()));
+		formparams.add(new BasicNameValuePair("assetUse.dept", item.getDept()));
+		formparams.add(new BasicNameValuePair("assetUse.office", item.getOffice()));
+		formparams.add(new BasicNameValuePair("assetUse.keeper", item
+				.getKeeper()));
+		formparams.add(new BasicNameValuePair("isck", item.getIsck()));
+		HttpEntity entity = null;
+		try {
+			entity = new UrlEncodedFormEntity(formparams, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		post.setEntity(entity);
+		try {
+			HttpResponse httpResponse = getHttpClient().execute(post);
+			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+				result = new String(EntityUtils.toString(
+						httpResponse.getEntity()).getBytes(), "UTF-8");
+				Log.i("a", "添加result = " + result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
 
 	public String isHasRfid(Context context, String rfidNumber) {
 		String uri = null;

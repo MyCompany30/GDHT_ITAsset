@@ -155,6 +155,8 @@ public class PlanListActivity extends Activity {
 						ScanResultActivity.class);
 				intent.putExtra("planId", planId);
 				intent.putExtra("planState", "1");
+				intent.putExtra("deptcode", zzPlanInfos.get(arg2).getDeptcode());
+				intent.putExtra("isCk", zzPlanInfos.get(arg2).getType());
 				startActivity(intent);
 				// new AsyncTask<Void, Void, Void>(){
 				//
@@ -325,8 +327,8 @@ public class PlanListActivity extends Activity {
 				Gson gson = new Gson();
 				String str = gson.toJson(lps);
 				str = str.replace("\\u0027", "'");
-//				Log.i("a", "json = " + str);
-				new DataCommitAt().execute(str);
+				Log.i("a", "json = " + str);
+//				new DataCommitAt().execute(str);
 			}
 			break;
 		}
