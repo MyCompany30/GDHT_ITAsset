@@ -1,5 +1,6 @@
 package com.gdht.itasset;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -7,6 +8,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -158,8 +160,13 @@ public class OptionActivity extends Activity {
 			}
 			break;
 		case R.id.gengxinUSB:
-			ImportDBUtils dbUtils = new ImportDBUtils(this);
-			dbUtils.copyDatabase();
+			String dbPath = Environment.getExternalStorageDirectory().getPath() + "/datasource.db";
+			File file = new File(dbPath);
+			if(file.exists()) {
+				new RefreshUSBAssetDataSourceAt().execute("");
+			}else {
+				Toast.makeText(this, "没有找到数据源，请使用USB连接电脑，下载最新的数据源!", 0).show();
+			}
 			break;
 		case R.id.gengxinDB:
 			new RefreshAssetDataSourceAt().execute("");
@@ -218,6 +225,40 @@ public class OptionActivity extends Activity {
 		ad.show();
 	}
 	
+	
+	private class RefreshUSBAssetDataSourceAt extends AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pd = new ProgressDialog(OptionActivity.this);
+			pd.setTitle("提示");
+			pd.setMessage("资产信息数据库更新中...");
+			pd.setCancelable(true);
+			pd.show();
+		}
+		@Override
+		protected String doInBackground(String... arg0) {
+			ImportDBUtils dbUtils = new ImportDBUtils(OptionActivity.this);
+			dbUtils.copyDatabase();
+			assetNumber = localStockService.getCountNumber();
+			planNumber = localPlanService.getCountNumber();
+			planResultNumber = localPlanResultService.getCountNumber();
+			return "";
+		}
+		
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			if (pd != null && pd.isShowing()) {
+				pd.dismiss();
+				pd = null;
+			}
+			String contentStr = "资产数据更新完成，共计" + assetNumber
+					+ "条。\n盘点计划数据更新完成，共计" + planNumber + "条。\n盘点结果数据更新完成，共计"
+					+ planResultNumber + "条。";
+			initAd(contentStr);
+		}
+	}
 
 	private class RefreshAssetDataSourceAt extends AsyncTask<String, Integer, Long> {
 		@Override
