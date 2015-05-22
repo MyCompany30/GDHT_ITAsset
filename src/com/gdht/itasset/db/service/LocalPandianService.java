@@ -24,6 +24,11 @@ public class LocalPandianService {
 //		GDHTDataSourceOpenHelper helper2 = new GDHTDataSourceOpenHelper(context);
 		dataSourceDb = GDHTDataSourceOpenHelper.getInstance(context).getWritableDatabase();
 	}
+	
+	public LocalPandianService clearDatas(){
+		db.execSQL("DELETE FROM LOCAL_PANDIAN ");
+		return this;
+	}
 
 	public List<String> save(String planid, String username, String rfids) {
 		String[] keys = rfids.split(",");
@@ -89,14 +94,14 @@ public class LocalPandianService {
 						ypRfids = ypRfids + "," + rfidTemp;
 					}
 				}
-				if (wpRfids.contains(rfidTemp)) {
+ 				if (wpRfids.contains(rfidTemp)) {
 					wpRfids = wpRfids.replace(rfidTemp, "");
 					wpRfids = wpRfids.replaceAll(",,", ",");
 					if (wpRfids.startsWith(",")) {
 						wpRfids = wpRfids.substring(1, wpRfids.length());
 					}
 					if (wpRfids.endsWith(",")) {
-						wpRfids = wpRfids.substring(0, wpRfids.length() - 2);
+						wpRfids = wpRfids.substring(0, wpRfids.length() - 1);
 					}
 				}
 				if (pkRfids.contains(rfidTemp)) {
