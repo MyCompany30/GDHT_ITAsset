@@ -1,6 +1,7 @@
 package com.gdht.itasset;
 
 import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.gdht.itasset.db.service.LocalPandianService;
 import com.gdht.itasset.db.service.LocalPlanResultService;
 import com.gdht.itasset.db.service.LocalPlanService;
@@ -28,6 +30,7 @@ import com.gdht.itasset.pojo.RealName;
 import com.gdht.itasset.pojo.StockItemNew;
 import com.gdht.itasset.utils.AppSharedPreferences;
 import com.gdht.itasset.utils.GlobalParams;
+import com.gdht.itasset.utils.ImportDBUtils;
 
 public class OptionActivity extends Activity {
 	private EditText ipEdt = null;
@@ -154,11 +157,9 @@ public class OptionActivity extends Activity {
 				gonglvEt.setText(String.valueOf(Integer.parseInt(gv) - 1));
 			}
 			break;
-		case R.id.gengxin:
-//			Toast.makeText(this, "gengxin", 0).show();
-//			new RefreshDataSourceAt().execute("");
-//			initAd();
-			new RefreshDataSourceAt().execute("");
+		case R.id.gengxinUSB:
+			ImportDBUtils dbUtils = new ImportDBUtils(this);
+			dbUtils.copyDatabase();
 			break;
 		case R.id.gengxinDB:
 			new RefreshAssetDataSourceAt().execute("");

@@ -173,7 +173,7 @@
                         android:textSize="18sp" />
 
                     <ImageView
-                        android:id="@+id/gengxin"
+                        android:id="@+id/gengxinUSB"
                         android:layout_width="117dp"
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"
