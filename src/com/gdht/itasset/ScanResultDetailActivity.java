@@ -36,11 +36,13 @@ public class ScanResultDetailActivity extends Activity {
 	private View chexiaoLayout = null;
 	private ImageView chexiaoBtn = null;
 	private ProgressDialog pd = null;
+	private String planState = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scan_result_detail);
+		planState = getIntent().getStringExtra("planState");
 		titleTv = (TextView)findViewById(R.id.title);
 		listView = (ListView)findViewById(R.id.listView);
 		type = getIntent().getStringExtra("type");
@@ -146,7 +148,11 @@ public class ScanResultDetailActivity extends Activity {
 										}.execute();
 									}
 								}).show();
-						
+						if(planState.equals("0")){
+							pankuiLayout.setVisibility(View.GONE);
+							xinzengLayout.setVisibility(View.GONE);
+							chexiaoLayout.setVisibility(View.GONE);
+						}
 					}
 				});
 			}else if(GlobalParams.LOGIN_TYPE == 2){
@@ -184,7 +190,11 @@ public class ScanResultDetailActivity extends Activity {
 									}.execute();
 								}
 						}).show();
-						
+						if(planState.equals("0")){
+							pankuiLayout.setVisibility(View.GONE);
+							xinzengLayout.setVisibility(View.GONE);
+							chexiaoLayout.setVisibility(View.GONE);
+						}
 					}
 				});
 			
@@ -296,7 +306,11 @@ public class ScanResultDetailActivity extends Activity {
 										}.execute();
 									}
 								}).show();
-						
+						if(planState.equals("0")){
+							pankuiLayout.setVisibility(View.GONE);
+							xinzengLayout.setVisibility(View.GONE);
+							chexiaoLayout.setVisibility(View.GONE);
+						}
 					}
 				});
 			}else{
@@ -397,7 +411,11 @@ public class ScanResultDetailActivity extends Activity {
 										}.execute();
 									}
 								}).show();
-						
+						if(planState.equals("0")){
+							pankuiLayout.setVisibility(View.GONE);
+							xinzengLayout.setVisibility(View.GONE);
+							chexiaoLayout.setVisibility(View.GONE);
+						}
 					}
 				});
 			}else{
@@ -430,7 +448,7 @@ public class ScanResultDetailActivity extends Activity {
 					}
 				};
 				
-			}.execute();
+ 			}.execute();
 		}else {
 			strRfids = this.getIntent().getStringExtra("rfids");
 			rfids = new ArrayList<String>();
@@ -453,7 +471,11 @@ public class ScanResultDetailActivity extends Activity {
 				chexiaoLayout.setVisibility(View.GONE);
 			}
 		}
-
+		if(planState.equals("0")){
+			pankuiLayout.setVisibility(View.GONE);
+			xinzengLayout.setVisibility(View.GONE);
+			chexiaoLayout.setVisibility(View.GONE);
+		}
 	}
 
 	public void btnClick(View view) {
