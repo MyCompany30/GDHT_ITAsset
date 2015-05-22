@@ -55,6 +55,7 @@ public class ScanResultActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		localPlanResultService = new LocalPlanResultService(this);
 		if (planState.equals("0")) {
 			this.findViewById(R.id.bottomBtnGroup).setVisibility(View.INVISIBLE);
 		}
@@ -475,6 +476,7 @@ public class ScanResultActivity extends Activity {
 		super.onDestroy();
 		EventBus.getDefault().unregister(this);
 		localPandianService.close();
+		localPlanResultService.close();
 	}
 
 	public void onEvent(RefreshDatas event) {

@@ -124,6 +124,7 @@ public class MainActivity extends Activity {
 				}
 				editor.commit();
 				GlobalParams.LOGIN_TYPE = 2;
+				GlobalParams.username = name;
 //				Toast.makeText(MainActivity.this, "离线登陆", 0).show();
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, HomePageActivity.class);
