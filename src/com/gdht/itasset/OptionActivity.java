@@ -231,12 +231,14 @@ public class OptionActivity extends Activity {
 
 		@Override
 		protected Long doInBackground(String... arg0) {
-			// TODO Auto-generated method stub
+			//删除当前local_pandian表的数据
+			
 			ArrayList<StockItemNew> sis = new HttpClientUtil(
 					OptionActivity.this).getAssetInfos(OptionActivity.this);
 			if (sis == null) {
 				return 0l;
 			} else {
+				new LocalPandianService(getApplicationContext()).clearDatas().close();
 				return localStockService.save(sis);
 			}
 		}
