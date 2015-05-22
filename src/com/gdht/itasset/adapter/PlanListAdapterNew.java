@@ -60,7 +60,7 @@ public class PlanListAdapterNew extends BaseAdapter {
 			vh = new ViewHolder();
 			vh.name = (TextView) convertView.findViewById(R.id.name);
 			vh.location = (TextView) convertView.findViewById(R.id.location);
-			vh.weitijiaoTag = (ImageView) convertView.findViewById(R.id.weitijiao);
+			vh.weitijiaoTag = (TextView) convertView.findViewById(R.id.weitijiao);
 			convertView.setTag(vh);
 		}
 		vh = (ViewHolder) convertView.getTag();
@@ -79,7 +79,7 @@ public class PlanListAdapterNew extends BaseAdapter {
 	
 	static class ViewHolder {
 		TextView name, location;
-		ImageView weitijiaoTag;
+		TextView weitijiaoTag;
 		
 	}
 

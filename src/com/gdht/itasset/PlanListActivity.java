@@ -322,13 +322,13 @@ public class PlanListActivity extends Activity {
 			List<LocalPandian> lps = localPandianService
 					.getLocalPandian(userid);
 			if (lps.size() <= 0) {
-				Toast.makeText(PlanListActivity.this, "暂时没有未提交的盘点数据.", 0)	.show();
+				Toast.makeText(PlanListActivity.this, "暂时没有未提交的盘点数据. username = " +userid, 0)	.show();
 			} else {
 				Gson gson = new Gson();
 				String str = gson.toJson(lps);
 				str = str.replace("\\u0027", "'");
 				Log.i("a", "json = " + str);
-//				new DataCommitAt().execute(str);
+				new DataCommitAt().execute(str);
 			}
 			break;
 		}
