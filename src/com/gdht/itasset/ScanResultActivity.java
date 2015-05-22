@@ -292,6 +292,7 @@ public class ScanResultActivity extends Activity {
 				Intent intent = new Intent(ScanResultActivity.this,	ScanResultDetailActivity.class);
 				intent.putExtra("type", "1");
 				intent.putExtra("planId", planId);
+				intent.putExtra("planState", planState);
 				if(GlobalParams.LOGIN_TYPE == 2 && localPlanResult != null) {
 					intent.putExtra("rfids", localPlanResult.getYpRfids());
 				}
@@ -319,6 +320,7 @@ public class ScanResultActivity extends Activity {
 				Intent intent = new Intent(ScanResultActivity.this, ScanResultDetailActivity.class);
 				intent.putExtra("type", "0");
 				intent.putExtra("planId", planId);
+				intent.putExtra("planState", planState);
 				if(GlobalParams.LOGIN_TYPE == 2 && localPlanResult != null) {
 					intent.putExtra("rfids", localPlanResult.getWpRfids());
 				}
@@ -347,6 +349,7 @@ public class ScanResultActivity extends Activity {
 						ScanResultDetailActivity.class);
 				intent.putExtra("type", "2");
 				intent.putExtra("planId", planId);
+				intent.putExtra("planState", planState);
 				if(GlobalParams.LOGIN_TYPE == 2 && localPlanResult != null) {
 					intent.putExtra("rfids", localPlanResult.getPyRfids());
 				}
@@ -375,6 +378,7 @@ public class ScanResultActivity extends Activity {
 						ScanResultDetailActivity.class);
 				intent.putExtra("type", "3");
 				intent.putExtra("planId", planId);
+				intent.putExtra("planState", planState);
 				if(GlobalParams.LOGIN_TYPE == 2 && localPlanResult != null) {
 					intent.putExtra("rfids", localPlanResult.getPkRfids());
 				}
