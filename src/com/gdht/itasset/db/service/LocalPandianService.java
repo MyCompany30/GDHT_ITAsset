@@ -10,16 +10,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.gdht.itasset.db.GDHTOpenHelper;
+import com.gdht.itasset.db.GDHTDataSourceOpenHelper;
+import com.gdht.itasset.db.GDHTOffLineDataOpenHelper;
 import com.gdht.itasset.pojo.LocalPandian;
 import com.gdht.itasset.pojo.RealName;
 
 public class LocalPandianService {
-	SQLiteDatabase db;
+	SQLiteDatabase db, dataSourceDb;
 
 	public LocalPandianService(Context context) {
-		GDHTOpenHelper helper = new GDHTOpenHelper(context);
+		GDHTOffLineDataOpenHelper helper = new GDHTOffLineDataOpenHelper(context);
 		db = helper.getWritableDatabase();
+//		GDHTDataSourceOpenHelper helper2 = new GDHTDataSourceOpenHelper(context);
+		dataSourceDb = GDHTDataSourceOpenHelper.getInstance(context).getWritableDatabase();
 	}
 
 	public List<String> save(String planid, String username, String rfids) {
@@ -45,20 +48,20 @@ public class LocalPandianService {
 					}
 				}
 				
-				db.execSQL("update local_stock set checkstate = 1 where rfidnumber = ?", new String[]{ ss });
+				dataSourceDb.execSQL("update local_stock set checkstate = 1 where rfidnumber = ?", new String[]{ ss });
 			}
 		}
 		Cursor cursor = db
 				.rawQuery(
 						"select rfid from local_pandian where username = ? and planid = ? and type = ?",
 						new String[] { username, planid, "1" });
-		Cursor ypC = db.rawQuery(
+		Cursor ypC = dataSourceDb.rawQuery(
 				"select yprfids from local_planresult where id = ?",
 				new String[] { planid });
-		Cursor wpC = db.rawQuery(
+		Cursor wpC = dataSourceDb.rawQuery(
 				"select wprfids from local_planresult where id = ?",
 				new String[] { planid });
-		Cursor pkC = db.rawQuery(
+		Cursor pkC = dataSourceDb.rawQuery(
 				"select pkrfids from local_planresult where id = ?",
 				new String[] { planid });
 		String ypRfids = "";
@@ -130,7 +133,7 @@ public class LocalPandianService {
 		Log.i("a", "ypRfids = " + ypRfids + " size = " + ypNum);
 		Log.i("a", "wpRfids = " + wpRfids + " size = " + wpNum);
 		Log.i("a", "pkRfids = " + pkRfids + " size = " + pkNum);
-		db.execSQL(
+		dataSourceDb.execSQL(
 				"update local_planresult set yp = ?, wp = ?, pk = ?, yprfids = ?, wprfids = ?, pkrfids = ? where id = ?",
 				new String[] { String.valueOf(ypNum), String.valueOf(wpNum),String.valueOf(pkNum),
 						ypRfids, wpRfids,pkRfids, planid });
@@ -175,7 +178,7 @@ public class LocalPandianService {
 
 	public String getPlanIdFromStock(String rfid) {
 		String result = "";
-		Cursor cursor = db
+		Cursor cursor = dataSourceDb
 				.rawQuery(
 						"select assetCheckplanId from local_stock where rfidnumber = ? ",
 						new String[] { rfid });
@@ -278,6 +281,7 @@ public class LocalPandianService {
 
 	public void close() {
 		db.close();
+		dataSourceDb.close();
 	}
 
 

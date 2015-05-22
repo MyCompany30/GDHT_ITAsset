@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.gdht.itasset.db.GDHTOpenHelper;
+import com.gdht.itasset.db.GDHTDataSourceOpenHelper;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -14,7 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 public class RFIDSDBService {
 	SQLiteDatabase db;
 	public RFIDSDBService(Context context) {
-		GDHTOpenHelper helper = new GDHTOpenHelper(context);
+		GDHTDataSourceOpenHelper helper = new GDHTDataSourceOpenHelper(context);
 		db = helper.getWritableDatabase();
 	}
 	

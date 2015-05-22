@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.gdht.itasset.db.GDHTOpenHelper;
+import com.gdht.itasset.db.GDHTCommonOpenHelper;
+import com.gdht.itasset.db.GDHTDataSourceOpenHelper;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -14,7 +15,7 @@ import android.database.sqlite.SQLiteDatabase;
 public class ScanCheckRFIDSDBService {
 	SQLiteDatabase db;
 	public ScanCheckRFIDSDBService(Context context) {
-		GDHTOpenHelper helper = new GDHTOpenHelper(context);
+		GDHTCommonOpenHelper helper = new GDHTCommonOpenHelper(context);
 		db = helper.getWritableDatabase();
 	}
 	

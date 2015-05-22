@@ -8,7 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.gdht.itasset.db.GDHTOpenHelper;
+import com.gdht.itasset.db.GDHTDataSourceOpenHelper;
 import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.StockItemNew;
 
@@ -16,8 +16,9 @@ public class LocalPlanService {
 	SQLiteDatabase db;
 
 	public LocalPlanService(Context context) {
-		GDHTOpenHelper helper = new GDHTOpenHelper(context);
-		db = helper.getWritableDatabase();
+		GDHTDataSourceOpenHelper helper = new GDHTDataSourceOpenHelper(context);
+//		db = helper.getWritableDatabase();
+		db = GDHTDataSourceOpenHelper.getInstance(context).getWritableDatabase();
 	}
 
 	public Long save(List<PlanInfo> lists) {
