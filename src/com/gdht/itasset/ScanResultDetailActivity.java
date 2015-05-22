@@ -37,11 +37,14 @@ public class ScanResultDetailActivity extends Activity {
 	private ImageView chexiaoBtn = null;
 	private ProgressDialog pd = null;
 	private String planState = null;
-	
+	private LocalStockService stockService = null;
+	private LocalPlanResultService localPlanResultService = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scan_result_detail);
+		stockService = new LocalStockService(getApplicationContext());
+		localPlanResultService = new LocalPlanResultService(ScanResultDetailActivity.this);
 		planState = getIntent().getStringExtra("planState");
 		titleTv = (TextView)findViewById(R.id.title);
 		listView = (ListView)findViewById(R.id.listView);
@@ -167,7 +170,6 @@ public class ScanResultDetailActivity extends Activity {
 								@Override
 								public void onClick(DialogInterface dialog,	int which) {
 									new AsyncTask<Void, Void, Integer>(){
-										LocalStockService stockService = new LocalStockService(getApplicationContext());
 										@Override
 										protected void onPreExecute() {
 											// TODO Auto-generated method stub
@@ -181,7 +183,6 @@ public class ScanResultDetailActivity extends Activity {
 										}
 										@Override
 										protected void onPostExecute(final Integer result) {
-											stockService.close();
 											Toast.makeText(ScanResultDetailActivity.this, "盘亏成功"+result+"条", Toast.LENGTH_SHORT).show();
 											new GetLoccalInfoAt().execute("");
 											
@@ -486,7 +487,6 @@ public class ScanResultDetailActivity extends Activity {
 		}
 	}
 	private class GetLoccalInfoAt extends AsyncTask<String, Integer, LocalPlanResult> {
-		LocalPlanResultService localPlanResultService = new LocalPlanResultService(ScanResultDetailActivity.this);
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -501,7 +501,6 @@ public class ScanResultDetailActivity extends Activity {
 		@Override
 		protected void onPostExecute(LocalPlanResult result) {
 			super.onPostExecute(result);
-			localPlanResultService.close();
 			pd.dismiss();
 			if (result != null) {
 				ArrayList<String> rfidList = new ArrayList<String>();
@@ -524,5 +523,12 @@ public class ScanResultDetailActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		stockService.close();
+		localPlanResultService.close();
 	}
 }

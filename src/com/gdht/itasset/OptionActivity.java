@@ -207,6 +207,9 @@ public class OptionActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		localStockService.close();
+		localPlanService.close();;
+		localPlanResultService.close();;
+		localRealNameService.close();;
 		asp.setGongLv(Integer.parseInt(gonglvEt.getText().toString().trim()));
 	}
 	
@@ -280,7 +283,6 @@ public class OptionActivity extends Activity {
 			if (sis == null) {
 				return 0l;
 			} else {
-				new LocalPandianService(getApplicationContext()).clearDatas().close();
 				return localStockService.save(sis);
 			}
 		}

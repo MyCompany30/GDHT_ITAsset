@@ -45,6 +45,7 @@ import com.gdht.itasset.pojo.StockItemNew;
 import com.gdht.itasset.receiver.ConnectionChangeReceiver;
 import com.gdht.itasset.utils.AppSharedPreferences;
 import com.gdht.itasset.utils.GlobalParams;
+import com.gdht.itasset.utils.OutputDBUtils;
 import com.gdht.itasset.widget.WaitingDialog;
 import com.google.gson.Gson;
 
@@ -319,16 +320,22 @@ public class PlanListActivity extends Activity {
 			new RefreshAssetDataSourceAt().execute("");
 			break;
 		case R.id.shujutongbu:
-			List<LocalPandian> lps = localPandianService
-					.getLocalPandian(userid);
-			if (lps.size() <= 0) {
-				Toast.makeText(PlanListActivity.this, "暂时没有未提交的盘点数据. username = " +userid, 0)	.show();
-			} else {
-				Gson gson = new Gson();
-				String str = gson.toJson(lps);
-				str = str.replace("\\u0027", "'");
-				Log.i("a", "json = " + str);
-				new DataCommitAt().execute(str);
+			if(GlobalParams.LOGIN_TYPE == 1) {
+				List<LocalPandian> lps = localPandianService
+						.getLocalPandian(userid);
+				if (lps.size() <= 0) {
+					Toast.makeText(PlanListActivity.this, "暂时没有未提交的盘点数据. username = " +userid, 0)	.show();
+				} else {
+					Gson gson = new Gson();
+					String str = gson.toJson(lps);
+					str = str.replace("\\u0027", "'");
+					Log.i("a", "json = " + str);
+					new DataCommitAt().execute(str);
+				}
+			}else {
+				Toast.makeText(this, "请用USB连接电脑上传数据文件!", 0).show();
+				OutputDBUtils outputDBUtils = new OutputDBUtils(this);
+				outputDBUtils.copyDatabase();
 			}
 			break;
 		}

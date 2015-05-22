@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gdht.itasset.asynctask.LoginAsyncTask;
+import com.gdht.itasset.db.service.LocalPandianService;
 import com.gdht.itasset.utils.AppSharedPreferences;
 import com.gdht.itasset.utils.GlobalParams;
 
@@ -41,10 +42,12 @@ public class MainActivity extends Activity {
 	private SharedPreferences loginSettings = null;
 	public static String ipStr = "";
 	private LoginAsyncTask lat;
+	private LocalPandianService localPandianService;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_view);
+		localPandianService = new LocalPandianService(this);
 		findViews();
 		setOnClicks();
 		
@@ -213,5 +216,10 @@ public class MainActivity extends Activity {
 		super.onConfigurationChanged(newConfig);
 	};
 	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		localPandianService.close();
+	}
 
 }

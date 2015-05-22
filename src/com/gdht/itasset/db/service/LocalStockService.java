@@ -7,17 +7,19 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.gdht.itasset.db.GDHTDataSourceOpenHelper;
+import com.gdht.itasset.db.GDHTOffLineDataOpenHelper;
 import com.gdht.itasset.pojo.StockItemNew;
 import com.gdht.itasset.utils.GlobalParams;
 
 public class LocalStockService {
-	SQLiteDatabase db;
+	SQLiteDatabase db, pandianDb;
 
 	public LocalStockService(Context context) {
-		GDHTDataSourceOpenHelper helper = new GDHTDataSourceOpenHelper(context);
-//		db = helper.getWritableDatabase();
+		GDHTOffLineDataOpenHelper helper = new GDHTOffLineDataOpenHelper(context);
 		db = GDHTDataSourceOpenHelper.getInstance(context).getWritableDatabase();
+		pandianDb = helper.getWritableDatabase();
 	}
 
 	public Long save(List<StockItemNew> lists) {
@@ -86,6 +88,7 @@ public class LocalStockService {
 	
 	public void close() {
 		db.close();
+		pandianDb.close();
 	}
 	
 	public int updateCheckState(ArrayList<String> rfids, String stateCode, String planId){
@@ -153,11 +156,11 @@ public class LocalStockService {
 					assetId = cursor2.getString(0);
 				}
 				cursor2.close();
-				Cursor cursor3 = db.rawQuery("select * from local_pandian where rfid = ? ", new String[]{"'"+rfid+"'"});
+				Cursor cursor3 = pandianDb.rawQuery("select * from local_pandian where rfid = ? ", new String[]{"'"+rfid+"'"});
 				if(cursor3.moveToFirst()){
 					ContentValues cv1 = new ContentValues();
 					cv1.put("type", "3");
-					db.update("local_pandian", cv1, "rfid = ?", new String []{"'"+rfid+"'"});
+					pandianDb.update("local_pandian", cv1, "rfid = ?", new String []{"'"+rfid+"'"});
 				}else{
 					ContentValues cv21 = new ContentValues();
 					cv21.put("username", GlobalParams.username);
@@ -165,7 +168,7 @@ public class LocalStockService {
 					cv21.put("rfid", "'"+rfid+"'");
 					cv21.put("assetid", assetId);
 					cv21.put("type", "3");
-					db.insert("local_pandian", null, cv21);
+					pandianDb.insert("local_pandian", null, cv21);
 				}
 				cursor3.close();
 			}
