@@ -496,7 +496,7 @@ public class PlanListActivity extends Activity {
 		localStockService.close();
 		localPlanService.close();
 		localPlanResultService.close();
-		localPandianService.close();
+		//localPandianService.close();
 	}
 
 	private void initAd(String contentStr) {

@@ -59,6 +59,7 @@ public class ScanResultActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		localPlanResultService = new LocalPlanResultService(this);
+		localPandianService = new LocalPandianService(getApplicationContext());
 		if (planState.equals("0")) {
 			this.findViewById(R.id.bottomBtnGroup).setVisibility(View.INVISIBLE);
 		}
