@@ -159,10 +159,14 @@ public class ScanResultDetailActivity extends Activity {
 					}
 				});
 			}else if(GlobalParams.LOGIN_TYPE == 2){
+				pankuiLayout.setVisibility(View.GONE);
 				//离线盘亏
 				pankuiBtn.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						if(((RfidSelectAdapter)adapter).getOriginalRfids().size()==0){
+							return;
+						}
 						new AlertDialog.Builder(ScanResultDetailActivity.this)
 						.setTitle("设为盘亏？")
 						.setNegativeButton("否", null)
@@ -460,7 +464,7 @@ public class ScanResultDetailActivity extends Activity {
 				rfids.add(r);
 			}
 			if(type.equals("0")){
-				adapter = new RfidSelectAdapter(ScanResultDetailActivity.this, rfids, planId);
+				adapter = new RfidAdapter(ScanResultDetailActivity.this, rfids, planId);
 				listView.setAdapter(adapter);
 			}else{
 				adapter = new RfidAdapter(ScanResultDetailActivity.this, rfids, planId);

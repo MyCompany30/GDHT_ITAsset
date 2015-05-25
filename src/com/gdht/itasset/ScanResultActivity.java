@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -51,6 +52,8 @@ public class ScanResultActivity extends Activity {
 	private LocalPlanResult localPlanResult;
 	private String pandianStr = "";
 	private LocalPandianService localPandianService;
+	private ImageView pyxx = null;
+	
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -64,6 +67,7 @@ public class ScanResultActivity extends Activity {
 			finishBtn.setVisibility(View.VISIBLE);
 			new GetInfoAt().execute("");
 		} else {
+			pyxx.setVisibility(View.GONE);
 			tongbuBtn.setVisibility(View.GONE);
 			finishBtn.setVisibility(View.VISIBLE);
 			new GetLoccalInfoAt().execute("");
@@ -77,6 +81,7 @@ public class ScanResultActivity extends Activity {
 		if (getIntent().hasExtra("planState")) {
 			planState = getIntent().getStringExtra("planState");
 		}
+		pyxx = (ImageView)findViewById(R.id.pyxx);
 		localPlanResultService = new LocalPlanResultService(this);
 		localPandianService = new LocalPandianService(this);
 		wd = new WaitingDialog(this);
