@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center" 
+    >
+
+    <LinearLayout
+        android:id="@+id/LL_this"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_bg"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/close"
+            android:layout_centerHorizontal="true"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/tishi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="提示"
+                android:textColor="@color/orange_txt"
+                android:textSize="30dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tishi"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:textColor="#000000"
+            android:textSize="30dp"
+            android:text="新版本数据源已下载到设备SD卡中，点击确定即可更新数据源."
+             />
+
+        <ImageView
+            android:id="@+id/sure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/content"
+            android:background="@drawable/selector_dialog_sure_single"
+            android:clickable="true"
+            android:scaleX=".8"
+            android:scaleY=".8"
+            android:layout_gravity="center_horizontal"
+            android:onClick="btnClick"
+             />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/guanbi_03" 
+        android:clickable="true"
+        android:onClick="btnClick"
+        />
+
+</RelativeLayout>
