@@ -79,8 +79,7 @@ public class PlanListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_plan_list);
-		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS",
-				Context.MODE_PRIVATE);
+		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS", Context.MODE_PRIVATE);
 		wd = new WaitingDialog(this);
 		userid = loginSettings.getString("LOGIN_NAME", "");
 		localPlanResultService = new LocalPlanResultService(this);
@@ -122,6 +121,7 @@ public class PlanListActivity extends Activity {
 				currentSelected = 1;
 				zzBtn.setBackgroundResource(R.drawable.tab_normal);
 				ypBtn.setBackgroundResource(R.drawable.tab_selected);
+				shujutongbu.setVisibility(View.GONE);
 				break;
 			}
 			/*
