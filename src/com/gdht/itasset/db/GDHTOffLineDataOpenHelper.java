@@ -12,11 +12,11 @@ public class GDHTOffLineDataOpenHelper extends SQLiteOpenHelper {
 	
 	
 	public GDHTOffLineDataOpenHelper(Context context) {
-		super(context, "offLine.db", null, 1);
+		super(context, "offline.db", null, 1);
 	}
 	
 	public GDHTOffLineDataOpenHelper(Context context, int versionId) {
-		super(context, "offLine.db", null, versionId);
+		super(context, "offline.db", null, versionId);
 		
 	}
 

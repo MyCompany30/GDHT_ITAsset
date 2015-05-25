@@ -14,7 +14,7 @@ import android.util.Log;
 public class OutputDBUtils {
 	private final int BUFFER_SIZE = 10000;
 
-	public static final String DB_NAME = "offLine.db"; // 保存的数据库文件名
+	public static final String DB_NAME = "offline.db"; // 保存的数据库文件名
 
 	public static final String PACKAGE_NAME = "com.gdht.itasset";// 工程包名
 
@@ -24,8 +24,8 @@ public class OutputDBUtils {
 
 	+ PACKAGE_NAME + "/databases"; // 在手机里存放数据库的位置
 	
-	public static final String LOCAL_DB = Environment.getExternalStorageDirectory().getPath() + "/" + DB_NAME;
-
+	public static final String LOCAL_DB_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/itasset";
+	
 	private Context context;
 
 	public OutputDBUtils(Context context) {
@@ -35,17 +35,21 @@ public class OutputDBUtils {
 	}
 
 	public void copyDatabase() {
-		Log.i("a", "执行数据库导入");
-		String dbfile = LOCAL_DB ;
-		File file = new File(LOCAL_DB);
+		Log.i("a", "执行数据库导出");
+		String dbfile = DB_PATH + "/" + DB_NAME;
+		
+		File file = new File(DB_PATH);
 		if(!file.exists()) file.mkdirs();
 		try {
 
 			// 执行数据库导入
-			InputStream is = new FileInputStream(new File(DB_PATH + "/" + DB_NAME));
-			File dbFile = new File(dbfile);
-			if(dbFile.exists()) dbFile.createNewFile();
-			FileOutputStream fos = new FileOutputStream(dbFile);
+			Log.i("a", "local_db = " +LOCAL_DB_PATH);
+			InputStream is = new FileInputStream(new File(dbfile));
+			File srcFileDir = new File(LOCAL_DB_PATH);
+			srcFileDir.mkdir();
+			File srcFile = new File(srcFileDir, DB_NAME);
+			srcFile.createNewFile();
+			FileOutputStream fos = new FileOutputStream(srcFile);
 
 			byte[] buffer = new byte[BUFFER_SIZE];
 
