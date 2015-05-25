@@ -106,7 +106,9 @@ public class ScanPandianActivity extends Activity {
 			case InterrogatorModelD2: {
 				AppSharedPreferences asp = new AppSharedPreferences(
 						ScanPandianActivity.this, "gdht");
-				App.getRfid().setPower(asp.getGongLv());
+				if(App.getRfid() != null){
+					App.getRfid().setPower(asp.getGongLv());
+				}
 				// Toast.makeText(ScanPandianActivity.this, "当前功率是  = " +
 				// App.getRfid().getPower(), 0).show();
 				// findViews();
