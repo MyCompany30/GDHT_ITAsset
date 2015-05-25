@@ -33,6 +33,7 @@ import com.gdht.itasset.pojo.StockItemNew;
 import com.gdht.itasset.utils.AppSharedPreferences;
 import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.utils.ImportDBUtils;
+import com.gdht.itasset.xintong.App;
 
 public class OptionActivity extends Activity {
 	private EditText ipEdt = null;
@@ -174,6 +175,29 @@ public class OptionActivity extends Activity {
 		}
 	}
 	
+	private void changeGongLv() {
+		if (App.getRfid() == null) {
+			Toast.makeText(this, R.string.MakeSurePDAexitRfid,
+					Toast.LENGTH_LONG).show();
+			finish();
+		} else {
+			switch (App.getRfid().getInterrogatorModel()) {
+
+			case InterrogatorModelD2: {
+				AppSharedPreferences asp = new AppSharedPreferences(
+						OptionActivity.this, "gdht");
+				if(App.getRfid() != null && asp != null) {
+					App.getRfid().setPower(asp.getGongLv());
+				}
+				break;
+			}
+
+			default:
+				break;
+			}
+		}
+	}
+	
 	private class RefreshDataSourceAt extends AsyncTask<String, Integer, String> {
 		@Override
 		protected void onPreExecute() {
@@ -211,6 +235,7 @@ public class OptionActivity extends Activity {
 		localPlanResultService.close();;
 		localRealNameService.close();;
 		asp.setGongLv(Integer.parseInt(gonglvEt.getText().toString().trim()));
+		changeGongLv();
 	}
 	
 	private void initAd() {

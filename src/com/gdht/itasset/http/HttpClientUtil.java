@@ -125,7 +125,7 @@ public class HttpClientUtil {
 			//Toast.makeText(activity, "网络异常", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 			return null;
-		}
+		} 
 		return dataArray;
 	}
 	
