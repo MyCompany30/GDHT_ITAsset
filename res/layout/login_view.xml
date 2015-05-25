@@ -33,6 +33,7 @@
             android:layout_marginLeft="10dp"
             android:background="@null"
             android:hint="请输入您的用户名"
+            android:singleLine="true"
             android:textSize="15sp" />
     </LinearLayout>
 
@@ -63,6 +64,7 @@
             android:layout_marginLeft="10dp"
             android:background="@null"
             android:hint="请输入您的密码"
+            android:singleLine="true"
             android:password="true"
             android:textSize="15sp" />
     </LinearLayout>

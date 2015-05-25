@@ -14,8 +14,9 @@ import com.gdht.itasset.pojo.StockItemNew;
 
 public class LocalPlanService {
 	SQLiteDatabase db;
-
+	private Context context = null;
 	public LocalPlanService(Context context) {
+		this.context = context;
 		GDHTDataSourceOpenHelper helper = new GDHTDataSourceOpenHelper(context);
 //		db = helper.getWritableDatabase();
 		db = GDHTDataSourceOpenHelper.getInstance(context).getWritableDatabase();
@@ -57,6 +58,9 @@ public class LocalPlanService {
 		PlanInfo pi = null;
 		String sql = "select * from local_plan where persons like '" + username +",%' or persons like '%," + username + 
 				",%' or persons like '" + username + "' or persons like '%," + username + "'";
+		if(db ==null || (!db.isOpen())){
+			db =  GDHTDataSourceOpenHelper.getInstance(context).getWritableDatabase();
+		}
 		Cursor cursor = db.rawQuery(sql, null);
 		while(cursor.moveToNext()) {
 			pi = new PlanInfo();

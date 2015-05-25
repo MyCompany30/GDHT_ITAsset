@@ -224,6 +224,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@null"
                     android:hint="请输入IP地址"
+                    android:singleLine="true"
                     android:textSize="18dp" />
             </LinearLayout>
 
@@ -253,6 +254,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:singleLine="true"
                     android:background="@null"
                     android:hint="请输入端口号"
                     android:textSize="18dp" />
@@ -286,6 +288,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@null"
                     android:hint="请输入系统名称"
+                    android:singleLine="true"
                     android:inputType="text"
                     android:textSize="18dp" />
             </LinearLayout>
