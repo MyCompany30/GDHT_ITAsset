@@ -333,7 +333,6 @@ public class PlanListActivity extends Activity {
 					new DataCommitAt().execute(str);
 				}
 			}else {
-				Toast.makeText(this, "请用USB连接电脑上传数据文件!", 0).show();
 				OutputDBUtils outputDBUtils = new OutputDBUtils(this);
 				outputDBUtils.copyDatabase();
 			}

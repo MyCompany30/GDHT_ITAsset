@@ -255,6 +255,22 @@
             android:name="com.gdht.itasset.BlankActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
+                <activity
+            android:name="com.gdht.itasset.USBOffLineCommitFinishActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+                        <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+                        <activity
+            android:name="com.gdht.itasset.USBDataSourcePushFinishActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+                        <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.gdht.itasset.XinZengScanNewActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
