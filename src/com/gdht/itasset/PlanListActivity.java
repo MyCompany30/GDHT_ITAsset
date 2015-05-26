@@ -1,5 +1,9 @@
 package com.gdht.itasset;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import android.app.Activity;
@@ -10,6 +14,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
@@ -41,6 +46,7 @@ import com.gdht.itasset.pojo.StockItemNew;
 import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.utils.OutputDBUtils;
 import com.gdht.itasset.widget.WaitingDialog;
+import com.google.common.io.FileWriteMode;
 import com.google.gson.Gson;
 
 public class PlanListActivity extends Activity {
@@ -329,12 +335,55 @@ public class PlanListActivity extends Activity {
 					new DataCommitAt().execute(str);
 				}
 			}else {
-				OutputDBUtils outputDBUtils = new OutputDBUtils(this);
-				outputDBUtils.copyDatabase();
+//				OutputDBUtils outputDBUtils = new OutputDBUtils(this);
+//				outputDBUtils.copyDatabase();
+				List<LocalPandian> lps = localPandianService
+						.getLocalPandian(userid);
+				if (lps.size() <= 0) {
+					Toast.makeText(PlanListActivity.this, "暂时没有未提交的盘点数据. username = " +userid, 0)	.show();
+				} else {
+					Gson gson = new Gson();
+					String str = gson.toJson(lps);
+					str = str.replace("\\u0027", "'");
+					Log.i("a", "离线json = " + str);
+					saveJsonAsTxt(str);
+					Toast.makeText(PlanListActivity.this, "离线操作数据生成完毕，可在有网络下使用在线提交或使用USB连接PC进行提交.", 1).show();
+				}
 			}
 			break;
 		}
 	}
+	
+	private void saveJsonAsTxt(String content) {
+		String rootPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/itasset";
+		File rootFile = new File(rootPath);
+		FileWriter fw = null;
+		BufferedWriter bw = null;
+		if(!rootFile.exists()) {
+			rootFile.mkdirs();
+		}
+		File txtFile = new File(rootFile, "offline_pandian.txt");
+		try {
+			txtFile.createNewFile();
+			fw = new FileWriter(txtFile);
+			bw = new BufferedWriter(fw);
+			bw.write(content);
+			bw.flush();
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {  
+                bw.close();  
+                fw.close();  
+            } catch (IOException e1) {  
+                // TODO Auto-generated catch block  
+            }  
+		}
+		
+	}
+	
 
 	private class DataCommitAt extends AsyncTask<String, Integer, String> {
 
