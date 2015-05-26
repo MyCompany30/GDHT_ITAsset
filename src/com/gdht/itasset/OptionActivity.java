@@ -59,8 +59,7 @@ public class OptionActivity extends Activity {
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
-		localStockService = new LocalStockService(this);
-		localPlanService = new LocalPlanService(this);
+
 		if(GlobalParams.LOGIN_TYPE == 2){
 			view1.setVisibility(View.GONE);
 			view2.setVisibility(View.GONE);
@@ -71,11 +70,13 @@ public class OptionActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_option);
-		view1 = findViewById(R.id.view2_1);
-		view2 = findViewById(R.id.view2_2);
+		localStockService = new LocalStockService(this);
+		localPlanService = new LocalPlanService(this);
 		localPlanResultService = new LocalPlanResultService(this);
 		localRealNameService = new LocalRealNameService(this);
 		localPandianService = new LocalPandianService(this);
+		view1 = findViewById(R.id.view2_1);
+		view2 = findViewById(R.id.view2_2);
 		optionView = findViewById(R.id.option);
 		ipconfigView = findViewById(R.id.ipconfig);
 		titleTv = (TextView) findViewById(R.id.title);
@@ -268,6 +269,9 @@ public class OptionActivity extends Activity {
 		protected String doInBackground(String... arg0) {
 			ImportDBUtils dbUtils = new ImportDBUtils(OptionActivity.this);
 			dbUtils.copyDatabase();
+			localStockService = new LocalStockService(OptionActivity.this);
+			localPlanService = new LocalPlanService(OptionActivity.this);
+			localPlanResultService = new LocalPlanResultService(OptionActivity.this);
 			assetNumber = localStockService.getCountNumber();
 			planNumber = localPlanService.getCountNumber();
 			planResultNumber = localPlanResultService.getCountNumber();

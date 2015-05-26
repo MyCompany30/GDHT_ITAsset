@@ -39,9 +39,7 @@ public class USBDataSourcePushFinishActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_usb_push);
-		localPlanResultService = new LocalPlanResultService(this);
-		localStockService = new LocalStockService(this);
-		localPlanService = new LocalPlanService(this);
+
 //		initAd(this);
 	}
 	
@@ -76,6 +74,9 @@ public class USBDataSourcePushFinishActivity extends Activity {
 		protected String doInBackground(String... arg0) {
 			ImportDBUtils dbUtils = new ImportDBUtils(USBDataSourcePushFinishActivity.this);
 			dbUtils.copyDatabase();
+			localPlanResultService = new LocalPlanResultService(USBDataSourcePushFinishActivity.this);
+			localStockService = new LocalStockService(USBDataSourcePushFinishActivity.this);
+			localPlanService = new LocalPlanService(USBDataSourcePushFinishActivity.this);
 			assetNumber = localStockService.getCountNumber();
 			planNumber = localPlanService.getCountNumber();
 			planResultNumber = localPlanResultService.getCountNumber();
