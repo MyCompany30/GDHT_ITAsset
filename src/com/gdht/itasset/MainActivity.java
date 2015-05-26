@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
 	private LinearLayout onLineLogin, offLineLogin;
 	private EditText userName = null;
 	private EditText userPwd = null;
+	private TextView chkTv = null;
 	private CheckBox chkBox = null;
 	private ImageView logo = null;
 	private ImageView optionImg = null;
@@ -140,6 +141,14 @@ public class MainActivity extends Activity {
 		userName = (EditText) this.findViewById(R.id.userName);
 		userPwd = (EditText) this.findViewById(R.id.userPwd);
 		chkBox = (CheckBox) this.findViewById(R.id.savePwd);
+		chkTv = (TextView)this.findViewById(R.id.saveTv);
+		chkTv.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				chkBox.setChecked(!chkBox.isChecked());
+			}
+		});
 		logo = (ImageView) this.findViewById(R.id.logo);
 		optionImg = (ImageView) this.findViewById(R.id.optionImg);
 		optionTv = (TextView) this.findViewById(R.id.optionTv);
