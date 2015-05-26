@@ -203,7 +203,9 @@ public class PlanListActivity extends Activity {
 					currentSelected = 0;
 					zzBtn.setBackgroundResource(R.drawable.tab_selected);
 					ypBtn.setBackgroundResource(R.drawable.tab_normal);
-					shujutongbu.setVisibility(View.VISIBLE);
+					if (localPandianService.getCount()) {
+						shujutongbu.setVisibility(View.VISIBLE);
+					}
 					break;
 				case 1:
 					currentSelected = 1;
