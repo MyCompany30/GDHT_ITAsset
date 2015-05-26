@@ -2,15 +2,11 @@ package com.gdht.itasset;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -42,8 +38,6 @@ import com.gdht.itasset.pojo.LocalPlanResult;
 import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.RealName;
 import com.gdht.itasset.pojo.StockItemNew;
-import com.gdht.itasset.receiver.ConnectionChangeReceiver;
-import com.gdht.itasset.utils.AppSharedPreferences;
 import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.utils.OutputDBUtils;
 import com.gdht.itasset.widget.WaitingDialog;
@@ -203,11 +197,13 @@ public class PlanListActivity extends Activity {
 					currentSelected = 0;
 					zzBtn.setBackgroundResource(R.drawable.tab_selected);
 					ypBtn.setBackgroundResource(R.drawable.tab_normal);
+					shujutongbu.setVisibility(View.VISIBLE);
 					break;
 				case 1:
 					currentSelected = 1;
 					zzBtn.setBackgroundResource(R.drawable.tab_normal);
 					ypBtn.setBackgroundResource(R.drawable.tab_selected);
+					shujutongbu.setVisibility(View.GONE);
 					break;
 				}
 			}

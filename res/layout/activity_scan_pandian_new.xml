@@ -53,9 +53,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp" 
-            android:layout_gravity="bottom"
-            >
+            android:layout_height="80dp"
+            android:layout_gravity="bottom" >
 
             <LinearLayout
                 android:id="@+id/finish"
@@ -66,8 +65,7 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:onClick="btnClick"
-                tools:ignore="Orientation" 
-                >
+                tools:ignore="Orientation" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -108,7 +106,15 @@
                 android:clickable="true"
                 android:onClick="btnClick"
                 android:scaleType="center"
+                android:gravity="center"
                 tools:ignore="Orientation" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="暂停"
+                    android:textColor="#ffffff"
+                    android:textSize="24dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -119,19 +125,27 @@
                 android:background="@drawable/selector_kaishisaomiao"
                 android:clickable="true"
                 android:onClick="btnClick"
+                android:gravity="center"
                 android:visibility="gone"
                 tools:ignore="Orientation" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="开始扫描"
+                    android:textColor="#ffffff"
+                    android:textSize="24dp" />
             </LinearLayout>
         </LinearLayout>
-        <ImageView 
+
+        <ImageView
             android:id="@+id/clear"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/shanchu_13"
             android:layout_gravity="center"
-            android:onClick="btnClick"
+            android:background="@drawable/shanchu_13"
             android:clickable="true"
-            />
+            android:onClick="btnClick" />
     </FrameLayout>
 
 </LinearLayout>

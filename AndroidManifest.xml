@@ -215,7 +215,7 @@
         </activity>
         <activity
             android:name="com.gdht.itasset.ScanActivityNew"
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_option"
             android:screenOrientation="sensor" >
         </activity>
@@ -227,7 +227,7 @@
         </activity>
         <activity
             android:name="com.gdht.itasset.ScanPandianActivity"
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_option"
             android:screenOrientation="sensor" >
         </activity>
@@ -237,38 +237,44 @@
 
         <activity
             android:name="com.gdht.itasset.AssetDetailActivity"
-            android:label="@string/title_activity_asset_detail" >
+            android:label="@string/title_activity_asset_detail"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="sensor" >
         </activity>
         <activity
             android:name="com.gdht.itasset.ScanResultDetailPYActivity"
-            android:label="@string/title_activity_scan_result_detail_py" >
+            android:label="@string/title_activity_scan_result_detail_py"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="sensor" >
         </activity>
         <activity
             android:name="com.gdht.itasset.ScanResultDetailActivity"
-            android:label="@string/title_activity_scan_result_detail_py" >
+            android:label="@string/title_activity_scan_result_detail" 
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensor" >
         </activity>
         <activity
             android:name="com.gdht.itasset.HomePageActivity"
-            android:label="@string/title_activity_home_page" >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_home_page"
+            android:screenOrientation="sensor" >
         </activity>
         <activity
             android:name="com.gdht.itasset.BlankActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
-                <activity
+        <activity
             android:name="com.gdht.itasset.USBOffLineCommitFinishActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-                        <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
             </intent-filter>
         </activity>
-                        <activity
+        <activity
             android:name="com.gdht.itasset.USBDataSourcePushFinishActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-                        <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
             </intent-filter>
         </activity>
         <activity
@@ -279,11 +285,10 @@
             android:name="com.gdht.itasset.SelectZCFLActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
-                <activity
+        <activity
             android:name="com.gdht.itasset.SelectZCLXActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
-        
     </application>
 
 </manifest>

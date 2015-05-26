@@ -27,218 +27,222 @@
             android:id="@+id/pyxx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="btnClick"
-            android:clickable="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/tianjia_03"
             android:layout_marginRight="10dp"
-            />
+            android:background="@drawable/tianjia_03"
+            android:clickable="true"
+            android:onClick="btnClick" />
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical" >
+        android:layout_weight="1" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center" >
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                android:layout_marginTop="30dp"
-                android:text="计划名称"
-                android:textColor="#000000"
-                android:textSize="30dp" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp" >
-
-            <View
-                android:id="@+id/lineLeft"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_alignParentLeft="true"
-                android:background="#000000" />
-
-            <View
-                android:id="@+id/lineRight"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_alignParentRight="true"
-                android:background="#000000" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:gravity="center" >
-
-            <TextView
-                android:id="@+id/label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="盘点人："
-                android:textColor="#000000"
-                android:textSize="30dp" />
-
-            <TextView
-                android:id="@+id/keeper"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/label"
-                android:text="张三"
-                android:textColor="#000000"
-                android:textSize="30dp" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            android:layout_marginTop="25dp" >
-
-            <RelativeLayout
-                android:id="@+id/dateLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center" >
-
-                <TextView
-                    android:id="@+id/label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/date"
-                    android:text="盘点日期："
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/label"
-                    android:text="2015-05-23"
-                    android:textColor="#000000"
-                    android:textSize="30dp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center" >
-
-                <TextView
-                    android:id="@+id/label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/planNum"
-                    android:text="计划总数："
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/planNum"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/label"
-                    android:text="0"
-                    android:textColor="#000000"
-                    android:textSize="30dp" />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/btnGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="vertical" >
 
             <LinearLayout
-                android:id="@+id/yipanBtn"
-                android:layout_width="213dp"
-                android:layout_height="53dp"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/selector_yipan"
-                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center" >
 
                 <TextView
-                    android:id="@+id/yipanTxt"
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="已盘：0"
-                    android:textColor="@color/yipanColor"
-                    android:textSize="20dp" />
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginTop="30dp"
+                    android:text="计划名称"
+                    android:textColor="#000000"
+                    android:textSize="30dp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp" >
+
+                <View
+                    android:id="@+id/lineLeft"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_alignParentLeft="true"
+                    android:background="#000000" />
+
+                <View
+                    android:id="@+id/lineRight"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_alignParentRight="true"
+                    android:background="#000000" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="盘点人："
+                    android:textColor="#000000"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/keeper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/label"
+                    android:text="张三"
+                    android:textColor="#000000"
+                    android:textSize="30dp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:layout_marginTop="25dp" >
+
+                <RelativeLayout
+                    android:id="@+id/dateLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/date"
+                        android:text="盘点日期："
+                        android:textColor="#000000"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/label"
+                        android:text="2015-05-23"
+                        android:textColor="#000000"
+                        android:textSize="30dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/planNum"
+                        android:text="计划总数："
+                        android:textColor="#000000"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/planNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/label"
+                        android:text="0"
+                        android:textColor="#000000"
+                        android:textSize="30dp" />
+                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/weipanBtn"
-                android:layout_width="213dp"
-                android:layout_height="53dp"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/selector_weipan"
-                android:clickable="true"
-                android:gravity="center" >
+                android:id="@+id/btnGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
 
-                <TextView
-                    android:id="@+id/weipanTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="未盘：0"
-                    android:textColor="@color/weipanColor"
-                    android:textSize="20dp" />
-            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/yipanBtn"
+                    android:layout_width="213dp"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/selector_yipan"
+                    android:clickable="true"
+                    android:gravity="center" >
 
-            <LinearLayout
-                android:id="@+id/panyingBtn"
-                android:layout_width="213dp"
-                android:layout_height="53dp"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/selector_panying"
-                android:clickable="true"
-                android:gravity="center" >
+                    <TextView
+                        android:id="@+id/yipanTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="已盘：0"
+                        android:textColor="@color/yipanColor"
+                        android:textSize="20dp" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/panyingTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="盘盈：0"
-                    android:textColor="@color/panyingColor"
-                    android:textSize="20dp" />
-            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/weipanBtn"
+                    android:layout_width="213dp"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/selector_weipan"
+                    android:clickable="true"
+                    android:gravity="center" >
 
-            <LinearLayout
-                android:id="@+id/pankuiBtn"
-                android:layout_width="213dp"
-                android:layout_height="53dp"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/selector_pankui"
-                android:clickable="true"
-                android:gravity="center" >
+                    <TextView
+                        android:id="@+id/weipanTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="未盘：0"
+                        android:textColor="@color/weipanColor"
+                        android:textSize="20dp" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/pankuiTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="盘亏：0"
-                    android:textColor="@color/pankuiColor"
-                    android:textSize="20dp" />
+                <LinearLayout
+                    android:id="@+id/panyingBtn"
+                    android:layout_width="213dp"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/selector_panying"
+                    android:clickable="true"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/panyingTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="盘盈：0"
+                        android:textColor="@color/panyingColor"
+                        android:textSize="20dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pankuiBtn"
+                    android:layout_width="213dp"
+                    android:layout_height="53dp"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/selector_pankui"
+                    android:clickable="true"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/pankuiTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="盘亏：0"
+                        android:textColor="@color/pankuiColor"
+                        android:textSize="20dp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/bottomBtnGroup"
@@ -252,8 +256,16 @@
             android:layout_weight="1"
             android:background="@drawable/selector_kaishisaomiao"
             android:clickable="true"
+            android:gravity="center"
             android:onClick="btnClick"
             tools:ignore="Orientation" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始扫描"
+                android:textColor="#ffffff"
+                android:textSize="24dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -263,8 +275,16 @@
             android:layout_weight="1"
             android:background="@drawable/selector_wanchengjihua"
             android:clickable="true"
+            android:gravity="center"
             android:onClick="btnClick"
             tools:ignore="Orientation" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="完成计划"
+                android:textColor="#ffffff"
+                android:textSize="24dp" />
         </LinearLayout>
 
         <LinearLayout
