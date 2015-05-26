@@ -6,6 +6,7 @@ import java.util.Vector;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -61,6 +62,7 @@ public class ErWeiScanCaptureActivity extends Activity implements Callback {
 	@Override
 	protected void onResume() {
 		super.onResume();
+
 		SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
 		SurfaceHolder surfaceHolder = surfaceView.getHolder();
 		if (hasSurface) {
@@ -221,5 +223,5 @@ public class ErWeiScanCaptureActivity extends Activity implements Callback {
 		}
 	}
 	
-
+		
 }

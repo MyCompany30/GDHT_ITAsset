@@ -52,7 +52,6 @@ public class MainActivity extends Activity {
 		setOnClicks();
 		
 	}
-
 	private void setOnClicks() {
 		// 登录按钮
 		onLineLogin.setOnClickListener(new OnClickListener() {
@@ -193,7 +192,7 @@ public class MainActivity extends Activity {
 								public void onClick(DialogInterface dialog,
 										int which) {
 									dialog.dismiss();
-									finish();
+									System.exit(0);
 								}
 							})
 					.setNegativeButton("取消",
@@ -221,6 +220,7 @@ public class MainActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		localPandianService.close();
+		System.exit(0);
 	}
 
 }

@@ -42,11 +42,11 @@ public final class ViewfinderView extends View {
 	/**
 	 * 四个绿色边角对应的宽度
 	 */
-	private static final int CORNER_WIDTH = 10;
+	private static final int CORNER_WIDTH = 5;
 	/**
 	 * 扫描框中的中间线的宽度
 	 */
-	private static final int MIDDLE_LINE_WIDTH = 6;
+	private static final int MIDDLE_LINE_WIDTH = 2;
 	
 	/**
 	 * 扫描框中的中间线的与扫描框左右的间隙
@@ -185,7 +185,8 @@ public final class ViewfinderView extends View {
 			paint.setTextSize(TEXT_SIZE * density);
 			paint.setAlpha(0x40);
 			paint.setTypeface(Typeface.create("System", Typeface.BOLD));
-			canvas.drawText("将二维码放入框内, 即可自动扫描", frame.left, (float) (frame.bottom + (float)TEXT_PADDING_TOP *density), paint);
+			//将文字左边距向右移动50个单位
+			canvas.drawText("将二维码放入框内, 即可自动扫描", frame.left+60, (float) (frame.bottom + (float)TEXT_PADDING_TOP *density), paint);
 			
 			
 

@@ -52,7 +52,7 @@ public class ScanResultActivity extends Activity {
 	private LocalPlanResult localPlanResult;
 	private String pandianStr = "";
 	private LocalPandianService localPandianService;
-	private ImageView pyxx = null;
+	private View pyxx = null;
 	
 	@Override
 	protected void onResume() {
@@ -82,7 +82,7 @@ public class ScanResultActivity extends Activity {
 		if (getIntent().hasExtra("planState")) {
 			planState = getIntent().getStringExtra("planState");
 		}
-		pyxx = (ImageView)findViewById(R.id.pyxx);
+		pyxx = findViewById(R.id.pyxx);
 		localPlanResultService = new LocalPlanResultService(this);
 		localPandianService = new LocalPandianService(this);
 		wd = new WaitingDialog(this);
