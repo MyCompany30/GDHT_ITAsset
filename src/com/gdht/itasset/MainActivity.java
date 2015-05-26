@@ -201,7 +201,7 @@ public class MainActivity extends Activity {
 								public void onClick(DialogInterface dialog,
 										int which) {
 									dialog.dismiss();
-									System.exit(0);
+									finish();
 								}
 							})
 					.setNegativeButton("取消",
@@ -229,7 +229,6 @@ public class MainActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		localPandianService.close();
-		System.exit(0);
 	}
 
 }

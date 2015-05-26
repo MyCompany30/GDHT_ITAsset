@@ -2,7 +2,6 @@ package com.gdht.itasset;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,15 +16,12 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.gdht.itasset.db.service.LocalPandianService;
 import com.gdht.itasset.db.service.LocalPlanResultService;
-import com.gdht.itasset.eventbus.GetPandianStrListener;
 import com.gdht.itasset.eventbus.RefreshDatas;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.LocalPlanResult;
