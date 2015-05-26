@@ -279,7 +279,9 @@
         </activity>
         <activity
             android:name="com.gdht.itasset.XinZengScanNewActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" 
+                        android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensor">
         </activity>
         <activity
             android:name="com.gdht.itasset.SelectZCFLActivity"
