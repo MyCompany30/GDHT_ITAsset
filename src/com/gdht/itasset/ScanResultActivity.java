@@ -284,7 +284,7 @@ public class ScanResultActivity extends Activity {
 			public boolean onTouch(View arg0, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
 					yipanTxt.setTextColor(Color.WHITE);
-				} else if (event.getAction() == MotionEvent.ACTION_UP) {
+				} else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_MOVE) {
 					yipanTxt.setTextColor(ScanResultActivity.this
 							.getResources().getColor(R.color.yipanColor));
 				}
@@ -312,7 +312,7 @@ public class ScanResultActivity extends Activity {
 			public boolean onTouch(View arg0, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
 					weipanTxt.setTextColor(Color.WHITE);
-				} else if (event.getAction() == MotionEvent.ACTION_UP) {
+				} else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_MOVE) {
 					weipanTxt.setTextColor(ScanResultActivity.this
 							.getResources().getColor(R.color.weipanColor));
 				}
@@ -340,7 +340,7 @@ public class ScanResultActivity extends Activity {
 			public boolean onTouch(View arg0, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
 					panyingTxt.setTextColor(Color.WHITE);
-				} else if (event.getAction() == MotionEvent.ACTION_UP) {
+				} else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_MOVE) {
 					panyingTxt.setTextColor(ScanResultActivity.this
 							.getResources().getColor(R.color.panyingColor));
 				}
@@ -369,7 +369,7 @@ public class ScanResultActivity extends Activity {
 			public boolean onTouch(View arg0, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_DOWN) {
 					pankuiTxt.setTextColor(Color.WHITE);
-				} else if (event.getAction() == MotionEvent.ACTION_UP) {
+				} else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_MOVE) {
 					pankuiTxt.setTextColor(ScanResultActivity.this
 							.getResources().getColor(R.color.pankuiColor));
 				}
