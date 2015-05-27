@@ -412,6 +412,10 @@ public class ScanResultActivity extends Activity {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								// TODO Auto-generated method stub
+								if(!weipanTxt.getText().equals("0")){
+									Toast.makeText(ScanResultActivity.this, "有未盘资产，无法完成计划！", Toast.LENGTH_SHORT).show();
+									return;
+								}
 								new AsyncTask<Void, Void, Boolean>() {
 									WaitingDialog dialog = new WaitingDialog(
 											ScanResultActivity.this);
