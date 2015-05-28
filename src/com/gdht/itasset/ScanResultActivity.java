@@ -460,6 +460,7 @@ public class ScanResultActivity extends Activity {
 
 			}else {
 //				Toast.makeText(ScanResultActivity.this, GlobalParams.pandian_str, 0).show();
+				localPandianService = new LocalPandianService(ScanResultActivity.this);
 				if(!"".equals(GlobalParams.pandian_str)) {
 					localPandianService.save(planId, userid, GlobalParams.pandian_str);
 				}
