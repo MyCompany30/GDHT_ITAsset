@@ -10,7 +10,6 @@
         android:id="@+id/rl_title"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:layout_alignParentTop="true"
         android:background="#5aa1d7" >
 
         <include layout="@layout/btnclick_layout" />

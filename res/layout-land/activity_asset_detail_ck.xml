@@ -76,7 +76,7 @@
                 android:layout_below="@+id/rfid_layout"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:text="资产分类："
+                android:text="资产名称："
                 android:textColor="#555555"
                 android:textSize="15sp" />
 
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/tv2"
                 android:layout_toLeftOf="@+id/tv2"
-                android:text="资产名称："
+                android:text="资产状态："
                 android:textColor="#555555"
                 android:textSize="15sp" />
 
@@ -119,7 +119,7 @@
                 android:layout_below="@+id/textView1"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:text="资产类别："
+                android:text="资产分类："
                 android:textColor="#555555"
                 android:textSize="15sp" />
 
@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/tv4"
                 android:layout_toLeftOf="@+id/tv4"
-                android:text="资产状态："
+                android:text="资产类别："
                 android:textColor="#555555"
                 android:textSize="15sp" />
 

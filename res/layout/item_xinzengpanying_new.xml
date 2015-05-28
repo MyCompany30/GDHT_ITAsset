@@ -34,7 +34,7 @@
                 android:layout_centerVertical="true"
                 android:text="标签号："
                 android:textColor="#ffffff"
-                android:textSize="25dp" />
+                android:textSize="21sp" />
 
             <TextView
                 android:id="@+id/rfidCode"
@@ -44,7 +44,7 @@
                 android:layout_toLeftOf="@+id/addBtn"
                 android:layout_toRightOf="@+id/lable"
                 android:textColor="#ffffff"
-                android:textSize="25dp" />
+                android:textSize="21sp" />
                 
             </LinearLayout>
 

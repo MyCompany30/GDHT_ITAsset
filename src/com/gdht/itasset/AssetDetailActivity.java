@@ -46,10 +46,10 @@ public class AssetDetailActivity extends Activity {
 							//库存
 							AssetDetailActivity.this.setContentView(R.layout.activity_asset_detail_ck);
 							TextView rfidTv = (TextView)AssetDetailActivity.this.findViewById(R.id.rfid_code);
-							TextView tv1 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv1);
-							TextView tv2 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv2);
-							TextView tv3 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv3);
-							TextView tv4 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv4);
+							TextView tv1 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv3);
+							TextView tv2 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv1);
+							TextView tv3 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv4);
+							TextView tv4 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv2);
 							TextView tv5 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv5);
 							TextView tv6 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv6);
 							TextView tv7 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv7);
@@ -88,10 +88,10 @@ public class AssetDetailActivity extends Activity {
 							//在运
 							AssetDetailActivity.this.setContentView(R.layout.activity_asset_detail_zy);
 							TextView rfidTv = (TextView)AssetDetailActivity.this.findViewById(R.id.rfid_code);
-							TextView tv1 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv1);
-							TextView tv2 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv2);
-							TextView tv3 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv3);
-							TextView tv4 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv4);
+							TextView tv1 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv3);
+							TextView tv2 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv1);
+							TextView tv3 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv4);
+							TextView tv4 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv2);
 							TextView tv5 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv5);
 							TextView tv6 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv6);
 							TextView tv7 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv7);
@@ -125,10 +125,10 @@ public class AssetDetailActivity extends Activity {
 							//废弃
 							AssetDetailActivity.this.setContentView(R.layout.activity_asset_detail_zy);
 							TextView rfidTv = (TextView)AssetDetailActivity.this.findViewById(R.id.rfid_code);
-							TextView tv1 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv1);
-							TextView tv2 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv2);
-							TextView tv3 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv3);
-							TextView tv4 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv4);
+							TextView tv1 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv3);
+							TextView tv2 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv1);
+							TextView tv3 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv4);
+							TextView tv4 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv2);
 							TextView tv5 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv5);
 							TextView tv6 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv6);
 							TextView tv7 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv7);
@@ -192,10 +192,10 @@ public class AssetDetailActivity extends Activity {
 							//库存
 							AssetDetailActivity.this.setContentView(R.layout.activity_asset_detail_ck);
 							TextView rfidTv = (TextView)AssetDetailActivity.this.findViewById(R.id.rfid_code);
-							TextView tv1 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv1);
-							TextView tv2 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv2);
-							TextView tv3 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv3);
-							TextView tv4 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv4);
+							TextView tv1 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv3);
+							TextView tv2 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv1);
+							TextView tv3 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv4);
+							TextView tv4 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv2);
 							TextView tv5 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv5);
 							TextView tv6 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv6);
 							TextView tv7 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv7);
@@ -234,10 +234,10 @@ public class AssetDetailActivity extends Activity {
 							//在运
 							AssetDetailActivity.this.setContentView(R.layout.activity_asset_detail_zy);
 							TextView rfidTv = (TextView)AssetDetailActivity.this.findViewById(R.id.rfid_code);
-							TextView tv1 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv1);
-							TextView tv2 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv2);
-							TextView tv3 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv3);
-							TextView tv4 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv4);
+							TextView tv1 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv3);
+							TextView tv2 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv1);
+							TextView tv3 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv4);
+							TextView tv4 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv2);
 							TextView tv5 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv5);
 							TextView tv6 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv6);
 							TextView tv7 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv7);
