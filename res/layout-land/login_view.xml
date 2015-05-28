@@ -80,7 +80,7 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="60dp" >
@@ -138,7 +138,7 @@
                 android:layout_width="447dp"
                 android:layout_height="62dp"
                 android:layout_gravity="center"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/zaixianlogin_btn"
                 android:gravity="center"
                 android:orientation="horizontal" >
@@ -149,7 +149,7 @@
                 android:layout_width="447dp"
                 android:layout_height="62dp"
                 android:layout_gravity="center"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/lixianlogin_btn"
                 android:gravity="center"
                 android:orientation="horizontal" >
