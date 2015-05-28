@@ -17,7 +17,7 @@ public class BlankActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_blank);
-		GlobalParams.isOffLineDialogRefresh = true;
+
 //		initAd(this);
 	}
 	
@@ -28,6 +28,8 @@ public class BlankActivity extends Activity {
 			this.finish();
 			break;
 		case R.id.close:
+			GlobalParams.LOGIN_TYPE = 1;
+			GlobalParams.isOffLineDialogRefresh = true;
 			this.finish();
 			break;
 		}

@@ -100,7 +100,7 @@ public class PlanListActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		if(!GlobalParams.isOffLineDialogRefresh){
-	//		Toast.makeText(this, "onResume", 0).show();
+//			Toast.makeText(this, "onResume", 0).show();
 			zzPlanInfos = new ArrayList<PlanInfo>();
 			ypPlanInfos = new ArrayList<PlanInfo>();
 			localStockService = new LocalStockService(this);
@@ -231,7 +231,7 @@ public class PlanListActivity extends Activity {
 		if (GlobalParams.LOGIN_TYPE == 2) {
 			new GetLocalPlanListAt().execute("");
 		} else {
-			new GetPlanListAt().execute("");
+				new GetPlanListAt().execute("");
 		}
 
 	}
