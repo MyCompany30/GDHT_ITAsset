@@ -100,6 +100,7 @@ public class OptionActivity extends Activity {
 		portEdt.setText(defaultAddr.split(":")[2].split("/")[0]);
 		PjEdt.setText(defaultAddr.substring(defaultAddr.lastIndexOf("/")+1));
 		gonglvEt.setText(asp.getGongLv() + "");
+		gonglvEt.setSelection(gonglvEt.getText().length());
 		gonglvEt.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -120,9 +121,11 @@ public class OptionActivity extends Activity {
 				if("".equals(gv) || "0".equals(gv)) {
 					Toast.makeText(OptionActivity.this, "最小功率为1", 0).show();
 					gonglvEt.setText("1");
+					gonglvEt.setSelection(gonglvEt.getText().length());
 				}else if(Integer.parseInt(gv) > 30) {
 					Toast.makeText(OptionActivity.this, "最大功率为30", 0).show();
 					gonglvEt.setText("30");
+					gonglvEt.setSelection(gonglvEt.getText().length());
 				}
 			}
 		});
@@ -151,6 +154,7 @@ public class OptionActivity extends Activity {
 			}else {
 				gonglvEt.setText(String.valueOf(Integer.parseInt(gv) + 1));
 			}
+			gonglvEt.setSelection(gonglvEt.getText().length());
 			break;
 		case R.id.jian:
 			gv = gonglvEt.getText().toString().trim();
@@ -160,6 +164,7 @@ public class OptionActivity extends Activity {
 			}else {
 				gonglvEt.setText(String.valueOf(Integer.parseInt(gv) - 1));
 			}
+			gonglvEt.setSelection(gonglvEt.getText().length());
 			break;
 		case R.id.gengxinUSB:
 			String dbPath = Environment.getExternalStorageDirectory().getPath() + "/datasource.db";
