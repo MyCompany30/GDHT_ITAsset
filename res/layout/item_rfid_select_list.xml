@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/cb"
-                android:text="名称："
+                android:text="资产名称："
                 android:textColor="#000000"
                 android:textSize="20dp" />
 
