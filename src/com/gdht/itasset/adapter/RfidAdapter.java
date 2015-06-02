@@ -57,7 +57,7 @@ public class RfidAdapter extends BaseAdapter {
 			convertView.setTag(vh);
 		}
 		vh = (ViewHolder) convertView.getTag();
-		vh.rfid.setText(rfids.get(position).getRfidnumber());
+		vh.rfid.setText(rfids.get(position).getRfidnumber().equals("")?"未知":rfids.get(position).getRfidnumber());
 		vh.name.setText(rfids.get(position).getName().equals("")?"未知":rfids.get(position).getName());
 		vh.keeper.setText(rfids.get(position).getKeeper().equals("")?"未知":rfids.get(position).getKeeper());
 		convertView.setOnClickListener(new OnClickListener() {

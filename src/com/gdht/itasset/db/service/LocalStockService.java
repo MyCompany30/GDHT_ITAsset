@@ -12,6 +12,7 @@ import com.gdht.itasset.db.GDHTDataSourceOpenHelper;
 import com.gdht.itasset.db.GDHTOffLineDataOpenHelper;
 import com.gdht.itasset.pojo.StockItemNew;
 import com.gdht.itasset.utils.GlobalParams;
+import com.senter.support.openapi.StConst;
 
 public class LocalStockService {
 	SQLiteDatabase db, pandianDb;
@@ -53,7 +54,10 @@ public class LocalStockService {
 	}
 	
 	public StockItemNew queryStockDetail(String rfid){
-		StockItemNew stockItemNew = null;
+		StockItemNew stockItemNew = new StockItemNew();
+		stockItemNew.setName("");
+		stockItemNew.setKeeper("");
+		stockItemNew.setRfidnumber(rfid);
 		Cursor cursor = db
 				.rawQuery("select assetChecklistId, assetCheckplanId, assetInfoId, classify, type, rfidnumber," +
 						"barnumber, qrnumber, brand, model, usetype, checkstate, dept, detil, id, keeper, " +

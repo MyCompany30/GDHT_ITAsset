@@ -13,7 +13,7 @@ public class StockItemNew {
 	private String qrnumber;// 二维码标签号
 	private String brand;// 品牌
 	private String model;// 型号
-	private String usetype;// 资产状态(1库存备用 2.在运 3.退役)
+	private String usetype = "0";// 资产状态(1库存备用 2.在运 3.退役)
 	private String checkstate;// 盘点状态  0 未盘 1 已盘 2盘盈 3盘亏
 	private String dept;// 部门
 	private String detil;// 盘点状态改变原因

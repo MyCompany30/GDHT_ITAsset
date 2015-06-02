@@ -3,15 +3,19 @@ package com.gdht.itasset;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.receiver.ConnectionChangeReceiver;
 import com.gdht.itasset.utils.AppSharedPreferences;
+import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.version.VersionServiceIndex;
+
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -72,7 +76,9 @@ public class HomePageActivity extends Activity {
 						downloadAd.dismiss();
 					}
 				}).create();
-		new EnquireAppVersionAsyncTask().execute("");
+		if(GlobalParams.LOGIN_TYPE == 2) {
+			new EnquireAppVersionAsyncTask().execute("");
+		}
 	}
 
 	private void findViews() {
@@ -147,9 +153,9 @@ public class HomePageActivity extends Activity {
 				try {
 					String version = getVersionName();
 					result = result.replaceAll("\"", "");
-//					Toast.makeText(HomePageActivity.this,
-//							"当前应用版本号 : " + version + " 获取到的版本号 : " + result, 0)
-//							.show();
+					Toast.makeText(HomePageActivity.this,
+							"当前应用版本号 : " + version + " 获取到的版本号 : " + result, 0)
+							.show();
 
 					if (result.equals(version)) {
 						// Toast.makeText(TheIndexActivity.this, "已经是最新版本!", 0)
