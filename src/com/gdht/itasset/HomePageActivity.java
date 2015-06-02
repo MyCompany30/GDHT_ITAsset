@@ -76,7 +76,7 @@ public class HomePageActivity extends Activity {
 						downloadAd.dismiss();
 					}
 				}).create();
-		if(GlobalParams.LOGIN_TYPE == 2) {
+		if(GlobalParams.LOGIN_TYPE == 1) {
 			new EnquireAppVersionAsyncTask().execute("");
 		}
 	}
@@ -153,9 +153,9 @@ public class HomePageActivity extends Activity {
 				try {
 					String version = getVersionName();
 					result = result.replaceAll("\"", "");
-					Toast.makeText(HomePageActivity.this,
-							"当前应用版本号 : " + version + " 获取到的版本号 : " + result, 0)
-							.show();
+//					Toast.makeText(HomePageActivity.this,
+//							"当前应用版本号 : " + version + " 获取到的版本号 : " + result, 0)
+//							.show();
 
 					if (result.equals(version)) {
 						// Toast.makeText(TheIndexActivity.this, "已经是最新版本!", 0)
