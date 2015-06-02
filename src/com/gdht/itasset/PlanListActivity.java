@@ -2,19 +2,35 @@ package com.gdht.itasset;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
@@ -26,10 +42,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.gdht.itasset.adapter.GuideActivityPagerViewAdapter;
 import com.gdht.itasset.adapter.PlanListAdapterNew;
 import com.gdht.itasset.db.service.LocalPandianService;
@@ -43,8 +59,10 @@ import com.gdht.itasset.pojo.LocalPlanResult;
 import com.gdht.itasset.pojo.PlanInfo;
 import com.gdht.itasset.pojo.RealName;
 import com.gdht.itasset.pojo.StockItemNew;
+import com.gdht.itasset.utils.AppSharedPreferences;
 import com.gdht.itasset.utils.GlobalParams;
 import com.gdht.itasset.utils.OutputDBUtils;
+import com.gdht.itasset.version.VersionServiceIndex;
 import com.gdht.itasset.widget.WaitingDialog;
 import com.google.common.io.FileWriteMode;
 import com.google.gson.Gson;
@@ -75,11 +93,13 @@ public class PlanListActivity extends Activity {
 	private SharedPreferences loginSettings;
 	private WaitingDialog wd = null;
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_plan_list);
-		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS", Context.MODE_PRIVATE);
+		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS",
+				Context.MODE_PRIVATE);
 		wd = new WaitingDialog(this);
 		userid = loginSettings.getString("LOGIN_NAME", "");
 		localPlanResultService = new LocalPlanResultService(this);
@@ -92,15 +112,15 @@ public class PlanListActivity extends Activity {
 		shujukugengxin = (ImageView) this.findViewById(R.id.shujukugengxin);
 		shujutongbu = this.findViewById(R.id.shujutongbu);
 		inflater = LayoutInflater.from(this);
-
+		
 	}
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if(!GlobalParams.isOffLineDialogRefresh){
-//			Toast.makeText(this, "onResume", 0).show();
+		if (!GlobalParams.isOffLineDialogRefresh) {
+			// Toast.makeText(this, "onResume", 0).show();
 			zzPlanInfos = new ArrayList<PlanInfo>();
 			ypPlanInfos = new ArrayList<PlanInfo>();
 			localStockService = new LocalStockService(this);
@@ -131,14 +151,14 @@ public class PlanListActivity extends Activity {
 			 */
 			viewPager.setCurrentItem(currentSelected);
 			/*
-			 * if(PlanListActivity.this.getResources().getConfiguration().orientation
-			 * == 0){ shujukugengxin.setImageResource(R.drawable.
+			 * if(PlanListActivity.this.getResources().getConfiguration().
+			 * orientation == 0){ shujukugengxin.setImageResource(R.drawable.
 			 * selector_shujukugengxin_novalue_land); }else {
 			 * shujukugengxin.setImageResource
 			 * (R.drawable.selector_shujukugengxin_novalue); }
 			 */
 		}
-		//重置标记
+		// 重置标记
 		GlobalParams.isOffLineDialogRefresh = false;
 	}
 
@@ -231,7 +251,7 @@ public class PlanListActivity extends Activity {
 		if (GlobalParams.LOGIN_TYPE == 2) {
 			new GetLocalPlanListAt().execute("");
 		} else {
-				new GetPlanListAt().execute("");
+			new GetPlanListAt().execute("");
 		}
 
 	}
@@ -324,11 +344,12 @@ public class PlanListActivity extends Activity {
 			new RefreshAssetDataSourceAt().execute("");
 			break;
 		case R.id.shujutongbu:
-			if(GlobalParams.LOGIN_TYPE == 1) {
+			if (GlobalParams.LOGIN_TYPE == 1) {
 				List<LocalPandian> lps = localPandianService
 						.getLocalPandian(userid);
 				if (lps.size() <= 0) {
-					Toast.makeText(PlanListActivity.this, "暂时没有未提交的盘点数据. username = " +userid, 0)	.show();
+					Toast.makeText(PlanListActivity.this,
+							"暂时没有未提交的盘点数据. username = " + userid, 0).show();
 				} else {
 					Gson gson = new Gson();
 					String str = gson.toJson(lps);
@@ -336,32 +357,35 @@ public class PlanListActivity extends Activity {
 					Log.i("a", "json = " + str);
 					new DataCommitAt().execute(str);
 				}
-			}else {
-//				OutputDBUtils outputDBUtils = new OutputDBUtils(this);
-//				outputDBUtils.copyDatabase();
+			} else {
+				// OutputDBUtils outputDBUtils = new OutputDBUtils(this);
+				// outputDBUtils.copyDatabase();
 				List<LocalPandian> lps = localPandianService
 						.getLocalPandian(userid);
 				if (lps.size() <= 0) {
-					Toast.makeText(PlanListActivity.this, "暂时没有未提交的盘点数据. username = " +userid, 0)	.show();
+					Toast.makeText(PlanListActivity.this,
+							"暂时没有未提交的盘点数据. username = " + userid, 0).show();
 				} else {
 					Gson gson = new Gson();
 					String str = gson.toJson(lps);
 					str = str.replace("\\u0027", "'");
 					Log.i("a", "离线json = " + str);
 					saveJsonAsTxt(str);
-					Toast.makeText(PlanListActivity.this, "离线操作数据生成完毕，可在有网络下使用在线提交或使用USB连接PC进行提交.", 1).show();
+					Toast.makeText(PlanListActivity.this,
+							"离线操作数据生成完毕，可在有网络下使用在线提交或使用USB连接PC进行提交.", 1).show();
 				}
 			}
 			break;
 		}
 	}
-	
+
 	private void saveJsonAsTxt(String content) {
-		String rootPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/itasset";
+		String rootPath = Environment.getExternalStorageDirectory()
+				.getAbsolutePath() + "/itasset";
 		File rootFile = new File(rootPath);
 		FileWriter fw = null;
 		BufferedWriter bw = null;
-		if(!rootFile.exists()) {
+		if (!rootFile.exists()) {
 			rootFile.mkdirs();
 		}
 		File txtFile = new File(rootFile, "offline_pandian.txt");
@@ -376,16 +400,15 @@ public class PlanListActivity extends Activity {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			try {  
-                bw.close();  
-                fw.close();  
-            } catch (IOException e1) {  
-                // TODO Auto-generated catch block  
-            }  
+			try {
+				bw.close();
+				fw.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+			}
 		}
-		
+
 	}
-	
 
 	private class DataCommitAt extends AsyncTask<String, Integer, String> {
 
@@ -399,7 +422,7 @@ public class PlanListActivity extends Activity {
 		protected String doInBackground(String... params) {
 			return new HttpClientUtil(PlanListActivity.this)
 					.plupdaterfidandplan(PlanListActivity.this, params[0]);
-			
+
 		}
 
 		@Override
@@ -542,7 +565,7 @@ public class PlanListActivity extends Activity {
 		localStockService.close();
 		localPlanService.close();
 		localPlanResultService.close();
-		//localPandianService.close();
+		// localPandianService.close();
 	}
 
 	private void initAd(String contentStr) {
@@ -576,5 +599,7 @@ public class PlanListActivity extends Activity {
 		ad.show();
 		ad.getWindow().setContentView((RelativeLayout) dialogView);
 	}
+
+	
 
 }
