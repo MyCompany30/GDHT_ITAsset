@@ -446,7 +446,7 @@ public class ScanResultDetailActivity extends Activity {
 				}
 				
 				protected void onPostExecute(Void result) {
-					if(type.equals("0") || type.equals("2") || type.equals("3")){
+					if((type.equals("0") || type.equals("2") || type.equals("3")) && planState.equals("1")){
 						adapter = new RfidSelectAdapter(ScanResultDetailActivity.this, rfids, planId);
 						listView.setAdapter(adapter);
 					}else{
