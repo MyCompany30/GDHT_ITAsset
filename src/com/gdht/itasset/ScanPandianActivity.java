@@ -90,10 +90,11 @@ public class ScanPandianActivity extends Activity {
 		de.greenrobot.event.EventBus.getDefault().register(this);
 		wd = new WaitingDialog(this);
 		checkRFIDSDBService = new ScanCheckRFIDSDBService(this);
-		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS", Context.MODE_PRIVATE);
+		loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS",
+				Context.MODE_PRIVATE);
 		userid = loginSettings.getString("LOGIN_NAME", "");
 		planId = this.getIntent().getStringExtra("planId");
-		
+
 		findViews();
 
 		if (App.getRfid() == null) {
@@ -104,11 +105,11 @@ public class ScanPandianActivity extends Activity {
 			switch (App.getRfid().getInterrogatorModel()) {
 
 			case InterrogatorModelD2: {
-//				AppSharedPreferences asp = new AppSharedPreferences(
-//						ScanPandianActivity.this, "gdht");
-//				if(App.getRfid() != null && asp != null) {
-//					App.getRfid().setPower(asp.getGongLv());
-//				}
+				// AppSharedPreferences asp = new AppSharedPreferences(
+				// ScanPandianActivity.this, "gdht");
+				// if(App.getRfid() != null && asp != null) {
+				// App.getRfid().setPower(asp.getGongLv());
+				// }
 				break;
 			}
 
@@ -130,14 +131,14 @@ public class ScanPandianActivity extends Activity {
 		start();
 		saveHandler.postDelayed(saveRunnable, 300000);
 	}
-	
+
 	Runnable saveRunnable = new Runnable() {
-		
+
 		@Override
 		public void run() {
 			Log.i("a", "save !!!!!!!!!!!!!!");
 			checkRFIDSDBService.deleteAll(userid);
-			for(String s : rfids) {
+			for (String s : rfids) {
 				checkRFIDSDBService.saveRFID(s, userid);
 			}
 			saveHandler.postDelayed(this, 300000);
@@ -164,24 +165,23 @@ public class ScanPandianActivity extends Activity {
 			this.finish();
 			break;
 		case R.id.finish:
-			
-			if(selectRifds.size() <= 0) {
+
+			if (selectRifds.size() <= 0) {
 				Toast.makeText(this, "请先选择要盘点的资产!", 0).show();
-			}else {
+			} else {
 				sb = new StringBuffer();
-				for(String s : selectRifds) {
+				for (String s : selectRifds) {
 					sb.append("'").append(s).append("'").append(",");
 				}
 				sb.deleteCharAt(sb.length() - 1);
-				if(GlobalParams.LOGIN_TYPE == 1) {
+				if (GlobalParams.LOGIN_TYPE == 1) {
 					new PanDianAt().execute("");
-				}else {
+				} else {
 					GlobalParams.pandian_str = sb.toString();
 					ScanPandianActivity.this.finish();
 				}
 			}
-			
-			
+
 			break;
 		case R.id.stop:
 			stopBtn.setVisibility(View.GONE);
@@ -198,6 +198,7 @@ public class ScanPandianActivity extends Activity {
 			startActivityForResult(intent, 100);
 			break;
 		case R.id.clear:
+			mUii = null;
 			rfids.clear();
 			selectRifds.clear();
 			num1.setText(selectRifds.size() + "");
@@ -218,7 +219,7 @@ public class ScanPandianActivity extends Activity {
 				startInventory();
 			}
 		};
-		mTimer.schedule(mTask, 1000, 10);
+		mTimer.schedule(mTask, 10, 10);
 
 	}
 
@@ -233,6 +234,7 @@ public class ScanPandianActivity extends Activity {
 			mTask.cancel();
 			mTask = null;
 		}
+		mUii = null;
 	}
 
 	private UII mUii;
@@ -309,31 +311,35 @@ public class ScanPandianActivity extends Activity {
 		saveHandler.removeCallbacks(saveRunnable);
 		checkRFIDSDBService.closeDB();
 	}
-	
+
 	private class PanDianAt extends AsyncTask<String, Integer, Boolean> {
-		
+
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
 			wd.show();
 		}
-		
+
 		@Override
 		protected Boolean doInBackground(String... arg0) {
-			return new HttpClientUtil(ScanPandianActivity.this).updateManyRfidToYp(ScanPandianActivity.this, planId, sb.toString(), userid);
+			return new HttpClientUtil(ScanPandianActivity.this)
+					.updateManyRfidToYp(ScanPandianActivity.this, planId,
+							sb.toString(), userid);
 		}
-		
+
 		@Override
 		protected void onPostExecute(Boolean result) {
 			super.onPostExecute(result);
 			wd.dismiss();
-			if(result) {
-				de.greenrobot.event.EventBus.getDefault().post(new RefreshDatas());
+			if (result) {
+				de.greenrobot.event.EventBus.getDefault().post(
+						new RefreshDatas());
 				ScanPandianActivity.this.finish();
-			}else {
-				Toast.makeText(ScanPandianActivity.this, "资产盘点失败，请稍后再试!", 0).show();
+			} else {
+				Toast.makeText(ScanPandianActivity.this, "资产盘点失败，请稍后再试!", 0)
+						.show();
 			}
 		}
-	
+
 	}
 }
