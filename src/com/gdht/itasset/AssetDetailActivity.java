@@ -267,7 +267,44 @@ public class AssetDetailActivity extends Activity {
 							tv9.setText(stockItemNew.getKeeper());
 							tv10.setText(stockItemNew.getOffice());
 							tv11.setText(stockItemNew.getRegisterdate());
-						}else if(stockItemNew.getUsetype().equals("0")){
+						}else if(stockItemNew.getUsetype().equals("3")){
+							//在运
+							AssetDetailActivity.this.setContentView(R.layout.activity_asset_detail_zy);
+							TextView rfidTv = (TextView)AssetDetailActivity.this.findViewById(R.id.rfid_code);
+							TextView tv1 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv3);
+							TextView tv2 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv1);
+							TextView tv3 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv4);
+							TextView tv4 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv2);
+							TextView tv5 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv5);
+							TextView tv6 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv6);
+							TextView tv7 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv7);
+							TextView tv8 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv8);
+							TextView tv9 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv9);
+							TextView tv10 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv10);
+							TextView tv11 = (TextView)AssetDetailActivity.this.findViewById(R.id.tv11);
+							rfidTv.setText(stockItemNew.getRfidnumber());
+							tv1.setText(stockItemNew.getClassify());
+							tv2.setText(stockItemNew.getName());
+							tv3.setText(stockItemNew.getType());
+							tv4.setText("废弃");
+							String checkState = "";
+							if(stockItemNew.getCheckstate().equals("0")){
+								checkState = "未盘";
+							}else if(stockItemNew.getCheckstate().equals("1")){
+								checkState = "已盘";
+							}else if(stockItemNew.getCheckstate().equals("2")){
+								checkState = "盘盈";
+							}else if(stockItemNew.getCheckstate().equals("3")){
+								checkState = "盘亏";
+							}
+							tv5.setText(checkState);
+							tv6.setText(stockItemNew.getBrand());
+							tv7.setText(stockItemNew.getModel());
+							tv8.setText(stockItemNew.getDept());
+							tv9.setText(stockItemNew.getKeeper());
+							tv10.setText(stockItemNew.getOffice());
+							tv11.setText(stockItemNew.getRegisterdate());
+						}else{
 							AssetDetailActivity.this.setContentView(R.layout.activity_asset_detail_ck);
 							TextView rfidTv = (TextView)AssetDetailActivity.this.findViewById(R.id.rfid_code);
 							rfidTv.setText(stockItemNew.getRfidnumber());
