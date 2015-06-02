@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.gdht.itasset.AssetDetailActivity;
 import com.gdht.itasset.R;
+import com.gdht.itasset.pojo.StockItemNew;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,11 +22,11 @@ public class RfidSelectAdapter extends RfidAdapter {
 	private ArrayList<String> checkedRfid = new ArrayList<String>();
 	private ArrayList<Boolean> checkIndexArray = new ArrayList<Boolean>();  
 	
-	public RfidSelectAdapter(Context context, List<String> rfids, String planId) {
+	public RfidSelectAdapter(Context context, List<StockItemNew> rfids, String planId) {
 		super(context, rfids, planId);
 		// TODO Auto-generated constructor stub
-		for(String s : rfids){
-			checkedRfid.add(s);
+		for(StockItemNew s : rfids){
+			checkedRfid.add(s.getRfidnumber());
 			checkIndexArray.add(true);
 		}
 	}
@@ -36,6 +37,8 @@ public class RfidSelectAdapter extends RfidAdapter {
 		convertView = inflater.inflate(R.layout.item_rfid_select_list, null);
 		CheckBox checkBox = (CheckBox)convertView.findViewById(R.id.cb);
 		final TextView rfidTv = (TextView)convertView.findViewById(R.id.rfid);
+		final TextView nameTv = (TextView)convertView.findViewById(R.id.name);
+		final TextView keeperTv = (TextView)convertView.findViewById(R.id.keeper);
 		if(checkIndexArray.get(position)){
 			checkBox.setChecked(true);
 		}else{
@@ -54,12 +57,14 @@ public class RfidSelectAdapter extends RfidAdapter {
 				}
 			}
 		});
-		rfidTv.setText(rfids.get(position));
+		rfidTv.setText(rfids.get(position).getRfidnumber());
+		nameTv.setText(rfids.get(position).getName().equals("")?"未知":rfids.get(position).getName());
+		keeperTv.setText(rfids.get(position).getKeeper().equals("")?"未知":rfids.get(position).getKeeper());
 		convertView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String rfid = rfids.get(position);
+				String rfid = rfids.get(position).getRfidnumber();
 				Intent intent = new Intent();
 				intent.setClass(context, AssetDetailActivity.class);
 				intent.putExtra("rfid", rfid);

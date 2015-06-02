@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.gdht.itasset.AssetDetailActivity;
 import com.gdht.itasset.R;
-import com.gdht.itasset.pojo.StockItemNew;
-import com.gdht.itasset.utils.GlobalParams;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,12 +14,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class RfidAdapter extends BaseAdapter {
+public class SimpleRfidAdapter extends BaseAdapter {
 	protected LayoutInflater inflater;
 	protected Context context;
-	protected List<StockItemNew> rfids;
+	protected List<String> rfids;
 	protected String planId;
-	public RfidAdapter(Context context, List<StockItemNew> rfids, String planId) {
+	public SimpleRfidAdapter(Context context, List<String> rfids, String planId) {
 		this.inflater = LayoutInflater.from(context);
 		this.context = context;
 		this.rfids = rfids;
@@ -49,22 +47,18 @@ public class RfidAdapter extends BaseAdapter {
 	public View getView(final int position, View convertView, ViewGroup arg2) {
 		ViewHolder vh;
 		if(convertView == null) {
-			convertView = inflater.inflate(R.layout.item_rfid_list, null);
+			convertView = inflater.inflate(R.layout.item_rfid_list_simple, null);
 			vh = new ViewHolder();
 			vh.rfid = (TextView)convertView.findViewById(R.id.rfid);
-			vh.name = (TextView)convertView.findViewById(R.id.name);
-			vh.keeper = (TextView)convertView.findViewById(R.id.keeper);
 			convertView.setTag(vh);
 		}
 		vh = (ViewHolder) convertView.getTag();
-		vh.rfid.setText(rfids.get(position).getRfidnumber());
-		vh.name.setText(rfids.get(position).getName().equals("")?"未知":rfids.get(position).getName());
-		vh.keeper.setText(rfids.get(position).getKeeper().equals("")?"未知":rfids.get(position).getKeeper());
+		vh.rfid.setText(rfids.get(position));
 		convertView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String rfid = rfids.get(position).getRfidnumber();
+				String rfid = rfids.get(position);
 				Intent intent = new Intent();
 				intent.setClass(context, AssetDetailActivity.class);
 				intent.putExtra("rfid", rfid);

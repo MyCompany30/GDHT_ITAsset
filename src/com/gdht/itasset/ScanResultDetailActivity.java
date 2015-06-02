@@ -7,6 +7,7 @@ import com.gdht.itasset.db.service.LocalPlanResultService;
 import com.gdht.itasset.db.service.LocalStockService;
 import com.gdht.itasset.http.HttpClientUtil;
 import com.gdht.itasset.pojo.LocalPlanResult;
+import com.gdht.itasset.pojo.StockItemNew;
 import com.gdht.itasset.utils.GlobalParams;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,7 +27,7 @@ public class ScanResultDetailActivity extends Activity {
 	private ListView listView = null;
 	private String type = null;
 	private String planId = null;
-	private ArrayList<String> rfids = null;
+	private ArrayList<StockItemNew> rfids = null;
 	private RfidAdapter adapter = null;
 	private String strRfids = "";
 	private View xinzengLayout = null;
@@ -131,12 +132,14 @@ public class ScanResultDetailActivity extends Activity {
 																}.execute();
 															}else {
 																strRfids = ScanResultDetailActivity.this.getIntent().getStringExtra("rfids");
-																rfids = new ArrayList<String>();
+																rfids = new ArrayList<StockItemNew>();
 																String [] rfid = strRfids.replace("\"", "").split(",");
 																for(String r : rfid){
+																	StockItemNew itemNew = new StockItemNew();
 																	if(r.equals(""))
 																		continue;
-																	rfids.add(r);
+																	itemNew = stockService.queryStockDetail(r);
+																	rfids.add(itemNew);
 																}
 																adapter = new RfidAdapter(ScanResultDetailActivity.this, rfids, planId);
 																listView.setAdapter(adapter);
@@ -291,12 +294,14 @@ public class ScanResultDetailActivity extends Activity {
 																}.execute();
 															}else {
 																strRfids = ScanResultDetailActivity.this.getIntent().getStringExtra("rfids");
-																rfids = new ArrayList<String>();
+																rfids = new ArrayList<StockItemNew>();
 																String [] rfid = strRfids.replace("\"", "").split(",");
 																for(String r : rfid){
+																	StockItemNew itemNew = new StockItemNew();
 																	if(r.equals(""))
 																		continue;
-																	rfids.add(r);
+																	itemNew = stockService.queryStockDetail(r);
+																	rfids.add(itemNew);
 																}
 																adapter = new RfidAdapter(ScanResultDetailActivity.this, rfids, planId);
 																listView.setAdapter(adapter);
@@ -396,12 +401,14 @@ public class ScanResultDetailActivity extends Activity {
 																}.execute();
 															}else {
 																strRfids = ScanResultDetailActivity.this.getIntent().getStringExtra("rfids");
-																rfids = new ArrayList<String>();
+																rfids = new ArrayList<StockItemNew>();
 																String [] rfid = strRfids.replace("\"", "").split(",");
 																for(String r : rfid){
+																	StockItemNew itemNew = new StockItemNew();
 																	if(r.equals(""))
 																		continue;
-																	rfids.add(r);
+																	itemNew = stockService.queryStockDetail(r);
+																	rfids.add(itemNew);
 																}
 																adapter = new RfidAdapter(ScanResultDetailActivity.this, rfids, planId);
 																listView.setAdapter(adapter);
@@ -455,14 +462,18 @@ public class ScanResultDetailActivity extends Activity {
 				
  			}.execute();
 		}else {
-			strRfids = this.getIntent().getStringExtra("rfids");
-			rfids = new ArrayList<String>();
+
+			strRfids = ScanResultDetailActivity.this.getIntent().getStringExtra("rfids");
+			rfids = new ArrayList<StockItemNew>();
 			String [] rfid = strRfids.replace("\"", "").split(",");
 			for(String r : rfid){
+				StockItemNew itemNew = new StockItemNew();
 				if(r.equals(""))
 					continue;
-				rfids.add(r);
+				itemNew = stockService.queryStockDetail(r);
+				rfids.add(itemNew);
 			}
+		
 			if(type.equals("0")){
 				adapter = new RfidAdapter(ScanResultDetailActivity.this, rfids, planId);
 				listView.setAdapter(adapter);
@@ -507,15 +518,17 @@ public class ScanResultDetailActivity extends Activity {
 			super.onPostExecute(result);
 			pd.dismiss();
 			if (result != null) {
-				ArrayList<String> rfidList = new ArrayList<String>();
-				rfids = new ArrayList<String>();
-				String [] rfid = result.getWpRfids().replace("\"", "").split(",");
+				strRfids = ScanResultDetailActivity.this.getIntent().getStringExtra("rfids");
+				rfids = new ArrayList<StockItemNew>();
+				String [] rfid = strRfids.replace("\"", "").split(",");
 				for(String r : rfid){
+					StockItemNew itemNew = new StockItemNew();
 					if(r.equals(""))
 						continue;
-					rfids.add(r);
+					itemNew = stockService.queryStockDetail(r);
+					rfids.add(itemNew);
 				}
-				adapter = new RfidSelectAdapter(ScanResultDetailActivity.this, rfids, planId);
+				adapter = new RfidAdapter(ScanResultDetailActivity.this, rfids, planId);
 				listView.setAdapter(adapter);
 			} else {
 			

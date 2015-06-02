@@ -336,8 +336,8 @@ public class ScanPandianActivity extends Activity {
 						new RefreshDatas());
 				ScanPandianActivity.this.finish();
 			} else {
-				Toast.makeText(ScanPandianActivity.this, "资产盘点失败，请稍后再试!", 0)
-						.show();
+				Toast.makeText(ScanPandianActivity.this, "失败：未扫描到计划盘点资产，或发生其他异常。", Toast.LENGTH_LONG).show();
+				ScanPandianActivity.this.finish();
 			}
 		}
 

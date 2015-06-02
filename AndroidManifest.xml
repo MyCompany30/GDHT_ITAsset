@@ -242,12 +242,6 @@
             android:screenOrientation="sensor" >
         </activity>
         <activity
-            android:name="com.gdht.itasset.ScanResultDetailPYActivity"
-            android:label="@string/title_activity_scan_result_detail_py"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="sensor" >
-        </activity>
-        <activity
             android:name="com.gdht.itasset.ScanResultDetailActivity"
             android:label="@string/title_activity_scan_result_detail" 
             android:configChanges="orientation|keyboardHidden|screenSize"

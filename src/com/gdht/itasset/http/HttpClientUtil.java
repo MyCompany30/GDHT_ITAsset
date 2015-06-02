@@ -319,11 +319,10 @@ public class HttpClientUtil {
 	 * @param status 盘点状态  0未盘、1已盘、2盘盈、3盘亏
 	 * @return 盘点计划中的资产清单集合
 	*/
-	public ArrayList<String> getRfidByPlanIdAndState(Activity activity, String planid, String status){
+	public ArrayList<StockItemNew> getRfidByPlanIdAndState(Activity activity, String planid, String status){
 		String result = null;
 		String uri = null;
-		String [] rfids = null;
-		ArrayList<String> rfidArray = new ArrayList<String>();
+		ArrayList<StockItemNew> rfidArray = new ArrayList<StockItemNew>();
 		uri = activity.getResources().getString(R.string.url_getRfidByPlanIdAndState);
 		HttpPost post = new HttpPost(ip + uri);
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
@@ -340,16 +339,17 @@ public class HttpClientUtil {
 		try {
 			HttpResponse httpResponse = getHttpClient().execute(post);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
-				
 				result = EntityUtils.toString(httpResponse.getEntity());
-				result = result.substring(1,result.length()-1).replace("\"", "");
-				rfids = result.split(",");
-				for(String rfid : rfids){
-					if(rfid.equals("")){
-						continue;
-					}
-					rfidArray.add(rfid);
+				JSONArray array = new JSONArray(result);
+				for(int i = 0 ; i < array.length(); i++){
+					JSONObject object = array.getJSONObject(i);
+					StockItemNew itemNew = new StockItemNew();
+					itemNew.setRfidnumber(object.getString("rfid"));
+					itemNew.setName(object.getString("name"));
+					itemNew.setKeeper(object.getString("keeper"));
+					rfidArray.add(itemNew);
 				}
+				
 			}
 		} catch (Exception e) {
 			//网络异常

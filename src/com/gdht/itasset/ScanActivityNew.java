@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.gdht.itasset.adapter.RfidAdapter;
+import com.gdht.itasset.adapter.SimpleRfidAdapter;
 import com.gdht.itasset.db.service.ScanCheckRFIDSDBService;
 import com.gdht.itasset.utils.AppSharedPreferences;
 import com.gdht.itasset.widget.WaitingDialog;
@@ -33,6 +34,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +47,7 @@ public class ScanActivityNew extends BaseActivity {
 	private String uii;
 	private ArrayList<String> rfidArray = new ArrayList<String>();
 	private LinearLayout startBtn, stopBtn;
-	private RfidAdapter adapter;
+	private SimpleRfidAdapter adapter;
 	private ListView listView;
 	private TextView num1, num2;
 	private Handler saveHandler = new Handler();
@@ -82,7 +84,7 @@ public class ScanActivityNew extends BaseActivity {
 		num1.setText("0");
 		num2 = (TextView) this.findViewById(R.id.num2);
 		num2.setText("0");
-		adapter = new RfidAdapter(this, rfidArray, null);
+		adapter = new SimpleRfidAdapter(this, rfidArray, null);
 		listView.setAdapter(adapter);
 		checkRFIDSDBService = new ScanCheckRFIDSDBService(this);
 		SharedPreferences loginSettings = this.getSharedPreferences("GDHT_ITASSET_SETTINGS", Context.MODE_PRIVATE);
