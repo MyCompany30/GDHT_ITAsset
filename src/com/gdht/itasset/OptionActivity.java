@@ -40,7 +40,8 @@ public class OptionActivity extends Activity {
 	private EditText portEdt = null;
 	private EditText PjEdt = null;
 	private TextView jiaBtn, jianBtn;
-	private EditText gonglvEt;
+	private TextView gonglvEt;
+	private TextView mileTv;
 	private int maxGongLv = 30;
 	private ProgressDialog pd;
 	private AppSharedPreferences asp;
@@ -77,6 +78,7 @@ public class OptionActivity extends Activity {
 		localPandianService = new LocalPandianService(this);
 		view1 = findViewById(R.id.view2_1);
 		view2 = findViewById(R.id.view2_2);
+		mileTv = (TextView) findViewById(R.id.miles);
 		optionView = findViewById(R.id.option);
 		ipconfigView = findViewById(R.id.ipconfig);
 		titleTv = (TextView) findViewById(R.id.title);
@@ -91,7 +93,7 @@ public class OptionActivity extends Activity {
 		asp = new AppSharedPreferences(this, "gdht");
 		jiaBtn = (TextView) findViewById(R.id.jia);
 		jianBtn = (TextView) findViewById(R.id.jian);
-		gonglvEt = (EditText) findViewById(R.id.gonglv);
+		gonglvEt = (TextView) findViewById(R.id.gonglv);
 		ipEdt = (EditText)findViewById(R.id.ipEdt);
 		portEdt = (EditText)findViewById(R.id.portEdt);
 		PjEdt = (EditText)findViewById(R.id.PjEdt);
@@ -100,35 +102,36 @@ public class OptionActivity extends Activity {
 		portEdt.setText(defaultAddr.split(":")[2].split("/")[0]);
 		PjEdt.setText(defaultAddr.substring(defaultAddr.lastIndexOf("/")+1));
 		gonglvEt.setText(asp.getGongLv() + "");
-		gonglvEt.setSelection(gonglvEt.getText().length());
-		gonglvEt.addTextChangedListener(new TextWatcher() {
-			
-			@Override
-			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-				
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-					int arg3) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void afterTextChanged(Editable editable) {
-				String gv = gonglvEt.getText().toString();
-				if("".equals(gv) || "0".equals(gv)) {
-					Toast.makeText(OptionActivity.this, "最小功率为1", 0).show();
-					gonglvEt.setText("1");
-					gonglvEt.setSelection(gonglvEt.getText().length());
-				}else if(Integer.parseInt(gv) > 30) {
-					Toast.makeText(OptionActivity.this, "最大功率为30", 0).show();
-					gonglvEt.setText("30");
-					gonglvEt.setSelection(gonglvEt.getText().length());
-				}
-			}
-		});
+		changeMiles();
+//		gonglvEt.setSelection(gonglvEt.getText().length());
+//		gonglvEt.addTextChangedListener(new TextWatcher() {
+//			
+//			@Override
+//			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+//				
+//			}
+//			
+//			@Override
+//			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+//					int arg3) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void afterTextChanged(Editable editable) {
+//				String gv = gonglvEt.getText().toString();
+//				if("".equals(gv) || "0".equals(gv) || Integer.parseInt(gv) <= 9) {
+//					Toast.makeText(OptionActivity.this, "最小功率为10", 0).show();
+//					gonglvEt.setText("10");
+//					gonglvEt.setSelection(gonglvEt.getText().length());
+//				}else if(Integer.parseInt(gv) > 30) {
+//					Toast.makeText(OptionActivity.this, "最大功率为30", 0).show();
+//					gonglvEt.setText("30");
+//					gonglvEt.setSelection(gonglvEt.getText().length());
+//				}
+//			}
+//		});
 	}
 
 	public void btnClick(View view) {
@@ -148,23 +151,23 @@ public class OptionActivity extends Activity {
 			break;
 		case R.id.jia:
 			String gv = gonglvEt.getText().toString().trim();
-			if(Integer.parseInt(gv) > maxGongLv) {
+			if(Integer.parseInt(gv) >= maxGongLv) {
 				Toast.makeText(OptionActivity.this, "最大功率为30", 0).show();
 				gonglvEt.setText("30");
 			}else {
-				gonglvEt.setText(String.valueOf(Integer.parseInt(gv) + 1));
+				gonglvEt.setText(String.valueOf(Integer.parseInt(gv) + 5));
 			}
-			gonglvEt.setSelection(gonglvEt.getText().length());
+			changeMiles();
 			break;
 		case R.id.jian:
 			gv = gonglvEt.getText().toString().trim();
-			if("".equals(gv) || "1".equals(gv)) {
-				Toast.makeText(OptionActivity.this, "最小功率为1", 0).show();
-				gonglvEt.setText("1");
+			if("".equals(gv) || "10".equals(gv)) {
+				Toast.makeText(OptionActivity.this, "最小功率为10", 0).show();
+				gonglvEt.setText("10");
 			}else {
-				gonglvEt.setText(String.valueOf(Integer.parseInt(gv) - 1));
+				gonglvEt.setText(String.valueOf(Integer.parseInt(gv) - 5));
 			}
-			gonglvEt.setSelection(gonglvEt.getText().length());
+			changeMiles();
 			break;
 		case R.id.gengxinUSB:
 			String dbPath = Environment.getExternalStorageDirectory().getPath() + "/datasource.db";
@@ -438,5 +441,22 @@ public class OptionActivity extends Activity {
 		});
 		ad.show();
 		ad.getWindow().setContentView((RelativeLayout) dialogView);
+	}
+	
+	private void changeMiles() {
+		String gv = gonglvEt.getText().toString();
+		String mileStr = "15厘米";
+		if("10".equals(gv)) {
+			mileStr = "15厘米";
+		}else if("15".equals(gv)) {
+			mileStr = "30厘米";
+		}else if("20".equals(gv)) {
+			mileStr = "50厘米";
+		}else if("25".equals(gv)) {
+			mileStr = "80厘米";
+		}else if("30".equals(gv)) {
+			mileStr = "1.5米";
+		}
+		mileTv.setText(mileStr);
 	}
 }

@@ -66,7 +66,7 @@
                         android:textColor="#58a1d8"
                         android:textSize="18sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/gonglv"
                         android:layout_width="50dp"
                         android:layout_height="40dp"
@@ -76,6 +76,7 @@
                         android:gravity="center"
                         android:inputType="number"
                         android:text="1"
+                        android:textColor="#000000"
                         android:textSize="18dp" />
 
                     <TextView
@@ -96,16 +97,33 @@
                         android:id="@+id/jia"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="20dp"
                         android:background="@drawable/orange_bg"
                         android:clickable="true"
                         android:gravity="center"
                         android:onClick="btnClick"
                         android:text="+"
                         android:textColor="#ffffff"
-                        android:textSize="18dp" />
+                        android:textSize="18dp" 
+                        android:layout_marginRight="10dp"
+                                                android:layout_alignParentRight="true"
+                        />
+
+                    <TextView
+                        android:id="@+id/miles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+						android:layout_toLeftOf="@+id/jian"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/orange_input_bg"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="15厘米"
+                        android:textColor="#000000"
+                        android:textSize="18dp"
+                        android:padding="5dp"
+                         />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -254,9 +272,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:singleLine="true"
                     android:background="@null"
                     android:hint="请输入端口号"
+                    android:singleLine="true"
                     android:textSize="18dp" />
             </LinearLayout>
 
@@ -288,8 +306,8 @@
                     android:layout_marginLeft="10dp"
                     android:background="@null"
                     android:hint="请输入系统名称"
-                    android:singleLine="true"
                     android:inputType="text"
+                    android:singleLine="true"
                     android:textSize="18dp" />
             </LinearLayout>
         </LinearLayout>
