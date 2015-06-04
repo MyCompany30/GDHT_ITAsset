@@ -115,6 +115,7 @@ public class XinZengScanNewActivity extends Activity {
 						@Override
 						public void onClick(View v) {
 							currentIdx = (Integer)addBtn.getTag();
+//							Toast.makeText(XinZengScanNewActivity.this, "currentIdx = " + currentIdx, 0).show();
 //							Toast.makeText(XinZengScanNewActivity.this, " item =  " + items.get((Integer)addBtn.getTag()).toString(), 0).show();
 							YingPanXinZengItem item = items.get((Integer)addBtn.getTag());
 							String assetName = items.get((Integer)addBtn.getTag()).getAssetNameEt().getText().toString();
@@ -188,9 +189,9 @@ public class XinZengScanNewActivity extends Activity {
 			if("1".equals(result)) {
 				Toast.makeText(XinZengScanNewActivity.this, "盘盈新增成功!", 0).show();
 				addUiis.add(items.get(currentIdx).getRfid_labelnum());
-				container.removeViewAt(currentIdx);
-				views.remove(currentIdx);
-				items.remove(currentIdx);
+				container.getChildAt(currentIdx).setVisibility(View.GONE);
+//				views.remove(currentIdx);
+//				items.remove(currentIdx);
 			}else if("-3".equals(result)) {
 				Toast.makeText(XinZengScanNewActivity.this, "Rfid标签已经存在!", 0).show();
 			}else {
