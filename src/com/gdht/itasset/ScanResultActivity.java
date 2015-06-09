@@ -58,6 +58,7 @@ public class ScanResultActivity extends Activity {
 		localPandianService = new LocalPandianService(getApplicationContext());
 		if (planState.equals("0")) {
 			this.findViewById(R.id.bottomBtnGroup).setVisibility(View.INVISIBLE);
+			pyxx.setVisibility(View.GONE);
 		}
 		if (GlobalParams.LOGIN_TYPE == 1) {
 			tongbuBtn.setVisibility(View.GONE);
