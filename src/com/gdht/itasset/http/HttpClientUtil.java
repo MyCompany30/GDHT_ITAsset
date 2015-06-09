@@ -340,6 +340,7 @@ public class HttpClientUtil {
 			HttpResponse httpResponse = getHttpClient().execute(post);
 			if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 				result = EntityUtils.toString(httpResponse.getEntity());
+				Log.i("a", "result = " + result);
 				JSONArray array = new JSONArray(result);
 				for(int i = 0 ; i < array.length(); i++){
 					JSONObject object = array.getJSONObject(i);
