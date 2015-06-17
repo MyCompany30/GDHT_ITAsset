@@ -371,6 +371,8 @@ public class PlanListActivity extends Activity {
 					str = str.replace("\\u0027", "'");
 					Log.i("a", "离线json = " + str);
 					saveJsonAsTxt(str);
+					localPandianService.deleteByUser(userid);
+					onResume();
 					Toast.makeText(PlanListActivity.this,
 							"离线操作数据生成完毕，可在有网络下使用在线提交或使用USB连接PC进行提交.", 1).show();
 				}
