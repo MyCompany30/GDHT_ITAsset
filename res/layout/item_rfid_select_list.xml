@@ -37,7 +37,7 @@
                 android:layout_toRightOf="@+id/cb"
                 android:text="资产名称："
                 android:textColor="#000000"
-                android:textSize="20dp" />
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/name"
@@ -46,7 +46,7 @@
                 android:layout_toRightOf="@+id/label2"
                 android:text="未知"
                 android:textColor="#000000"
-                android:textSize="20dp" />
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/label"
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/label2"
                 android:layout_below="@+id/label2"
-                android:paddingTop="5dp"
+                android:paddingTop="15dp"
                 android:text="RFID："
                 android:textColor="#000000"
                 android:textSize="15dp" />
