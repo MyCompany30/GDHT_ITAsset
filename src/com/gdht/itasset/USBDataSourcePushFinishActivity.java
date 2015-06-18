@@ -134,9 +134,15 @@ public class USBDataSourcePushFinishActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		localPlanResultService.close();
-		localPlanService.close();
-		localStockService.close();
+		if(localPlanResultService != null) {
+			localPlanResultService.close();
+		}
+		if(localPlanService != null) {
+			localPlanService.close();
+		}
+		if(localStockService != null) {
+			localStockService.close();
+		}
 	}
 	
 }
